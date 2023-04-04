@@ -13,3 +13,4 @@
 *.toc
 *.Rproj
 *glottolog-cldf*
+code/output/plots/*
