@@ -12,5 +12,4 @@
 *.pdf
 *.toc
 *.Rproj
-code/output/*
 *glottolog-cldf*
