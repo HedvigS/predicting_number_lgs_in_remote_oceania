@@ -1,6 +1,7 @@
 source("01_requirements.R")
 
-Glottolog <- read_tsv("output/processed_data/glottolog_language_table_wide_df.tsv", show_col_types = F) %>%   dplyr::select(glottocode = Glottocode, Language_level_ID, level)
+Glottolog <- read_tsv("output/processed_data/glottolog_language_table_wide_df.tsv", show_col_types = F) %>%   
+  dplyr::select(glottocode = Glottocode, Language_level_ID, level)
 
 Polygon_lgs_glottocodes_unnested <- read_csv("data/RO_polygons_grouped_with_languages.csv", show_col_types = F) %>% 
   filter(!is.na(glottocodes)) %>% 
@@ -153,17 +154,13 @@ NetPrimaryProductionPredictability <- read_csv("data/NetPrimaryProductionPredict
 ecoClimate_data <- read_tsv("output/processed_data/RO_polygons_grouped_with_languages_with_climate_grouped.tsv", show_col_types = F)
 
 ##dates
-dates <- read_xlsx("data/island_group_settlement_date.xlsx") %>% 
+dates <- read_tsv("data/island_group_settlement_date.tsv", show_col_types = F) %>% 
   rename(settlement_date_grouping_finer = "Time depth settlement group", Smallest_Island_group = `Smaller specific island group`, `Settlement date oldest date` = `Oldest date`) %>% 
   mutate(Smallest_Island_group = str_split(Smallest_Island_group, ",")) %>%
   unnest(Smallest_Island_group) %>% 
   mutate(Smallest_Island_group = trimws(Smallest_Island_group)) %>% 
   group_by(Smallest_Island_group) %>% 
   summarise(oldest_date = max(`Settlement date oldest date`), settlement_date_grouping_finer = min(settlement_date_grouping_finer, na.rm = T), settlement_date_grouping_coarser = min(settlement_date_grouping_coarser, na.rm = T)) 
-
-dates$settlement_date_grouping_finer = (max(dates$settlement_date_grouping_finer)+1) - dates$settlement_date_grouping_finer
-
-dates$settlement_date_grouping_coarser = (max(dates$settlement_date_grouping_coarser)+1) - dates$settlement_date_grouping_coarser
 
 ##All
 Island_group_all_sep <- polygon_geo_grouping_hierarchy %>% 
@@ -196,8 +193,8 @@ Island_group_summarised_smallest <- Island_group_all_sep %>%
             sum_shoreline = sum(sum_shoreline, na.rm = T),
             mean_lat = mean(mean_lat),
             mean_long = mean(mean_long),
-            settlement_date_grouping_finer = max(settlement_date_grouping_finer), 
-            settlement_date_grouping_coarser = max(settlement_date_grouping_coarser),
+            settlement_date_grouping_finer = min(settlement_date_grouping_finer), 
+            settlement_date_grouping_coarser = min(settlement_date_grouping_coarser),
             oldest_date = max(oldest_date),
             color = dplyr::first(smallest_island_color), 
             lg_count = dplyr::first(lg_count_smallest),
@@ -236,8 +233,8 @@ Island_group_summarised_medium <- Island_group_all_sep %>%
             sum_shoreline = sum(sum_shoreline, na.rm = T),
             mean_lat = mean(mean_lat),
             mean_long = mean(mean_long),
-            settlement_date_grouping_finer = max(settlement_date_grouping_finer), 
-            settlement_date_grouping_coarser = max(settlement_date_grouping_coarser),
+            settlement_date_grouping_finer = min(settlement_date_grouping_finer), 
+            settlement_date_grouping_coarser = min(settlement_date_grouping_coarser),
             oldest_date = max(oldest_date),
             color = dplyr::first(medium_group_color), 
             lg_count = dplyr::first(lg_count_medium),
@@ -280,8 +277,8 @@ Island_group_summarised_Marck_group <- Island_group_all_sep %>%
             sum_shoreline = sum(sum_shoreline, na.rm = T),
             mean_lat = mean(mean_lat),
             mean_long = mean(mean_long),
-            settlement_date_grouping_finer = max(settlement_date_grouping_finer),
-            settlement_date_grouping_coarser = max(settlement_date_grouping_coarser),
+            settlement_date_grouping_finer = min(settlement_date_grouping_finer),
+            settlement_date_grouping_coarser = min(settlement_date_grouping_coarser),
             oldest_date = max(oldest_date),
             color = dplyr::first(Marck_group_color), 
             lg_count = dplyr::first(lg_count_Marck),
