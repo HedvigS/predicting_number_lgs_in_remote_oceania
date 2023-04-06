@@ -1,7 +1,5 @@
 source("01_requirements.R")
 
-data$settlement_date_grouping_finer
-
 data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_marck_group.tsv", show_col_types = F) %>% 
   dplyr::filter(!is.na(Marck_group)) %>% 
   dplyr::select(group = Marck_group, everything()) %>% 
@@ -30,7 +28,7 @@ data$Shoreline <- log10(data$Shoreline)
 data$ratio_coastline_to_area <- data$Shoreline / data$Area_land
 data$Isolation <- log10(data$Isolation)
 
-data$lg_count <- log10(data$lg_count)
+#data$lg_count <- log10(data$lg_count)
 
 
 #normalise by standard deviation
@@ -43,13 +41,13 @@ data$lg_count <- log10(data$lg_count)
  data$Precipitation_seasonality_mean <- scale(x = data$Precipitation_seasonality_mean)[,1]
  data$Annual_temperature_mean <- scale(x = data$Annual_temperature_mean)[,1]
  data$Temperature_seasonality_mean <- scale(x = data$Temperature_seasonality_mean)[,1]
- data$Settlement_order_oldest <- scale(x = data$Settlement_order_oldest)[,1]
+ data$Settlement_date_grouping_finer <- scale(x = data$Settlement_date_grouping_finer)[,1]
  data$EA033 <- scale(x = data$EA033)[,1]
  data$Latitude_abs_mean <- scale(x = data$Latitude_abs_mean)[,1]
  
  
 data %>%   
-   dplyr::select(lg_count,EA033,  Settlement_order_oldest, Area_land ,Shoreline, ratio_coastline_to_area, Isolation, Latitude_abs_mean,Annual_temperature_mean, Temperature_seasonality_mean, Annual_precipitation_mean, Precipitation_seasonality_mean) %>% 
+   dplyr::select(lg_count,EA033,  Settlement_date_grouping_finer, Area_land ,Shoreline, ratio_coastline_to_area, Isolation, Latitude_abs_mean,Annual_temperature_mean, Temperature_seasonality_mean, Annual_precipitation_mean, Precipitation_seasonality_mean) %>% 
  pairs.panels(method = "pearson", # correlation method
               hist.col = "#a3afd1",# "#a9d1a3","",""),
               density = TRUE,  # show density plots
@@ -62,17 +60,11 @@ data %>%
               cex.cor = 2,stars = T)
  
  
-data %>%   
-   dplyr::select(group, lg_count,EA033,  Settlement_order_oldest, Area_land ,Shoreline, ratio_coastline_to_area, Isolation, Latitude_abs_mean,Annual_temperature_mean, Temperature_seasonality_mean, Annual_precipitation_mean, Precipitation_seasonality_mean) %>% 
-   arrange(group) %>% 
-   write_tsv("output/processed_data/RO_Hedvig_aggregate_marck_group_pruned.tsv")
- 
 ##full model
 full_model <- glm.nb(data = data, lg_count  ~  Annual_precipitation_mean * Precipitation_seasonality_mean +
                        Annual_temperature_mean * Temperature_seasonality_mean +
-                        Latitude_abs_mean + 
-                       EA033 + 
-                       Isolation , 
+                        Latitude_abs_mean + Settlement_date_grouping_finer +
+                       EA033 +                        Isolation , 
 #                       Shoreline * Settlement_order_oldest +
 #                       Area_land * Settlement_order_oldest  +
 #                      ratio_coastline_to_area* Settlement_order_oldest                  ,  
