@@ -20,6 +20,7 @@ h_load(pkg = c(
   "randomcoloR",
   "ggplot2",
   "ggrepel",
+  "psych",
   "ggthemes",
   "readxl",
   "broom", 
