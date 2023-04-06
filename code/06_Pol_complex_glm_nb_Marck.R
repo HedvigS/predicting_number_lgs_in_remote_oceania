@@ -1,6 +1,6 @@
-source("requirements.R")
+source("01_requirements.R")
 
-data <- read_tsv("output/sheets/RO_Hedvig_aggregate_marck_group.tsv") %>% 
+data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_marck_group.tsv", show_col_types = F) %>% 
   dplyr::filter(!is.na(Marck_group)) %>% 
   dplyr::select(group = Marck_group, everything()) %>% 
   dplyr::mutate(Latitude_abs_mean = abs(mean_lat)) %>% 
@@ -22,7 +22,6 @@ data <- read_tsv("output/sheets/RO_Hedvig_aggregate_marck_group.tsv") %>%
   arrange(-lg_count) %>% 
   dplyr::select(group, lg_count, Latitude_abs_mean, Annual_precipitation_mean, Precipitation_seasonality_mean, Annual_temperature_mean, Temperature_seasonality_mean, EA033, Area_land, Shoreline, Isolation, Settlement_order_oldest, ratio_coastline_to_area)
 
-
 #log10 size variables
 data$Area_land <- log10(data$Area_land)
 data$Shoreline <- log10(data$Shoreline)
@@ -31,37 +30,34 @@ data$Isolation <- log10(data$Isolation)
 
 #normalise by standard deviation
 
- data$Area_land <- scale(x = data$Area_land)
- data$Shoreline <- scale(x = data$Shoreline)
- data$ratio_coastline_to_area <- scale(x = data$ratio_coastline_to_area)
- data$Isolation <- scale(x = data$Isolation)
- data$Annual_precipitation_mean <- scale(x = data$Annual_precipitation_mean)
- data$Precipitation_seasonality_mean <- scale(x = data$Precipitation_seasonality_mean)
- data$Annual_temperature_mean <- scale(x = data$Annual_temperature_mean)
- data$Temperature_seasonality_mean <- scale(x = data$Temperature_seasonality_mean)
- data$Settlement_order_oldest <- scale(x = data$Settlement_order_oldest)
- data$EA033 <- scale(x = data$EA033)
- data$Latitude_abs_mean <- scale(x = data$Latitude_abs_mean)
- 
- data %>%   dplyr::select(group, lg_count,EA033,  Settlement_order_oldest, Area_land ,Shoreline, ratio_coastline_to_area, Isolation, Latitude_abs_mean,Annual_temperature_mean, Temperature_seasonality_mean, Annual_precipitation_mean, Precipitation_seasonality_mean) %>% 
-   arrange(group) %>% 
-   write_tsv("output/sheets/RO_Hedvig_aggregate_marck_group_pruned.tsv")
+ data$Area_land <- scale(x = data$Area_land)[,1]
+ data$Shoreline <- scale(x = data$Shoreline)[,1]
+ data$ratio_coastline_to_area <- scale(x = data$ratio_coastline_to_area)[,1]
+ data$Isolation <- scale(x = data$Isolation)[,1]
+ data$Annual_precipitation_mean <- scale(x = data$Annual_precipitation_mean)[,1]
+ data$Precipitation_seasonality_mean <- scale(x = data$Precipitation_seasonality_mean)[,1]
+ data$Annual_temperature_mean <- scale(x = data$Annual_temperature_mean)[,1]
+ data$Temperature_seasonality_mean <- scale(x = data$Temperature_seasonality_mean)[,1]
+ data$Settlement_order_oldest <- scale(x = data$Settlement_order_oldest)[,1]
+ data$EA033 <- scale(x = data$EA033)[,1]
+ data$Latitude_abs_mean <- scale(x = data$Latitude_abs_mean)[,1]
  
 
-##full model
+data %>%   
+   dplyr::select(group, lg_count,EA033,  Settlement_order_oldest, Area_land ,Shoreline, ratio_coastline_to_area, Isolation, Latitude_abs_mean,Annual_temperature_mean, Temperature_seasonality_mean, Annual_precipitation_mean, Precipitation_seasonality_mean) %>% 
+   arrange(group) %>% 
+   write_tsv("output/processed_data/RO_Hedvig_aggregate_marck_group_pruned.tsv")
+ 
 ##full model
 full_model <- glm.nb(data = data, lg_count  ~  Annual_precipitation_mean * Precipitation_seasonality_mean +
                        Annual_temperature_mean * Temperature_seasonality_mean +
                         Latitude_abs_mean + 
                        EA033 + 
-                       Isolation + 
-                       #                       Net_Primary_Production_mean +
-                       #                       Net_Primary_Production_Predictability_mean +
-                       #                       Area_incl_water * Settlement_order_oldest +
-                       Shoreline * Settlement_order_oldest +
-                       Area_land * Settlement_order_oldest  +
-                      ratio_coastline_to_area* Settlement_order_oldest                  ,  
-                     control = list(maxit = 2500, epsilon = 1e-7, trace = 3))
+                       Isolation , 
+#                       Shoreline * Settlement_order_oldest +
+#                       Area_land * Settlement_order_oldest  +
+#                      ratio_coastline_to_area* Settlement_order_oldest                  ,  
+                     control = list(maxit = 30000, epsilon = 1e-7, trace = 3))
 
 broomed_full_model <-  broom::tidy(full_model) %>% 
   mutate(estimate = round(as.numeric(estimate), digits = 7)) %>% 
