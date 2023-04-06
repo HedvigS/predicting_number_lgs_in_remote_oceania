@@ -1,5 +1,7 @@
 source("01_requirements.R")
 
+data$settlement_date_grouping_finer
+
 data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_marck_group.tsv", show_col_types = F) %>% 
   dplyr::filter(!is.na(Marck_group)) %>% 
   dplyr::select(group = Marck_group, everything()) %>% 
@@ -13,20 +15,23 @@ data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_marck_group.tsv", sh
   rename(Area_incl_water = sum_water_area) %>% 
   rename(Area_land = sum_area) %>% 
   rename(Shoreline = sum_shoreline) %>% 
-  rename(Settlement_order_oldest = settlement_date_grouping_finer) %>% 
+  rename(Settlement_date_grouping_finer = settlement_date_grouping_finer) %>% 
   rename(Net_Primary_Production_mean = mean_NPP) %>% 
   rename(Net_Primary_Production_Predictability_mean = mean_NetPrimaryProductionPredictability) %>% 
   rename(Isolation = dist) %>% 
   mutate(group = str_replace_all(group, "Kanaky", "New Caledonia (incl loyalties)")) %>% 
   mutate(group = str_replace_all(group, "and", "+")) %>% 
   arrange(-lg_count) %>% 
-  dplyr::select(group, lg_count, Latitude_abs_mean, Annual_precipitation_mean, Precipitation_seasonality_mean, Annual_temperature_mean, Temperature_seasonality_mean, EA033, Area_land, Shoreline, Isolation, Settlement_order_oldest, ratio_coastline_to_area)
+  dplyr::select(group, lg_count, Latitude_abs_mean, Annual_precipitation_mean, Precipitation_seasonality_mean, Annual_temperature_mean, Temperature_seasonality_mean, EA033, Area_land, Shoreline, Isolation, Settlement_date_grouping_finer, ratio_coastline_to_area)
 
 #log10 size variables
 data$Area_land <- log10(data$Area_land)
 data$Shoreline <- log10(data$Shoreline)
 data$ratio_coastline_to_area <- data$Shoreline / data$Area_land
 data$Isolation <- log10(data$Isolation)
+
+data$lg_count <- log10(data$lg_count)
+
 
 #normalise by standard deviation
 
@@ -42,7 +47,21 @@ data$Isolation <- log10(data$Isolation)
  data$EA033 <- scale(x = data$EA033)[,1]
  data$Latitude_abs_mean <- scale(x = data$Latitude_abs_mean)[,1]
  
-
+ 
+data %>%   
+   dplyr::select(lg_count,EA033,  Settlement_order_oldest, Area_land ,Shoreline, ratio_coastline_to_area, Isolation, Latitude_abs_mean,Annual_temperature_mean, Temperature_seasonality_mean, Annual_precipitation_mean, Precipitation_seasonality_mean) %>% 
+ pairs.panels(method = "pearson", # correlation method
+              hist.col = "#a3afd1",# "#a9d1a3","",""),
+              density = TRUE,  # show density plots
+              ellipses = F, # show correlation ellipses
+              cex.labels= 1,
+              #           smoother= T,
+              cor=T,
+              lm=T,
+              ci = T, 
+              cex.cor = 2,stars = T)
+ 
+ 
 data %>%   
    dplyr::select(group, lg_count,EA033,  Settlement_order_oldest, Area_land ,Shoreline, ratio_coastline_to_area, Isolation, Latitude_abs_mean,Annual_temperature_mean, Temperature_seasonality_mean, Annual_precipitation_mean, Precipitation_seasonality_mean) %>% 
    arrange(group) %>% 
@@ -64,7 +83,8 @@ broomed_full_model <-  broom::tidy(full_model) %>%
   mutate(p.value = round(p.value, digit = 5)) %>% 
   mutate(statistic_abs = abs(statistic)) %>% 
   arrange(-statistic_abs) %>% 
-  dplyr::select(term, estimate, p.value, statistic = statistic_abs)
+  dplyr::select(term, estimate, p.value, statistic = statistic_abs) %>% 
+  mutate(estimate_abs = abs(estimate))
 
 anova_full_model <- anova(full_model, test = "Chisq") %>% 
   rownames_to_column("variable") %>% 
