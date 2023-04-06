@@ -63,11 +63,11 @@ data %>%
 ##full model
 full_model <- glm.nb(data = data, lg_count  ~  Annual_precipitation_mean * Precipitation_seasonality_mean +
                        Annual_temperature_mean * Temperature_seasonality_mean +
-                        Latitude_abs_mean + Settlement_date_grouping_finer +
-                       EA033 +                        Isolation , 
-#                       Shoreline * Settlement_order_oldest +
-#                       Area_land * Settlement_order_oldest  +
-#                      ratio_coastline_to_area* Settlement_order_oldest                  ,  
+                        Latitude_abs_mean  +
+                       EA033 +  Isolation + 
+                       Shoreline * Settlement_date_grouping_finer +
+                       Area_land * Settlement_date_grouping_finer  +
+                      ratio_coastline_to_area* Settlement_date_grouping_finer                 ,  
                      control = list(maxit = 30000, epsilon = 1e-7, trace = 3))
 
 broomed_full_model <-  broom::tidy(full_model) %>% 
@@ -86,11 +86,20 @@ anova_full_model <- anova(full_model, test = "Chisq") %>%
   mutate(sig = ifelse(`Pr(>Chi)` <0.05, "Sig", "Non Sig")) %>% 
   dplyr::select(variable, sig, interactions, `Pr(>Chi)`, everything())
 
-#View(anova_full_model)
+variable_highest_p_value <- anova_full_model[1,1]
 
-anova_full_model[1,1]
+sig_vars <- anova_full_model %>% 
+  filter(sig == "Sig") %>% 
+  dplyr::select(variable) %>% 
+  as.matrix() %>% 
+  as.vector() %>% 
+  paste(collapse = ",")
 
-model_1 <- update(full_model,  .~. -Settlement_order_oldest:ratio_coastline_to_area)
+if(variable_highest_p_value %in% sig_vars){
+  cat("The variable with the highest p-value is involved in an interaction!!!")
+}
+
+model_1 <- update(full_model,  paste(". ~ . -", variable_highest_p_value))
 
 anova_model_1 <- anova(model_1, test = "Chisq") %>% 
   rownames_to_column("variable") %>% 
@@ -101,9 +110,20 @@ anova_model_1 <- anova(model_1, test = "Chisq") %>%
   dplyr::select(variable, sig, interactions, `Pr(>Chi)`, everything())
 
 #View(anova_model_1)
-anova_model_1[1,1]
+variable_highest_p_value <- anova_model_1[1,1]
 
-model_2 <- update(model_1,  .~. -Shoreline:Settlement_order_oldest)
+sig_vars <- anova_model_1 %>% 
+  filter(sig == "Sig") %>% 
+  dplyr::select(variable) %>% 
+  as.matrix() %>% 
+  as.vector() %>% 
+  paste(collapse = ",")
+
+if(variable_highest_p_value %in% sig_vars){
+  cat("The variable with the highest p-value is involved in an interaction!!!")
+}
+
+model_2 <- update(model_1,  paste(". ~ . -", variable_highest_p_value))
 
 anova_model_2 <- anova(model_2, test = "Chisq") %>% 
   rownames_to_column("variable") %>% 
@@ -114,9 +134,9 @@ anova_model_2 <- anova(model_2, test = "Chisq") %>%
   dplyr::select(variable, sig, interactions, `Pr(>Chi)`, everything())
 
 #View(anova_model_2)
-anova_model_2[1,1]
+variable_highest_p_value <- anova_model_2[1,1]
 
-model_3 <- update(model_2,  .~. -	Latitude_abs_mean)
+model_3 <- update(model_2,paste(". ~ . -", variable_highest_p_value))
 
 anova_model_3 <- anova(model_3,test = "Chisq") %>% 
   rownames_to_column("variable") %>% 
@@ -127,9 +147,9 @@ anova_model_3 <- anova(model_3,test = "Chisq") %>%
   dplyr::select(variable, sig, interactions, `Pr(>Chi)`, everything())
 
 #View(anova_model_3)
-anova_model_3[1,1]
+variable_highest_p_value <- anova_model_3[1,1]
 
-model_4 <- update(model_3,  .~. -Annual_precipitation_mean:Precipitation_seasonality_mean)
+model_4 <- update(model_3,paste(". ~ . -", variable_highest_p_value))
 
 anova_model_4 <- anova(model_4, test = "Chisq") %>% 
   rownames_to_column("variable") %>% 
@@ -140,10 +160,10 @@ anova_model_4 <- anova(model_4, test = "Chisq") %>%
   dplyr::select(variable, sig, interactions, `Pr(>Chi)`, everything())
 
 #View(anova_model_4)
- anova_model_4[1,1]
+variable_highest_p_value <-  anova_model_4[1,1]
  
- model_5 <- update(model_4,  .~. -Annual_temperature_mean:Temperature_seasonality_mean)
-
+ model_5 <- update(model_4, paste(". ~ . -", variable_highest_p_value))
+              
 anova_model_5 <- anova(model_5, test = "Chisq") %>%
   rownames_to_column("variable") %>%
   mutate(`Pr(>Chi)`= round(`Pr(>Chi)`, digits = 7)) %>%
@@ -153,9 +173,9 @@ anova_model_5 <- anova(model_5, test = "Chisq") %>%
   dplyr::select(variable, sig, interactions, `Pr(>Chi)`, everything())
 
 #View(anova_model_5)
-anova_model_5[1,1]
+variable_highest_p_value <-  anova_model_5[1,1]
 
-model_6 <- update(model_5,  .~. -	Isolation)
+model_6 <- update(model_5, paste(". ~ . -", variable_highest_p_value))
 
 anova_model_6 <- anova(model_6, test = "Chisq") %>%
   rownames_to_column("variable") %>%
@@ -166,9 +186,9 @@ anova_model_6 <- anova(model_6, test = "Chisq") %>%
   dplyr::select(variable, sig, interactions, `Pr(>Chi)`, everything())
 
 #View(anova_model_6)
-anova_model_6[1,1]
+variable_highest_p_value <-  anova_model_6[1,1]
 
-model_7 <- update(model_6,  .~. -		ratio_coastline_to_area)
+model_7 <- update(model_6, paste(". ~ . -", variable_highest_p_value))
 
 anova_model_7 <- anova(model_7, test = "Chisq") %>%
   rownames_to_column("variable") %>%
@@ -179,9 +199,9 @@ anova_model_7 <- anova(model_7, test = "Chisq") %>%
   dplyr::select(variable, sig, interactions, `Pr(>Chi)`, everything())
 
 #View(anova_model_7)
-anova_model_7[1,1]
+variable_highest_p_value <-  anova_model_7[1,1]
 
-model_8 <- update(model_7,  .~. -		Annual_precipitation_mean)
+model_8 <- update(model_7, paste(". ~ . -", variable_highest_p_value))
 
 anova_model_8 <- anova(model_8, test = "Chisq") %>%
   rownames_to_column("variable") %>%
@@ -192,9 +212,9 @@ anova_model_8 <- anova(model_8, test = "Chisq") %>%
   dplyr::select(variable, sig, interactions, `Pr(>Chi)`, everything())
 
 #View(anova_model_8)
-anova_model_8[1,1]
+variable_highest_p_value <-  anova_model_8[1,1]
 
- model_9 <- update(model_8,  .~. -	Annual_temperature_mean)
+ model_9 <- update(model_8, paste(". ~ . -", variable_highest_p_value))
 
   anova_model_9 <- anova(model_9, test = "Chisq") %>%
   rownames_to_column("variable") %>%
@@ -205,9 +225,9 @@ anova_model_8[1,1]
   dplyr::select(variable, sig, interactions, `Pr(>Chi)`, everything())
  
 # View(anova_model_9)
-  anova_model_9[1,1]
+  variable_highest_p_value <-    anova_model_9[1,1]
 # 
- model_10 <- update(model_9,  .~. -Latitude_abs_mean)
+ model_10 <- update(model_9, paste(". ~ . -", variable_highest_p_value))
 
 anova_model_10 <- anova(model_10, test = "Chisq") %>%
  rownames_to_column("variable") %>%
@@ -218,8 +238,10 @@ anova_model_10 <- anova(model_10, test = "Chisq") %>%
   dplyr::select(variable, sig, interactions, `Pr(>Chi)`, everything())
 
 #View(anova_model_10)
-model_11 <- update(model_10,  .~. -Isolation)
- 
+variable_highest_p_value <-    anova_model_10[1,1]
+
+model_11 <- update(model_10, paste(". ~ . -", variable_highest_p_value))
+
 anova_model_11 <- anova(model_11, test = "Chisq") %>%
  rownames_to_column("variable") %>%
  mutate(`Pr(>Chi)`= round(`Pr(>Chi)`, digits = 7)) %>%
@@ -228,32 +250,39 @@ anova_model_11 <- anova(model_11, test = "Chisq") %>%
  mutate(sig = ifelse(`Pr(>Chi)` <0.05, "Sig", "Non Sig")) %>%
  dplyr::select(variable, sig, interactions, `Pr(>Chi)`, everything())
  
+variable_highest_p_value <-    anova_model_11[1,1]
 
+model_12 <- update(model_11, paste(". ~ . -", variable_highest_p_value))
 
-#model_12 <- update(model_11,  .~. -Annual_temperature_mean)
+anova_model_12 <- anova(model_12, test = "Chisq") %>% 
+  rownames_to_column("variable") %>% 
+  mutate(`Pr(>Chi)`= round(`Pr(>Chi)`, digits = 7)) %>%
+  mutate(interactions = str_count(variable, ":") + 1) %>% 
+  arrange(-interactions, -`Pr(>Chi)`) %>% 
+  mutate(sig = ifelse(`Pr(>Chi)` <0.05, "Sig", "Non Sig")) %>% 
+  dplyr::select(variable, sig, interactions, `Pr(>Chi)`, everything())
 
-#anova_model_12 <- anova(model_12, test = "Chisq") %>% 
-#  rownames_to_column("variable") %>% 
-#  mutate(`Pr(>Chi)`= round(`Pr(>Chi)`, digits = 7)) %>%
-#  mutate(interactions = str_count(variable, ":") + 1) %>% 
-#  arrange(-interactions, -`Pr(>Chi)`) %>% 
-#  mutate(sig = ifelse(`Pr(>Chi)` <0.05, "Sig", "Non Sig")) %>% 
-#  dplyr::select(variable, sig, interactions, `Pr(>Chi)`, everything())
+variable_highest_p_value <-    anova_model_12[1,1]
 
-##View(anova_model_12)
+model_13 <- update(model_12, paste(". ~ . -", variable_highest_p_value))
 
+anova_model_13 <- anova(model_13, test = "Chisq") %>% 
+  rownames_to_column("variable") %>% 
+  mutate(`Pr(>Chi)`= round(`Pr(>Chi)`, digits = 7)) %>%
+  mutate(interactions = str_count(variable, ":") + 1) %>% 
+  arrange(-interactions, -`Pr(>Chi)`) %>% 
+  mutate(sig = ifelse(`Pr(>Chi)` <0.05, "Sig", "Non Sig")) %>% 
+  dplyr::select(variable, sig, interactions, `Pr(>Chi)`, everything())
 
 ###STOP
 
-final_model <- model_9
+final_model <- model_13
 
 summary(final_model)
 
 modEvA::RsqGLM(final_model)
 rsq(final_model)
 pseudo_r = (final_model$null.deviance - final_model$deviance) / final_model$null.deviance
-
-
 
 xtable(final_model, digits = 2, caption = c("GLM model for predicting language counts in island groups joined for overnight sailing distances."), label = "table:GLM_model_marck") %>% 
   print() %>% 
