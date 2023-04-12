@@ -45,7 +45,7 @@ data$Isolation <- log10(data$Isolation)
  data$EA033 <- scale(x = data$EA033)[,1]
  data$Latitude_abs_mean <- scale(x = data$Latitude_abs_mean)[,1]
  
- 
+ png(filename = "output/plots/SLOM_marck_all_variables.png", width = 15, height = 15, units = "in", res = 300)
 data %>%   
    dplyr::select(lg_count,EA033,  Settlement_date_grouping_finer, Area_land ,Shoreline, ratio_coastline_to_area, Isolation, Latitude_abs_mean,Annual_temperature_mean, Temperature_seasonality_mean, Annual_precipitation_mean, Precipitation_seasonality_mean) %>% 
  pairs.panels(method = "pearson", # correlation method
@@ -58,7 +58,7 @@ data %>%
               lm=T,
               ci = T, 
               cex.cor = 2,stars = T)
- 
+ x <- dev.off()
  
 ##full model
 full_model <- glm.nb(data = data, lg_count  ~  Annual_precipitation_mean * Precipitation_seasonality_mean +
