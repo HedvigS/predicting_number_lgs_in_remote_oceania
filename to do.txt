@@ -1,0 +1,11 @@
+Todo
+
+Plot of pop per country and lgs per country
+
+Plot of SPLOM all variables
+
+Outcomes of models
+* Backwards pruning
+* Full
+* MuMin
+* hand picked pruning for super-correlated
