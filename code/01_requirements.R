@@ -60,3 +60,6 @@ if(!dir.exists(dir)){dir.create(dir)}
 
 dir <- "output/plots/maps"
 if(!dir.exists(dir)){dir.create(dir)}
+
+dir <- "output/results"
+if(!dir.exists(dir)){dir.create(dir)}
