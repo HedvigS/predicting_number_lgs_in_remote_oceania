@@ -6,6 +6,7 @@ source("fun_def_h_load.R")
 h_load(pkg = c(
   "tidyverse",
   "reshape2",
+  "jsonlite",
   "modEvA",
   "MuMIn",
   "rsq",
@@ -19,6 +20,7 @@ h_load(pkg = c(
   "ggalt",
   "randomcoloR",
   "ggplot2",
+  "readxl",
   "ggrepel",
   "psych",
   "ggthemes",
