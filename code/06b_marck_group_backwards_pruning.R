@@ -1,4 +1,5 @@
 source("01_requirements.R")
+source("fun_def_anova_drop.R")
 
 data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_marck_group_scaled.tsv", show_col_types = F) 
 
@@ -33,25 +34,24 @@ write_tsv(x = anova_full_model, file = "output/results/marck_full_model_anova.ts
 ##backwards pruning
 #variable_highest_p_value <- anova_full_model[1,1]
 
-to_drop_df <- anova_full_model %>% 
-  slice_max(order_by = `Pr(>Chi)`) 
+var_to_drop <- fun_anova_pick_drop(model = full_model)
 
-#if there's more than one to kick out, kick out the one that is an interaction
-if(nrow(to_drop_df) != 1 & filter(to_drop_df, interactions == 2) %>% nrow()){
-  
-  to_drop_var <-   filter(to_drop_df, interactions == 2) %>% 
-    .$variable
-  }
+model_1 <- update(object = full_model,paste(". ~ . -", var_to_drop))
 
-#if there aren't interactions, randomly pick one of the same valued ones
-if(nrow(to_drop_df) != 1 & (filter(to_drop_df, interactions == 2) %>% nrow() < 1)){
-  
-  to_drop_var <-   to_drop_df %>% 
-    sample_n(size = 1) %>% 
-    .$variable
-}
+var_to_drop <- fun_anova_pick_drop(model = model_1)
 
+model_2 <- update(object = model_1,paste(". ~ . -", var_to_drop))
 
+var_to_drop <- fun_anova_pick_drop(model = model_2)
 
+model_3 <- update(object = model_2,paste(". ~ . -", var_to_drop))
+
+var_to_drop <- fun_anova_pick_drop(model = model_3)
+
+model_4 <- update(object = model_3,paste(". ~ . -", var_to_drop))
+
+var_to_drop <- fun_anova_pick_drop(model = model_3)
+
+model_4 <- update(object = model_3,paste(". ~ . -", var_to_drop))
 
 
