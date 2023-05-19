@@ -160,7 +160,8 @@ dates <- read_tsv("data/island_group_settlement_date.tsv", show_col_types = F) %
   unnest(Smallest_Island_group) %>% 
   mutate(Smallest_Island_group = trimws(Smallest_Island_group)) %>% 
   group_by(Smallest_Island_group) %>% 
-  summarise(oldest_date = max(`Settlement date oldest date`), settlement_date_grouping_finer = min(settlement_date_grouping_finer, na.rm = T), settlement_date_grouping_coarser = min(settlement_date_grouping_coarser, na.rm = T)) 
+  summarise(oldest_date = max(`Settlement date oldest date`), 
+            settlement_date_grouping_finer = min(settlement_date_grouping_finer, na.rm = T), settlement_date_grouping_coarser = min(settlement_date_grouping_coarser, na.rm = T)) 
 
 ##All
 Island_group_all_sep <- polygon_geo_grouping_hierarchy %>% 
@@ -216,6 +217,7 @@ Island_group_summarised_smallest %>%
   theme(axis.text.x = element_blank(), legend.position = "None")
 
 ggsave("output/plots/Lg_distrubition_smallest_island_group.png", width = 20, height = 5)
+
 
 #medium_group
 Island_group_summarised_medium <- Island_group_all_sep %>%
