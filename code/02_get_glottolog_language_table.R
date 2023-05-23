@@ -2,7 +2,7 @@
 source("01_requirements.R")
 options(timeout=300)
 
-if(dir.exists(paths = "data/git_submodules/glottolog-cldf/cldf/")){
+if(dir.exists(paths = "data/glottolog-cldf/cldf/")){
   cat(paste0("glottolog-cldf already downloaded, skipping fetching it anew."))
   }else{
 
@@ -14,14 +14,14 @@ filepath <- file.path(tempfile())
 glottolog_fn <- c("https://zenodo.org/record/7398887/files/glottolog/glottolog-cldf-v4.7.zip")
 
 utils::download.file(file.path(glottolog_fn), destfile = filepath)
-utils::unzip(zipfile = filepath, exdir = "glottolog-cldf")}
+utils::unzip(zipfile = filepath, exdir = "data/glottolog-cldf")}
 
 #Zenodo locations contain a dir with the name of the repos and the commit in the release. This is not convenient for later scripts, so we move the contents up one level
-old_fn <- list.dirs("glottolog-cldf", recursive = F)
+old_fn <- list.dirs("data/glottolog-cldf", recursive = F)
 old_fn_files <- list.files(old_fn)
-new_fn <- "glottolog-cldf"
+new_fn <- "data/glottolog-cldf"
 
-if(!dir.exists(paths = "data/git_submodules/glottolog-cldf/cldf/")){
+if(!dir.exists(paths = "data/glottolog-cldf/cldf/")){
 file.copy(from = paste0(old_fn,"/", old_fn_files),to = new_fn, recursive = T, overwrite = T)
 #remove old dir
 unlink(old_fn, recursive = T)}
