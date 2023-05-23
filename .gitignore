@@ -12,7 +12,8 @@
 *.pdf
 *.toc
 *.Rproj
-*glottolog-cldf*
+code/data/glottolog-cldf/**
+code/data/dplace-cldf/**
 code/output/plots/*
 code/output/processed_data/isolation*
 code/output/processed_data/RO_Hedvig_aggregate_all_obs_sep.tsv
