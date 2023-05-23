@@ -1,3 +1,0 @@
-[submodule "code/data/git_submodules/glottolog-cldf"]
-	path = code/data/git_submodules/glottolog-cldf
-	url = https://github.com/glottolog/glottolog-cldf
