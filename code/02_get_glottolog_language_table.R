@@ -2,7 +2,7 @@
 source("01_requirements.R")
 options(timeout=300)
 
-if(dir.exists(paths = "data/glottolog-cldf/cldf/")){
+if(dir.exists(paths = "output/processed_data/glottolog_language_table_wide_df.tsv")){
   cat(paste0("glottolog-cldf already downloaded, skipping fetching it anew."))
   }else{
 
