@@ -16,26 +16,28 @@ all_modis <- fns %>%  map_df(
     mutate(across(everything(), as.character)) %>% 
     mutate(filename = basename(x)))
 
-
 modis_with_groups <- all_modis %>% 
  mutate(terra_aqua = ifelse(str_detect(filename, "MOD"), "terra", "aqua")) %>% 
   dplyr::select(Unique_ID = ID, MOD17A3HGF_061_Npp_500m, MYD17A3HGF_061_Npp_500m) %>% 
     mutate(MOD17A3HGF_061_Npp_500m = as.numeric(MOD17A3HGF_061_Npp_500m)) %>% 
     mutate(MYD17A3HGF_061_Npp_500m = as.numeric(MYD17A3HGF_061_Npp_500m)) %>% 
-  left_join(polygons, by = "Unique_ID") %>% 
-  reshape2::melt(id.vars = c("Unique_ID", "Medium_only_merged_for_shared_language", "Marck_group"))
+  left_join(polygons, by = "Unique_ID") 
 
 modis_with_groups %>% 
   filter(!is.na(Marck_group)) %>% 
   group_by(Marck_group) %>% 
-summarise(mean_061_Npp_500m = mean(value, na.rm = T),
-            var__061_Npp_500m = var(value, na.rm = T)) %>% 
+summarise(mean_MOD17A3HGF_061_Npp_500m = mean(MOD17A3HGF_061_Npp_500m, na.rm = T),
+            var_MOD17A3HGF_061_Npp_500m = var(MOD17A3HGF_061_Npp_500m, na.rm = T),
+            mean_MYD17A3HGF_061_Npp_500m = mean(MYD17A3HGF_061_Npp_500m, na.rm = T), 
+            var_MYD17A3HGF_061_Npp_500m = var(MYD17A3HGF_061_Npp_500m, na.rm = T)) %>% 
   write_tsv("output/processed_data/modis_marck.tsv", na = "")
 
 modis_with_groups %>% 
   filter(!is.na(Medium_only_merged_for_shared_language)) %>% 
   group_by(Medium_only_merged_for_shared_language) %>% 
-  summarise(mean_061_Npp_500m = mean(value, na.rm = T),
-            var__061_Npp_500m = var(value, na.rm = T)) %>% 
-write_tsv("output/processed_data/modis_Medium_only_merged_for_shared_language.tsv", na = "")
+  summarise(mean_MOD17A3HGF_061_Npp_500m = mean(MOD17A3HGF_061_Npp_500m, na.rm = T),
+            var_MOD17A3HGF_061_Npp_500m = var(MOD17A3HGF_061_Npp_500m, na.rm = T),
+            mean_MYD17A3HGF_061_Npp_500m = mean(MYD17A3HGF_061_Npp_500m, na.rm = T), 
+            var_MYD17A3HGF_061_Npp_500m = var(MYD17A3HGF_061_Npp_500m, na.rm = T)) %>% 
+  write_tsv("output/processed_data/modis_Medium_only_merged_for_shared_language.tsv", na = "")
 
