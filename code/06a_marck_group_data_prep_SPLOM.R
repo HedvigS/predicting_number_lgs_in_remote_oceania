@@ -12,6 +12,7 @@ data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_marck_group.tsv", sh
   rename(EA033 = mean_pol_complex) %>% 
   rename(Area_land = sum_area) %>% 
   rename(Shoreline = sum_shoreline) %>% 
+  rename(Area_water = sum_water_area) %>% 
   rename(Settlement_date_grouping_finer = settlement_date_grouping_finer) %>% 
   rename(Isolation = dist) %>% 
   mutate(group = str_replace_all(group, "Kanaky", "New Caledonia (incl loyalties)")) %>% 
@@ -29,16 +30,19 @@ data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_marck_group.tsv", sh
                 Shoreline, #8
                 Isolation, #9
                 Settlement_date_grouping_finer, #10
-                ratio_coastline_to_area) #11
+                ratio_coastline_to_area,
+                Area_water) #11
 
 #log10 size variables to take out the oversized effect of large island groups, like south island aotearoa etc
 data$Area_land <- log10(data$Area_land)
+data$Area_water <- log10(data$Area_water)
 data$Shoreline <- log10(data$Shoreline)
 data$ratio_coastline_to_area <- data$Shoreline / data$Area_land
 data$Isolation <- log10(data$Isolation)
 
 #setting all values to between 0 and 1 to make coef easier to interpret. adding 1 so that there aren't actually 0's since the glm.nb otherwise complains about not being able to take the sqrt of 0.
 data$Area_land <- modEvA::range01(data$Area_land) +1
+data$Area_water <- modEvA::range01(data$Area_water) +1
 data$Shoreline <- modEvA::range01(data$Shoreline) +1
 data$ratio_coastline_to_area <- modEvA::range01(data$ratio_coastline_to_area) +1
 data$Isolation <- modEvA::range01(data$Isolation) +1
@@ -55,7 +59,7 @@ data %>%
 
 png(filename = "output/plots/SLOM_marck_all_variables.png", width = 10, height = 10, units = "in", res = 300)
 data %>%   
-  dplyr::select(lg_count,EA033,  Settlement_date_grouping_finer, Area_land ,Shoreline, ratio_coastline_to_area, Isolation, Latitude_abs_mean,Annual_temperature_mean, Temperature_seasonality_mean, Annual_precipitation_mean, Precipitation_seasonality_mean) %>% 
+  dplyr::select(lg_count,EA033,  Settlement_date_grouping_finer, Area_land ,Area_water, Shoreline, ratio_coastline_to_area, Isolation, Latitude_abs_mean,Annual_temperature_mean, Temperature_seasonality_mean, Annual_precipitation_mean, Precipitation_seasonality_mean) %>% 
   pairs.panels(method = "pearson", # correlation method
                hist.col = "#a3afd1",# "#a9d1a3","",""),
                density = TRUE,  # show density plots

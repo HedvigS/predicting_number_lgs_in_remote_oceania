@@ -33,6 +33,7 @@ h_load(pkg = c(
   "devtools",
   "xtable",
   "broom", 
+  "nFactors",
   "sp", 
   "raster"), verbose = F, dependencies = T
 )
