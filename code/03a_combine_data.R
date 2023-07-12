@@ -1,5 +1,7 @@
 source("01_requirements.R")
 
+#this scripts takes all relevant data and combines into approrpaite tables for the two island groupings.
+
 #reading in glottolog for language-levelling
 Glottolog <- read_tsv("output/processed_data/glottolog_language_table_wide_df.tsv", show_col_types = F) %>%   
   dplyr::select(glottocode = Glottocode, Language_level_ID, level)
@@ -156,7 +158,6 @@ Island_group_summarised_smallest <- Island_group_all_sep %>%
             mean_pol_complex = mean(pol_complex_code_Hedvig, na.rm = T), 
             sum_area = sum(sum_area, na.rm = T), 
             sum_water_area = sum(sum_water_area, na.rm = T), 
-            Melanesia_or_not = dplyr::first(Melanesia_or_not),
             lg_count_smallest = mean(lg_count_smallest, na.rm = T),
             sum_shoreline = sum(sum_shoreline, na.rm = T),
             mean_lat = mean(mean_lat),
@@ -179,43 +180,31 @@ Island_group_summarised_smallest <- Island_group_all_sep %>%
 
 write_tsv(Island_group_summarised_smallest, "output/processed_data/RO_Hedvig_aggregate_smallest_island.tsv")
 
-Island_group_summarised_smallest$Smallest_Island_group <- fct_reorder(Island_group_summarised_smallest$Smallest_Island_group, Island_group_summarised_smallest$lg_count)
-
-Island_group_summarised_smallest %>% 
-  ggplot() +
-  geom_bar(aes(x = Smallest_Island_group, y = lg_count, fill = lg_count), stat = "Identity") +
-  theme_classic() +
-  theme(axis.text.x = element_blank(), legend.position = "None")
-
-ggsave("output/plots/Lg_distrubition_smallest_island_group.png", width = 20, height = 5)
-
-
 #medium_group
 Island_group_summarised_medium <- Island_group_all_sep %>%
   filter(!is.na(settlement_date_grouping_finer)) %>% 
   group_by(Medium_only_merged_for_shared_language) %>% 
-  summarise(mean_NetPrimaryProductionPredictability = mean(Predictability_code, na.rm = T), 
-            max_NetPrimaryProductionPredictability = max(Predictability_code),
-            min_NetPrimaryProductionPredictability = min(Predictability_code),
-            mean_NPP = mean(NPP, na.rm = T),  
-            mean_pol_complex = mean(pol_complex_code_Hedvig, na.rm = T), 
-            mean_EA032 = mean(EA032_code, na.rm = T),
-            sum_area = sum(sum_area, na.rm = T), 
-            sum_water_area = sum(sum_water_area, na.rm = T),
-            Melanesia_or_not = dplyr::first(Melanesia_or_not),
-            sum_shoreline = sum(sum_shoreline, na.rm = T),
-            mean_lat = mean(mean_lat),
-            mean_long = mean(mean_long),
-            settlement_date_grouping_finer = min(settlement_date_grouping_finer), 
-            settlement_date_grouping_coarser = min(settlement_date_grouping_coarser),
-            oldest_date = max(oldest_date),
-            color = dplyr::first(medium_group_color), 
-            lg_count = dplyr::first(lg_count_medium),
-            mean_CCSM_piControl_1760_bio1 = mean(mean_CCSM_piControl_1760_bio1),
-            mean_CCSM_piControl_1760_bio4 = mean(mean_CCSM_piControl_1760_bio4),
-            mean_CCSM_piControl_1760_bio12 = mean(mean_CCSM_piControl_1760_bio12),
-            mean_CCSM_piControl_1760_bio15 = mean(mean_CCSM_piControl_1760_bio15)
-            ) %>% 
+  dplyr::summarise(
+        mean_pol_complex = mean(pol_complex_code_Hedvig, na.rm = T), 
+        sum_area = sum(sum_area, na.rm = T), 
+        sum_water_area = sum(sum_water_area, na.rm = T), 
+        lg_count_smallest = mean(lg_count_smallest, na.rm = T),
+        sum_shoreline = sum(sum_shoreline, na.rm = T),
+        mean_lat = mean(mean_lat),
+        mean_long = mean(mean_long),
+        settlement_date_grouping_finer = min(settlement_date_grouping_finer), 
+        oldest_date = max(oldest_date),
+        color = dplyr::first(medium_group_color), 
+        lg_count = dplyr::first(lg_count_medium),
+        NPP_terra_mean = mean(MOD17A3HGF_061_Npp_500m_terra, na.rm = T),
+        NPP_terra_var = var(MOD17A3HGF_061_Npp_500m_terra, na.rm = T),
+        NPP_aqua_mean = mean(MYD17A3HGF_061_Npp_500m_water, na.rm = T),
+        NPP_aqua_var = var(MYD17A3HGF_061_Npp_500m_water, na.rm = T),
+        mean_CCSM_piControl_1760_bio1 = mean(mean_CCSM_piControl_1760_bio1),
+        mean_CCSM_piControl_1760_bio4 = mean(mean_CCSM_piControl_1760_bio4),
+        mean_CCSM_piControl_1760_bio12 = mean(mean_CCSM_piControl_1760_bio12),
+        mean_CCSM_piControl_1760_bio15 = mean(mean_CCSM_piControl_1760_bio15)
+) %>% 
   left_join(isolation_medium, by = "Medium_only_merged_for_shared_language") %>% 
   mutate(ratio_coastline_to_area = sum_shoreline / sum_area)
 
@@ -237,29 +226,27 @@ ggsave("output/plots/Lg_distrubition_medium_island_group_lg_merged.png", width =
 Island_group_summarised_Marck_group <- Island_group_all_sep %>% 
   filter(!is.na(settlement_date_grouping_finer)) %>% 
   group_by(Marck_group) %>% 
-  summarise(mean_NetPrimaryProductionPredictability = mean(Predictability_code, na.rm = T), 
-            max_NetPrimaryProductionPredictability = max(Predictability_code),
-            min_NetPrimaryProductionPredictability = min(Predictability_code),
-            mean_NPP = mean(NPP, na.rm = T),  
-            mean_pol_complex = mean(pol_complex_code_Hedvig, na.rm = T), 
-            mean_EA032 = mean(EA032_code, na.rm = T),
-            sum_area = sum(sum_area, na.rm = T), 
-            sum_water_area = sum(sum_water_area, na.rm = T), 
-            Melanesia_or_not = dplyr::first(Melanesia_or_not),
-            lg_count_smallest = mean(lg_count_smallest, na.rm = T),
-            sum_shoreline = sum(sum_shoreline, na.rm = T),
-            mean_lat = mean(mean_lat),
-            mean_long = mean(mean_long),
-            settlement_date_grouping_finer = min(settlement_date_grouping_finer),
-            settlement_date_grouping_coarser = min(settlement_date_grouping_coarser),
-            oldest_date = max(oldest_date),
-            color = dplyr::first(Marck_group_color), 
-            lg_count = dplyr::first(lg_count_Marck),
-            mean_CCSM_piControl_1760_bio1 = mean(mean_CCSM_piControl_1760_bio1),
-            mean_CCSM_piControl_1760_bio4 = mean(mean_CCSM_piControl_1760_bio4),
-            mean_CCSM_piControl_1760_bio12 = mean(mean_CCSM_piControl_1760_bio12),
-            mean_CCSM_piControl_1760_bio15 = mean(mean_CCSM_piControl_1760_bio15)
-            ) %>% 
+  dplyr::summarise(
+    mean_pol_complex = mean(pol_complex_code_Hedvig, na.rm = T), 
+    sum_area = sum(sum_area, na.rm = T), 
+    sum_water_area = sum(sum_water_area, na.rm = T), 
+    lg_count_smallest = mean(lg_count_smallest, na.rm = T),
+    sum_shoreline = sum(sum_shoreline, na.rm = T),
+    mean_lat = mean(mean_lat),
+    mean_long = mean(mean_long),
+    settlement_date_grouping_finer = min(settlement_date_grouping_finer), 
+    oldest_date = max(oldest_date),
+    color = dplyr::first(Marck_group_color), 
+    lg_count = dplyr::first(lg_count_Marck),
+    NPP_terra_mean = mean(MOD17A3HGF_061_Npp_500m_terra, na.rm = T),
+    NPP_terra_var = var(MOD17A3HGF_061_Npp_500m_terra, na.rm = T),
+    NPP_aqua_mean = mean(MYD17A3HGF_061_Npp_500m_water, na.rm = T),
+    NPP_aqua_var = var(MYD17A3HGF_061_Npp_500m_water, na.rm = T),
+    mean_CCSM_piControl_1760_bio1 = mean(mean_CCSM_piControl_1760_bio1),
+    mean_CCSM_piControl_1760_bio4 = mean(mean_CCSM_piControl_1760_bio4),
+    mean_CCSM_piControl_1760_bio12 = mean(mean_CCSM_piControl_1760_bio12),
+    mean_CCSM_piControl_1760_bio15 = mean(mean_CCSM_piControl_1760_bio15)
+  ) %>% 
   left_join(isolation_marck, by = "Marck_group") %>% 
   mutate(ratio_coastline_to_area = sum_shoreline / sum_area)
 
