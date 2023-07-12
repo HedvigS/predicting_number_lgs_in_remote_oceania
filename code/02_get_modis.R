@@ -10,7 +10,7 @@ source("01_requirements.R")
 #Running, S., Zhao, M. (2021). MODIS/Terra Net Primary Production Gap-Filled Yearly L4 Global 500m SIN Grid V061. NASA EOSDIS Land Processes DAAC. Accessed 2023-05-24 from https://doi.org/10.5067/MODIS/MOD17A3HGF.061. Accessed May 24, 2023.
 
 polygons <- read_csv("data/RO_polygons_grouped_with_languages.csv", show_col_types = F) %>% 
-  dplyr::select(Unique_ID, Marck_group, Medium_only_merged_for_shared_language) 
+  dplyr::select(Unique_ID, Smallest_Island_group, Marck_group, Medium_only_merged_for_shared_language) 
 
 fns <- list.files("data/modis/output_from_modis/", pattern = "MOD.*.csv")
 
@@ -31,6 +31,9 @@ modis_with_groups <- all_modis %>%
     mutate(MOD17A3HGF_061_Npp_500m = as.numeric(MOD17A3HGF_061_Npp_500m)) %>% 
     mutate(MYD17A3HGF_061_Npp_500m = as.numeric(MYD17A3HGF_061_Npp_500m)) %>% 
   left_join(polygons, by = "Unique_ID") 
+
+modis_with_groups %>% 
+write_tsv("output/processed_data/modis_with_groups.tsv", na = "")
 
 modis_with_groups %>% 
   filter(!is.na(Marck_group)) %>% 
