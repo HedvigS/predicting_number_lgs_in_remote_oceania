@@ -1,5 +1,7 @@
 source("01_requirements.R")
 
+if(!file.exists("output/processed_data/isolation_RO_geo_dist_isolation_marck_group.tsv")){
+
 polygon_geo <- read_csv("data/RO_polygons_grouped_with_languages.csv", show_col_types = F) %>% 
   filter(!is.na(Inhabited)) %>% 
   filter(Unique_ID != "11356") %>% #removing the huge islands of new guinea and new zealand, since the centroid is in the middle it doesn't make sense for calculating distances 
@@ -115,3 +117,4 @@ atDist_df_w_island_largest_island_of_group_closest %>%
   filter(!str_detect(Marck_group_left, "Non Remote")) %>% 
   dplyr::select(Marck_group_left, Marck_group_right, dist) %>% 
   write_tsv("output/processed_data/isolation_RO_geo_dist_isolation_marck_group.tsv")
+}
