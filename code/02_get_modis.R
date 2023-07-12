@@ -35,21 +35,21 @@ modis_with_groups <- all_modis %>%
 modis_with_groups %>% 
 write_tsv("output/processed_data/modis_with_groups.tsv", na = "")
 
-modis_with_groups %>% 
-  filter(!is.na(Marck_group)) %>% 
-  group_by(Marck_group) %>% 
-summarise(mean_MOD17A3HGF_061_Npp_500m_terra = mean(MOD17A3HGF_061_Npp_500m, na.rm = T),
-            var_MOD17A3HGF_061_Npp_500m_terra = var(MOD17A3HGF_061_Npp_500m, na.rm = T),
-            mean_MYD17A3HGF_061_Npp_500m_aqua = mean(MYD17A3HGF_061_Npp_500m, na.rm = T), 
-            var_MYD17A3HGF_061_Npp_500m_aqua = var(MYD17A3HGF_061_Npp_500m, na.rm = T)) %>% 
-  write_tsv("output/processed_data/modis_marck.tsv", na = "")
+#modis_with_groups %>% 
+#  filter(!is.na(Marck_group)) %>% 
+#  group_by(Marck_group) %>% 
+#summarise(mean_MOD17A3HGF_061_Npp_500m_terra = mean(MOD17A3HGF_061_Npp_500m, na.rm = T),
+#            var_MOD17A3HGF_061_Npp_500m_terra = var(MOD17A3HGF_061_Npp_500m, na.rm = T),
+#            mean_MYD17A3HGF_061_Npp_500m_aqua = mean(MYD17A3HGF_061_Npp_500m, na.rm = T), 
+#            var_MYD17A3HGF_061_Npp_500m_aqua = var(MYD17A3HGF_061_Npp_500m, na.rm = T)) %>% 
+#  write_tsv("output/processed_data/modis_marck.tsv", na = "")
 
-modis_with_groups %>% 
-  filter(!is.na(Medium_only_merged_for_shared_language)) %>% 
-  group_by(Medium_only_merged_for_shared_language) %>% 
-  summarise(mean_MOD17A3HGF_061_Npp_500m_terra = mean(MOD17A3HGF_061_Npp_500m, na.rm = T),
-            var_MOD17A3HGF_061_Npp_500m_terra = var(MOD17A3HGF_061_Npp_500m, na.rm = T),
-            mean_MYD17A3HGF_061_Npp_500m_aqua = mean(MYD17A3HGF_061_Npp_500m, na.rm = T), 
-            var_MYD17A3HGF_061_Npp_500m_aqua = var(MYD17A3HGF_061_Npp_500m, na.rm = T)) %>% 
-  write_tsv("output/processed_data/modis_Medium_only_merged_for_shared_language.tsv", na = "")
+#modis_with_groups %>% 
+#  filter(!is.na(Medium_only_merged_for_shared_language)) %>% 
+#  group_by(Medium_only_merged_for_shared_language) %>% 
+#  summarise(mean_MOD17A3HGF_061_Npp_500m_terra = mean(MOD17A3HGF_061_Npp_500m, na.rm = T),
+#            var_MOD17A3HGF_061_Npp_500m_terra = var(MOD17A3HGF_061_Npp_500m, na.rm = T),
+#            mean_MYD17A3HGF_061_Npp_500m_aqua = mean(MYD17A3HGF_061_Npp_500m, na.rm = T), 
+#            var_MYD17A3HGF_061_Npp_500m_aqua = var(MYD17A3HGF_061_Npp_500m, na.rm = T)) %>% 
+#  write_tsv("output/processed_data/modis_Medium_only_merged_for_shared_language.tsv", na = "")
 
