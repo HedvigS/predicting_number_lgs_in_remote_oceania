@@ -19,3 +19,11 @@ source("02_get_modis.R")
 source("02_get_DPLACE.R")
 
 source("02_isolation_calculation.R")
+
+source("03a_combine_data.R")
+
+source("03b_data_maps.R")
+
+source("03c_marck_group_data_prep_SPLOM.R")
+
+source("03d_carrying_capacity_PCA.R")
