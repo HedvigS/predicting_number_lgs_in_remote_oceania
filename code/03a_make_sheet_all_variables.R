@@ -1,8 +1,10 @@
 source("01_requirements.R")
 
+#reading in glottolog for language-levelling
 Glottolog <- read_tsv("output/processed_data/glottolog_language_table_wide_df.tsv", show_col_types = F) %>%   
   dplyr::select(glottocode = Glottocode, Language_level_ID, level)
 
+#wrangling polygon lists into language counts per island group
 Polygon_lgs_glottocodes_unnested <- read_csv("data/RO_polygons_grouped_with_languages.csv", show_col_types = F) %>% 
   filter(!is.na(glottocodes)) %>% 
   mutate(glottocodes = str_split(glottocodes, ",")) %>%
@@ -25,9 +27,10 @@ Polygon_lgs_count_Marck <- Polygon_lgs_glottocodes_unnested %>%
   group_by(Marck_group) %>% 
   summarise(lg_count_Marck = n())
 
-#reading in area per smallest island group
+#reading in water area per smallest island group
 water_areas <- read_tsv("data/Water_area.tsv", show_col_types = F)
 
+#isolation
 isolation_marck <- read_tsv("output/processed_data/isolation_RO_geo_dist_isolation_marck_group.tsv", show_col_types = F) %>% 
   dplyr::select(Marck_group = Marck_group_left, dist) 
 
