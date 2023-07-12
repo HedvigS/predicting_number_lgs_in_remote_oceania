@@ -1,4 +1,3 @@
-
 options("print.matrix" = FALSE)
 
 find_pcs <- function(data){
@@ -21,7 +20,7 @@ find_pcs <- function(data){
   
   optimal_components <- nS$Components$nparallel
   
-  plotnScree(nS)
+#  plotnScree(nS)
   
   prop_explained <- sum(summary(data_pca)$importance[2, 1:optimal_components])
   
