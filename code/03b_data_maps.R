@@ -48,16 +48,14 @@ basemap <- ggplot(All_polygons) +
         axis.ticks = element_blank())   +
   coord_map(projection = "vandergrinten") +
 #  coord_map(projection = "vandergrinten", xlim = c(130, 255), ylim = c(-56, 27)) +
-  xlim(c(110, 255)) +
-  ylim(c(-56, 27))
-
-
+  scale_x_continuous(expand=c(0,0), limits = c(110, 255)) +
+  scale_y_continuous(expand=c(0,0), limits = c(-48, 23)) 
 
 Map_plot_all_polygons <- basemap + 
   geom_point(aes(x=Longitude, y=Latitude), color = All_polygons$smallest_island_color, size = 0.5) 
 
 plot(Map_plot_all_polygons)
-ggsave("output/plots/maps/Map_RO_Smallest.png", width = 5, height = 4)
+ggsave("output/plots/maps/Map_RO_Smallest.png", width = 5, height = 3)
 
 ##Marck grouping
 Map_plot_marck <- basemap + 
@@ -96,16 +94,22 @@ pol_complex_data <- readODS::read_ods("data/Remote_oceania_pol_complex_hedvig_co
     summarise(Latitude = mean(Latitude, na.rm = T),
               Longitude = mean(Longitude, na.rm = T), .groups = "drop") 
 
+trans <- scales::alpha("#91bfdb", 0.2)
+
 basemap + 
-  geom_jitter(data = pol_complex_data, aes(x=Longitude, y=Latitude, fill = `Political complexity (EA033)`), size = 2, alpha = 0.8, shape = 21, stroke = 0.4, width = 0.5) +
+  geom_jitter(data = pol_complex_data, aes(x=Longitude, y=Latitude, fill = `Political complexity (EA033)`),
+              size = 3, 
+              color = "darkblue",
+              alpha = 0.8, shape = 21, stroke = 0.5, width = 1) +
   scale_fill_manual(values = col_vector_3) +
-  theme(legend.position = "bottom") 
+  theme(legend.position = c(0.2,0.42),
+        legend.background  =  element_rect(fill = trans, color = trans)) 
   
-ggsave("output/plots/maps/map_pol_complex.png", width = 9, height = 6)
-ggsave("../latex/illustrations/plots_from_R/plots_from_R/map_pol_complex.png", width = 9, height = 6)
+ggsave("output/plots/maps/map_pol_complex.png", width = 9, height = 5)
+ggsave("../latex/illustrations/plots_from_R/plots_from_R/map_pol_complex.png", width = 9, height = 5)
 
 #dates
-dates <- read_xlsx("data/island_group_settlement_date.xlsx") %>% 
+dates <- read_tsv("data/island_group_settlement_date.tsv", show_col_types = F) %>% 
   rename(settlement_date_grouping_finer = "Time depth settlement group", Smallest_Island_group = `Smaller specific island group`, `Settlement date oldest date` = `Oldest date`) %>% 
   dplyr::select(Smallest_Island_group, settlement_date_grouping_finer, `Settlement date oldest date`) %>% 
   full_join(All_polygons, by = "Smallest_Island_group"  ) %>% 
@@ -113,7 +117,7 @@ dates <- read_xlsx("data/island_group_settlement_date.xlsx") %>%
   filter(!is.na(settlement_date_grouping_finer))
 
 
-dates_summarised_for_SM <- read_xlsx("data/island_group_settlement_date.xlsx") %>%
+dates_summarised_for_SM <- read_tsv("data/island_group_settlement_date.tsv", show_col_types = F)%>%
   rename(settlement_date_grouping_finer = "Time depth settlement group", Smallest_Island_group = `Smaller specific island group`, `Settlement date oldest date` = `Oldest date`) %>% 
   group_by(`Name in source`) %>% 
   summarise(`Date ranges` = unique(paste0(`Date ranges`, collapse = ", ")),
@@ -129,14 +133,25 @@ dates_labels <- dates %>%
             Latitude = mean(Latitude), 
             .groups = "drop")
 
-basemap + 
-  geom_point(data = dates, aes(x=Longitude, y=Latitude, colour = settlement_date_grouping_finer), size = 0.5, alpha = 0.8) +
-  geom_label(data = dates_labels, aes(x= Longitude, 
-                                      y= Latitude, 
-                                      label = `settlement_date_grouping_finer`, 
-                                      fill = settlement_date_grouping_finer), size = 2, label.padding = unit(0.1, "lines"), position = "jitter") +
-  scale_fill_viridis() +
-  scale_color_viridis() 
 
-ggsave("output/plots/maps/Map_RO_dates.png", width = 9, height = 6)
-ggsave("../latex/illustrations/plots_from_R/Map_RO_dates.png", width = 9, height = 6)
+trans <- scales::alpha("#35B779FF", 0.2)
+
+basemap + 
+  geom_point(data = dates, aes(x=Longitude, y=Latitude, colour = settlement_date_grouping_finer), 
+             size = 1.5, alpha = 0.7) +
+#  geom_label(data = dates_labels, aes(x= Longitude, 
+       #                               y= Latitude, 
+      #                                label = `settlement_date_grouping_finer`, 
+     #                                 fill = settlement_date_grouping_finer),
+    #                              color = "white",
+   #                               size = 3, 
+  #                                label.padding = unit(0.15, "lines"), 
+ #            position = position_jitter(seed = 4, height =0.7, width = 0.7)) +
+  scale_fill_viridis() +
+  scale_color_viridis(breaks = c(1, 6 , 12)) +
+  theme(legend.position = c(0.2,0.42), 
+        legend.background  =  element_rect(fill = trans, color = trans)) +
+  labs(color = "Settlement wave")
+
+ggsave("output/plots/maps/Map_RO_dates.png", width = 9, height = 5)
+ggsave("../latex/illustrations/plots_from_R/Map_RO_dates.png", width = 9, height = 5)
