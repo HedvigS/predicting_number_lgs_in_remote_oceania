@@ -1,7 +1,7 @@
 #source("01_requirements.R")
 source("fun_def_h_load.R")
 
-h_load(c("NCmisc", "tidyverse"))
+h_load(c("NCmisc", "tidyverse", "knitr", "bib2df"))
 
 r_fns <- list.files(path = ".", pattern = "*.R$", full.names = T, recursive = T)
 
@@ -56,9 +56,10 @@ most_used <- used_packages %>%
   distinct(packages, functions) %>% 
   group_by(packages) %>% 
   summarise(n = n()) %>% 
-  arrange(desc(n)) 
+  arrange(desc(n)) %>% 
+  filter(packages != ".GlobalEnv") %>% 
+  filter(!is.na(packages))
   
-
 cat("The top 5 packages from which you use the most different functions are:\n ")
 most_used[1:5,]
 
@@ -73,7 +74,7 @@ most_used %>%
   theme(axis.text.x = element_text(angle = 70, hjust = 1), 
         legend.position = 0) 
 
-ggsave("output/processed_data/used_packages.png")
+ggsave("output/processed_data/used_packages.png", width = 10, height = 10)
 
 script_with_most_functions <-  used_packages %>% 
   distinct(scripts, functions) %>% 
@@ -94,18 +95,15 @@ cat("The top 5 packages that are used in the most scripts:\n ")
 packages_in_most_scripts[1:5,]
 
 #generating bibtex file of all the packages where you've used at least one funciton
-h_load("knitr")
 
-output_fn <- "output/processed_data/used_pkgs.bib"
+#output_fn <- "output/processed_data/used_pkgs.bib"
 
-knitr::write_bib(most_used$packages, file = output_fn)
+knitr::write_bib(most_used$packages, file = "output/processed_data/used_pkgs.bib")
 
 cat(paste0("Wrote citations for packages you've used to", output_fn, ".\n There were ", length(!is.na(most_used$packages %>% unique()))
 , " entries.\n" ))
 
 #optional part, this generates a text string with the bibtex citation KEYS from earlier that you can then paste into LaTeX in order to cite all
-
-h_load("bib2df")
 
 bibdf <- suppressMessages(bib2df(output_fn))
 
