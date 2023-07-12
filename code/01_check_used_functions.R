@@ -96,16 +96,16 @@ packages_in_most_scripts[1:5,]
 
 #generating bibtex file of all the packages where you've used at least one funciton
 
-#output_fn <- "output/processed_data/used_pkgs.bib"
+output_fn <- "output/processed_data/used_pkgs.bib"
 
-knitr::write_bib(most_used$packages, file = "output/processed_data/used_pkgs.bib")
+knitr::write_bib(most_used$packages, file = output_fn)
 
 cat(paste0("Wrote citations for packages you've used to", output_fn, ".\n There were ", length(!is.na(most_used$packages %>% unique()))
 , " entries.\n" ))
 
 #optional part, this generates a text string with the bibtex citation KEYS from earlier that you can then paste into LaTeX in order to cite all
 
-bibdf <- suppressMessages(bib2df(output_fn))
+bibdf <- suppressWarnings(bib2df(output_fn))
 
 bibdf$BIBTEXKEY %>% 
   writeLines(sep = ", ", con = "output/processed_data/citation_keys.txt")
