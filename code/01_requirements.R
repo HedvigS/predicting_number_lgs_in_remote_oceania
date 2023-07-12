@@ -30,6 +30,7 @@ h_load(pkg = c(
   "data.table",
   "naniar", 
   "fields",
+  "scales",
   "devtools",
   "xtable",
   "broom", 
