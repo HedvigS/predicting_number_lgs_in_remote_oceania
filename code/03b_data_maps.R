@@ -103,7 +103,8 @@ basemap +
               alpha = 0.8, shape = 21, stroke = 0.5, width = 1) +
   scale_fill_manual(values = col_vector_3) +
   theme(legend.position = c(0.2,0.42),
-        legend.background  =  element_rect(fill = trans, color = trans)) 
+        legend.background  =  element_rect(fill = trans, color = trans), 
+        legend.key = element_rect(fill = NA, color = NULL)) 
   
 ggsave("output/plots/maps/map_pol_complex.png", width = 9, height = 5)
 ggsave("../latex/illustrations/plots_from_R/plots_from_R/map_pol_complex.png", width = 9, height = 5)
@@ -114,8 +115,13 @@ dates <- read_tsv("data/island_group_settlement_date.tsv", show_col_types = F) %
   dplyr::select(Smallest_Island_group, settlement_date_grouping_finer, `Settlement date oldest date`) %>% 
   full_join(All_polygons, by = "Smallest_Island_group"  ) %>% 
   filter(!is.na(Smallest_Island_group)) %>% 
-  filter(!is.na(settlement_date_grouping_finer))
-
+  filter(!is.na(settlement_date_grouping_finer)) %>% 
+  group_by(Smallest_Island_group) %>% 
+  summarise(Longitude = mean(Longitude), 
+            Latitude = mean(Latitude),
+            settlement_date_grouping_finer = min(settlement_date_grouping_finer),
+            .groups = "drop") %>% 
+  arrange(settlement_date_grouping_finer) 
 
 dates_summarised_for_SM <- read_tsv("data/island_group_settlement_date.tsv", show_col_types = F)%>%
   rename(settlement_date_grouping_finer = "Time depth settlement group", Smallest_Island_group = `Smaller specific island group`, `Settlement date oldest date` = `Oldest date`) %>% 
@@ -127,18 +133,18 @@ dates_summarised_for_SM <- read_tsv("data/island_group_settlement_date.tsv", sho
             `Based on inference from neighbouring island?` = first(`Based on inference from neighbouring island?`),
             Island_groups = paste0(Smallest_Island_group, collapse = ", "))
   
-dates_labels <- dates %>% 
-  group_by(Marck_group, settlement_date_grouping_finer) %>% 
-  summarise(Longitude = mean(Longitude), 
-            Latitude = mean(Latitude), 
-            .groups = "drop")
+#dates_labels <- dates %>% 
+#  group_by(Marck_group, settlement_date_grouping_finer) %>% 
+#  summarise(Longitude = mean(Longitude), 
+#            Latitude = mean(Latitude), 
+#            .groups = "drop") 
 
 
 trans <- scales::alpha("#35B779FF", 0.2)
 
 basemap + 
-  geom_point(data = dates, aes(x=Longitude, y=Latitude, colour = settlement_date_grouping_finer), 
-             size = 1.5, alpha = 0.7) +
+  geom_jitter(data = dates, aes(x=Longitude, y=Latitude, colour = settlement_date_grouping_finer), 
+             size = 3.5, alpha = 0.7) +
 #  geom_label(data = dates_labels, aes(x= Longitude, 
        #                               y= Latitude, 
       #                                label = `settlement_date_grouping_finer`, 
