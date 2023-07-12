@@ -1,6 +1,15 @@
 source("01_requirements.R")
 
-polygons <- read_csv("data/RO_polygons_grouped_with_languages.csv") %>% 
+#wrangling output from modis. the modis data was derived from the AppEEARS website on May 24th 2023.
+
+#MYD = including water
+#mod = only land
+
+#Running, S., Zhao, M. (2021). MODIS/Aqua Net Primary Production Gap-Filled Yearly L4 Global 500m SIN Grid V061. NASA EOSDIS Land Processes DAAC. Accessed 2023-05-24 from https://doi.org/10.5067/MODIS/MYD17A3HGF.061. Accessed May 24, 2023.
+
+#Running, S., Zhao, M. (2021). MODIS/Terra Net Primary Production Gap-Filled Yearly L4 Global 500m SIN Grid V061. NASA EOSDIS Land Processes DAAC. Accessed 2023-05-24 from https://doi.org/10.5067/MODIS/MOD17A3HGF.061. Accessed May 24, 2023.
+
+polygons <- read_csv("data/RO_polygons_grouped_with_languages.csv", show_col_types = F) %>% 
   dplyr::select(Unique_ID, Marck_group, Medium_only_merged_for_shared_language) 
 
 fns <- list.files("data/modis/output_from_modis/", pattern = "MOD.*.csv")
@@ -26,18 +35,18 @@ modis_with_groups <- all_modis %>%
 modis_with_groups %>% 
   filter(!is.na(Marck_group)) %>% 
   group_by(Marck_group) %>% 
-summarise(mean_MOD17A3HGF_061_Npp_500m = mean(MOD17A3HGF_061_Npp_500m, na.rm = T),
-            var_MOD17A3HGF_061_Npp_500m = var(MOD17A3HGF_061_Npp_500m, na.rm = T),
-            mean_MYD17A3HGF_061_Npp_500m = mean(MYD17A3HGF_061_Npp_500m, na.rm = T), 
-            var_MYD17A3HGF_061_Npp_500m = var(MYD17A3HGF_061_Npp_500m, na.rm = T)) %>% 
+summarise(mean_MOD17A3HGF_061_Npp_500m_terra = mean(MOD17A3HGF_061_Npp_500m, na.rm = T),
+            var_MOD17A3HGF_061_Npp_500m_terra = var(MOD17A3HGF_061_Npp_500m, na.rm = T),
+            mean_MYD17A3HGF_061_Npp_500m_aqua = mean(MYD17A3HGF_061_Npp_500m, na.rm = T), 
+            var_MYD17A3HGF_061_Npp_500m_aqua = var(MYD17A3HGF_061_Npp_500m, na.rm = T)) %>% 
   write_tsv("output/processed_data/modis_marck.tsv", na = "")
 
 modis_with_groups %>% 
   filter(!is.na(Medium_only_merged_for_shared_language)) %>% 
   group_by(Medium_only_merged_for_shared_language) %>% 
-  summarise(mean_MOD17A3HGF_061_Npp_500m = mean(MOD17A3HGF_061_Npp_500m, na.rm = T),
-            var_MOD17A3HGF_061_Npp_500m = var(MOD17A3HGF_061_Npp_500m, na.rm = T),
-            mean_MYD17A3HGF_061_Npp_500m = mean(MYD17A3HGF_061_Npp_500m, na.rm = T), 
-            var_MYD17A3HGF_061_Npp_500m = var(MYD17A3HGF_061_Npp_500m, na.rm = T)) %>% 
+  summarise(mean_MOD17A3HGF_061_Npp_500m_terra = mean(MOD17A3HGF_061_Npp_500m, na.rm = T),
+            var_MOD17A3HGF_061_Npp_500m_terra = var(MOD17A3HGF_061_Npp_500m, na.rm = T),
+            mean_MYD17A3HGF_061_Npp_500m_aqua = mean(MYD17A3HGF_061_Npp_500m, na.rm = T), 
+            var_MYD17A3HGF_061_Npp_500m_aqua = var(MYD17A3HGF_061_Npp_500m, na.rm = T)) %>% 
   write_tsv("output/processed_data/modis_Medium_only_merged_for_shared_language.tsv", na = "")
 
