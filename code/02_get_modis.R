@@ -27,7 +27,7 @@ all_modis <- fns %>%  map_df(
 
 modis_with_groups <- all_modis %>% 
  mutate(terra_aqua = ifelse(str_detect(filename, "MOD"), "terra", "aqua")) %>% 
-  dplyr::select(Unique_ID = ID, MOD17A3HGF_061_Npp_500m, MYD17A3HGF_061_Npp_500m) %>% 
+  dplyr::select(Unique_ID = ID, Date, MOD17A3HGF_061_Npp_500m, MYD17A3HGF_061_Npp_500m) %>% 
     mutate(MOD17A3HGF_061_Npp_500m = as.numeric(MOD17A3HGF_061_Npp_500m)) %>% 
     mutate(MYD17A3HGF_061_Npp_500m = as.numeric(MYD17A3HGF_061_Npp_500m)) %>% 
   left_join(polygons, by = "Unique_ID") 

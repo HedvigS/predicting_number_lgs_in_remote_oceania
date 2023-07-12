@@ -22,8 +22,13 @@ source("02_isolation_calculation.R")
 
 source("03a_combine_data.R")
 
-source("03b_data_maps.R")
+source("03b_scale_data_and_SPLOM.R")
 
-source("03c_marck_group_data_prep_SPLOM.R")
+source("03c_carrying_capacity_PCA.R")
 
-source("03d_carrying_capacity_PCA.R")
+source("04_data_maps.R")
+
+source("04_map_polygon_groups_marck_medium.R")
+
+
+

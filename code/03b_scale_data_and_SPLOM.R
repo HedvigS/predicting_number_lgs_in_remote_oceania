@@ -14,10 +14,10 @@ data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_marck_group.tsv", sh
   rename(Area_water = sum_water_area) %>% 
   rename(Settlement_date_grouping_finer = settlement_date_grouping_finer) %>% 
   rename(Isolation = dist) %>% 
-  mutate(group = str_replace_all(Marck_group, "Kanaky", "New Caledonia (incl loyalties)")) %>% 
-  mutate(group = str_replace_all(Marck_group, "and", "+")) %>% 
+  mutate(Marck_group = str_replace_all(Marck_group, "Kanaky", "New Caledonia (incl loyalties)")) %>% 
+  mutate(Marck_group = str_replace_all(Marck_group, "and", "+")) %>% 
   arrange(-lg_count) %>% 
-  dplyr::select(group, 
+  dplyr::select(Marck_group, 
                 lg_count, 
                 Latitude_abs_mean, #1
                 Annual_precipitation_mean, #2
@@ -32,9 +32,10 @@ data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_marck_group.tsv", sh
                 ratio_coastline_to_area,#11
                 Area_water,#12
                 NPP_terra_mean,#13
-                NPP_terra_var,#14
-                NPP_aqua_mean,#15
-                NPP_aqua_var) #16
+      #          NPP_terra_var,#14
+                NPP_aqua_mean #15
+       #         NPP_aqua_var16
+      ) #
 
 #log10 size variables to take out the oversized effect of large island groups, like south island aotearoa etc
 data$Area_land <- log10(data$Area_land)
@@ -57,9 +58,9 @@ data$Settlement_date_grouping_finer <- modEvA::range01(data$Settlement_date_grou
 data$EA033 <- modEvA::range01(data$EA033) +1
 data$Latitude_abs_mean <- modEvA::range01(data$Latitude_abs_mean) +1
 data$NPP_terra_mean <- modEvA::range01(data$NPP_terra_mean) +1
-data$NPP_terra_var <- modEvA::range01(data$NPP_terra_var) +1
+#data$NPP_terra_var <- modEvA::range01(data$NPP_terra_var) +1
 data$NPP_aqua_mean <- modEvA::range01(data$NPP_aqua_mean) +1
-data$NPP_aqua_var <- modEvA::range01(data$NPP_aqua_var) +1
+#data$NPP_aqua_var <- modEvA::range01(data$NPP_aqua_var) +1
 
 data %>% 
   write_tsv("output/processed_data/RO_Hedvig_aggregate_marck_group_scaled.tsv")
@@ -69,7 +70,10 @@ colnames(data) <- str_replace_all(colnames(data), "_", "\n")
 png(filename = "output/plots/SLOM_marck_all_variables.png", width = 10, height = 10, units = "in", res = 300)
 data %>%   
   dplyr::select("lg\ncount","EA033",  "Settlement\ndate\ngrouping\nfiner", "Area\nland" ,"Area\nwater", "Shoreline", "ratio\ncoastline\nto\narea", 
-                "Isolation", "Latitude\nabs\nmean","Annual\ntemperature\nmean", "Temperature\nseasonality\nmean", "Annual\nprecipitation\nmean", "Precipitation\nseasonality\nmean", "NPP\nterra\nmean", "NPP\nterra\nvar", "NPP\naqua\nmean", "NPP\naqua\nvar") %>% 
+                "Isolation", "Latitude\nabs\nmean","Annual\ntemperature\nmean", "Temperature\nseasonality\nmean", "Annual\nprecipitation\nmean", "Precipitation\nseasonality\nmean", "NPP\nterra\nmean", 
+                #"NPP\nterra\nvar", "NPP\naqua\nmean" 
+                #"NPP\naqua\nvar"
+                ) %>% 
   pairs.panels(method = "pearson", # correlation method
                hist.col = "#a3afd1",# "#a9d1a3","",""),
                density = TRUE,  # show density plots
@@ -98,9 +102,9 @@ data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_medium_island.tsv", 
   rename(Area_water = sum_water_area) %>% 
   rename(Settlement_date_grouping_finer = settlement_date_grouping_finer) %>% 
   rename(Isolation = dist) %>% 
-  mutate(group = str_replace_all(Medium_only_merged_for_shared_language, "and", "+")) %>% 
+  mutate(Medium_only_merged_for_shared_language = str_replace_all(Medium_only_merged_for_shared_language, "and", "+")) %>% 
   arrange(-lg_count) %>% 
-  dplyr::select(group, 
+  dplyr::select(Medium_only_merged_for_shared_language, 
                 lg_count, 
                 Latitude_abs_mean, #1
                 Annual_precipitation_mean, #2
@@ -115,9 +119,10 @@ data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_medium_island.tsv", 
                 ratio_coastline_to_area,#11
                 Area_water,#12
                 NPP_terra_mean,#13
-                NPP_terra_var,#14
-                NPP_aqua_mean,#15
-                NPP_aqua_var) #16
+#                NPP_terra_var,#14
+                NPP_aqua_mean#15
+ #               NPP_aqua_var) #16
+)
 
 #log10 size variables to take out the oversized effect of large island groups, like south island aotearoa etc
 data$Area_land <- log10(data$Area_land)
@@ -140,20 +145,22 @@ data$Settlement_date_grouping_finer <- modEvA::range01(data$Settlement_date_grou
 data$EA033 <- modEvA::range01(data$EA033) +1
 data$Latitude_abs_mean <- modEvA::range01(data$Latitude_abs_mean) +1
 data$NPP_terra_mean <- modEvA::range01(data$NPP_terra_mean) +1
-data$NPP_terra_var <- modEvA::range01(data$NPP_terra_var) +1
+#data$NPP_terra_var <- modEvA::range01(data$NPP_terra_var) +1
 data$NPP_aqua_mean <- modEvA::range01(data$NPP_aqua_mean) +1
-data$NPP_aqua_var <- modEvA::range01(data$NPP_aqua_var) +1
+#data$NPP_aqua_var <- modEvA::range01(data$NPP_aqua_var) +1
 
 data %>% 
   write_tsv("output/processed_data/RO_Hedvig_aggregate_medium_group_scaled.tsv")
-
 
 colnames(data) <- str_replace_all(colnames(data), "_", "\n")
 
 png(filename = "output/plots/SLOM_medium_all_variables.png", width = 10, height = 10, units = "in", res = 300)
 data %>%   
   dplyr::select("lg\ncount","EA033",  "Settlement\ndate\ngrouping\nfiner", "Area\nland" ,"Area\nwater", "Shoreline", "ratio\ncoastline\nto\narea", 
-                "Isolation", "Latitude\nabs\nmean","Annual\ntemperature\nmean", "Temperature\nseasonality\nmean", "Annual\nprecipitation\nmean", "Precipitation\nseasonality\nmean", "NPP\nterra\nmean", "NPP\nterra\nvar", "NPP\naqua\nmean", "NPP\naqua\nvar") %>% 
+                "Isolation", "Latitude\nabs\nmean","Annual\ntemperature\nmean", "Temperature\nseasonality\nmean", "Annual\nprecipitation\nmean", "Precipitation\nseasonality\nmean", "NPP\nterra\nmean",
+                #"NPP\nterra\nvar", "NPP\naqua\nmean" 
+                #"NPP\naqua\nvar"
+                ) %>% 
   pairs.panels(method = "pearson", # correlation method
                hist.col = "#a3afd1",# "#a9d1a3","",""),
                density = TRUE,  # show density plots

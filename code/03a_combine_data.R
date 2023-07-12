@@ -167,13 +167,11 @@ Island_group_summarised_smallest <- Island_group_all_sep %>%
             color = dplyr::first(smallest_island_color), 
             lg_count = dplyr::first(lg_count_smallest),
             NPP_terra_mean = mean(MOD17A3HGF_061_Npp_500m_terra, na.rm = T),
-            NPP_terra_var = var(MOD17A3HGF_061_Npp_500m_terra, na.rm = T),
             NPP_aqua_mean = mean(MYD17A3HGF_061_Npp_500m_water, na.rm = T),
-            NPP_aqua_var = var(MYD17A3HGF_061_Npp_500m_water, na.rm = T),
-            mean_CCSM_piControl_1760_bio1 = mean(mean_CCSM_piControl_1760_bio1),
-            mean_CCSM_piControl_1760_bio4 = mean(mean_CCSM_piControl_1760_bio4),
-            mean_CCSM_piControl_1760_bio12 = mean(mean_CCSM_piControl_1760_bio12),
-            mean_CCSM_piControl_1760_bio15 = mean(mean_CCSM_piControl_1760_bio15)
+            mean_CCSM_piControl_1760_bio1 = mean(mean_CCSM_piControl_1760_bio1, na.rm = T),
+            mean_CCSM_piControl_1760_bio4 = mean(mean_CCSM_piControl_1760_bio4, na.rm = T),
+            mean_CCSM_piControl_1760_bio12 = mean(mean_CCSM_piControl_1760_bio12, na.rm = T),
+            mean_CCSM_piControl_1760_bio15 = mean(mean_CCSM_piControl_1760_bio15, na.rm = T)
             ) %>% 
   mutate(ratio_coastline_to_area = sum_shoreline / sum_area,
          mean_lat_abs = abs(mean_lat))
@@ -197,13 +195,11 @@ Island_group_summarised_medium <- Island_group_all_sep %>%
         color = dplyr::first(medium_group_color), 
         lg_count = dplyr::first(lg_count_medium),
         NPP_terra_mean = mean(MOD17A3HGF_061_Npp_500m_terra, na.rm = T),
-        NPP_terra_var = var(MOD17A3HGF_061_Npp_500m_terra, na.rm = T),
         NPP_aqua_mean = mean(MYD17A3HGF_061_Npp_500m_water, na.rm = T),
-        NPP_aqua_var = var(MYD17A3HGF_061_Npp_500m_water, na.rm = T),
-        mean_CCSM_piControl_1760_bio1 = mean(mean_CCSM_piControl_1760_bio1),
-        mean_CCSM_piControl_1760_bio4 = mean(mean_CCSM_piControl_1760_bio4),
-        mean_CCSM_piControl_1760_bio12 = mean(mean_CCSM_piControl_1760_bio12),
-        mean_CCSM_piControl_1760_bio15 = mean(mean_CCSM_piControl_1760_bio15)
+        mean_CCSM_piControl_1760_bio1 = mean(mean_CCSM_piControl_1760_bio1, na.rm = T),
+        mean_CCSM_piControl_1760_bio4 = mean(mean_CCSM_piControl_1760_bio4, na.rm = T),
+        mean_CCSM_piControl_1760_bio12 = mean(mean_CCSM_piControl_1760_bio12, na.rm = T),
+        mean_CCSM_piControl_1760_bio15 = mean(mean_CCSM_piControl_1760_bio15, na.rm = T)
 ) %>% 
   left_join(isolation_medium, by = "Medium_only_merged_for_shared_language") %>% 
   mutate(ratio_coastline_to_area = sum_shoreline / sum_area,
@@ -240,13 +236,11 @@ Island_group_summarised_Marck_group <- Island_group_all_sep %>%
     color = dplyr::first(Marck_group_color), 
     lg_count = dplyr::first(lg_count_Marck),
     NPP_terra_mean = mean(MOD17A3HGF_061_Npp_500m_terra, na.rm = T),
-    NPP_terra_var = var(MOD17A3HGF_061_Npp_500m_terra, na.rm = T),
     NPP_aqua_mean = mean(MYD17A3HGF_061_Npp_500m_water, na.rm = T),
-    NPP_aqua_var = var(MYD17A3HGF_061_Npp_500m_water, na.rm = T),
     mean_CCSM_piControl_1760_bio1 = mean(mean_CCSM_piControl_1760_bio1),
     mean_CCSM_piControl_1760_bio4 = mean(mean_CCSM_piControl_1760_bio4),
     mean_CCSM_piControl_1760_bio12 = mean(mean_CCSM_piControl_1760_bio12),
-    mean_CCSM_piControl_1760_bio15 = mean(mean_CCSM_piControl_1760_bio15)
+    mean_CCSM_piControl_1760_bio15 = mean(mean_CCSM_piControl_1760_bio15),
   ) %>% 
   left_join(isolation_marck, by = "Marck_group") %>% 
   mutate(ratio_coastline_to_area = sum_shoreline / sum_area,
