@@ -30,8 +30,10 @@ find_pcs <- function(data){
   
   cat(nScree_summary_string)
   
+  maxcol <- optimal_components+1
+  
   x <- list(data_pca_df= data_pca_df, 
             optimal_components = optimal_components, 
-            nScree_summary_string = nScree_summary_string)
+            nScree_summary_string = nScree_summary_string, maxcol= maxcol)
   x
 }
