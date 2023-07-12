@@ -1,6 +1,7 @@
 source("01_requirements.R")
 
-source("02_get_glottolog_language_table.R")
+if(!file.exists("output/processed_data/glottolog_language_table_wide_df.tsv")){
+source("02_get_glottolog_language_table.R")}
 
 lg_count_countries_df  <- read_tsv("output/processed_data/glottolog_language_table_wide_df.tsv", show_col_types = F) %>% 
   filter(level == "language") %>% 
@@ -35,7 +36,7 @@ combined %>%
                    label.y.npc="top", label.x.npc = "left", alpha = 0.8) +
   geom_smooth(method='lm', formula = 'y ~ x')
 
-ggsave("output/plots/number_of_languags_vs_pop_1950.png")
+ggsave("output/plots/number_of_languags_vs_pop_1950.png", width = 7, height = 7)
 
 combined %>%
   ggplot(aes(x = `Population 1950 log10` , y = `Number of languages log10`)) +
@@ -45,4 +46,4 @@ combined %>%
                    label.y.npc="top", label.x.npc = "left", alpha = 0.8) +
   geom_smooth(method='lm', formula = 'y ~ x')
 
-ggsave("output/plots/number_of_languags_vs_pop_1950_log10.png")
+ggsave("output/plots/number_of_languags_vs_pop_1950_log10.png", width = 7, height = 7)
