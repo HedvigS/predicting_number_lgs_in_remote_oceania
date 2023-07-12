@@ -40,7 +40,7 @@ clim_dat <- raster::extract(clim_stack, points_to_extract)
 
 all_dat <- pnts_all %>%
   dplyr::left_join(pnts %>%
-                     dplyr::bind_cols(dplyr::as_tibble(clim_dat)))
+                     dplyr::bind_cols(dplyr::as_tibble(clim_dat)),by = join_by(Unique_ID, `AREA (sq km)`, `COASTLINE (km) (perimeter)`, Longitude, Latitude, Region, `COUNTRY NAME`, Melanesia_or_not, `Island name`, Marck_group, Inhabited, glottocodes, Left_over, Smallest_Island_group, Medium_island_group, Medium_island_group_language_merged, Medium_only_merged_for_shared_language))
 
 all_dat_grouped <-all_dat %>% 
   filter(!is.na(Smallest_Island_group)) %>% 
