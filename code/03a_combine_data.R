@@ -206,7 +206,8 @@ Island_group_summarised_medium <- Island_group_all_sep %>%
         mean_CCSM_piControl_1760_bio15 = mean(mean_CCSM_piControl_1760_bio15)
 ) %>% 
   left_join(isolation_medium, by = "Medium_only_merged_for_shared_language") %>% 
-  mutate(ratio_coastline_to_area = sum_shoreline / sum_area)
+  mutate(ratio_coastline_to_area = sum_shoreline / sum_area,
+         mean_lat_abs = abs(mean_lat))
 
 write_tsv(Island_group_summarised_medium, "output/processed_data/RO_Hedvig_aggregate_medium_island.tsv")
 
@@ -248,7 +249,8 @@ Island_group_summarised_Marck_group <- Island_group_all_sep %>%
     mean_CCSM_piControl_1760_bio15 = mean(mean_CCSM_piControl_1760_bio15)
   ) %>% 
   left_join(isolation_marck, by = "Marck_group") %>% 
-  mutate(ratio_coastline_to_area = sum_shoreline / sum_area)
+  mutate(ratio_coastline_to_area = sum_shoreline / sum_area,
+         mean_lat_abs = abs(mean_lat))
 
 write_tsv(Island_group_summarised_Marck_group, "output/processed_data/RO_Hedvig_aggregate_marck_group.tsv")
 
