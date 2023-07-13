@@ -4,9 +4,6 @@ source("01_requirements_brms.R")
 data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_marck_group_scaled.tsv", show_col_types = F) 
 
 
-
-colnames(data)
-
 #inspiried by
 #https://bookdown.org/ajkurz/Statistical_Rethinking_recoded/counting-and-classification.html#binomial-regression
 
@@ -21,6 +18,7 @@ output <-  brm(data = data,
       iter = 3000, 
       warmup = 1000, 
       chains = 4, 
+      save_pars = save_pars(all = T),
       cores = 4,
       seed = 10,
 backend="cmdstanr") 
@@ -28,9 +26,8 @@ backend="cmdstanr")
 summary(output)
 
 predict_df <- data.frame(predicted =  predict(output),
-                         group = data$group) %>% 
+                         group = data$Marck_group) %>% 
   mutate(min = predicted.Estimate - predicted.Est.Error) %>% 
   mutate(max = predicted.Estimate + predicted.Est.Error)
-
 
 
