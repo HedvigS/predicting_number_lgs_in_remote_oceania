@@ -135,7 +135,12 @@ dates <- read_tsv("data/island_group_settlement_date.tsv", show_col_types = F) %
   mutate(Smallest_Island_group = trimws(Smallest_Island_group)) %>% 
   group_by(Smallest_Island_group) %>% 
   summarise(oldest_date = max(`Settlement date oldest date`), 
-            settlement_date_grouping_finer = min(settlement_date_grouping_finer, na.rm = T)) 
+            settlement_date_grouping_finer = min(settlement_date_grouping_finer, na.rm = T)) %>% 
+  ungroup()  
+
+max_group <- max(dates$settlement_date_grouping_finer) + 1
+
+dates$settlement_date_grouping_finer <- abs(max_group - dates$settlement_date_grouping_finer)
 
 ##All which are at smallest island group level
 Island_group_all_sep <- polygon_geo_grouping_hierarchy %>% 
@@ -162,7 +167,7 @@ Island_group_summarised_smallest <- Island_group_all_sep %>%
             sum_shoreline = sum(sum_shoreline, na.rm = T),
             mean_lat = mean(mean_lat),
             mean_long = mean(mean_long),
-            settlement_date_grouping_finer = min(settlement_date_grouping_finer), 
+            settlement_date_grouping_finer = max(settlement_date_grouping_finer), 
             oldest_date = max(oldest_date),
             color = dplyr::first(smallest_island_color), 
             lg_count = dplyr::first(lg_count_smallest),
@@ -190,7 +195,7 @@ Island_group_summarised_medium <- Island_group_all_sep %>%
         sum_shoreline = sum(sum_shoreline, na.rm = T),
         mean_lat = mean(mean_lat),
         mean_long = mean(mean_long),
-        settlement_date_grouping_finer = min(settlement_date_grouping_finer), 
+        settlement_date_grouping_finer = max(settlement_date_grouping_finer), 
         oldest_date = max(oldest_date),
         color = dplyr::first(medium_group_color), 
         lg_count = dplyr::first(lg_count_medium),
@@ -231,7 +236,7 @@ Island_group_summarised_Marck_group <- Island_group_all_sep %>%
     sum_shoreline = sum(sum_shoreline, na.rm = T),
     mean_lat = mean(mean_lat),
     mean_long = mean(mean_long),
-    settlement_date_grouping_finer = min(settlement_date_grouping_finer), 
+    settlement_date_grouping_finer = max(settlement_date_grouping_finer), 
     oldest_date = max(oldest_date),
     color = dplyr::first(Marck_group_color), 
     lg_count = dplyr::first(lg_count_Marck),
