@@ -45,22 +45,22 @@ data$ratio_coastline_to_area <- data$Shoreline / data$Area_land
 data$Isolation <- log10(data$Isolation)
 
 #setting all values to between 0 and 1 to make coef easier to interpret. adding 1 so that there aren't actually 0's since the glm.nb otherwise complains about not being able to take the sqrt of 0.
-data$Area_land <- modEvA::range01(data$Area_land) +1
-data$Area_water <- modEvA::range01(data$Area_water) +1
-data$Shoreline <- modEvA::range01(data$Shoreline) +1
-data$ratio_coastline_to_area <- modEvA::range01(data$ratio_coastline_to_area) +1
-data$Isolation <- modEvA::range01(data$Isolation) +1
-data$Annual_precipitation_mean <- modEvA::range01(data$Annual_precipitation_mean) +1
-data$Precipitation_seasonality_mean <- modEvA::range01(data$Precipitation_seasonality_mean) +1
-data$Annual_temperature_mean <- modEvA::range01(data$Annual_temperature_mean) +1
-data$Temperature_seasonality_mean <- modEvA::range01(data$Temperature_seasonality_mean) +1
-data$Settlement_date_grouping_finer <- modEvA::range01(data$Settlement_date_grouping_finer) +1
-data$EA033 <- modEvA::range01(data$EA033) +1
-data$Latitude_abs_mean <- modEvA::range01(data$Latitude_abs_mean) +1
-data$NPP_terra_mean <- modEvA::range01(data$NPP_terra_mean) +1
-#data$NPP_terra_var <- modEvA::range01(data$NPP_terra_var) +1
-data$NPP_aqua_mean <- modEvA::range01(data$NPP_aqua_mean) +1
-#data$NPP_aqua_var <- modEvA::range01(data$NPP_aqua_var) +1
+data$Area_land <- modEvA::range01(data$Area_land) 
+data$Area_water <- modEvA::range01(data$Area_water) 
+data$Shoreline <- modEvA::range01(data$Shoreline) 
+data$ratio_coastline_to_area <- modEvA::range01(data$ratio_coastline_to_area) 
+data$Isolation <- modEvA::range01(data$Isolation) 
+data$Annual_precipitation_mean <- modEvA::range01(data$Annual_precipitation_mean) 
+data$Precipitation_seasonality_mean <- modEvA::range01(data$Precipitation_seasonality_mean) 
+data$Annual_temperature_mean <- modEvA::range01(data$Annual_temperature_mean) 
+data$Temperature_seasonality_mean <- modEvA::range01(data$Temperature_seasonality_mean) 
+data$Settlement_date_grouping_finer <- modEvA::range01(data$Settlement_date_grouping_finer) 
+data$EA033 <- modEvA::range01(data$EA033) 
+data$Latitude_abs_mean <- modEvA::range01(data$Latitude_abs_mean) 
+data$NPP_terra_mean <- modEvA::range01(data$NPP_terra_mean) 
+#data$NPP_terra_var <- modEvA::range01(data$NPP_terra_var) 
+data$NPP_aqua_mean <- modEvA::range01(data$NPP_aqua_mean) 
+#data$NPP_aqua_var <- modEvA::range01(data$NPP_aqua_var) 
 
 data %>% 
   write_tsv("output/processed_data/RO_Hedvig_aggregate_marck_group_scaled.tsv")
@@ -132,22 +132,22 @@ data$ratio_coastline_to_area <- data$Shoreline / data$Area_land
 data$Isolation <- log10(data$Isolation)
 
 #setting all values to between 0 and 1 to make coef easier to interpret. adding 1 so that there aren't actually 0's since the glm.nb otherwise complains about not being able to take the sqrt of 0.
-data$Area_land <- modEvA::range01(data$Area_land) +1
-data$Area_water <- modEvA::range01(data$Area_water) +1
-data$Shoreline <- modEvA::range01(data$Shoreline) +1
-data$ratio_coastline_to_area <- modEvA::range01(data$ratio_coastline_to_area) +1
-data$Isolation <- modEvA::range01(data$Isolation) +1
-data$Annual_precipitation_mean <- modEvA::range01(data$Annual_precipitation_mean) +1
-data$Precipitation_seasonality_mean <- modEvA::range01(data$Precipitation_seasonality_mean) +1
-data$Annual_temperature_mean <- modEvA::range01(data$Annual_temperature_mean) +1
-data$Temperature_seasonality_mean <- modEvA::range01(data$Temperature_seasonality_mean) +1
-data$Settlement_date_grouping_finer <- modEvA::range01(data$Settlement_date_grouping_finer) +1
-data$EA033 <- modEvA::range01(data$EA033) +1
-data$Latitude_abs_mean <- modEvA::range01(data$Latitude_abs_mean) +1
-data$NPP_terra_mean <- modEvA::range01(data$NPP_terra_mean) +1
-#data$NPP_terra_var <- modEvA::range01(data$NPP_terra_var) +1
-data$NPP_aqua_mean <- modEvA::range01(data$NPP_aqua_mean) +1
-#data$NPP_aqua_var <- modEvA::range01(data$NPP_aqua_var) +1
+data$Area_land <- modEvA::range01(data$Area_land) 
+data$Area_water <- modEvA::range01(data$Area_water) 
+data$Shoreline <- modEvA::range01(data$Shoreline) 
+data$ratio_coastline_to_area <- modEvA::range01(data$ratio_coastline_to_area) 
+data$Isolation <- modEvA::range01(data$Isolation) 
+data$Annual_precipitation_mean <- modEvA::range01(data$Annual_precipitation_mean) 
+data$Precipitation_seasonality_mean <- modEvA::range01(data$Precipitation_seasonality_mean) 
+data$Annual_temperature_mean <- modEvA::range01(data$Annual_temperature_mean) 
+data$Temperature_seasonality_mean <- modEvA::range01(data$Temperature_seasonality_mean) 
+data$Settlement_date_grouping_finer <- modEvA::range01(data$Settlement_date_grouping_finer) 
+data$EA033 <- modEvA::range01(data$EA033) 
+data$Latitude_abs_mean <- modEvA::range01(data$Latitude_abs_mean) 
+data$NPP_terra_mean <- modEvA::range01(data$NPP_terra_mean) 
+#data$NPP_terra_var <- modEvA::range01(data$NPP_terra_var) 
+data$NPP_aqua_mean <- modEvA::range01(data$NPP_aqua_mean) 
+#data$NPP_aqua_var <- modEvA::range01(data$NPP_aqua_var) 
 
 data %>% 
   write_tsv("output/processed_data/RO_Hedvig_aggregate_medium_group_scaled.tsv")
