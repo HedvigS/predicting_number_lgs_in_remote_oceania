@@ -2,8 +2,6 @@ source("01_requirements.R")
 source("01_requirements_brms.R")
 
 data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_marck_group_scaled.tsv", show_col_types = F) 
-data$Settlement_date_grouping_finer <- abs(data$Settlement_date_grouping_finer - 2 ) + 1
-
 
 #inspiried by
 #https://bookdown.org/ajkurz/Statistical_Rethinking_recoded/counting-and-classification.html#binomial-regression
