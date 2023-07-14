@@ -71,7 +71,8 @@ png(filename = "output/plots/SLOM_marck_all_variables.png", width = 10, height =
 data %>%   
   dplyr::select("lg\ncount","EA033",  "Settlement\ndate\ngrouping\nfiner", "Area\nland" ,"Area\nwater", "Shoreline", "ratio\ncoastline\nto\narea", 
                 "Isolation", "Latitude\nabs\nmean","Annual\ntemperature\nmean", "Temperature\nseasonality\nmean", "Annual\nprecipitation\nmean", "Precipitation\nseasonality\nmean", "NPP\nterra\nmean", 
-                #"NPP\nterra\nvar", "NPP\naqua\nmean" 
+                #"NPP\nterra\nvar", 
+                "NPP\naqua\nmean" 
                 #"NPP\naqua\nvar"
                 ) %>% 
   pairs.panels(method = "pearson", # correlation method
@@ -158,7 +159,8 @@ png(filename = "output/plots/SLOM_medium_all_variables.png", width = 10, height 
 data %>%   
   dplyr::select("lg\ncount","EA033",  "Settlement\ndate\ngrouping\nfiner", "Area\nland" ,"Area\nwater", "Shoreline", "ratio\ncoastline\nto\narea", 
                 "Isolation", "Latitude\nabs\nmean","Annual\ntemperature\nmean", "Temperature\nseasonality\nmean", "Annual\nprecipitation\nmean", "Precipitation\nseasonality\nmean", "NPP\nterra\nmean",
-                #"NPP\nterra\nvar", "NPP\naqua\nmean" 
+                #"NPP\nterra\nvar", 
+                "NPP\naqua\nmean" 
                 #"NPP\naqua\nvar"
                 ) %>% 
   pairs.panels(method = "pearson", # correlation method
