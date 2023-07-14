@@ -47,6 +47,35 @@ read_tsv(data_fn_marck, show_col_types = F) %>%
   write_tsv(data_fn_marck)
 
 
+
+
+PCA_prop_variance_df <- found_pcs$tidied_pca %>%
+  dplyr::distinct(PC, Contribution, Parameter_ID)
+
+# set up our plotting theme - starts with theme_classic and then modify some parts
+theme_grambank_pca <- function(base_size = 12, base_family = "") {
+  theme_classic(base_size = base_size, base_family = base_family) %+replace%
+    theme(
+      axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),
+      axis.ticks.x = element_blank()
+    )
+}
+
+
+
+PCA_prop_variance_df  %>%
+  filter(PC == "PC1") %>%
+  mutate(Parameter_ID= reorder(Parameter_ID, desc(Contribution))) %>%
+  ggplot(aes(Parameter_ID, Contribution, fill = Parameter_ID)) +
+  geom_col(show.legend = FALSE, alpha = 0.8) +
+  theme_grambank_pca() 
+
+
+
+
+
+
+
 ###############################################################################
 ###############################################################################
 ### medium + carrying capacity
