@@ -22,6 +22,8 @@ save_pars = save_pars(all = T)
 cores = 4
 seed = 10
 
+ndraws = 10000
+
 ############# ALL OBSERVATIONS ####################
 
 output_poission <-  brm(data = data, 
@@ -38,7 +40,7 @@ backend="cmdstanr")
 
 #summary(output_poission)
 
-posterior_predict_df <- brms::posterior_predict(output_poission, cores = cores, ndraws = 10000) %>%
+posterior_predict_df <- brms::posterior_predict(output_poission, cores = cores, ndraws = ndraws) %>%
   as.data.frame() %>% 
   data.table::transpose() %>% 
   mutate(Marck_group = data$Marck_group) %>% 
@@ -116,17 +118,50 @@ chain_joined %>%
 
 ########### KICKING OUT ONE OBSERVATION AT A TIME
 
-obs <- data$Marck_group
+
+df_all <- data.frame(
+  "dropped_obs"     = as.character(),
+  "b_Carrying_capactiy_PC1_max"         = as.numeric(),          
+  "b_Carrying_capactiy_PC1_min"     = as.numeric(),            
+  "b_Carrying_capactiy_PC1_mean"      = as.numeric(),             
+  "b_Intercept_max"                                = as.numeric(),
+  "b_Intercept_min"                                = as.numeric(),
+  "b_Intercept_mean"                             = as.numeric(),
+  "b_Carrying_capactiy_PC2_max"                    = as.numeric(),
+  "b_Carrying_capactiy_PC2_min"                 = as.numeric(),
+  "b_Carrying_capactiy_PC2_mean"                   = as.numeric(),
+  "b_EA033_max"                            = as.numeric(),
+  "b_EA033_min"                                    = as.numeric(),
+  "b_EA033_mean"                          = as.numeric(),
+  "b_Shoreline_max"                                = as.numeric(),
+  "b_Shoreline_min"                     = as.numeric(),
+  "b_Shoreline_mean"                               = as.numeric(),
+  "b_Settlement_date_grouping_finer_max"      = as.numeric(),
+  "b_Settlement_date_grouping_finer_min"           = as.numeric(),
+  "b_Settlement_date_grouping_finer_mean"     = as.numeric(),
+  "mean_Rhat"                                      = as.numeric(),
+  "mean_Bulk_ESS"                         = as.numeric(),
+  "mean_Tail_ESS"                         = as.numeric(),
+  "diff_predicted_vs_observed"               = as.numeric(),
+  "dropped_observation_prediction"                  = as.numeric(),
+  "dropped_observation_prediction_diff"      = as.numeric(),
+  "b_Carrying_capactiy_PC1_includes_zero"         = as.character(),
+  "b_Carrying_capactiy_PC2_includes_zero"  = as.character(),
+  "b_Intercept_includes_zero"                     = as.character(),
+  "b_EA033_includes_zero"                  = as.character(),
+  "b_Shoreline_includes_zero"                     = as.character(),
+  "b_Settlement_date_grouping_finer_includes_zero"= as.character()
+)
 
 
-for(ob in obs){
+for(obs in data$Marck_group){
   
-#  ob <- obs[1]
+#  obs <- data$Marck_group[1]
 
-  cat(paste0("Dropping out ", ob, ".\n"))
+  cat(paste0("Dropping out ", obs, ".\n"))
   
 data_spec <-   data %>% 
-    filter(Marck_group != {{ob}})
+    filter(Marck_group != {{obs}})
 
 output_spec <-  brm(data = data_spec, 
                     family = poisson,
@@ -134,21 +169,122 @@ output_spec <-  brm(data = data_spec,
                     iter = iter, 
                     silent = 2,
                     refresh = 0,
+                    save_pars = save_pars,
                     warmup = warmup, 
                     chains = chains, 
-                    save_pars = save_pars,
                     cores = cores,
                     seed = seed,
                     backend="cmdstanr") 
 
-predict_df_spec <- data.frame(predicted_spec =  predict(output_spec),
-                         group = data_spec$Marck_group, 
-                         lg_count = data_spec$lg_count)  %>% 
-  mutate(diff = abs(lg_count - predicted_spec.Estimate)) 
+ms <- summary(output_spec)
 
-cat(paste0("The diff was ", mean(predict_df_spec$diff) %>% round(2)
+#predicting number of lgs
+posterior_predict_df_spec <- brms::posterior_predict(output_spec, cores = cores, ndraws = ndraws) %>%
+  as.data.frame() %>% 
+  data.table::transpose() %>% 
+  mutate(Marck_group = data_spec$Marck_group) %>% 
+  reshape2::melt(id.vars = "Marck_group") %>% 
+  group_by(Marck_group) %>% 
+  summarise(mean = mean(value), 
+         sd = sd(value),
+         min = min(value),
+         max = max(value)) %>% 
+  left_join(data, by = "Marck_group") %>% 
+  mutate(diff = abs(lg_count - mean)) 
+
+diff <- mean(posterior_predict_df_spec$diff)
+
+cat(paste0("The diff was ", diff %>% round(2)
 , ".\n"))
-  
+
+#coef
+chain_1 <- output_spec$fit@sim$samples[[1]] %>% as.data.frame()  %>% mutate(chain = "1")
+chain_2 <- output_spec$fit@sim$samples[[2]] %>% as.data.frame()  %>% mutate(chain = "2")
+chain_3 <- output_spec$fit@sim$samples[[3]] %>% as.data.frame()  %>% mutate(chain = "3")
+chain_4 <- output_spec$fit@sim$samples[[4]] %>% as.data.frame()  %>% mutate(chain = "4")
+
+chain_joined <- full_join(chain_1, chain_2, by = join_by(b_Intercept, b_Carrying_capactiy_PC1, b_Carrying_capactiy_PC2,
+                                                         b_EA033, b_Shoreline, b_Settlement_date_grouping_finer, Intercept, lprior, lp__, chain)) %>% 
+  full_join(chain_3, by = join_by(b_Intercept, b_Carrying_capactiy_PC1, b_Carrying_capactiy_PC2,
+                                  b_EA033, b_Shoreline, b_Settlement_date_grouping_finer, Intercept, lprior, lp__, chain)) %>% 
+  full_join(chain_4, by = join_by(b_Intercept, b_Carrying_capactiy_PC1, b_Carrying_capactiy_PC2,
+                                  b_EA033, b_Shoreline, b_Settlement_date_grouping_finer, Intercept, lprior, lp__, chain))
+
+predict_new_data <- brms::posterior_predict(output_spec, newdata = data, ndraws = ndraws) %>% 
+  as.data.frame() %>% 
+  data.table::transpose() %>% 
+  mutate(Marck_group = data$Marck_group) %>% 
+  reshape2::melt(id.vars = "Marck_group") %>% 
+  group_by(Marck_group) %>% 
+  summarise(mean = mean(value), 
+            sd = sd(value),
+            min = min(value),
+            max = max(value)) %>% 
+  left_join(data, by = "Marck_group") %>% 
+  mutate(diff = abs(lg_count - mean)) %>% 
+  filter(Marck_group == {{obs}})
+
+
+
+#output_data_frame
+df_spec <- data.frame(dropped_obs = obs, 
+           b_Carrying_capactiy_PC1_max = chain_joined$b_Carrying_capactiy_PC1 %>% max(),
+           b_Carrying_capactiy_PC1_min = chain_joined$b_Carrying_capactiy_PC1 %>% min(),
+           b_Carrying_capactiy_PC1_mean = chain_joined$b_Carrying_capactiy_PC1 %>% mean(),
+           b_Intercept_max = chain_joined$b_Intercept %>% max(),
+           b_Intercept_min = chain_joined$b_Intercept %>% min(),
+           b_Intercept_mean = chain_joined$b_Intercept %>% mean(),
+           b_Carrying_capactiy_PC2_max = chain_joined$b_Carrying_capactiy_PC2 %>% max(),
+           b_Carrying_capactiy_PC2_min = chain_joined$b_Carrying_capactiy_PC2 %>% min(),
+           b_Carrying_capactiy_PC2_mean = chain_joined$b_Carrying_capactiy_PC2 %>% mean(),
+           b_EA033_max = chain_joined$b_EA033 %>% max(),
+           b_EA033_min = chain_joined$b_EA033 %>% min(),
+           b_EA033_mean = chain_joined$b_EA033 %>% mean(),
+           b_Shoreline_max = chain_joined$b_Shoreline %>% max(),
+           b_Shoreline_min = chain_joined$b_Shoreline %>% min(),
+           b_Shoreline_mean = chain_joined$b_Shoreline %>% mean(),
+           b_Settlement_date_grouping_finer_max = chain_joined$b_Settlement_date_grouping_finer %>% max(),
+           b_Settlement_date_grouping_finer_min = chain_joined$b_Settlement_date_grouping_finer %>% min(),
+           b_Settlement_date_grouping_finer_mean = chain_joined$b_Settlement_date_grouping_finer %>% mean(),
+           mean_Rhat =  ms$fixed$Rhat %>% mean(),
+           mean_Bulk_ESS = ms$fixed$Bulk_ESS %>% mean(),
+           mean_Tail_ESS = ms$fixed$Tail_ESS %>% mean(),
+           diff_predicted_vs_observed = diff,
+           dropped_observation_prediction = predict_new_data$mean,
+           dropped_observation_prediction_diff = predict_new_data$diff) %>% 
+  mutate(
+    b_Carrying_capactiy_PC1_includes_zero = ifelse(
+    b_Carrying_capactiy_PC1_max > 0 & b_Carrying_capactiy_PC1_min < 0 |
+      b_Carrying_capactiy_PC1_max < 0 & b_Carrying_capactiy_PC1_min > 0, 
+    yes = "Yes", no = "No")) %>% 
+  mutate(
+    b_Carrying_capactiy_PC2_includes_zero = ifelse(
+      b_Carrying_capactiy_PC2_max > 0 & b_Carrying_capactiy_PC2_min < 0 |
+        b_Carrying_capactiy_PC2_max < 0 & b_Carrying_capactiy_PC2_min > 0, 
+      yes = "Yes", no = "No")) %>% 
+  mutate(
+    b_Intercept_includes_zero = ifelse(
+      b_Intercept_max > 0 & b_Intercept_min < 0 |
+        b_Intercept_max < 0 & b_Intercept_min > 0, 
+      yes = "Yes", no = "No")) %>% 
+  mutate(
+    b_EA033_includes_zero = ifelse(
+      b_EA033_max > 0 & b_EA033_min < 0 |
+        b_EA033_max < 0 & b_EA033_min > 0, 
+      yes = "Yes", no = "No")) %>% 
+  mutate(
+    b_Shoreline_includes_zero = ifelse(
+      b_Shoreline_max > 0 & b_Shoreline_min < 0 |
+        b_Shoreline_max < 0 & b_Shoreline_min > 0, 
+      yes = "Yes", no = "No")) %>% 
+  mutate(
+    b_Settlement_date_grouping_finer_includes_zero = ifelse(
+      b_Settlement_date_grouping_finer_max > 0 & b_Settlement_date_grouping_finer_min < 0 |
+        b_Settlement_date_grouping_finer_max < 0 & b_Settlement_date_grouping_finer_min > 0, 
+      yes = "Yes", no = "No"))
+
+df_all <- full_join(df_all, df_spec)
+
 }
 
 
