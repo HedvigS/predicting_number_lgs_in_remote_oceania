@@ -53,10 +53,12 @@ posterior_predict_df <- brms::posterior_predict(output_poission, cores = cores, 
   full_join(data, by = "Marck_group") %>% 
   mutate(diff_poission = abs(lg_count - mean)) 
 
+posterior_predict_df %>% 
+  write_tsv("output/results/brms_marck_predict_table.tsv", na = "")
+
 #predict plot
 
 posterior_predict_df$Marck_group <- fct_reorder(posterior_predict_df$Marck_group, posterior_predict_df$lg_count)
-
 
 c("#440154FF" ,"#481769FF" ,"#472A7AFF" ,"#433D84FF" ,"#3D4E8AFF" ,"#355E8DFF", "#2E6D8EFF",
  "#297B8EFF", "#23898EFF" ,"#1F978BFF", "#21A585FF", "#2EB37CFF" ,"#46C06FFF" ,"#65CB5EFF",
@@ -92,13 +94,16 @@ chain_joined <- full_join(chain_1, chain_2, by = join_by(b_Intercept, b_Carrying
                                   b_EA033, b_Shoreline, b_Settlement_date_grouping_finer, Intercept, lprior, lp__, chain))
 
 chain_joined %>% 
+  write_tsv(file = "output/results/brms_marck_full_chains.tsv", na = "")
+
+chain_joined %>% 
   reshape2::melt(id.vars = "chain") %>% 
   filter(variable != "lprior") %>% 
   filter(variable != "lp__") %>% 
   filter(variable != "Intercept") %>% 
   ggplot(aes(x = value, fill = variable, 
              color = variable,
-                     y = ..density..)) + 
+                     y = after_stat(density))) + 
   geom_density(  alpha = 0.8,
                  color = "darkgray",
                  linewidth = 0.8, adjust = 0.7
@@ -115,6 +120,8 @@ chain_joined %>%
         axis.text.y = element_blank()) +
   scale_color_manual(values = RColorBrewer::brewer.pal(name = "Set3", n = 9)) +
   scale_fill_manual(values = RColorBrewer::brewer.pal(name = "Set3", n = 9))
+
+ggsave("output/plots/brms_marck_group_full_effect_ridge_panels_plot.png", height = 9, width = 10)
 
 ########### KICKING OUT ONE OBSERVATION AT A TIME
 
@@ -153,16 +160,19 @@ df_all <- data.frame(
   "b_Settlement_date_grouping_finer_includes_zero"= as.character()
 )
 
+obs <- c(data$Marck_group, NA)
 
-for(obs in data$Marck_group){
+for(obs in obs){
   
-#  obs <- data$Marck_group[1]
+#  obs <- obs[59]
 
   cat(paste0("Dropping out ", obs, ".\n"))
   
-data_spec <-   data %>% 
+  if(is.na(obs)){
+    data_spec <-   data 
+  }else{data_spec <-   data %>% 
     filter(Marck_group != {{obs}})
-
+  }
 output_spec <-  brm(data = data_spec, 
                     family = poisson,
                     formula = formula,
@@ -179,7 +189,7 @@ output_spec <-  brm(data = data_spec,
 ms <- summary(output_spec)
 
 #predicting number of lgs
-posterior_predict_df_spec <- brms::posterior_predict(output_spec, cores = cores, ndraws = ndraws) %>%
+posterior_predict_df_spec <- brms::posterior_predict(output_spec, cores = cores, ndraws = 1000) %>%
   as.data.frame() %>% 
   data.table::transpose() %>% 
   mutate(Marck_group = data_spec$Marck_group) %>% 
@@ -210,6 +220,8 @@ chain_joined <- full_join(chain_1, chain_2, by = join_by(b_Intercept, b_Carrying
   full_join(chain_4, by = join_by(b_Intercept, b_Carrying_capactiy_PC1, b_Carrying_capactiy_PC2,
                                   b_EA033, b_Shoreline, b_Settlement_date_grouping_finer, Intercept, lprior, lp__, chain))
 
+
+
 predict_new_data <- brms::posterior_predict(output_spec, newdata = data, ndraws = ndraws) %>% 
   as.data.frame() %>% 
   data.table::transpose() %>% 
@@ -221,12 +233,19 @@ predict_new_data <- brms::posterior_predict(output_spec, newdata = data, ndraws 
             min = min(value),
             max = max(value)) %>% 
   left_join(data, by = "Marck_group") %>% 
-  mutate(diff = abs(lg_count - mean)) %>% 
+  mutate(diff = abs(lg_count - mean)) 
+
+if(!is.na(obs)){
+  predict_new_data  <- predict_new_data %>% 
   filter(Marck_group == {{obs}})
 
-
+}
 
 #output_data_frame
+
+
+
+
 df_spec <- data.frame(dropped_obs = obs, 
            b_Carrying_capactiy_PC1_max = chain_joined$b_Carrying_capactiy_PC1 %>% max(),
            b_Carrying_capactiy_PC1_min = chain_joined$b_Carrying_capactiy_PC1 %>% min(),
@@ -283,39 +302,62 @@ df_spec <- data.frame(dropped_obs = obs,
         b_Settlement_date_grouping_finer_max < 0 & b_Settlement_date_grouping_finer_min > 0, 
       yes = "Yes", no = "No"))
 
-df_all <- full_join(df_all, df_spec)
+df_all <- full_join(df_all, df_spec, 
+                    by = join_by(dropped_obs, b_Carrying_capactiy_PC1_max, b_Carrying_capactiy_PC1_min,
+                    b_Carrying_capactiy_PC1_mean, b_Intercept_max, b_Intercept_min, 
+                    b_Intercept_mean, b_Carrying_capactiy_PC2_max,
+                    b_Carrying_capactiy_PC2_min, b_Carrying_capactiy_PC2_mean, 
+                    b_EA033_max, b_EA033_min, b_EA033_mean,
+                    b_Shoreline_max, b_Shoreline_min, b_Shoreline_mean, 
+                    b_Settlement_date_grouping_finer_max,
+                    b_Settlement_date_grouping_finer_min, 
+                    b_Settlement_date_grouping_finer_mean, mean_Rhat, mean_Bulk_ESS,   
+                    mean_Tail_ESS, diff_predicted_vs_observed, 
+                    dropped_observation_prediction, dropped_observation_prediction_diff,   
+                    b_Carrying_capactiy_PC1_includes_zero, 
+                    b_Carrying_capactiy_PC2_includes_zero, b_Intercept_includes_zero,   
+                    b_EA033_includes_zero, b_Shoreline_includes_zero,
+                    b_Settlement_date_grouping_finer_includes_zero))
 
 }
 
+#the run with no dropped generates 58 rows, let's cut that down to one
+df_all <- df_all %>% 
+  group_by(dropped_obs) %>% 
+  mutate(dropped_observation_prediction_mean = mean(dropped_observation_prediction, na.rm = T),
+         dropped_observation_prediction_diff_mean = mean(dropped_observation_prediction_diff, na.rm = T)) %>% 
+           distinct(dropped_obs, dropped_observation_prediction_diff_mean, .keep_all = T) 
 
+df_all %>%          
+  write_tsv("output/results/brms_marck_group_drop_one_out.tsv", na = "")
 
 
 ######################################
 
-
-#calculating the estimate value "manually" from the coef vs what predict() does
-for(n in 1:58){
-
-  n <- 13
-
-model_estimate <- predict_df[n,]$predicted_poission.Estimate
-
-manual_estimate <- exp((mean(data_chopped[n,]$Carrying_capactiy_PC1 * chain_joined$b_Carrying_capactiy_PC1)
- +
-       mean(data_chopped[n,]$Carrying_capactiy_PC2 * chain_joined$b_Carrying_capactiy_PC2)
- +
-       mean(data_chopped[n,]$Shoreline * chain_joined$b_Shoreline)
- +
-       mean(data_chopped[n,]$EA033 * chain_joined$b_EA033)
- +
-       mean(data_chopped[n,]$Settlement_date_grouping_finer * chain_joined$b_Settlement_date_grouping_finer)) +
-   mean(chain_joined$b_Intercept)
-)
-
-print(manual_estimate-model_estimate)
-
-}
-
-
+# 
+# #calculating the estimate value "manually" from the coef vs what predict() does
+# for(n in 1:58){
+# 
+#   n <- 13
+# 
+# model_estimate <- predict_df[n,]$predicted_poission.Estimate
+# 
+# manual_estimate <- exp((mean(data_chopped[n,]$Carrying_capactiy_PC1 * chain_joined$b_Carrying_capactiy_PC1)
+#  +
+#        mean(data_chopped[n,]$Carrying_capactiy_PC2 * chain_joined$b_Carrying_capactiy_PC2)
+#  +
+#        mean(data_chopped[n,]$Shoreline * chain_joined$b_Shoreline)
+#  +
+#        mean(data_chopped[n,]$EA033 * chain_joined$b_EA033)
+#  +
+#        mean(data_chopped[n,]$Settlement_date_grouping_finer * chain_joined$b_Settlement_date_grouping_finer)) +
+#    mean(chain_joined$b_Intercept)
+# )
+# 
+# print(manual_estimate-model_estimate)
+# 
+# }
+# 
+# 
 
 
