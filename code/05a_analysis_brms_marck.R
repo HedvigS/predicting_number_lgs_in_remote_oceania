@@ -54,6 +54,7 @@ posterior_predict_df <- brms::posterior_predict(output_poission, cores = cores, 
   mutate(diff_poission = abs(lg_count - mean)) 
 
 posterior_predict_df %>% 
+  distinct(Marck_group, mean, sd, min, max, diff_poission, lg_count) %>% 
   write_tsv("output/results/brms_marck_predict_table.tsv", na = "")
 
 #predict plot
