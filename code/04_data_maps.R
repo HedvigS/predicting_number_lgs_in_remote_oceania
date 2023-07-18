@@ -64,7 +64,7 @@ Map_plot_marck <- basemap +
 
 plot(Map_plot_marck)
 ggsave("output/plots/maps/Map_RO_Marck.png", width = 5, height = 4)
-ggsave("../latex/illustrations/plots_from_R/plots_from_R/polygon_marck_group_map.png", width = 5, height = 3)
+ggsave("../latex/illustrations/plots_from_R/polygon_marck_group_map.png", width = 5, height = 3)
 
 ##Medium_group
 Map_plot_medium <- basemap + 
@@ -73,7 +73,7 @@ Map_plot_medium <- basemap +
 
 plot(Map_plot_medium)
 ggsave("output/plots/maps/Map_RO_Medium.png", width = 5, height = 4)
-ggsave("../latex/illustrations/plots_from_R/plots_from_R/polygon_medium_group_map.png", width = 5, height =3)
+ggsave("../latex/illustrations/plots_from_R/polygon_medium_group_map.png", width = 5, height =3)
 
 
 #pol_complex
@@ -107,7 +107,7 @@ basemap +
         legend.key = element_rect(fill = NA, color = NULL)) 
   
 ggsave("output/plots/maps/map_pol_complex.png", width = 9, height = 5)
-ggsave("../latex/illustrations/plots_from_R/plots_from_R/map_pol_complex.png", width = 9, height = 5)
+ggsave("../latex/illustrations/plots_from_R/map_pol_complex.png", width = 9, height = 5)
 
 #dates
 dates <- read_tsv("data/island_group_settlement_date.tsv", show_col_types = F) %>% 
