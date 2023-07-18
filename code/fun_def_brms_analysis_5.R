@@ -49,9 +49,9 @@ fun_hedvig_brms_predicting <- function(data = NULL,
   
   posterior_predict_df$group <- fct_reorder(posterior_predict_df$group, posterior_predict_df$lg_count)
   
-  c("#440154FF" ,"#481769FF" ,"#472A7AFF" ,"#433D84FF" ,"#3D4E8AFF" ,"#355E8DFF", "#2E6D8EFF",
-    "#297B8EFF", "#23898EFF" ,"#1F978BFF", "#21A585FF", "#2EB37CFF" ,"#46C06FFF" ,"#65CB5EFF",
-    "#89D548FF" ,"#B0DD2FFF", "#D8E219FF" ,"#FDE725FF")
+#  c("#440154FF" ,"#481769FF" ,"#472A7AFF" ,"#433D84FF" ,"#3D4E8AFF" ,"#355E8DFF", "#2E6D8EFF",
+#    "#297B8EFF", "#23898EFF" ,"#1F978BFF", "#21A585FF", "#2EB37CFF" ,"#46C06FFF" ,"#65CB5EFF",
+#    "#89D548FF" ,"#B0DD2FFF", "#D8E219FF" ,"#FDE725FF")
   
   p <- posterior_predict_df %>% 
     ggplot() +
@@ -76,17 +76,14 @@ fun_hedvig_brms_predicting <- function(data = NULL,
   chain_3 <- output_poission$fit@sim$samples[[3]] %>% as.data.frame()  %>% mutate(chain = "3")
   chain_4 <- output_poission$fit@sim$samples[[4]] %>% as.data.frame()  %>% mutate(chain = "4")
   
-  chain_joined <- full_join(chain_1, chain_2, by = join_by(b_Intercept, b_Carrying_capactiy_PC1, b_Carrying_capactiy_PC2,
-                                                           b_EA033, b_Shoreline, b_Settlement_date_grouping_finer, Intercept, lprior, lp__, chain)) %>% 
-    full_join(chain_3, by = join_by(b_Intercept, b_Carrying_capactiy_PC1, b_Carrying_capactiy_PC2,
-                                    b_EA033, b_Shoreline, b_Settlement_date_grouping_finer, Intercept, lprior, lp__, chain)) %>% 
-    full_join(chain_4, by = join_by(b_Intercept, b_Carrying_capactiy_PC1, b_Carrying_capactiy_PC2,
-                                    b_EA033, b_Shoreline, b_Settlement_date_grouping_finer, Intercept, lprior, lp__, chain))
+  chain_joined <- suppressMessages(full_join(chain_1, chain_2)) %>% 
+    suppressMessages(full_join(chain_3)) %>%
+    suppressMessages(full_join(chain_4))
   
   chain_joined %>% 
     write_tsv(file = paste0("output/results/brms_", group, "_full_chains.tsv"), na = "")
   
-  chain_joined %>% 
+  chain_joined %>%
     reshape2::melt(id.vars = "chain") %>% 
     filter(variable != "lprior") %>% 
     filter(variable != "lp__") %>% 
