@@ -202,14 +202,9 @@ fun_hedvig_brms_predicting <- function(data = NULL,
     chain_3 <- output_spec$fit@sim$samples[[3]] %>% as.data.frame()  %>% mutate(chain = "3")
     chain_4 <- output_spec$fit@sim$samples[[4]] %>% as.data.frame()  %>% mutate(chain = "4")
     
-    chain_joined <- full_join(chain_1, chain_2, by = join_by(b_Intercept, b_Carrying_capactiy_PC1, b_Carrying_capactiy_PC2,
-                                                             b_EA033, b_Shoreline, b_Settlement_date_grouping_finer, Intercept, lprior, lp__, chain)) %>% 
-      full_join(chain_3, by = join_by(b_Intercept, b_Carrying_capactiy_PC1, b_Carrying_capactiy_PC2,
-                                      b_EA033, b_Shoreline, b_Settlement_date_grouping_finer, Intercept, lprior, lp__, chain)) %>% 
-      full_join(chain_4, by = join_by(b_Intercept, b_Carrying_capactiy_PC1, b_Carrying_capactiy_PC2,
-                                      b_EA033, b_Shoreline, b_Settlement_date_grouping_finer, Intercept, lprior, lp__, chain))
-    
-    
+    chain_joined <- suppressMessages(full_join(chain_1, chain_2)) %>% 
+      suppressMessages(full_join(chain_3)) %>%
+      suppressMessages(full_join(chain_4))
     
     predict_new_data <- brms::posterior_predict(output_spec, newdata = data, ndraws = ndraws) %>% 
       as.data.frame() %>% 
@@ -332,7 +327,8 @@ fun_hedvig_brms_predicting <- function(data = NULL,
     theme_fivethirtyeight() +
     theme(axis.text.x =  element_text(angle = 70, hjust = 1) , 
           legend.position = "none") +
-    scale_fill_viridis(direction = -1) 
+    scale_fill_viridis(direction = -1) +
+    ylim(c(0,3.4))
   
   ggsave(filename = paste0("output/plots/brms_", group, "_dropped_out_plot_diff.png"), width = 9, height = 9)
   ggsave(filename = paste0("../latex/brms_", group, "_dropped_out_plot_diff.png"), width = 9, height = 9)
