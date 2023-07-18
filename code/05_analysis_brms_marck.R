@@ -321,8 +321,11 @@ df_all <- full_join(df_all, df_spec,
 
 }
 
+#df_all <- read_tsv("output/results/brms_marck_group_drop_one_out.tsv")
+
 #the run with no dropped generates 58 rows, let's cut that down to one
 df_all <- df_all %>% 
+  mutate(dropped_obs = ifelse(is.na(dropped_obs), "NONE", dropped_obs)) %>% 
   group_by(dropped_obs) %>% 
   mutate(dropped_observation_prediction_mean = mean(dropped_observation_prediction, na.rm = T),
          dropped_observation_prediction_diff_mean = mean(dropped_observation_prediction_diff, na.rm = T)) %>% 
@@ -331,6 +334,25 @@ df_all <- df_all %>%
 df_all %>%          
   write_tsv("output/results/brms_marck_group_drop_one_out.tsv", na = "")
 
+
+df_all$dropped_obs <- fct_reorder(df_all$dropped_obs, df_all$diff_predicted_vs_observed)
+
+df_all %>% 
+  ggplot() +
+  geom_bar(aes(x = dropped_obs, y = diff_predicted_vs_observed, fill = diff_predicted_vs_observed), stat = "identity") +
+  theme_fivethirtyeight() +
+  theme(axis.text.x =  element_text(angle = 70, hjust = 1) , 
+        legend.position = "none") +
+  scale_fill_viridis(direction = -1) 
+
+ggsave(filename = "output/plots/brms_marck_dropped_out_plot_diff.png", width = 9, height = 9)
+
+
+df_all %>% 
+  filter(diff_predicted_vs_observed < 2.5) %>% 
+#  column_to_rownames("dropped_obs") %>% 
+  data.table::transpose(make.names = "dropped_obs", keep.names = "variable") %>% 
+  write_tsv("output/results/brms_marck_dropped_effects.tsv")
 
 ######################################
 
