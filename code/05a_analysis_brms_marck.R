@@ -77,6 +77,9 @@ p <- posterior_predict_df %>%
         plot.background = element_rect(fill = "white"))
 
 ggsave(plot = p, filename = "output/plots/brms_predict_marck.png", height = 8, width = 6)  
+ggsave(filename = "../latex/illustrations/plots_from_R/brms_predict_marck.png",  height = 8, width = 6) 
+
+
 
 cat(paste0("The mean differences between the predicted and observed numbers of languages is ", posterior_predict_df$diff_poission %>% mean() %>% round(2), ".\n"))
 
@@ -122,6 +125,8 @@ chain_joined %>%
   scale_fill_manual(values = RColorBrewer::brewer.pal(name = "Set3", n = 9))
 
 ggsave("output/plots/brms_marck_group_full_effect_ridge_panels_plot.png", height = 9, width = 10)
+ggsave(filename = "../latex/illustrations/plots_from_R/brms_marck_group_full_effect_ridge_panels_plot.png",  height = 9, width = 10) 
+
 
 ########### KICKING OUT ONE OBSERVATION AT A TIME
 
@@ -346,6 +351,7 @@ df_all %>%
   scale_fill_viridis(direction = -1) 
 
 ggsave(filename = "output/plots/brms_marck_dropped_out_plot_diff.png", width = 9, height = 9)
+ggsave(filename = "../latex/illustrations/plots_from_R/brms_marck_dropped_out_plot_diff.png", width = 9, height = 9)
 
 
 df_all %>% 
