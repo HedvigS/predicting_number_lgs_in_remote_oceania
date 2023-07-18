@@ -80,6 +80,7 @@
 %\renewcommand{\labelitemi}{$\rightarrow$}
 \usepackage{gb4e}
 
+\usepackage{authblk}
 %\usepackage{draftwatermark}
 %\SetWatermarkText{DRAFT}
 %\SetWatermarkScale{4}
@@ -90,8 +91,11 @@
 \title{Predicting number of languages per island group in Remote Oceania}
 %\large A thesis submitted for the degree of Doctor of Philosophy of The Australian National University\\}
 
-\author{anon}
-%\author{Hedvig Skirg{\aa}rd}
+%\author{anon}
+\author{Hedvig Skirg{\aa}rd}
+\affil{Department of Linguistic and Cultural Evolution, Max Planck Institute for Evolutionary Anthropology. Deutscher Platz 6, 04103 Leipzig. %Hedvig_skirgard$@$eva.mpg.de
+}
+
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
 
@@ -109,7 +113,7 @@
 \begin{abstract}
 \doublespacing
 \normalsize
-
+%We suggest a maximum length of 350 words for the Abstract
 There are more than 7,000 languages on our planet today, but they are not evenly distributed over the population. For example, there are over 100 languages in Vanuatu but only one in S\={a}moa, despite the populations being plausibly similar historically. Why might this be? This paper explores this question for one particular region: Remote Oceania.
 Remote Oceania comprises the eastern Solomon Islands (Temotu), Vanuatu, New Caledonia, Fiji, Polynesia and Micronesia. The region was settled more recently than the rest of Oceania (3,500 years ago) and entirely by Austronesian speakers. Through studies in archaeology, history and linguistics much is known of migration patterns and societal organization. The comparatively shallow time depth, the relatedness of the languages and established knowledge about the history of this region make it an ideal base for understanding language diversification. This study considers environmental, archaeological and societal variables and their statistical relationship to the number of languages per island group. Of these factors, political complexity, time depth and island size significantly explain the variation. The impact of political complexity is probably due to the fact that more hierarchical societies led to more interactions and cohesion over large distances, which reduced language splitting.
 
@@ -139,7 +143,7 @@ Remote Oceania comprises the eastern Solomon Islands (Temotu), Vanuatu, New Cale
 
 
 \newpage
-
+\doublespacing
 \section{Predicting language diversity in Remote Oceania}
 \label{study_pol_complex}
 \subsection{Introduction}
@@ -194,13 +198,13 @@ Linguists, anthropologists and scholars of other fields have long remarked on th
 %This diversification process has two stages. First, there are similar sequences of rapid expansion over the entire island group, and sparse settlement with trade and marriages between different sister communities. Second, there is denser settlement associated with localised trade and marriage practices between sister communities, more intensive agriculture and weakening of kin ties and linguistic divergence. 
 
 \begin{quotation}
-\noindent \emph{In [Fiji and West Polynesia] the maintenance of long distance voyaging, both within island groups and between neighbouring island groups, can be attributed in large part to the rise of powerful chiefs. These chiefs had political, economic and social motives for maintaining long distance connections and were able to use their authority to drive the production of a food surplus which in turn could be used to support specialist craftsmen who could, among other things, build and sail large ocean-going canoes.} \citep[28]{pawley2007} \end{quotation}
+\noindent \emph{In [Fiji and West Polynesia] the maintenance of long-distance voyaging, both within island groups and between neighbouring island groups, can be attributed in large part to the rise of powerful chiefs. These chiefs had political, economic and social motives for maintaining long distance connections and were able to use their authority to drive the production of a food surplus which in turn could be used to support specialist craftsmen who could, among other things, build and sail large ocean-going canoes.} \citep[28]{pawley2007} \end{quotation}
 
 This proposal by \citet{pawley81, pawley2007} can be expressed in a Directed Acyclic Graph (DAG, c.f. \cite{mcelreath2020statistical}. Figure \ref{Predicting_lgs_DAG_andy} contains such a graph, based on the author's interpretation of Pawley's proposal.
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=16cm]{illustrations/Predicting_lgs_DAG_andy.png}
+\includegraphics[width=14cm]{illustrations/Predicting_lgs_DAG_andy.png}
 \caption{Directed Acyclic Graph of the argument presented in \cite{pawley2007}. Blue = variable to be predicted (response).}
 \label{Predicting_lgs_DAG_andy}
 \end{figure}
@@ -353,13 +357,13 @@ The aim of this study is to explore the number of languages across islands of Re
 \begin{figure}[ht]
 \centering
     \begin{subfigure}{\textwidth}
-    \includegraphics[width=\textwidth]{illustrations/plots_from_R/polygon_marck_group_map.png}
+%    \includegraphics[width=\textwidth]{polygon_marck_group_map.png}
      \caption{Island and atolls grouped by overnight sailing distance (see main text for definition).}
 \label{marck_group_map}
     \end{subfigure}
 
     \begin{subfigure}{\textwidth}
-\includegraphics[width=\textwidth]{illustrations/plots_from_R/polygon_medium_group_map.png}
+%\includegraphics[width=\textwidth]{polygon_medium_group_map.png}
 \caption{Island and atolls grouped by shared language(s).}
 \label{medium_group_map}
     \end{subfigure}
@@ -389,7 +393,7 @@ This requires that we use a different kind of model than if the distribution had
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=13cm]{illustrations/plots_from_R/Lg_distrubition_medium_island_group_lg_merged.png}
+%\includegraphics[width=13cm]{Lg_distrubition_medium_island_group_lg_merged.png}
 \caption{{Distribution of languages per shared language island group.}}
 \label{dist_lg_medium}
 \end{figure}
@@ -481,7 +485,7 @@ Fig.~\ref{pol_complex_map} represents the coding of political complexity for the
 
 \begin{sidewaysfigure}
 \centering
-\includegraphics[width=19cm]{illustrations/plots_from_R/map_pol_complex.png}
+\includegraphics[width=19cm]{map_pol_complex.png}
 \caption[Map of Remote Oceania: Political complexity]{{Map of Remote Oceania with associated values for political complexity (EA033).}}
 \label{pol_complex_map}
 \end{sidewaysfigure}
@@ -503,24 +507,44 @@ For comparison across island groups, the oldest settlement order per group was u
 
 \begin{sidewaysfigure}
 \centering
-\includegraphics[width=19cm]{illustrations/plots_from_R/Map_RO_dates.png}
+\includegraphics[width=19cm]{Map_RO_dates.png}
 \caption{{Map of island groups in Remote Oceania labelled with settlement order.}}
 \label{dates_map}
 \end{sidewaysfigure}
 
 \subsubsection{Other environmental factors} 
-As previous studies of language diversification have shown, environmental factors such as latitude\footnote{Latitude is included to make the methodology comparable to other studies in this field. It should be noted that it is taken to be a proxy-measure of other environmental variables such as Net Primary Production which was not possible to include (c.f. \citet{hillebrand2004generality}). However, it is likely that the rainfall and temperature variables are capturing the most relevant aspects of this. Thank you to the anonymous examiner who pointed this out.}, area, temperature and rainfall can predict the number of languages in a given area to a significant degree \citep{ greenhill2015demographic, gavin2017process, Pacheco_Coelho_2019, hua2019ecological}. For this study, environmental variables were chosen based on previous research and data availability. 
+As previous studies of language diversification have shown (e.g. \citet{ greenhill2015demographic, gavin2017process, Pacheco_Coelho_2019, hua2019ecological}), environmental factors such as latitude, rainfall etc can be useful in estimating language richness. This is due to the connection between these variables and carrying capacity (the maximum population size that can be sustained by the environment), which in turn suggests how many people can live in an region. In many parts of the world, we have limited data on actual population dynamics --- in particular historically. How many people lived on Efate island 1,000 years ago? This is hard to know. Estimations of carrying capacity can give us an upper limit on how many humans could possible live in an area. The link to languages is as follows: the more groups of people who can sustain themselves on a smaller area each, the more languages there can be in that region.
 
-We will be using measurements of (absolute) latitude, area, shoreline, ratio of shoreline to area and isolation based on the landmass polygons from the Global Self-consistent, Hierarchical, High-resolution Geography Database (GSHHG) version 2.3.7 \citep{wessel1996global} (see section \ref{sec:island_geo}). For temperature and rainfall statistics, the variables were extracted from the ecoClimate database \citep{ecoclimate} for the relevant locations. We are including measurements for the annual mean temperature and rainfall and for their respective seasonality (variation over the year).
+We are using measurements of absolute latitude, Net Primary Production, Precipitation (rainfall), temperature and size of islands to estimate carrying capacity. The data comes from Global Self-consistent, Hierarchical, High-resolution Geography Database (GSHHG) \citep{wessel1996global}, the ecoClimate database \citep{ecoclimate} and the Moderate Resolution Imaging Spectroradiometer (MODIS, \citet{running2021modis_terra, running2021modis_aqua}). The coordinates of the centroids of each land mass from GSHHG was used to extract the information from ecoClimate and MODIS. The ecoClimate data used are simulations of the pre-industrial period ($\sim$1760).
 
-The following variables from the ecoClimate database are used:
+The Net Primary Production (NPP) data from from MODIS is from 2001, 2002, 2003 and 2004 (these are the oldest available information). NPP reflects the amount of carbon captured by plants in an ecosystem, after accounting for losses due to respiration. The data is gathered by two space satellites (Terra and Aqua) of the United States of America's National Aeronautics and Space Administration (NASA). They collect spectral indices of land-based vegetation, which are then used to infer NPP which is acculmated into a grid where each cell is 500 meters by 500 meters. For more details, see \citet{running2015daily} \footnote{The manual is for a previous release, where the grid cells were 1km by 1km. The more recent release is 500m by 500m.}.
+
+In total, the following environmental variables are included in the study:
 
 \begin{itemize}
-\item Bio1: Annual mean temperature
-\item Bio4: Temperature seasonality (standard deviation *100)
-\item Bio12: Annual precipitation/rainfall (mm/m2)
-\item Bio15: Precipitation/rainfall seasonality (coefficient of variation)
+\item Global Self-consistent, Hierarchical, High-resolution Geography Database (GSHHG)
+\begin{itemize}
+    \item Absolute latitude
+    \item Shoreline
 \end{itemize}
+\item ecoClimate
+\begin{itemize}
+\item Bio1: Annual mean temperature (Celsius)
+\item Bio4: Temperature seasonality (standard deviation *100)
+\item Bio12: Annual precipitation (mm/m2)
+\item Bio15: Precipitation seasonality (coefficient of variation)
+\end{itemize}
+\item Moderate Resolution Imaging Spectroradiometer (MODIS)
+\begin{itemize}
+    \item MOD17A3HGF.061: NPP data from the satellite Terra
+    \item MYD17A3HGF.061: NPP data from the satellite Aqua
+\end{itemize}
+\end{itemize}
+
+Because the 
+
+
+
 
 %We will also be using two environmental variables taken from D-PLACE: Net Primary Production (NPP) and NPP predictability. The Net Primary Production is the grams of carbon uptake per square meter of land per month.
 
@@ -598,13 +622,13 @@ Fig.~\ref{medium_model_predict} shows the actual observed language counts (red),
 \centering
     \begin{subfigure}{12cm}
 \centering
-\includegraphics[width=\textwidth]{illustrations/plots_from_R/medium_group_model_prediction.png}
+\includegraphics[width=\textwidth]{medium_group_model_prediction.png}
 \caption{Untransformed values.}
     \end{subfigure}
 \hfil
     \begin{subfigure}{12cm}
 \centering
-\includegraphics[width=\textwidth]{illustrations/plots_from_R/medium_group_model_prediction_log10.png}
+\includegraphics[width=\textwidth]{medium_group_model_prediction_log10.png}
 \caption{Values transformed log-10.}
     \end{subfigure}
     \caption[Model prediction for shared language island group.]{{Model prediction for shared language island groups. Red = observed language count, blue = prediction and bars = standard error.  \emph{n}= 65}}
@@ -650,13 +674,13 @@ Fig.~\ref{Marck_model_predict} illustrates the predictions of the model using ov
 \centering
     \begin{subfigure}{12cm}
 \centering
-\includegraphics[width=\textwidth]{illustrations/plots_from_R/Marck_group_model_prediction.png}
+%\includegraphics[width=\textwidth]{Marck_group_model_prediction.png}
 \caption{Untransformed values.}
     \end{subfigure}
 \hfil
     \begin{subfigure}{12cm}
 \centering
-\includegraphics[width=\textwidth]{illustrations/plots_from_R/Marck_group_model_prediction_log10.png}
+%\includegraphics[width=\textwidth]{Marck_group_model_prediction_log10.png}
 \caption{Values transformed log-10.}
     \end{subfigure}
 \caption[Model prediction for overnight distance island groups.]{{Model prediction for overnight distance island groups. Red = observed language count, blue = prediction and bars = standard error. \emph{n}= 58}}
@@ -717,6 +741,15 @@ In the next study we explore the disparity of languages of Remote Oceania, how d
 \bibliography{latex/HS_Oceanic}
 %\singlespacing
 
+
+
+\newpage
+\section*{Acknowledgements}
+I am fortunate enough to have colleagues in academia who have been generous and helped me with technical matters and working through methodology conceptually, these are Stephen Mann, Angela Chira, Russell Gray, Richard McElreath, Fredric Blum and Luke Maurits.
+
+I am also grateful to my former PhD supervisors who reviewed earlier versions of this study for my thesis; Nicholas Evans, Andrew Pawley, Mark Ellison and Simon Greenhill. 
+
+Any mistakes and misconceptions that remain are my own.
 
 \newpage
 \singlespacing
