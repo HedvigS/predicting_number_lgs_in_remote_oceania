@@ -1,6 +1,8 @@
 # Please run this script first to make sure you have all the necessary packages 
 # installed for running the rest of the scripts in this R project
 
+set.seed(1988)
+
 source("fun_def_h_load.R")
 
 h_load(pkg = c(
@@ -60,6 +62,9 @@ dir <- "output/processed_data"
 if(!dir.exists(dir)){dir.create(dir)}
 
 dir <- "output/plots"
+if(!dir.exists(dir)){dir.create(dir)}
+
+dir <- "../latex/illustrations/plots_from_R/"
 if(!dir.exists(dir)){dir.create(dir)}
 
 dir <- "output/plots/maps"
