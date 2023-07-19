@@ -13,8 +13,8 @@ data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_marck_group_scaled.t
 #model specs
 formula <- "lg_count  ~ Carrying_capactiy_PC1 + 
   Carrying_capactiy_PC2 +
-  Carrying_capactiy_PC1:Shoreline:EA033 +
-  Carrying_capactiy_PC2:Shoreline:EA033 +
+#  Carrying_capactiy_PC1:Shoreline:EA033 +
+#  Carrying_capactiy_PC2:Shoreline:EA033 +
   EA033 + 
   Shoreline +
   Settlement_date_grouping_finer"
