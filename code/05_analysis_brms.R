@@ -10,7 +10,6 @@ data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_marck_group_scaled.t
 #inspired by
 #https://bookdown.org/ajkurz/Statistical_Rethinking_recoded/counting-and-classification.html#binomial-regression
 
-
 #model specs
 formula <- "lg_count  ~ Carrying_capactiy_PC1 + 
   Carrying_capactiy_PC2 +
