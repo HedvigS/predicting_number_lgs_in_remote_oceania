@@ -64,9 +64,6 @@ if(!dir.exists(dir)){dir.create(dir)}
 dir <- "output/plots"
 if(!dir.exists(dir)){dir.create(dir)}
 
-dir <- "../latex/illustrations/plots_from_R/"
-if(!dir.exists(dir)){dir.create(dir)}
-
 dir <- "output/plots/maps"
 if(!dir.exists(dir)){dir.create(dir)}
 
