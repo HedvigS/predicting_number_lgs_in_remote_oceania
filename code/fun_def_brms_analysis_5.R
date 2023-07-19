@@ -10,6 +10,13 @@ fun_hedvig_brms_predicting <- function(data = NULL,
                                        ndraws = 10000
 ){
   
+#  iter = 30000
+#  warmup = 1000
+#  chains = 4
+#  cores = 4
+#  seed = 10
+#  ndraws = 10000
+  
   
   
   ############# ALL OBSERVATIONS ####################
@@ -104,9 +111,9 @@ fun_hedvig_brms_predicting <- function(data = NULL,
     theme(legend.position = "none", 
           axis.ticks.y = element_blank(),
           axis.line.y = element_blank(),
-          axis.text.y = element_blank()) +
-    scale_color_manual(values = RColorBrewer::brewer.pal(name = "Set3", n = 10)) +
-    scale_fill_manual(values = RColorBrewer::brewer.pal(name = "Set3", n = 10))
+          axis.text.y = element_blank()) #+
+#    scale_color_manual(values = RColorBrewer::brewer.pal(name = "Set3", n = 10)) +
+#    scale_fill_manual(values = RColorBrewer::brewer.pal(name = "Set3", n = 10))
   
   ggsave(filename = paste0("output/plots/brms_", group, "_group_full_effect_ridge_panels_plot.png"), height = 9, width = 10)
   ggsave(filename = paste0("../latex/brms_", group, "_group_full_effect_ridge_panels_plot.png"),  height = 9, width = 10) 
@@ -327,8 +334,8 @@ fun_hedvig_brms_predicting <- function(data = NULL,
     theme_fivethirtyeight() +
     theme(axis.text.x =  element_text(angle = 70, hjust = 1) , 
           legend.position = "none") +
-    scale_fill_viridis(direction = -1) +
-    ylim(c(0,3.4))
+    scale_fill_viridis(direction = -1) #+
+#    ylim(c(0,3.4))
   
   ggsave(filename = paste0("output/plots/brms_", group, "_dropped_out_plot_diff.png"), width = 9, height = 9)
   ggsave(filename = paste0("../latex/brms_", group, "_dropped_out_plot_diff.png"), width = 9, height = 9)
