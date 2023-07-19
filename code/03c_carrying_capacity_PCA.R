@@ -39,8 +39,8 @@ carrying_capactiy_PCA_marck_df <- found_pcs$data_pca_df[,1:found_pcs$maxcol]  %>
            Carrying_capactiy_PC2 = "PC2",
            Marck_group = ID)
 
-carrying_capactiy_PCA_marck_df$Carrying_capactiy_PC1 <- modEvA::range01(carrying_capactiy_PCA_marck_df$Carrying_capactiy_PC1) +1
-carrying_capactiy_PCA_marck_df$Carrying_capactiy_PC2 <- modEvA::range01(carrying_capactiy_PCA_marck_df$Carrying_capactiy_PC2) +1
+carrying_capactiy_PCA_marck_df$Carrying_capactiy_PC1 <- modEvA::range01(carrying_capactiy_PCA_marck_df$Carrying_capactiy_PC1)
+carrying_capactiy_PCA_marck_df$Carrying_capactiy_PC2 <- modEvA::range01(carrying_capactiy_PCA_marck_df$Carrying_capactiy_PC2)
 
 read_tsv(data_fn_marck, show_col_types = F) %>% 
   full_join(carrying_capactiy_PCA_marck_df, by = "Marck_group") %>% 
@@ -62,7 +62,6 @@ theme_grambank_pca <- function(base_size = 12, base_family = "") {
 }
 
 
-
 PCA_prop_variance_df  %>%
   filter(PC == "PC1") %>%
   mutate(Parameter_ID= reorder(Parameter_ID, desc(Contribution))) %>%
@@ -70,8 +69,19 @@ PCA_prop_variance_df  %>%
   geom_col(show.legend = FALSE, alpha = 0.8) +
   theme_grambank_pca() 
 
+ggsave("output/plots/PCA_contributions_Marck_PC1.png", width = 12, height = 10)
+ggsave("../latex/PCA_contributions_Marck_PC1.png", width = 12, height = 10)
 
+PCA_prop_variance_df  %>%
+  filter(PC == "PC2") %>%
+  mutate(Parameter_ID= reorder(Parameter_ID, desc(Contribution))) %>%
+  ggplot(aes(Parameter_ID, Contribution, fill = Parameter_ID)) +
+  geom_col(show.legend = FALSE, alpha = 0.8) +
+  theme_grambank_pca() 
 
+ggsave("output/plots/PCA_contributions_Marck_PC2.png", width = 12, height = 10)
+
+ggsave("../latex/PCA_contributions_Marck_PC2.png", width = 12, height = 10)
 
 
 
@@ -109,13 +119,53 @@ carrying_capactiy_PCA_medium_df <- found_pcs$data_pca_df[,1:found_pcs$maxcol]  %
          Carrying_capactiy_PC3 = "PC3",
          Medium_only_merged_for_shared_language = ID)
 
-carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC1 <- modEvA::range01(carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC1) +1
-carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC2 <- modEvA::range01(carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC2) +1
-carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC3 <- modEvA::range01(carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC3) +1
+carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC1 <- modEvA::range01(carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC1) 
+carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC2 <- modEvA::range01(carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC2)
+carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC3 <- modEvA::range01(carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC3)
 
 read_tsv(data_fn_medium, show_col_types = F) %>% 
   full_join(carrying_capactiy_PCA_medium_df, by = "Medium_only_merged_for_shared_language") %>% 
   write_tsv(data_fn_medium)
+
+PCA_prop_variance_df <- found_pcs$tidied_pca %>%
+  dplyr::distinct(PC, Contribution, Parameter_ID)
+
+PCA_prop_variance_df  %>%
+  filter(PC == "PC1") %>%
+  mutate(Parameter_ID= reorder(Parameter_ID, desc(Contribution))) %>%
+  ggplot(aes(Parameter_ID, Contribution, fill = Parameter_ID)) +
+  geom_col(show.legend = FALSE, alpha = 0.8) +
+  theme_grambank_pca() 
+
+ggsave("output/plots/PCA_contributions_medium_PC1.png", width = 12, height = 10)
+ggsave("../latex/PCA_contributions_medium_PC1.png", width = 12, height = 10)
+
+PCA_prop_variance_df  %>%
+  filter(PC == "PC2") %>%
+  mutate(Parameter_ID= reorder(Parameter_ID, desc(Contribution))) %>%
+  ggplot(aes(Parameter_ID, Contribution, fill = Parameter_ID)) +
+  geom_col(show.legend = FALSE, alpha = 0.8) +
+  theme_grambank_pca() 
+
+ggsave("output/plots/PCA_contributions_medium_PC2.png", width = 12, height = 10)
+
+ggsave("../latex/PCA_contributions_medium_PC2.png", width = 12, height = 10)
+
+
+
+PCA_prop_variance_df  %>%
+  filter(PC == "PC3") %>%
+  mutate(Parameter_ID= reorder(Parameter_ID, desc(Contribution))) %>%
+  ggplot(aes(Parameter_ID, Contribution, fill = Parameter_ID)) +
+  geom_col(show.legend = FALSE, alpha = 0.8) +
+  theme_grambank_pca() 
+
+ggsave("output/plots/PCA_contributions_medium_PC3.png", width = 12, height = 10)
+
+ggsave("../latex/PCA_contributions_medium_PC3.png", width = 12, height = 10)
+
+
+
 
 ###############################################################################
 ###############################################################################
