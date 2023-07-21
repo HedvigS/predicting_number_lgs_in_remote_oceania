@@ -20,7 +20,7 @@ source("02_get_modis.R")
 
 source("02_get_DPLACE.R")
 
-source("02_isolation_calculation.R")
+#source("02_isolation_calculation.R")
 
 #WRANGLE
 source("03a_combine_data.R")
@@ -36,4 +36,5 @@ source("04_map_polygon_groups_marck_medium.R")
 
 #ANALYZE
 
+source("05_analysis_brms.R")
 
