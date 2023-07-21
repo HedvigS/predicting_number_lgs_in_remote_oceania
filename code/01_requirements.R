@@ -69,3 +69,11 @@ if(!dir.exists(dir)){dir.create(dir)}
 
 dir <- "output/results"
 if(!dir.exists(dir)){dir.create(dir)}
+
+
+getmode <- function(v) {
+  uniqv <- unique(v)
+  uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+
+
