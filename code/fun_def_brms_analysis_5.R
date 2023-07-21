@@ -17,8 +17,6 @@ fun_hedvig_brms_predicting <- function(data = NULL,
 #  seed = 10
 #  ndraws = 10000
   
-  
-  
   ############# ALL OBSERVATIONS ####################
   
   output_poission <-  brm(data = data, 
@@ -124,38 +122,7 @@ fun_hedvig_brms_predicting <- function(data = NULL,
   
   
   df_all <- data.frame(
-    "dropped_obs"     = as.character(),
-    "b_Carrying_capactiy_PC1_max"         = as.numeric(),          
-    "b_Carrying_capactiy_PC1_min"     = as.numeric(),            
-    "b_Carrying_capactiy_PC1_mean"      = as.numeric(),             
-    "b_Intercept_max"                                = as.numeric(),
-    "b_Intercept_min"                                = as.numeric(),
-    "b_Intercept_mean"                             = as.numeric(),
-    "b_Carrying_capactiy_PC2_max"                    = as.numeric(),
-    "b_Carrying_capactiy_PC2_min"                 = as.numeric(),
-    "b_Carrying_capactiy_PC2_mean"                   = as.numeric(),
-    "b_EA033_max"                            = as.numeric(),
-    "b_EA033_min"                                    = as.numeric(),
-    "b_EA033_mean"                          = as.numeric(),
-    "b_Shoreline_max"                                = as.numeric(),
-    "b_Shoreline_min"                     = as.numeric(),
-    "b_Shoreline_mean"                               = as.numeric(),
-    "b_Settlement_date_grouping_finer_max"      = as.numeric(),
-    "b_Settlement_date_grouping_finer_min"           = as.numeric(),
-    "b_Settlement_date_grouping_finer_mean"     = as.numeric(),
-    "mean_Rhat"                                      = as.numeric(),
-    "mean_Bulk_ESS"                         = as.numeric(),
-    "mean_Tail_ESS"                         = as.numeric(),
-    "diff_predicted_vs_observed"               = as.numeric(),
-    "dropped_observation_prediction"                  = as.numeric(),
-    "dropped_observation_prediction_diff"      = as.numeric(),
-    "b_Carrying_capactiy_PC1_includes_zero"         = as.character(),
-    "b_Carrying_capactiy_PC2_includes_zero"  = as.character(),
-    "b_Intercept_includes_zero"                     = as.character(),
-    "b_EA033_includes_zero"                  = as.character(),
-    "b_Shoreline_includes_zero"                     = as.character(),
-    "b_Settlement_date_grouping_finer_includes_zero"= as.character()
-  )
+    "dropped_obs"     = as.character()  )
   
   obs <- c(data$group, NA)
   
@@ -176,7 +143,6 @@ fun_hedvig_brms_predicting <- function(data = NULL,
                         iter = iter, 
                         silent = 2,
                         refresh = 0,
-                        save_pars = save_pars(all = T),
                         warmup = warmup, 
                         chains = chains, 
                         cores = cores,
@@ -214,6 +180,22 @@ fun_hedvig_brms_predicting <- function(data = NULL,
       suppressMessages(full_join(chain_3)) %>%
       suppressMessages(full_join(chain_4))
     
+    chain_summarised <-      chain_joined %>% 
+      dplyr::select(-c("lp__", "lprior")) %>% 
+      reshape2::melt(id.vars = c("chain")) %>% 
+      group_by(variable) %>% 
+      summarise(mean = mean(value), 
+                sd = sd(value),
+                min = min(value),
+                max = max(value)) %>% 
+      rename(variable_1 = variable) %>% 
+      reshape2::melt(id.vars = "variable_1") %>%
+      ungroup() %>% 
+      mutate(variable = paste0(`variable_1`, "_", `variable`)) %>% 
+      dplyr::select(variable, value) %>% 
+      data.table::transpose(make.names = "variable") %>% 
+      mutate(dropped_obs = obs)
+      
     predict_new_data <- brms::posterior_predict(output_spec, newdata = data, ndraws = ndraws) %>% 
       as.data.frame() %>% 
       data.table::transpose() %>% 
@@ -235,93 +217,30 @@ fun_hedvig_brms_predicting <- function(data = NULL,
     
     #output_data_frame
     
-    
-    
-    
     df_spec <- data.frame(dropped_obs = obs, 
-                          b_Carrying_capactiy_PC1_max = chain_joined$b_Carrying_capactiy_PC1 %>% max(),
-                          b_Carrying_capactiy_PC1_min = chain_joined$b_Carrying_capactiy_PC1 %>% min(),
-                          b_Carrying_capactiy_PC1_mean = chain_joined$b_Carrying_capactiy_PC1 %>% mean(),
-                          b_Intercept_max = chain_joined$b_Intercept %>% max(),
-                          b_Intercept_min = chain_joined$b_Intercept %>% min(),
-                          b_Intercept_mean = chain_joined$b_Intercept %>% mean(),
-                          b_Carrying_capactiy_PC2_max = chain_joined$b_Carrying_capactiy_PC2 %>% max(),
-                          b_Carrying_capactiy_PC2_min = chain_joined$b_Carrying_capactiy_PC2 %>% min(),
-                          b_Carrying_capactiy_PC2_mean = chain_joined$b_Carrying_capactiy_PC2 %>% mean(),
-                          b_EA033_max = chain_joined$b_EA033 %>% max(),
-                          b_EA033_min = chain_joined$b_EA033 %>% min(),
-                          b_EA033_mean = chain_joined$b_EA033 %>% mean(),
-                          b_Shoreline_max = chain_joined$b_Shoreline %>% max(),
-                          b_Shoreline_min = chain_joined$b_Shoreline %>% min(),
-                          b_Shoreline_mean = chain_joined$b_Shoreline %>% mean(),
-                          b_Settlement_date_grouping_finer_max = chain_joined$b_Settlement_date_grouping_finer %>% max(),
-                          b_Settlement_date_grouping_finer_min = chain_joined$b_Settlement_date_grouping_finer %>% min(),
-                          b_Settlement_date_grouping_finer_mean = chain_joined$b_Settlement_date_grouping_finer %>% mean(),
                           mean_Rhat =  ms$fixed$Rhat %>% mean(),
                           mean_Bulk_ESS = ms$fixed$Bulk_ESS %>% mean(),
                           mean_Tail_ESS = ms$fixed$Tail_ESS %>% mean(),
                           diff_predicted_vs_observed = diff,
                           dropped_observation_prediction = predict_new_data$mean,
                           dropped_observation_prediction_diff = predict_new_data$diff) %>% 
-      mutate(
-        b_Carrying_capactiy_PC1_includes_zero = ifelse(
-          b_Carrying_capactiy_PC1_max > 0 & b_Carrying_capactiy_PC1_min < 0 |
-            b_Carrying_capactiy_PC1_max < 0 & b_Carrying_capactiy_PC1_min > 0, 
-          yes = "Yes", no = "No")) %>% 
-      mutate(
-        b_Carrying_capactiy_PC2_includes_zero = ifelse(
-          b_Carrying_capactiy_PC2_max > 0 & b_Carrying_capactiy_PC2_min < 0 |
-            b_Carrying_capactiy_PC2_max < 0 & b_Carrying_capactiy_PC2_min > 0, 
-          yes = "Yes", no = "No")) %>% 
-      mutate(
-        b_Intercept_includes_zero = ifelse(
-          b_Intercept_max > 0 & b_Intercept_min < 0 |
-            b_Intercept_max < 0 & b_Intercept_min > 0, 
-          yes = "Yes", no = "No")) %>% 
-      mutate(
-        b_EA033_includes_zero = ifelse(
-          b_EA033_max > 0 & b_EA033_min < 0 |
-            b_EA033_max < 0 & b_EA033_min > 0, 
-          yes = "Yes", no = "No")) %>% 
-      mutate(
-        b_Shoreline_includes_zero = ifelse(
-          b_Shoreline_max > 0 & b_Shoreline_min < 0 |
-            b_Shoreline_max < 0 & b_Shoreline_min > 0, 
-          yes = "Yes", no = "No")) %>% 
-      mutate(
-        b_Settlement_date_grouping_finer_includes_zero = ifelse(
-          b_Settlement_date_grouping_finer_max > 0 & b_Settlement_date_grouping_finer_min < 0 |
-            b_Settlement_date_grouping_finer_max < 0 & b_Settlement_date_grouping_finer_min > 0, 
-          yes = "Yes", no = "No"))
+      full_join(chain_summarised, by = "dropped_obs")
+      
+      
+    df_all <- suppressMessages(full_join(df_all, df_spec))
     
-    df_all <- full_join(df_all, df_spec, 
-                        by = join_by(dropped_obs, b_Carrying_capactiy_PC1_max, b_Carrying_capactiy_PC1_min,
-                                     b_Carrying_capactiy_PC1_mean, b_Intercept_max, b_Intercept_min, 
-                                     b_Intercept_mean, b_Carrying_capactiy_PC2_max,
-                                     b_Carrying_capactiy_PC2_min, b_Carrying_capactiy_PC2_mean, 
-                                     b_EA033_max, b_EA033_min, b_EA033_mean,
-                                     b_Shoreline_max, b_Shoreline_min, b_Shoreline_mean, 
-                                     b_Settlement_date_grouping_finer_max,
-                                     b_Settlement_date_grouping_finer_min, 
-                                     b_Settlement_date_grouping_finer_mean, mean_Rhat, mean_Bulk_ESS,   
-                                     mean_Tail_ESS, diff_predicted_vs_observed, 
-                                     dropped_observation_prediction, dropped_observation_prediction_diff,   
-                                     b_Carrying_capactiy_PC1_includes_zero, 
-                                     b_Carrying_capactiy_PC2_includes_zero, b_Intercept_includes_zero,   
-                                     b_EA033_includes_zero, b_Shoreline_includes_zero,
-                                     b_Settlement_date_grouping_finer_includes_zero))
+    #the run with no dropped generates 58 rows, let's cut that down to one
+    df_all <- df_all %>% 
+      mutate(dropped_obs = ifelse(is.na(dropped_obs), "NONE", dropped_obs)) %>% 
+      group_by(dropped_obs) %>% 
+      mutate(dropped_observation_prediction_mean = mean(dropped_observation_prediction, na.rm = T),
+             dropped_observation_prediction_diff_mean = mean(dropped_observation_prediction_diff, na.rm = T)) %>% 
+      distinct(dropped_obs, dropped_observation_prediction_diff_mean, .keep_all = T) 
+    
+    df_all %>%          
+      write_tsv(file = paste0("output/results/brms_", group, "_group_drop_one_out.tsv"), na = "")
     
   }
-  
-  #df_all <- read_tsv(paste0("output/results/brms_", group, "_group_drop_one_out.tsv"))
-  
-  #the run with no dropped generates 58 rows, let's cut that down to one
-  df_all <- df_all %>% 
-    mutate(dropped_obs = ifelse(is.na(dropped_obs), "NONE", dropped_obs)) %>% 
-    group_by(dropped_obs) %>% 
-    mutate(dropped_observation_prediction_mean = mean(dropped_observation_prediction, na.rm = T),
-           dropped_observation_prediction_diff_mean = mean(dropped_observation_prediction_diff, na.rm = T)) %>% 
-    distinct(dropped_obs, dropped_observation_prediction_diff_mean, .keep_all = T) 
   
   df_all %>%          
     write_tsv(file = paste0("output/results/brms_", group, "_group_drop_one_out.tsv"), na = "")
