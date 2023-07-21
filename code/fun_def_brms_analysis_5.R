@@ -254,8 +254,9 @@ fun_hedvig_brms_predicting <- function(data = NULL,
     theme_fivethirtyeight() +
     theme(axis.text.x =  element_text(angle = 70, hjust = 1) , 
           legend.position = "none") +
-    scale_fill_viridis(direction = -1) #+
-#    ylim(c(0,3.4))
+    scale_fill_viridis(direction = -1)   +
+    theme(panel.background = element_rect(fill = "white"), 
+          plot.background = element_rect(fill = "white"))
   
   ggsave(filename = paste0("output/plots/brms_", group, "_dropped_out_plot_diff.png"), width = 9, height = 9)
   ggsave(filename = paste0("../latex/brms_", group, "_dropped_out_plot_diff.png"), width = 9, height = 9)
