@@ -15,7 +15,7 @@ data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_marck_group.tsv", sh
   rename(Settlement_date_grouping_finer = settlement_date_grouping_finer) %>% 
   rename(Isolation = dist) %>% 
   mutate(Marck_group = str_replace_all(Marck_group, "Kanaky", "New Caledonia (incl loyalties)")) %>% 
-  mutate(Marck_group = str_replace_all(Marck_group, "and", "+")) %>% 
+  mutate(Marck_group = str_replace_all(Marck_group, "and ", "+ ")) %>% 
   arrange(-lg_count) %>% 
   dplyr::select(Marck_group, 
                 lg_count, 
@@ -103,7 +103,7 @@ data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_medium_island.tsv", 
   rename(Area_water = sum_water_area) %>% 
   rename(Settlement_date_grouping_finer = settlement_date_grouping_finer) %>% 
   rename(Isolation = dist) %>% 
-  mutate(Medium_only_merged_for_shared_language = str_replace_all(Medium_only_merged_for_shared_language, "and", "+")) %>% 
+  mutate(Medium_only_merged_for_shared_language = str_replace_all(Medium_only_merged_for_shared_language, "and ", "+ ")) %>% 
   arrange(-lg_count) %>% 
   dplyr::select(Medium_only_merged_for_shared_language, 
                 lg_count, 
