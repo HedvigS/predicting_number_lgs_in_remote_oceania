@@ -739,20 +739,6 @@ Any mistakes and misconceptions that remain are my own.
 \singlespacing
 %This section contains the necessary data for the analysis in study \ref{study_pol_complex}. The data is divided up into the two kinds of island groups: shared language (section \ref{shared_language_groups} and overnight sailing distances (section \ref{overnight_groups}). Each section contains two tables: a) data on political complexity, time depth, area, shoreline, isolation and latitude and b) the environmental variables from the ecoClimate datbase.
 
-%Tables \ref{shared_language_groups_table} and \ref{overnight_groups_table} (part 1) contain data on:
-
-\begin{itemize}
-\item language count (response variable)
-\item EA033 (aka political complexity) - mean score per island group (see section \ref{prediting:sec:pol:complex} for more details)
-\item Settlement wave order - oldest per group (see section \ref{pol_complex_sec_dates} for more details)
-\item Area (log10) (see section \ref{sec:island_geo} for more details)
-\item Shoreline (log10) (see section \ref{sec:island_geo} for more details)
-\item Ratio shoreline to ratio (see section \ref{sec:island_geo} for more details)
-\item Isolation (see section \ref{sec:island_geo} for more details)
-\item Latitude (absolute mean)
-\end{itemize}
-
-%Tables \ref{shared_language_groups_table_2} and \ref{overnight_groups_table} (part 2) contain data on the variables related to temperature and rainfall from the ecoClimate database \citep{ecoclimate}:
 
 \begin{itemize}
 \item Bio1: Annual mean temperature
@@ -761,17 +747,39 @@ Any mistakes and misconceptions that remain are my own.
 \item Bio15: Precipitation/rainfall seasonality (coefficient of variation)- mean for island group
 \end{itemize}
 
-All measurements, except the response variable, were scaled and centred to make the coeffecients easier to interpret and compare. Area, shoreline and Isolation were also log-10-transformed. For reasons of space, this data is displayed in two separate tables for each island grouping and the numbers are rounded to 4 digits.
+All measurements, except the response variable, were scaled and centred to make the coeffecients easier to interpret and compare. Shoreline were also log-10-transformed. For reasons of space, this data is displayed in two separate tables for each island grouping and the numbers are rounded to 4 digits.
+
+\subsection{Supplementary figures}
 
 
+\begin{figure}[ht]
+\centering
+\includegraphics[width=13cm]{brms_Marck_group_full_effect_ridge_panels_plot.png}
+\caption{}
+\label{}
+\end{figure}
 
+\begin{figure}[ht]
+\centering
+\includegraphics[width=13cm]{brms_medium_group_full_effect_ridge_panels_plot}
+\caption{}
+\label{}
+\end{figure}
 
+\begin{figure}[ht]
+\centering
 
+\includegraphics[width=13cm]{brms_Marck_dropped_out_plot_diff}
+\caption{}
+\label{}
+\end{figure}
 
-
-
-
-
+\begin{figure}[ht]
+\centering
+\includegraphics[width=13cm]{brms_medium_dropped_out_plot_diff}
+\caption{}
+\label{}
+\end{figure}
 
 
 \end{document}
