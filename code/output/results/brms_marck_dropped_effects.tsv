@@ -1,33 +1,29 @@
-variable	Vanuatu + Temotu	Laguas_yan_gani
-b_Carrying_capactiy_PC1_max	1.39448	0.926695
-b_Carrying_capactiy_PC1_min	-3.30354	-3.61129
-b_Carrying_capactiy_PC1_mean	-0.839908659755207	-1.45443508501339
-b_Intercept_max	6.99971	8.20094
-b_Intercept_min	-6.37709	-3.51486
-b_Intercept_mean	-0.0512812705307567	2.43755071062531
-b_Carrying_capactiy_PC2_max	2.82924	1.98303
-b_Carrying_capactiy_PC2_min	-2.38232	-2.01831
-b_Carrying_capactiy_PC2_mean	0.283448733487684	-0.0235956792395362
-b_EA033_max	0.894752	-4.31378
-b_EA033_min	-3.43891	-7.61854
-b_EA033_mean	-1.37646450230207	-6.0255508387931
-b_Shoreline_max	4.38568	4.40329
-b_Shoreline_min	0.141763	0.197853
-b_Shoreline_mean	2.2955471412931	2.22594763468966
-b_Settlement_date_grouping_finer_max	3.79868	5.25016
-b_Settlement_date_grouping_finer_min	0.642179	2.58078
-b_Settlement_date_grouping_finer_mean	2.18306391896552	3.61353527206897
-mean_Rhat	1.00002886488708	1.00005621420944
-mean_Bulk_ESS	80118.6728520374	85052.2391943437
-mean_Tail_ESS	79855.5542207471	77204.0952787949
-diff_predicted_vs_observed	1.23419298245614	1.70612280701754
-dropped_observation_prediction	10.9603	124.8687
-dropped_observation_prediction_diff	117.0397	121.8687
-b_Carrying_capactiy_PC1_includes_zero	Yes	Yes
-b_Carrying_capactiy_PC2_includes_zero	Yes	Yes
-b_Intercept_includes_zero	Yes	Yes
-b_EA033_includes_zero	Yes	No
-b_Shoreline_includes_zero	No	No
-b_Settlement_date_grouping_finer_includes_zero	No	No
-dropped_observation_prediction_mean	10.9603	124.8687
-dropped_observation_prediction_diff_mean	117.0397	121.8687
+variable	Vanuatu + Temotu	New Caledonia (incl loyalties)	Laguas_yan_gani
+mean_Rhat	1.000028480622535	1.000034237354525	1.0000190610821973
+mean_Bulk_ESS	101513.01100005965	76688.591942134	82139.24499777985
+mean_Tail_ESS	82654.80506782717	74218.13553428715	72572.88616563832
+diff_predicted_vs_observed	0.8145438596491228	2.499263157894737	1.8787017543859648
+dropped_observation_prediction	11.0797	110.8643	75.0532
+dropped_observation_prediction_diff	116.9203	76.8643	72.0532
+b_Intercept_mean	0.3611081308601983	0.5847461123778276	1.6365222641551724
+b_EA033_mean	-1.3513300427847585	-4.954017013275862	-6.279136815
+b_Carrying_capactiy_PC1:Shoreline_mean	-1.9547346758510344	-0.7577946884657155	-0.36821850075676205
+b_Shoreline:Carrying_capactiy_PC2_mean	0.30660045551572623	1.8467094123055172	-0.4874106254368431
+b_Shoreline:Settlement_date_grouping_finer_mean	4.775075758275862	6.935726138965517	6.056891289482759
+b_Intercept_sd	0.2817633547282601	0.2752916559475658	0.2688483652032814
+b_EA033_sd	0.5304230296613598	0.3770420865110993	0.4029196958541671
+b_Carrying_capactiy_PC1:Shoreline_sd	0.9407359843451373	0.9182245886605584	0.7983064850148232
+b_Shoreline:Carrying_capactiy_PC2_sd	0.7276446613581711	0.5671313907272565	0.9311462077422379
+b_Shoreline:Settlement_date_grouping_finer_sd	0.389233210574202	0.45285062287868594	0.32484432352475384
+b_Intercept_min	-0.815182	-0.550526	0.387882
+b_EA033_min	-3.48099	-6.93837	-7.88655
+b_Carrying_capactiy_PC1:Shoreline_min	-6.00616	-4.64406	-4.41992
+b_Shoreline:Carrying_capactiy_PC2_min	-3.05111	-1.10748	-5.39126
+b_Shoreline:Settlement_date_grouping_finer_min	3.20304	5.12894	4.71253
+b_Intercept_max	1.40191	1.68174	2.75067
+b_EA033_max	0.776737	-3.54762	-4.49889
+b_Carrying_capactiy_PC1:Shoreline_max	1.96605	2.71419	3.10503
+b_Shoreline:Carrying_capactiy_PC2_max	2.89394	4.04184	2.64312
+b_Shoreline:Settlement_date_grouping_finer_max	6.38912	8.99532	7.59529
+dropped_observation_prediction_mean	11.0797	110.8643	75.0532
+dropped_observation_prediction_diff_mean	116.9203	76.8643	72.0532
