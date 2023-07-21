@@ -160,7 +160,7 @@ Island_group_summarised_smallest <- Island_group_all_sep %>%
   filter(!is.na(settlement_date_grouping_finer)) %>% 
   group_by(Smallest_Island_group) %>% 
   dplyr::summarise(
-            mean_pol_complex = mean(pol_complex_code_Hedvig, na.rm = T), 
+            mean_pol_complex = getmode(pol_complex_code_Hedvig), 
             sum_area = sum(sum_area, na.rm = T), 
             sum_water_area = sum(sum_water_area, na.rm = T), 
             lg_count_smallest = mean(lg_count_smallest, na.rm = T),
@@ -188,7 +188,7 @@ Island_group_summarised_medium <- Island_group_all_sep %>%
   filter(!is.na(settlement_date_grouping_finer)) %>% 
   group_by(Medium_only_merged_for_shared_language) %>% 
   dplyr::summarise(
-        mean_pol_complex = mean(pol_complex_code_Hedvig, na.rm = T), 
+        mean_pol_complex = getmode(pol_complex_code_Hedvig), 
         sum_area = sum(sum_area, na.rm = T), 
         sum_water_area = sum(sum_water_area, na.rm = T), 
         lg_count_smallest = mean(lg_count_smallest, na.rm = T),
@@ -229,7 +229,7 @@ Island_group_summarised_Marck_group <- Island_group_all_sep %>%
   filter(!is.na(settlement_date_grouping_finer)) %>% 
   group_by(Marck_group) %>% 
   dplyr::summarise(
-    mean_pol_complex = mean(pol_complex_code_Hedvig, na.rm = T), 
+    mean_pol_complex = getmode(pol_complex_code_Hedvig), 
     sum_area = sum(sum_area, na.rm = T), 
     sum_water_area = sum(sum_water_area, na.rm = T), 
     lg_count_smallest = mean(lg_count_smallest, na.rm = T),
