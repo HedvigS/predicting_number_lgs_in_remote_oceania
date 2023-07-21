@@ -260,12 +260,11 @@ fun_hedvig_brms_predicting <- function(data = NULL,
   ggsave(filename = paste0("output/plots/brms_", group, "_dropped_out_plot_diff.png"), width = 9, height = 9)
   ggsave(filename = paste0("../latex/brms_", group, "_dropped_out_plot_diff.png"), width = 9, height = 9)
   
-  
   df_all %>% 
     filter(diff_predicted_vs_observed < 2.5) %>% 
     #  column_to_rownames("dropped_obs") %>% 
     data.table::transpose(make.names = "dropped_obs", keep.names = "variable") %>% 
-    write_tsv(file = paste0("output/results/brms_", group, "_dropped_effects.tsv"), na = "")
+    write_tsv(file = paste0("output/results/brms_", group, "_dropped_effects_diff_above__2.24.tsv"), na = "")
   
   ######################################
   
