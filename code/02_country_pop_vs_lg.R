@@ -33,17 +33,21 @@ combined %>%
   geom_point( ) +
   theme_classic() +
   ggpubr::stat_cor(method = "pearson", p.digits = 2, geom = "label", color = "blue",
-                   label.y.npc="top", label.x.npc = "left", alpha = 0.8) +
-  geom_smooth(method='lm', formula = 'y ~ x')
+                   label.y.npc="top", label.x.npc = "left", alpha = 0.8, size = 8) +
+  geom_smooth(method='lm', formula = 'y ~ x') +
+  theme(text = element_text(size = 20))
 
 ggsave("output/plots/number_of_languags_vs_pop_1950.png", width = 7, height = 7)
+ggsave("../latex/number_of_languags_vs_pop_1950.png", width = 7, height = 7)
 
 combined %>%
   ggplot(aes(x = `Population 1950 log10` , y = `Number of languages log10`)) +
   geom_point( ) +
   theme_classic() +
   ggpubr::stat_cor(method = "pearson", p.digits = 2, geom = "label", color = "blue",
-                   label.y.npc="top", label.x.npc = "left", alpha = 0.8) +
-  geom_smooth(method='lm', formula = 'y ~ x')
+                   label.y.npc="top", label.x.npc = "left", alpha = 0.8, size = 8) +
+  geom_smooth(method='lm', formula = 'y ~ x')+
+  theme(text = element_text(size = 20))
 
 ggsave("output/plots/number_of_languags_vs_pop_1950_log10.png", width = 7, height = 7)
+ggsave("../latex/number_of_languags_vs_pop_1950_log10.png", width = 7, height = 7)
