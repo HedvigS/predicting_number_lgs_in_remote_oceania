@@ -48,6 +48,8 @@ fun_hedvig_brms_predicting <- function(data = NULL,
     full_join(data, by = "group") %>% 
     mutate(diff_poission = abs(lg_count - mean)) 
   
+  cat(paste0("The mean differences between the predicted and observed numbers of languages is ", posterior_predict_df$diff_poission %>% mean() %>% round(2), ".\n"))
+  
   posterior_predict_df %>% 
     distinct(group, mean, sd, min, max, diff_poission, lg_count) %>% 
     write_tsv(file = paste0("output/results/brms_", group, "_predict_table.tsv"), na = "")
@@ -75,7 +77,6 @@ fun_hedvig_brms_predicting <- function(data = NULL,
   ggsave(plot = p, filename = paste0("output/plots/brms_predict_", group, ".png"), height = 8, width = 6)  
   ggsave(filename = paste0("../latex/brms_predict_", group, ".png"),  height = 8, width = 6) 
   
-  cat(paste0("The mean differences between the predicted and observed numbers of languages is ", posterior_predict_df$diff_poission %>% mean() %>% round(2), ".\n"))
   
   ### model output
   chain_1 <- output_poission$fit@sim$samples[[1]] %>% as.data.frame()  %>% mutate(chain = "1")
@@ -160,7 +161,7 @@ fun_hedvig_brms_predicting <- function(data = NULL,
   
   for(obs in obs){
     
-    #  obs <- obs[59]
+    #  obs <- obs[1]
     
     cat(paste0("Dropping out ", obs, ".\n"))
     
@@ -225,7 +226,7 @@ fun_hedvig_brms_predicting <- function(data = NULL,
                 max = max(value)) %>% 
       left_join(data, by = "group") %>% 
       mutate(diff = abs(lg_count - mean)) 
-    
+  
     if(!is.na(obs)){
       predict_new_data  <- predict_new_data %>% 
         filter(group == {{obs}})
