@@ -10,11 +10,11 @@ if(!dir.exists(OUTPUTDIR)){dir.create(OUTPUTDIR)}
 ###############################################################################
 ###############################################################################
 
-#Marck + carrying capacity parameters
-data_fn_marck <- "output/processed_data/RO_Hedvig_aggregate_marck_group_scaled.tsv"
+#SBZR + carrying capacity parameters
+data_fn_SBZR <- "output/processed_data/RO_Hedvig_aggregate_SBZR_group_scaled.tsv"
 
-data <- read_tsv(file = data_fn_marck, show_col_types = F)  %>% 
-  column_to_rownames("Marck_group") %>% 
+data <- read_tsv(file = data_fn_SBZR, show_col_types = F)  %>% 
+  column_to_rownames("SBZR_group") %>% 
   dplyr::select(Annual_precipitation_mean, 
                 Precipitation_seasonality_mean, 
                 Annual_temperature_mean, 
@@ -31,20 +31,20 @@ found_pcs <- find_pcs(data = data)
 
 writeLines(
   found_pcs$nScree_summary_string,
-  con = file.path(OUTPUTDIR, "PCA_nScree_summary_carrying_marck.txt")
+  con = file.path(OUTPUTDIR, "PCA_nScree_summary_carrying_SBZR.txt")
 )
 
-carrying_capactiy_PCA_marck_df <- found_pcs$data_pca_df[,1:found_pcs$maxcol]  %>% #because the first col is the group we need to do plus one
+carrying_capactiy_PCA_SBZR_df <- found_pcs$data_pca_df[,1:found_pcs$maxcol]  %>% #because the first col is the group we need to do plus one
     rename(Carrying_capactiy_PC1 = "PC1",
            Carrying_capactiy_PC2 = "PC2",
-           Marck_group = ID)
+           SBZR_group = ID)
 
-carrying_capactiy_PCA_marck_df$Carrying_capactiy_PC1 <- modEvA::range01(carrying_capactiy_PCA_marck_df$Carrying_capactiy_PC1)
-carrying_capactiy_PCA_marck_df$Carrying_capactiy_PC2 <- modEvA::range01(carrying_capactiy_PCA_marck_df$Carrying_capactiy_PC2)
+carrying_capactiy_PCA_SBZR_df$Carrying_capactiy_PC1 <- modEvA::range01(carrying_capactiy_PCA_SBZR_df$Carrying_capactiy_PC1)
+carrying_capactiy_PCA_SBZR_df$Carrying_capactiy_PC2 <- modEvA::range01(carrying_capactiy_PCA_SBZR_df$Carrying_capactiy_PC2)
 
-read_tsv(data_fn_marck, show_col_types = F) %>% 
-  full_join(carrying_capactiy_PCA_marck_df, by = "Marck_group") %>% 
-  write_tsv(data_fn_marck)
+read_tsv(data_fn_SBZR, show_col_types = F) %>% 
+  full_join(carrying_capactiy_PCA_SBZR_df, by = "SBZR_group") %>% 
+  write_tsv(data_fn_SBZR)
 
 
 
@@ -69,8 +69,8 @@ PCA_prop_variance_df  %>%
   geom_col(show.legend = FALSE, alpha = 0.8) +
   theme_grambank_pca() 
 
-ggsave("output/plots/PCA_contributions_Marck_PC1.png", width = 12, height = 10)
-ggsave("../latex/PCA_contributions_Marck_PC1.png", width = 12, height = 10)
+ggsave("output/plots/PCA_contributions_SBZR_PC1.png", width = 12, height = 10)
+ggsave("../latex/PCA_contributions_SBZR_PC1.png", width = 12, height = 10)
 
 PCA_prop_variance_df  %>%
   filter(PC == "PC2") %>%
@@ -79,9 +79,9 @@ PCA_prop_variance_df  %>%
   geom_col(show.legend = FALSE, alpha = 0.8) +
   theme_grambank_pca() 
 
-ggsave("output/plots/PCA_contributions_Marck_PC2.png", width = 12, height = 10)
+ggsave("output/plots/PCA_contributions_SBZR_PC2.png", width = 12, height = 10)
 
-ggsave("../latex/PCA_contributions_Marck_PC2.png", width = 12, height = 10)
+ggsave("../latex/PCA_contributions_SBZR_PC2.png", width = 12, height = 10)
 
 
 
