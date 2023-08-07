@@ -13,8 +13,8 @@ subregions <- read.delim("data/RO_polygons_grouped_with_languages.csv", sep = ",
   group_by(Glottocode) %>% 
   summarise(Smallest_Island_group = paste(Smallest_Island_group, collapse = ", ")) %>% 
   full_join(subregions, by = "Glottocode") %>% 
-  filter(!is.na(Glottocodes)) %>% 
-  filter(Glottocodes != "") 
+  filter(!is.na(Glottocode)) %>% 
+  filter(Glottocode != "") 
   
 subregions %>%
   write_tsv("data/oceania_subregions.tsv")
@@ -22,7 +22,8 @@ subregions %>%
   
 ##naming the new marck groups, SBZR  
   
-polygons_df <- read.delim("data/RO_polygons_grouped_with_languages.csv", sep = ",") 
+polygons_df <- read.delim("data/RO_polygons_grouped_with_languages.csv", sep = ",") %>% 
+  dplyr::select(-SBZR_group, -cost_area_id) 
 
 polygons_df_distinct <- polygons_df %>% 
   distinct(Marck_group, Smallest_Island_group)
@@ -52,8 +53,12 @@ SBZR_df_names <- SBZR_df %>%
   full_join(SBZR_df, by = "cost_area_id") %>% 
   rename(SBZR_group = cost_area_name)
 
-read.delim("data/RO_polygons_grouped_with_languages.csv", sep = ",") %>% View()
-#  full_join(SBZR_df_names) %>% 
+read_csv("data/RO_polygons_grouped_with_languages.csv") %>%
+  dplyr::select(-SBZR_group, -cost_area_id) %>% 
+  left_join(SBZR_df_names, by = join_by(Unique_ID)) %>% 
+#  rename(`AREA (sq km)` = `AREA..sq.km.`) %>% 
+#  rename(`COASTLINE (km) (perimeter)` = `COASTLINE..km...perimeter.`) %>% 
+  distinct() %>%
   write_csv("data/RO_polygons_grouped_with_languages.csv")
 
 #read_tsv("data/oceania_subregions.tsv") %>% 
