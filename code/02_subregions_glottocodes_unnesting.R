@@ -29,7 +29,7 @@ polygons_df_distinct <- polygons_df %>%
   distinct(Marck_group, Smallest_Island_group)
 
 SBZR_df <- read_tsv("data/polygons_table_new_group.tsv", show_col_types = F) %>% 
-    dplyr::select(-Longitude, -Latitude) 
+    distinct(Unique_ID, cost_area_id)
   
 SBZR_df_names <- SBZR_df %>% 
     full_join(polygons_df, by = join_by(Unique_ID)) %>% 
@@ -53,7 +53,7 @@ SBZR_df_names <- SBZR_df %>%
   full_join(SBZR_df, by = "cost_area_id") %>% 
   rename(SBZR_group = cost_area_name)
 
-read_csv("data/RO_polygons_grouped_with_languages.csv") %>%
+read_csv("data/RO_polygons_grouped_with_languages.csv", show_col_types = F) %>%
   dplyr::select(-SBZR_group, -cost_area_id) %>% 
   left_join(SBZR_df_names, by = join_by(Unique_ID)) %>% 
 #  rename(`AREA (sq km)` = `AREA..sq.km.`) %>% 
