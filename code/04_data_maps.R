@@ -11,7 +11,7 @@ All_polygons <- read_csv("data/RO_polygons_grouped_with_languages.csv", show_col
   mutate(Longitude = if_else(Longitude <= -25, Longitude + 360, Longitude)) %>% 
   mutate(area = as.numeric(`AREA (sq km)`)) %>% 
   arrange(area) %>% 
-  full_join(polygon_grouping_hierachy, by = c("Melanesia_or_not", "Marck_group", "glottocodes", "Smallest_Island_group",  "Medium_only_merged_for_shared_language")) %>% 
+  full_join(polygon_grouping_hierachy, by = c("Melanesia_or_not", "SBZR_group", "glottocodes", "Smallest_Island_group",  "Medium_only_merged_for_shared_language")) %>% 
   filter(!is.na(glottocodes)) %>% 
   mutate(glottocodes = str_split(glottocodes, ",")) %>%
   unnest(glottocodes) %>% 
@@ -57,14 +57,14 @@ Map_plot_all_polygons <- basemap +
 plot(Map_plot_all_polygons)
 ggsave("output/plots/maps/Map_RO_Smallest.png", width = 5, height = 3)
 
-##Marck grouping
-Map_plot_marck <- basemap + 
-  geom_point(aes(x=Longitude, y=Latitude), color = All_polygons$Marck_group_color, size = 0.5) #+
+##SBZR grouping
+Map_plot_SBZR <- basemap + 
+  geom_point(aes(x=Longitude, y=Latitude), color = All_polygons$SBZR_group_color, size = 0.5) #+
 #  scale_color_manual(values = color_vector_smallest)
 
-plot(Map_plot_marck)
-ggsave("output/plots/maps/Map_RO_Marck.png", width = 5, height = 4)
-ggsave("../latex/polygon_marck_group_map.png", width = 5, height = 3)
+plot(Map_plot_SBZR)
+ggsave("output/plots/maps/Map_RO_SBZR.png", width = 5, height = 4)
+ggsave("../latex/polygon_SBZR_group_map.png", width = 5, height = 3)
 
 ##Medium_group
 Map_plot_medium <- basemap + 
@@ -134,7 +134,7 @@ dates_summarised_for_SM <- read_tsv("data/island_group_settlement_date.tsv", sho
             Island_groups = paste0(Smallest_Island_group, collapse = ", "))
   
 #dates_labels <- dates %>% 
-#  group_by(Marck_group, settlement_date_grouping_finer) %>% 
+#  group_by(SBZR_group, settlement_date_grouping_finer) %>% 
 #  summarise(Longitude = mean(Longitude), 
 #            Latitude = mean(Latitude), 
 #            .groups = "drop") 
