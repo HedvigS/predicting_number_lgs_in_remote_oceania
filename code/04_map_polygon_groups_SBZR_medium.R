@@ -97,6 +97,8 @@ ggsave("output/plots/maps/polygon_SBZR_group_map.png", width = 15, height = 8)
 
 #per medium group
 
+if(!file.exists("output/plots/maps/polygon_medium_group_map_vanuatu_mh_inset.png")){
+
 medium_groups <- read_tsv("output/processed_data/RO_Hedvig_aggregate_medium_island.tsv", show_col_types = F) %>% 
   dplyr::select(Medium_only_merged_for_shared_language, color, lg_count) %>% 
 full_join(Polygon_lgs_glottocodes_sep, by = "Medium_only_merged_for_shared_language") %>% 
@@ -221,3 +223,4 @@ mi <- medium_map +
 
 
 ggsave(plot = mi, filename = "output/plots/maps/polygon_medium_group_map_vanuatu_mh_inset.png", width = 15, height = 10)
+}
