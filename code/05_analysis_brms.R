@@ -3,9 +3,9 @@ source("01_requirements_brms.R")
 
 source("fun_def_brms_analysis_5.R")
 
-###MARCK
-data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_marck_group_scaled.tsv", show_col_types = F) %>%  
-  rename(group = Marck_group)
+###SBZR
+data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_SBZR_group_scaled.tsv", show_col_types = F) %>%  
+  rename(group = SBZR_group)
 
 #colnames(data)
 
@@ -30,7 +30,7 @@ formula <- "lg_count  ~  #Settlement_date_grouping_finer +
   EA033 + 
   Shoreline:Settlement_date_grouping_finer"
 
-group = "Marck"
+group = "SBZR"
 
 fun_hedvig_brms_predicting(data = data, formula = formula, group = group)
 
