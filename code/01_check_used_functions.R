@@ -82,7 +82,7 @@ script_with_most_functions <-  used_packages %>%
   summarise(n = n()) %>% 
   arrange(desc(n)) 
 
-cat("The top 5 scripst which use the most differenty functions:\n ")
+cat("The top 5 scripst which use the most different functions:\n ")
 script_with_most_functions [1:5,]
 
 packages_in_most_scripts <-  used_packages %>% 
@@ -98,7 +98,7 @@ packages_in_most_scripts[1:5,]
 
 output_fn <- "output/processed_data/used_pkgs.bib"
 
-knitr::write_bib(most_used$packages, file = output_fn)
+knitr::write_bib(as.character(most_used$packages), file = output_fn)
 
 cat(paste0("Wrote citations for packages you've used to", output_fn, ".\n There were ", length(!is.na(most_used$packages %>% unique()))
 , " entries.\n" ))
