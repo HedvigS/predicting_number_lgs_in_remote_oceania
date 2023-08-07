@@ -29,27 +29,20 @@ Polygon_lgs_count_Marck <- Polygon_lgs_glottocodes_unnested %>%
   group_by(Marck_group) %>% 
   summarise(lg_count_Marck = n())
 
-#reading in water area per smallest island group
-water_areas <- read_tsv("data/Water_area.tsv", show_col_types = F)
-
-#isolation
-isolation_marck <- read_tsv("output/processed_data/isolation_RO_geo_dist_isolation_marck_group.tsv", show_col_types = F) %>% 
-  dplyr::select(Marck_group = Marck_group_left, dist) 
-
-isolation_medium <- read_tsv("output/processed_data/isolation_RO_geo_dist_isolation_medium_island.tsv", show_col_types = F) %>%
-  dplyr::select(Medium_only_merged_for_shared_language = Medium_only_merged_for_shared_language_left, dist)
+Polygon_lgs_count_SBZR <- Polygon_lgs_glottocodes_unnested %>%   
+  distinct(SBZR_group, glottocode) %>% 
+  group_by(SBZR_group) %>% 
+  summarise(lg_count_SBZR = n())
 
 polygon_geo <- read_csv("data/RO_polygons_grouped_with_languages.csv", na = c("NA", ""),show_col_types = F) %>% 
   filter(!is.na(glottocodes)) %>% 
   mutate(Unique_ID = as.character(Unique_ID)) %>% 
-  full_join(water_areas, by = c("Unique_ID", "Smallest_Island_group"))  %>% 
   distinct(Smallest_Island_group, Unique_ID, .keep_all = T) %>% 
   group_by(Smallest_Island_group) %>% 
   summarise(sum_area = sum(`AREA (sq km)`), 
             sum_shoreline = sum(`COASTLINE (km) (perimeter)`), 
             mean_lat = mean(Latitude), 
             mean_long = mean(Longitude), 
-            sum_water_area = sum(water_area), 
             Melanesia_or_not = dplyr::first(Melanesia_or_not), 
             max_long = max(Longitude), 
             min_long = min(Longitude), 
@@ -58,10 +51,11 @@ polygon_geo <- read_csv("data/RO_polygons_grouped_with_languages.csv", na = c("N
 
 polygon_geo_grouping_hierarchy <- read_csv("data/RO_polygons_grouped_with_languages.csv", show_col_types = F) %>% 
   filter(!is.na(glottocodes)) %>% 
-  distinct(Marck_group, Medium_only_merged_for_shared_language, Smallest_Island_group, glottocodes) %>% 
+  distinct(Marck_group, Medium_only_merged_for_shared_language, SBZR_group, Smallest_Island_group, glottocodes) %>% 
   full_join(Polygon_lgs_count_medium, by = "Medium_only_merged_for_shared_language") %>% 
   full_join(Polygon_lgs_count_Marck, by = "Marck_group") %>% 
-  full_join(Polygon_lgs_count_smallest, by = "Smallest_Island_group") %>% 
+  full_join(Polygon_lgs_count_SBZR , by = "SBZR_group") %>% 
+    full_join(Polygon_lgs_count_smallest, by = "Smallest_Island_group") %>% 
   full_join(polygon_geo, by = "Smallest_Island_group")
 
 #distinct colors
@@ -76,6 +70,10 @@ polygon_geo_grouping_hierarchy$Marck_group_color <- color_vector[as.factor(polyg
 n <- length(unique(polygon_geo_grouping_hierarchy$Medium_only_merged_for_shared_language))
 color_vector <- sample(distinctColorPalette(n), size = n)
 polygon_geo_grouping_hierarchy$medium_group_color <- color_vector[as.factor(polygon_geo_grouping_hierarchy$Medium_only_merged_for_shared_language)]
+
+n <- length(unique(polygon_geo_grouping_hierarchy$SBZR_group))
+color_vector <- sample(distinctColorPalette(n), size = n)
+polygon_geo_grouping_hierarchy$SBZR_group_color <- color_vector[as.factor(polygon_geo_grouping_hierarchy$SBZR_group)]
 
 write_tsv(polygon_geo_grouping_hierarchy, "output/processed_data/Polygon_hierarchy_stats.tsv")
 
@@ -99,7 +97,9 @@ subregions <- read_tsv("data/oceania_subregions.tsv", show_col_types = F) %>%
   dplyr::rename(Glottocode_spec = Glottocode) %>% 
   dplyr::rename(Glottocode = Glottocode_language_level) %>% 
   distinct(Glottocode_spec, Glottocode, Smallest_Island_group, Smallest_Island_group_main) %>% 
-  full_join(polygon_geo_grouping_hierarchy, by = "Smallest_Island_group")
+  full_join(polygon_geo_grouping_hierarchy, 
+            by = "Smallest_Island_group",
+            relationship = "many-to-many")
 
 
 ##POL COMPLEXITY
@@ -145,9 +145,8 @@ dates$settlement_date_grouping_finer <- abs(max_group - dates$settlement_date_gr
 ##All which are at smallest island group level
 Island_group_all_sep <- polygon_geo_grouping_hierarchy %>% 
   full_join(polygon_geo, by = c("Smallest_Island_group", "sum_area", "sum_shoreline", "mean_lat", "mean_long",
-                                "sum_water_area", "Melanesia_or_not", "max_long", "min_long", "max_lat", "min_lat")) %>% 
+                                "Melanesia_or_not", "max_long", "min_long", "max_lat", "min_lat")) %>% 
   full_join(dates, by = "Smallest_Island_group") %>% 
-  full_join(water_areas, by = "Smallest_Island_group") %>% 
   full_join(modis_NPP, by = "Smallest_Island_group", relationship = "many-to-many") %>% 
   full_join(pol_complex, by = "Smallest_Island_group", relationship = "many-to-many")  %>% 
   full_join(ecoClimate_data, by = "Smallest_Island_group") %>% 
@@ -162,7 +161,6 @@ Island_group_summarised_smallest <- Island_group_all_sep %>%
   dplyr::summarise(
             mean_pol_complex = getmode(pol_complex_code_Hedvig), 
             sum_area = sum(sum_area, na.rm = T), 
-            sum_water_area = sum(sum_water_area, na.rm = T), 
             lg_count_smallest = mean(lg_count_smallest, na.rm = T),
             sum_shoreline = sum(sum_shoreline, na.rm = T),
             mean_lat = mean(mean_lat),
@@ -190,7 +188,6 @@ Island_group_summarised_medium <- Island_group_all_sep %>%
   dplyr::summarise(
         mean_pol_complex = getmode(pol_complex_code_Hedvig), 
         sum_area = sum(sum_area, na.rm = T), 
-        sum_water_area = sum(sum_water_area, na.rm = T), 
         lg_count_smallest = mean(lg_count_smallest, na.rm = T),
         sum_shoreline = sum(sum_shoreline, na.rm = T),
         mean_lat = mean(mean_lat),
@@ -206,7 +203,6 @@ Island_group_summarised_medium <- Island_group_all_sep %>%
         mean_CCSM_piControl_1760_bio12 = mean(mean_CCSM_piControl_1760_bio12, na.rm = T),
         mean_CCSM_piControl_1760_bio15 = mean(mean_CCSM_piControl_1760_bio15, na.rm = T)
 ) %>% 
-  left_join(isolation_medium, by = "Medium_only_merged_for_shared_language") %>% 
   mutate(ratio_coastline_to_area = sum_shoreline / sum_area,
          mean_lat_abs = abs(mean_lat))
 
@@ -231,7 +227,6 @@ Island_group_summarised_Marck_group <- Island_group_all_sep %>%
   dplyr::summarise(
     mean_pol_complex = getmode(pol_complex_code_Hedvig), 
     sum_area = sum(sum_area, na.rm = T), 
-    sum_water_area = sum(sum_water_area, na.rm = T), 
     lg_count_smallest = mean(lg_count_smallest, na.rm = T),
     sum_shoreline = sum(sum_shoreline, na.rm = T),
     mean_lat = mean(mean_lat),
@@ -247,7 +242,6 @@ Island_group_summarised_Marck_group <- Island_group_all_sep %>%
     mean_CCSM_piControl_1760_bio12 = mean(mean_CCSM_piControl_1760_bio12),
     mean_CCSM_piControl_1760_bio15 = mean(mean_CCSM_piControl_1760_bio15),
   ) %>% 
-  left_join(isolation_marck, by = "Marck_group") %>% 
   mutate(ratio_coastline_to_area = sum_shoreline / sum_area,
          mean_lat_abs = abs(mean_lat))
 
@@ -265,3 +259,43 @@ Island_group_summarised_Marck_group %>%
 #  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5), legend.position = "None")
 
 ggsave("output/plots/Lg_distrubition_Marck_group.png", width = 10, height = 5)
+
+#SBZR group
+Island_group_summarised_SBZR_group <- Island_group_all_sep %>% 
+  filter(!is.na(settlement_date_grouping_finer)) %>% 
+  group_by(SBZR_group) %>% 
+  dplyr::summarise(
+    mean_pol_complex = getmode(pol_complex_code_Hedvig), 
+    sum_area = sum(sum_area, na.rm = T), 
+    lg_count_smallest = mean(lg_count_smallest, na.rm = T),
+    sum_shoreline = sum(sum_shoreline, na.rm = T),
+    mean_lat = mean(mean_lat),
+    mean_long = mean(mean_long),
+    settlement_date_grouping_finer = max(settlement_date_grouping_finer), 
+    oldest_date = max(oldest_date),
+    color = dplyr::first(SBZR_group_color), 
+    lg_count = dplyr::first(lg_count_SBZR),
+    NPP_terra_mean = mean(MOD17A3HGF_061_Npp_500m_terra, na.rm = T),
+    NPP_aqua_mean = mean(MYD17A3HGF_061_Npp_500m_water, na.rm = T),
+    mean_CCSM_piControl_1760_bio1 = mean(mean_CCSM_piControl_1760_bio1),
+    mean_CCSM_piControl_1760_bio4 = mean(mean_CCSM_piControl_1760_bio4),
+    mean_CCSM_piControl_1760_bio12 = mean(mean_CCSM_piControl_1760_bio12),
+    mean_CCSM_piControl_1760_bio15 = mean(mean_CCSM_piControl_1760_bio15),
+  ) %>% 
+  mutate(ratio_coastline_to_area = sum_shoreline / sum_area,
+         mean_lat_abs = abs(mean_lat))
+
+write_tsv(Island_group_summarised_SBZR_group, "output/processed_data/RO_Hedvig_aggregate_SBZR_group.tsv")
+
+Island_group_summarised_SBZR_group$SBZR_group <- fct_reorder(Island_group_summarised_SBZR_group$SBZR_group, Island_group_summarised_SBZR_group$lg_count)
+
+Island_group_summarised_SBZR_group %>% 
+  rename(`Language count` = lg_count) %>% 
+  rename(`SBZR group` = SBZR_group) %>% 
+  ggplot() +
+  geom_bar(aes(x = `SBZR group`, y = `Language count`), stat = "Identity", fill = Island_group_summarised_SBZR_group$color) +
+  theme_classic() +
+  theme(axis.text.x = element_blank(), legend.position = "None")
+#  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5), legend.position = "None")
+
+ggsave("output/plots/Lg_distrubition_SBZR_group.png", width = 10, height = 5)
