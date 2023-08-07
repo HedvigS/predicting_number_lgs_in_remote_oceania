@@ -32,7 +32,7 @@ source("03c_carrying_capacity_PCA.R")
 #PLOT
 source("04_data_maps.R")
 
-source("04_map_polygon_groups_marck_medium.R")
+source("04_map_polygon_groups_SBZR_medium.R")
 
 #ANALYZE
 
