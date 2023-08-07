@@ -16,14 +16,14 @@ if(dir.exists(paths = "data/dplace-cldf")){
   
   ##grambank: downloading, zipping and moving
   Zenodo_url <- c("https://zenodo.org/record/5554412/files/D-PLACE/dplace-cldf-v2.2.1.zip")
-  exdir <- "data/dplace-cldf"
+  exdir <- "data/dplace-cldf/"
   
-get_zenodo_dir(url = Zenodo_url, exdir = exir, remove_git_commit_dir = T)
+get_zenodo_dir(url = Zenodo_url, exdir = exdir, remove_git_commit_dir = T)
   
 
 }
 
-dplace_language_IDs <- read_csv("data/dplace-cldf/languages.csv", show_col_types = F) %>% 
+dplace_language_IDs <- read_csv("data/dplace-cldf/cldf/languages.csv", show_col_types = F) %>% 
   dplyr::select(ID, Glottocode)
 
 #data table with information on the language-levlled parent
@@ -35,7 +35,7 @@ if(!file.exists(glottolog_fn)){
 glottolog_cldf <- read_tsv(file = glottolog_fn, show_col_types = F) %>% 
   dplyr::select(Glottocode, Language_level_ID)
 
-read_csv("data/dplace-cldf/values.csv", show_col_types = F, col_types = cols(.default = "c")) %>% 
+read_csv("data/dplace-cldf/cldf/values.csv", show_col_types = F, col_types = cols(.default = "c")) %>% 
   dplyr::select(ID = Language_ID, Parameter_ID, Value) %>% 
   left_join(dplace_language_IDs, by = "ID") %>% 
   left_join(glottolog_cldf, by = "Glottocode") %>% 
