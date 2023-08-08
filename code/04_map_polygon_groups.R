@@ -93,6 +93,7 @@ basemap +
   theme( panel.background = element_rect(fill = "white"))
 
 ggsave("output/plots/maps/polygon_SBZR_group_map.png", width = 15, height = 8)
+ggsave("../latex/polygon_SBZR_group_map.png", width = 15, height = 8)
 
 
 #per medium group
@@ -223,4 +224,7 @@ mi <- medium_map +
 
 
 ggsave(plot = mi, filename = "output/plots/maps/polygon_medium_group_map_vanuatu_mh_inset.png", width = 15, height = 10)
+ggsave(plot = mi, filename = "../latex/polygon_medium_group_map_vanuatu_mh_inset.png", width = 15, height = 10)
+
+
 }
