@@ -40,6 +40,9 @@ fun_hedvig_brms_predicting(data = data, formula = formula, group = group)
 data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_medium_group_scaled.tsv", show_col_types = F) %>%  
   rename(group = Medium_only_merged_for_shared_language)
 
+cor.test(data$lg_count, data$EA033, method = "spearman")
+
+
 formula <- "lg_count  ~  #Settlement_date_grouping_finer +
 #  Annual_precipitation_mean+ 
 #  Precipitation_seasonality_mean + 
