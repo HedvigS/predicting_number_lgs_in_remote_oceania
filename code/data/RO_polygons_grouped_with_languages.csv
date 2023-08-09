@@ -1,4 +1,4 @@
-Unique_ID,AREA (sq km),COASTLINE (km) (perimeter),Longitude,Latitude,Region,,Melanesia_or_not,Island name,Marck_group,Inhabited,glottocodes,Left_over,Smallest_Island_group,Medium_island_group,Medium_island_group_language_merged,Medium_only_merged_for_shared_language,SBZR_group,cost_area_id
+Unique_ID,AREA (sq km),COASTLINE (km) (perimeter),Longitude,Latitude,Region,COUNTRY NAME,Melanesia_or_not,Island name,Marck_group,Inhabited,glottocodes,Left_over,Smallest_Island_group,Medium_island_group,Medium_island_group_language_merged,Medium_only_merged_for_shared_language,SBZR_group,cost_area_id
 Tobi,0.85,NA,131.12438,3.007434,Micronesia,PALAU,Not_Melanesia,Tobi,Tobi,yes,tobi1238,Tobi,Tobi,Tobi,Tobi,Tobi,Tobi,1
 Mapia,NA,NA,134.304599,0.896674,Micronesia,INDONESIA,Not_Melanesia,Mapia,Mapia,yes,mapi1250,Mapia,Mapia,Mapia,Mapia,Mapia,Mapia,3
 16668349,349.275151139,94.195210596,-179.915283676,-16.8268805013,Melanesia,FIJI,Melanesia,Taveuni,Fiji,yes,gone1237,NA,Vanua Levu,Fiji,Fiji,Vanua Levu,Fiji,34
