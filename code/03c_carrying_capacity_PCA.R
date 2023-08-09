@@ -1,4 +1,5 @@
 source("01_requirements.R")
+source("fun_def_range_1_2.R")
 
 ##combining variables that are proxies for "carrying capacity" and different kinds of area-variables by finding the optimal number of pcs with a nscree test.
 
@@ -39,15 +40,12 @@ carrying_capactiy_PCA_SBZR_df <- found_pcs$data_pca_df[,1:found_pcs$maxcol]  %>%
            Carrying_capactiy_PC2 = "PC2",
            SBZR_group = ID)
 
-carrying_capactiy_PCA_SBZR_df$Carrying_capactiy_PC1 <- modEvA::range01(carrying_capactiy_PCA_SBZR_df$Carrying_capactiy_PC1)
-carrying_capactiy_PCA_SBZR_df$Carrying_capactiy_PC2 <- modEvA::range01(carrying_capactiy_PCA_SBZR_df$Carrying_capactiy_PC2)
+carrying_capactiy_PCA_SBZR_df$Carrying_capactiy_PC1 <- range_1_2(carrying_capactiy_PCA_SBZR_df$Carrying_capactiy_PC1)
+carrying_capactiy_PCA_SBZR_df$Carrying_capactiy_PC2 <- range_1_2(carrying_capactiy_PCA_SBZR_df$Carrying_capactiy_PC2)
 
 read_tsv(data_fn_SBZR, show_col_types = F) %>% 
-  full_join(carrying_capactiy_PCA_SBZR_df, by = "SBZR_group") %>% 
+  full_join(carrying_capactiy_PCA_SBZR_df, by = "SBZR_group") %>%
   write_tsv(data_fn_SBZR)
-
-
-
 
 PCA_prop_variance_df <- found_pcs$tidied_pca %>%
   dplyr::distinct(PC, Contribution, Parameter_ID)
@@ -119,9 +117,9 @@ carrying_capactiy_PCA_medium_df <- found_pcs$data_pca_df[,1:found_pcs$maxcol]  %
          Carrying_capactiy_PC3 = "PC3",
          Medium_only_merged_for_shared_language = ID)
 
-carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC1 <- modEvA::range01(carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC1) 
-carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC2 <- modEvA::range01(carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC2)
-carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC3 <- modEvA::range01(carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC3)
+carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC1 <- range_1_2(carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC1) 
+carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC2 <- range_1_2(carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC2)
+carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC3 <- range_1_2(carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC3)
 
 read_tsv(data_fn_medium, show_col_types = F) %>% 
   full_join(carrying_capactiy_PCA_medium_df, by = "Medium_only_merged_for_shared_language") %>% 
@@ -202,8 +200,8 @@ carrying_capactiy_PCA_country_df <- found_pcs$data_pca_df[,1:found_pcs$maxcol]  
          Carrying_capactiy_PC2 = "PC2",
          `COUNTRY NAME` = ID)
 
-carrying_capactiy_PCA_country_df$Carrying_capactiy_PC1 <- modEvA::range01(carrying_capactiy_PCA_country_df$Carrying_capactiy_PC1) 
-carrying_capactiy_PCA_country_df$Carrying_capactiy_PC2 <- modEvA::range01(carrying_capactiy_PCA_country_df$Carrying_capactiy_PC2)
+carrying_capactiy_PCA_country_df$Carrying_capactiy_PC1 <- range_1_2(carrying_capactiy_PCA_country_df$Carrying_capactiy_PC1) 
+carrying_capactiy_PCA_country_df$Carrying_capactiy_PC2 <- range_1_2(carrying_capactiy_PCA_country_df$Carrying_capactiy_PC2)
 
 read_tsv(data_fn_country, show_col_types = F) %>% 
   full_join(carrying_capactiy_PCA_country_df, by = "COUNTRY NAME") %>% 
