@@ -78,17 +78,37 @@ COUNTRY_NAMES <- read_tsv("data/country_names.tsv", show_col_types = F)
 
 Island_group_summarised_COUNTRY <- read_tsv("output/processed_data/RO_Hedvig_aggregate_country_group_scaled.tsv", show_col_types = F) %>% 
   inner_join(COUNTRY_NAMES, by ="COUNTRY NAME") %>% 
-  left_join(combined, by = join_by(ISO2_code)) %>% 
-  mutate(`Carrying_capactiy_PC1:Shoreline` = abs(1-Carrying_capactiy_PC1) * Shoreline) %>% 
-  mutate(`Carrying_capactiy_PC2:Shoreline` = Carrying_capactiy_PC2 * Shoreline)
+  left_join(combined, by = join_by(ISO2_code)) 
+
+#flip values
+#max <- max(Island_group_summarised_COUNTRY$Carrying_capactiy_PC1) + 1
+#Island_group_summarised_COUNTRY$Carrying_capactiy_PC1 <- 1 -Island_group_summarised_COUNTRY$Carrying_capactiy_PC1
+
+
+#make interaction cols
+Island_group_summarised_COUNTRY$`Carrying_capactiy_PC1:Shoreline` <- Island_group_summarised_COUNTRY$`Carrying_capactiy_PC1` * Island_group_summarised_COUNTRY$Shoreline
+
+Island_group_summarised_COUNTRY$`Carrying_capactiy_PC2:Shoreline` <- Island_group_summarised_COUNTRY$`Carrying_capactiy_PC2` * Island_group_summarised_COUNTRY$Shoreline
+
+
+png(filename = "output/plots/SLOM_country_variables.png", width = 10, height = 10, units = "in", res = 300)
 
 Island_group_summarised_COUNTRY %>% 
-dplyr::select(lg_count, Carrying_capactiy_PC1, Carrying_capactiy_PC2,`Population 1950` ,`Population 1950 log10`, Shoreline, `Carrying_capactiy_PC1:Shoreline`, `Carrying_capactiy_PC2:Shoreline`) %>% 
-  pairs.panels(method = "pearson", # correlation method
+dplyr::select(lg_count, 
+              `Population\n1950` = `Population 1950` ,
+              `Population\n1950\nlog10` = `Population 1950 log10`, 
+              Shoreline, 
+              "Carrying capactiy\nPC1"= Carrying_capactiy_PC1, 
+              "Carrying capactiy\nPC2"= Carrying_capactiy_PC2, 
+              "Carrying capactiy\nPC1:\nShoreline" = `Carrying_capactiy_PC1:Shoreline`, 
+              "Carrying capactiy\nPC2:\nShoreline" = `Carrying_capactiy_PC2:Shoreline`, 
+) %>% 
+  psych::pairs.panels(method = "pearson", # correlation method
                hist.col = "#a3afd1",# "#a9d1a3","",""),
                density = TRUE,  # show density plots
                ellipses = F, # show correlation ellipses
-               cex.labels= 0.7,
+               cex.labels= 1,
+               label.pos = 0.7,
                #           smoother= T,
                cor=T,
                lm=T,
@@ -96,3 +116,4 @@ dplyr::select(lg_count, Carrying_capactiy_PC1, Carrying_capactiy_PC2,`Population
                cex.cor = 1,stars = T)
 
 
+x <- dev.off()
