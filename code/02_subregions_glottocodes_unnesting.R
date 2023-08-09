@@ -65,11 +65,6 @@ read_csv("data/RO_polygons_grouped_with_languages.csv", show_col_types = F) %>%
 #  full_join(SBZR_df_names) %>% 
 #  write_tsv("data/oceania_subregions.tsv")
 
-
-
-
-
-  
 #read_csv("data/Remote_Oceania_Political_complex_and_more/RO_polygons_grouped_with_languages.csv") %>%
 #  filter(!is.na(glottocodes)) %>%
 #  group_by(Smallest_Island_group, glottocodes, Medium_only_merged_for_shared_language, Marck_group) %>% 
