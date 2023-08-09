@@ -1,4 +1,5 @@
 source("01_requirements.R")
+source("fun_def_range_1_2.R")
 
 data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_SBZR_group.tsv", show_col_types = F) %>% 
   dplyr::filter(!is.na(SBZR_group)) %>% 
@@ -37,43 +38,22 @@ data$Shoreline <- log10(data$Shoreline)
 data$ratio_coastline_to_area <- data$Shoreline / data$Area_land
 
 #setting all values to between 0 and 1 to make coef easier to interpret. adding 1 so that there aren't actually 0's since the glm.nb otherwise complains about not being able to take the sqrt of 0.
-data$Area_land <- modEvA::range01(data$Area_land) 
-data$Shoreline <- modEvA::range01(data$Shoreline) 
-data$ratio_coastline_to_area <- modEvA::range01(data$ratio_coastline_to_area) 
-data$Annual_precipitation_mean <- modEvA::range01(data$Annual_precipitation_mean) 
-data$Precipitation_seasonality_mean <- modEvA::range01(data$Precipitation_seasonality_mean) 
-data$Annual_temperature_mean <- modEvA::range01(data$Annual_temperature_mean) 
-data$Temperature_seasonality_mean <- modEvA::range01(data$Temperature_seasonality_mean) 
-data$Settlement_date_grouping_finer <- modEvA::range01(data$Settlement_date_grouping_finer) 
-data$EA033 <- modEvA::range01(data$EA033) 
-data$Latitude_abs_mean <- modEvA::range01(data$Latitude_abs_mean) 
-data$NPP_terra_mean <- modEvA::range01(data$NPP_terra_mean) 
-data$NPP_aqua_mean <- modEvA::range01(data$NPP_aqua_mean) 
+data$Area_land <- range_1_2(data$Area_land) 
+data$Shoreline <- range_1_2(data$Shoreline) 
+data$ratio_coastline_to_area <- range_1_2(data$ratio_coastline_to_area) 
+data$Annual_precipitation_mean <- range_1_2(data$Annual_precipitation_mean) 
+data$Precipitation_seasonality_mean <- range_1_2(data$Precipitation_seasonality_mean) 
+data$Annual_temperature_mean <- range_1_2(data$Annual_temperature_mean) 
+data$Temperature_seasonality_mean <- range_1_2(data$Temperature_seasonality_mean) 
+data$Settlement_date_grouping_finer <- range_1_2(data$Settlement_date_grouping_finer) 
+data$EA033 <- range_1_2(data$EA033) 
+data$Latitude_abs_mean <- range_1_2(data$Latitude_abs_mean) 
+data$NPP_terra_mean <- range_1_2(data$NPP_terra_mean) 
+data$NPP_aqua_mean <- range_1_2(data$NPP_aqua_mean) 
 
 data %>% 
   write_tsv("output/processed_data/RO_Hedvig_aggregate_SBZR_group_scaled.tsv")
 
-colnames(data) <- str_replace_all(colnames(data), "_", "\n")
-
-png(filename = "output/plots/SLOM_SBZR_all_variables.png", width = 10, height = 10, units = "in", res = 300)
-data %>%   
-  dplyr::select("lg\ncount","EA033",  "Settlement\ndate\ngrouping\nfiner", "Area\nland" , "Shoreline", "ratio\ncoastline\nto\narea", 
-               "Latitude\nabs\nmean","Annual\ntemperature\nmean", "Temperature\nseasonality\nmean", "Annual\nprecipitation\nmean", "Precipitation\nseasonality\nmean", "NPP\nterra\nmean", 
-                #"NPP\nterra\nvar", 
-                "NPP\naqua\nmean" 
-                #"NPP\naqua\nvar"
-                ) %>% 
-  pairs.panels(method = "pearson", # correlation method
-               hist.col = "#a3afd1",# "#a9d1a3","",""),
-               density = TRUE,  # show density plots
-               ellipses = F, # show correlation ellipses
-               cex.labels= 0.7,
-               #           smoother= T,
-               cor=T,
-               lm=T,
-               ci = T, 
-               cex.cor = 1,stars = T)
-x <- dev.off()
 
 ##Medium group
 
@@ -113,43 +93,21 @@ data$Shoreline <- log10(data$Shoreline)
 data$ratio_coastline_to_area <- data$Shoreline / data$Area_land
 
 #setting all values to between 0 and 1 to make coef easier to interpret. adding 1 so that there aren't actually 0's since the glm.nb otherwise complains about not being able to take the sqrt of 0.
-data$Area_land <- modEvA::range01(data$Area_land) 
-data$Shoreline <- modEvA::range01(data$Shoreline) 
-data$ratio_coastline_to_area <- modEvA::range01(data$ratio_coastline_to_area) 
-data$Annual_precipitation_mean <- modEvA::range01(data$Annual_precipitation_mean) 
-data$Precipitation_seasonality_mean <- modEvA::range01(data$Precipitation_seasonality_mean) 
-data$Annual_temperature_mean <- modEvA::range01(data$Annual_temperature_mean) 
-data$Temperature_seasonality_mean <- modEvA::range01(data$Temperature_seasonality_mean) 
-data$Settlement_date_grouping_finer <- modEvA::range01(data$Settlement_date_grouping_finer) 
-data$EA033 <- modEvA::range01(data$EA033) 
-data$Latitude_abs_mean <- modEvA::range01(data$Latitude_abs_mean) 
-data$NPP_terra_mean <- modEvA::range01(data$NPP_terra_mean) 
-data$NPP_aqua_mean <- modEvA::range01(data$NPP_aqua_mean) 
+data$Area_land <- range_1_2(data$Area_land) 
+data$Shoreline <- range_1_2(data$Shoreline) 
+data$ratio_coastline_to_area <- range_1_2(data$ratio_coastline_to_area) 
+data$Annual_precipitation_mean <- range_1_2(data$Annual_precipitation_mean) 
+data$Precipitation_seasonality_mean <- range_1_2(data$Precipitation_seasonality_mean) 
+data$Annual_temperature_mean <- range_1_2(data$Annual_temperature_mean) 
+data$Temperature_seasonality_mean <- range_1_2(data$Temperature_seasonality_mean) 
+data$Settlement_date_grouping_finer <- range_1_2(data$Settlement_date_grouping_finer) 
+data$EA033 <- range_1_2(data$EA033) 
+data$Latitude_abs_mean <- range_1_2(data$Latitude_abs_mean) 
+data$NPP_terra_mean <- range_1_2(data$NPP_terra_mean) 
+data$NPP_aqua_mean <- range_1_2(data$NPP_aqua_mean) 
 
 data %>% 
   write_tsv("output/processed_data/RO_Hedvig_aggregate_medium_group_scaled.tsv")
-
-colnames(data) <- str_replace_all(colnames(data), "_", "\n")
-
-png(filename = "output/plots/SLOM_medium_all_variables.png", width = 10, height = 10, units = "in", res = 300)
-data %>%   
-  dplyr::select("lg\ncount","EA033",  "Settlement\ndate\ngrouping\nfiner", "Area\nland" , "Shoreline", "ratio\ncoastline\nto\narea", 
- "Latitude\nabs\nmean","Annual\ntemperature\nmean", "Temperature\nseasonality\nmean", "Annual\nprecipitation\nmean", "Precipitation\nseasonality\nmean", "NPP\nterra\nmean",
-                #"NPP\nterra\nvar", 
-                "NPP\naqua\nmean" 
-                #"NPP\naqua\nvar"
-                ) %>% 
-  pairs.panels(method = "pearson", # correlation method
-               hist.col = "#a3afd1",# "#a9d1a3","",""),
-               density = TRUE,  # show density plots
-               ellipses = F, # show correlation ellipses
-               cex.labels= 0.7,
-               #           smoother= T,
-               cor=T,
-               lm=T,
-               ci = T, 
-               cex.cor = 1,stars = T)
-x <- dev.off()
 
 ##COUNTRY
 
@@ -188,18 +146,18 @@ data$Shoreline <- log10(data$Shoreline)
 data$ratio_coastline_to_area <- data$Shoreline / data$Area_land
 
 #setting all values to between 0 and 1 to make coef easier to interpret. adding 1 so that there aren't actually 0's since the glm.nb otherwise complains about not being able to take the sqrt of 0.
-data$Area_land <- modEvA::range01(data$Area_land) 
-data$Shoreline <- modEvA::range01(data$Shoreline) 
-data$ratio_coastline_to_area <- modEvA::range01(data$ratio_coastline_to_area) 
-data$Annual_precipitation_mean <- modEvA::range01(data$Annual_precipitation_mean) 
-data$Precipitation_seasonality_mean <- modEvA::range01(data$Precipitation_seasonality_mean) 
-data$Annual_temperature_mean <- modEvA::range01(data$Annual_temperature_mean) 
-data$Temperature_seasonality_mean <- modEvA::range01(data$Temperature_seasonality_mean) 
-data$Settlement_date_grouping_finer <- modEvA::range01(data$Settlement_date_grouping_finer) 
-data$EA033 <- modEvA::range01(data$EA033) 
-data$Latitude_abs_mean <- modEvA::range01(data$Latitude_abs_mean) 
-data$NPP_terra_mean <- modEvA::range01(data$NPP_terra_mean) 
-data$NPP_aqua_mean <- modEvA::range01(data$NPP_aqua_mean) 
+data$Area_land <- range_1_2(data$Area_land) 
+data$Shoreline <- range_1_2(data$Shoreline) 
+data$ratio_coastline_to_area <- range_1_2(data$ratio_coastline_to_area) 
+data$Annual_precipitation_mean <- range_1_2(data$Annual_precipitation_mean) 
+data$Precipitation_seasonality_mean <- range_1_2(data$Precipitation_seasonality_mean) 
+data$Annual_temperature_mean <- range_1_2(data$Annual_temperature_mean) 
+data$Temperature_seasonality_mean <- range_1_2(data$Temperature_seasonality_mean) 
+data$Settlement_date_grouping_finer <- range_1_2(data$Settlement_date_grouping_finer) 
+data$EA033 <- range_1_2(data$EA033) 
+data$Latitude_abs_mean <- range_1_2(data$Latitude_abs_mean) 
+data$NPP_terra_mean <- range_1_2(data$NPP_terra_mean) 
+data$NPP_aqua_mean <- range_1_2(data$NPP_aqua_mean) 
 
 data %>% 
   write_tsv("output/processed_data/RO_Hedvig_aggregate_country_group_scaled.tsv")
