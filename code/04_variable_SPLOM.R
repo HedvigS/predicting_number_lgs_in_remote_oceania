@@ -6,7 +6,10 @@ colnames(data) <- str_replace_all(colnames(data), "_", "\n")
 
 png(filename = "output/plots/SLOM_SBZR_all_variables.png", width = 10, height = 10, units = "in", res = 300)
 data %>%   
-  dplyr::select("lg\ncount","EA033",  "Settlement\ndate\ngrouping\nfiner", "Area\nland" , "Shoreline", "ratio\ncoastline\nto\narea", 
+  dplyr::select("lg\ncount","EA033",  
+                "Carrying\ncapactiy\nPC1", 
+                "Carrying\ncapactiy\nPC2",
+                "Settlement\ndate\ngrouping\nfiner", "Area\nland" , "Shoreline", "ratio\ncoastline\nto\narea", 
                 "Latitude\nabs\nmean","Annual\ntemperature\nmean", "Temperature\nseasonality\nmean", "Annual\nprecipitation\nmean", "Precipitation\nseasonality\nmean", "NPP\nterra\nmean", 
                 #"NPP\nterra\nvar", 
                 "NPP\naqua\nmean" 
