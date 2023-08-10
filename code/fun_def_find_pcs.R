@@ -52,3 +52,17 @@ tidied_pca <- data_pca$rotation %>%
             tidied_pca = tidied_pca)
   x
 }
+
+
+
+
+flip_PCA_if_need_be <- function(df, col){
+  #df = combined
+  #  col <- "Carrying_capactiy_PC2"
+  cor_test_PCA_direction <- cor.test(df$NPP_terra_mean, df[,{{col}}], method = "pearson")$estimate
+  
+  if(cor_test_PCA_direction < -0.2){
+    cat("Flipping component direction on", col, ".\n")
+    df[,{{col}}] <- 2 - df[,{{col}}]
+  }
+}
