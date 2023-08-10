@@ -23,12 +23,12 @@ formula <- "lg_count  ~  #Settlement_date_grouping_finer +
 #  NPP_aqua_mean +
 # Carrying_capactiy_PC1 + 
 #  Carrying_capactiy_PC2 +
-  Carrying_capactiy_PC1:Shoreline +
-  Carrying_capactiy_PC2:Shoreline +
-#  Carrying_capactiy_PC1:Shoreline:EA033 +
-#  Carrying_capactiy_PC2:Shoreline:EA033 +
+  Carrying_capactiy_PC1*Shoreline +
+  Carrying_capactiy_PC2*Shoreline +
+#  Carrying_capactiy_PC1*Shoreline:EA033 +
+#  Carrying_capactiy_PC2*Shoreline:EA033 +
   EA033 + 
-  Shoreline:Settlement_date_grouping_finer"
+  Shoreline*Settlement_date_grouping_finer"
 
 group = "SBZR"
 
