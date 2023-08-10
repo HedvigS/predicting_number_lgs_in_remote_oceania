@@ -43,6 +43,17 @@ carrying_capactiy_PCA_SBZR_df <- found_pcs$data_pca_df[,1:found_pcs$maxcol]  %>%
 carrying_capactiy_PCA_SBZR_df$Carrying_capactiy_PC1 <- range_1_2(carrying_capactiy_PCA_SBZR_df$Carrying_capactiy_PC1)
 carrying_capactiy_PCA_SBZR_df$Carrying_capactiy_PC2 <- range_1_2(carrying_capactiy_PCA_SBZR_df$Carrying_capactiy_PC2)
 
+carrying_capactiy_PCA_SBZR_df <- data %>% 
+  rownames_to_column("SBZR_group") %>% 
+  full_join(carrying_capactiy_PCA_SBZR_df, by = "SBZR_group") %>% 
+  dplyr::select(SBZR_group, NPP_terra_mean, Carrying_capactiy_PC1, Carrying_capactiy_PC2)
+
+flip_PCA_if_need_be(df = carrying_capactiy_PCA_SBZR_df, col = "Carrying_capactiy_PC1")
+flip_PCA_if_need_be(df = carrying_capactiy_PCA_SBZR_df, col = "Carrying_capactiy_PC2")
+
+carrying_capactiy_PCA_SBZR_df <- carrying_capactiy_PCA_SBZR_df %>% 
+  dplyr::select(-NPP_terra_mean)
+
 read_tsv(data_fn_SBZR, show_col_types = F) %>% 
   full_join(carrying_capactiy_PCA_SBZR_df, by = "SBZR_group") %>%
   write_tsv(data_fn_SBZR)
@@ -120,6 +131,26 @@ carrying_capactiy_PCA_medium_df <- found_pcs$data_pca_df[,1:found_pcs$maxcol]  %
 carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC1 <- range_1_2(carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC1) 
 carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC2 <- range_1_2(carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC2)
 carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC3 <- range_1_2(carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC3)
+
+#flipping if need be
+
+carrying_capactiy_PCA_medium_df <- data %>% 
+  rownames_to_column("Medium_only_merged_for_shared_language") %>% 
+  full_join(carrying_capactiy_PCA_medium_df, by = "Medium_only_merged_for_shared_language") %>% 
+  dplyr::select(Medium_only_merged_for_shared_language, NPP_terra_mean, Carrying_capactiy_PC1, Carrying_capactiy_PC2, Carrying_capactiy_PC3)
+
+flip_PCA_if_need_be(df = carrying_capactiy_PCA_medium_df, col = "Carrying_capactiy_PC1")
+flip_PCA_if_need_be(df = carrying_capactiy_PCA_medium_df, col = "Carrying_capactiy_PC2")
+flip_PCA_if_need_be(df = carrying_capactiy_PCA_medium_df, col = "Carrying_capactiy_PC3")
+
+carrying_capactiy_PCA_medium_df <- carrying_capactiy_PCA_medium_df %>% 
+  dplyr::select(-NPP_terra_mean)
+
+read_tsv(data_fn_medium, show_col_types = F) %>% 
+  full_join(carrying_capactiy_PCA_medium_df, by = "Medium_only_merged_for_shared_language") %>%
+  write_tsv(data_fn_medium)
+
+
 
 read_tsv(data_fn_medium, show_col_types = F) %>% 
   full_join(carrying_capactiy_PCA_medium_df, by = "Medium_only_merged_for_shared_language") %>% 
