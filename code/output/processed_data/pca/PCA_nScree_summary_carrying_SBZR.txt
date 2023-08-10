@@ -1,2 +1,2 @@
-The optimal number of components is 2 and they explain 81.883 % of the variation.
+The optimal number of components is 2 and they explain 81.886 % of the variation.
 
