@@ -159,5 +159,5 @@ data$Latitude_abs_mean <- range_1_2(data$Latitude_abs_mean)
 data$NPP_terra_mean <- range_1_2(data$NPP_terra_mean) 
 data$NPP_aqua_mean <- range_1_2(data$NPP_aqua_mean) 
 
-data %>% 
+data %>%
   write_tsv("output/processed_data/RO_Hedvig_aggregate_country_group_scaled.tsv")
