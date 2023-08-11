@@ -147,13 +147,7 @@ carrying_capactiy_PCA_medium_df <- carrying_capactiy_PCA_medium_df %>%
   dplyr::select(-NPP_terra_mean)
 
 read_tsv(data_fn_medium, show_col_types = F) %>% 
-  full_join(carrying_capactiy_PCA_medium_df, by = "Medium_only_merged_for_shared_language") %>%
-  write_tsv(data_fn_medium)
-
-
-
-read_tsv(data_fn_medium, show_col_types = F) %>% 
-  full_join(carrying_capactiy_PCA_medium_df, by = "Medium_only_merged_for_shared_language") %>% 
+  full_join(carrying_capactiy_PCA_medium_df, by = join_by(Medium_only_merged_for_shared_language)) %>%
   write_tsv(data_fn_medium)
 
 PCA_prop_variance_df <- found_pcs$tidied_pca %>%
