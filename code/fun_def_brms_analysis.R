@@ -31,7 +31,7 @@ fun_hedvig_brms_predicting <- function(data = NULL,
                           seed = seed,
                           backend="cmdstanr") 
   
-  #summary(output_poission)
+ms_full <- summary(output_poission)
   
   posterior_predict_df <- brms::posterior_predict(output_poission, cores = cores, ndraws = ndraws) %>%
     as.data.frame() %>% 
@@ -44,12 +44,13 @@ fun_hedvig_brms_predicting <- function(data = NULL,
            min = min(value),
            max = max(value)) %>% 
     full_join(data, by = "group") %>% 
-    mutate(diff_poission = abs(lg_count - mean)) 
+    mutate(diff_poission = lg_count - mean) %>%  
+    mutate(diff_poission_abs = abs(lg_count - mean)) 
   
-  cat(paste0("The mean differences between the predicted and observed numbers of languages is ", posterior_predict_df$diff_poission %>% mean() %>% round(2), ".\n"))
+  cat(paste0("The mean absolute difference between the predicted and observed numbers of languages is ", posterior_predict_df$diff_poission_abs %>% mean() %>% round(2), ".\n"))
   
   posterior_predict_df %>% 
-    distinct(group, mean, sd, min, max, diff_poission, lg_count) %>% 
+    distinct(group, mean, sd, min, max, diff_poission, diff_poission_abs, lg_count) %>% 
     write_tsv(file = paste0("output/results/brms_", group, "_predict_table.tsv"), na = "")
   
   #predict plot
@@ -89,11 +90,11 @@ fun_hedvig_brms_predicting <- function(data = NULL,
   chain_joined %>% 
     write_tsv(file = paste0("output/results/brms_", group, "_full_chains.tsv"), na = "")
   
-  chain_joined %>%
+  chain_joined %>% 
     reshape2::melt(id.vars = "chain") %>% 
     filter(variable != "lprior") %>% 
     filter(variable != "lp__") %>% 
-    filter(variable != "Intercept") %>% 
+    filter(variable != "Intercept") %>%
     ggplot(aes(x = value, fill = variable, 
                color = variable,
                y = after_stat(density))) + 
@@ -117,6 +118,37 @@ fun_hedvig_brms_predicting <- function(data = NULL,
   ggsave(filename = paste0("output/plots/brms_", group, "_group_full_effect_ridge_panels_plot.png"), height = 9, width = 10)
   ggsave(filename = paste0("../latex/brms_", group, "_group_full_effect_ridge_panels_plot.png"),  height = 9, width = 10) 
   
+ms_df <- ms_full$fixed %>% 
+  rownames_to_column("term") %>% 
+  mutate(straddle_zero_95 = ifelse(`l-95% CI` < 0 & `u-95% CI` < 0|
+                                     `l-95% CI`  > 1 & `u-95% CI`  > 1  , "no", "yes")) %>%
+  reshape2::melt(id.vars = "term") %>% 
+  unite(term, variable, sep = "§", col = "variable") %>% 
+  data.table::transpose(make.names = "variable")
+
+  chain_summarised <-      chain_joined %>% 
+    reshape2::melt(id.vars = c("chain")) %>% 
+    group_by(variable) %>% 
+    summarise(mean = mean(value), 
+              sd = sd(value),
+              min = min(value),
+              max = max(value)) %>% 
+    mutate(straddle_zero = ifelse(max < 0 & min < 0|
+                                    max > 1 & min > 1  , "no", "yes")) %>%
+    rename(variable_1 = variable) %>% 
+    reshape2::melt(id.vars = "variable_1") %>%
+    ungroup() %>% 
+    mutate(variable = paste0(`variable_1`, "§", `variable`)) %>% 
+    dplyr::select(variable, value) %>% 
+    data.table::transpose(make.names = "variable") %>% 
+    cbind(ms_df) %>% 
+    mutate(dropped_obs = "NONE_original_full")
+
+chain_summarised  %>% 
+  reshape2::melt(id.vars = "dropped_obs") %>% 
+  separate(col = variable, into = c("term","variable"), sep = "§", remove = T) %>% 
+  dplyr::select(-dropped_obs) %>% 
+  write_tsv(file = paste0("output/results/brms_", group, "_full_effects_table.tsv"))
   
   ########### KICKING OUT ONE OBSERVATION AT A TIME
   
@@ -151,7 +183,16 @@ fun_hedvig_brms_predicting <- function(data = NULL,
     
     ms <- summary(output_spec)
     
-    #predicting number of lgs
+ms_df <-  ms$fixed %>% 
+  rownames_to_column("term") %>% 
+  mutate(straddle_zero_95 = ifelse(`l-95% CI` < 0 & `u-95% CI` < 0|
+                                     `l-95% CI`  > 1 & `u-95% CI`  > 1  , "no", "yes")) %>%
+  reshape2::melt(id.vars = "term") %>% 
+  unite(term, variable, sep = "§", col = "variable") %>% 
+  data.table::transpose(make.names = "variable") %>% 
+  mutate(dropped_obs = obs)
+  
+  #predicting number of lgs
     posterior_predict_df_spec <- brms::posterior_predict(output_spec, cores = cores, ndraws = 1000) %>%
       as.data.frame() %>% 
       data.table::transpose() %>% 
@@ -163,9 +204,11 @@ fun_hedvig_brms_predicting <- function(data = NULL,
                 min = min(value),
                 max = max(value)) %>% 
       left_join(data, by = "group") %>% 
-      mutate(diff = abs(lg_count - mean)) 
+      mutate(diff = lg_count) %>%  
+      mutate(diff_abs = abs(diff)) 
     
     diff <- mean(posterior_predict_df_spec$diff)
+    diff_abs <- mean(posterior_predict_df_spec$diff_abs)
     
     cat(paste0("The diff was ", diff %>% round(2)
                , ".\n"))
@@ -188,14 +231,16 @@ fun_hedvig_brms_predicting <- function(data = NULL,
                 sd = sd(value),
                 min = min(value),
                 max = max(value)) %>% 
+      mutate(straddle_zero = ifelse(max < 0 & min < 0|
+                                      max > 1 & min > 1  , "no", "yes")) %>% 
       rename(variable_1 = variable) %>% 
       reshape2::melt(id.vars = "variable_1") %>%
       ungroup() %>% 
       mutate(variable = paste0(`variable_1`, "_", `variable`)) %>% 
       dplyr::select(variable, value) %>% 
       data.table::transpose(make.names = "variable") %>% 
-      mutate(dropped_obs = obs)
-      
+      mutate(dropped_obs = obs) 
+    
     predict_new_data <- brms::posterior_predict(output_spec, newdata = data, ndraws = ndraws) %>% 
       as.data.frame() %>% 
       data.table::transpose() %>% 
@@ -205,10 +250,11 @@ fun_hedvig_brms_predicting <- function(data = NULL,
       summarise(mean = mean(value), 
                 sd = sd(value),
                 min = min(value),
-                max = max(value)) %>% 
+                max = max(value)) %>%
       left_join(data, by = "group") %>% 
-      mutate(diff = abs(lg_count - mean)) 
-  
+      mutate(diff = lg_count - mean) %>% 
+      mutate(diff_abs = abs(diff)) 
+    
     if(!is.na(obs)){
       predict_new_data  <- predict_new_data %>% 
         filter(group == {{obs}})
@@ -222,10 +268,12 @@ fun_hedvig_brms_predicting <- function(data = NULL,
                           mean_Bulk_ESS = ms$fixed$Bulk_ESS %>% mean(),
                           mean_Tail_ESS = ms$fixed$Tail_ESS %>% mean(),
                           diff_predicted_vs_observed = diff,
+                          diff_predicted_vs_observed = diff_abs,
                           dropped_observation_prediction = predict_new_data$mean,
-                          dropped_observation_prediction_diff = predict_new_data$diff) %>% 
-      full_join(chain_summarised, by = "dropped_obs")
-      
+                          dropped_observation_prediction_diff = predict_new_data$diff,
+                          dropped_observation_prediction_diff_abs = predict_new_data$diff_abs) %>% 
+      full_join(chain_summarised, by = "dropped_obs") %>% 
+      full_join(ms_df)
       
     df_all <- suppressMessages(full_join(df_all, df_spec))
     
