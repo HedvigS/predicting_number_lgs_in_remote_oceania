@@ -273,7 +273,7 @@ ms_df <-  ms$fixed %>%
                           dropped_observation_prediction_diff = predict_new_data$diff,
                           dropped_observation_prediction_diff_abs = predict_new_data$diff_abs) %>% 
       full_join(chain_summarised, by = "dropped_obs") %>% 
-      full_join(ms_df)
+      full_join(ms_df, by = "dropped_obs")
       
     df_all <- suppressMessages(full_join(df_all, df_spec))
     
