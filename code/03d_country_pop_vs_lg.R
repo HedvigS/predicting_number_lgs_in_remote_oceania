@@ -46,8 +46,8 @@ combined %>%
         legend.position = "None") +
   scale_color_manual(values=c("darkolivegreen2","blue4"))
 
-ggsave("output/plots/number_of_languags_vs_pop_1950.png", width = 7, height = 7)
-ggsave("../latex/number_of_languags_vs_pop_1950.png", width = 7, height = 7)
+ggsave("output/plots/number_of_languages_vs_pop_1950.png", width = 7, height = 7)
+ggsave("../latex/number_of_languages_vs_pop_1950.png", width = 7, height = 7)
 
 combined %>%
   ggplot(aes(x = `Population 1950 log10` , y = `Number of languages log10`)) +
@@ -68,8 +68,8 @@ combined %>%
                    nudge_x = 0.4, nudge_y = -0.1,
                    max.overlaps = 15) 
   
-ggsave("output/plots/number_of_languags_vs_pop_1950_log10.png", width = 7, height = 7)
-ggsave("../latex/number_of_languags_vs_pop_1950_log10.png", width = 7, height = 7)
+ggsave("output/plots/number_of_languages_vs_pop_1950_log10.png", width = 7, height = 7)
+ggsave("../latex/number_of_languages_vs_pop_1950_log10.png", width = 7, height = 7)
 
 
 ###COUNTRY VS CARRYING CAPCITY
