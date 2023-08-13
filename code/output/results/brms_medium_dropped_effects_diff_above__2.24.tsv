@@ -4,9 +4,9 @@ mean_Bulk_ESS	46177.0259133961	52940.9225827957	46850.6391583895
 mean_Tail_ESS	55332.8573451611	58945.4372464833	56578.1306831526
 diff_predicted_vs_observed	2.296875	2.359375	2.4375
 diff_predicted_vs_observed.1	2.296875	2.359375	2.4375
-dropped_observation_prediction	10.0773	320.3702	12.7931
-dropped_observation_prediction_diff	22.9227	-291.3702	11.2069
-dropped_observation_prediction_diff_abs	22.9227	291.3702	11.2069
+dropped_observation_prediction	10.0328	325.2069	12.6938
+dropped_observation_prediction_diff	22.9672	-296.2069	11.3062
+dropped_observation_prediction_diff_abs	22.9672	296.2069	11.3062
 b_Intercept_mean	11.5988125280013	-12.6736109540691	8.94719887364138
 b_Carrying_capactiy_PC1_mean	-6.30107280573035	-0.610532466127207	-5.17065566682656
 b_Shoreline_mean	-8.6285897460076	9.20276039182234	-4.95759230811578
@@ -150,5 +150,5 @@ Carrying_capactiy_PC1:Shoreline§straddle_zero_95	yes	yes	yes
 Shoreline:Carrying_capactiy_PC2§straddle_zero_95	yes	yes	yes
 Shoreline:Carrying_capactiy_PC3§straddle_zero_95	yes	yes	yes
 Shoreline:Settlement_date_grouping_finer§straddle_zero_95	no	no	no
-dropped_observation_prediction_mean	10.0773	320.3702	12.7931
-dropped_observation_prediction_diff_mean	22.9227	-291.3702	11.2069
+dropped_observation_prediction_mean	10.0328	325.2069	12.6938
+dropped_observation_prediction_diff_mean	22.9672	-296.2069	11.3062
