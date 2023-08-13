@@ -1,0 +1,20 @@
+I am planning on this overall rhetorical content:
+
+* Andy's argument suggests that pol complex explains at least in part the difference in number of langauges between vanuatu and new caledonia vs rest of remote oceania.
+* is this true when we also control for time depth and other known relevant variables like NPP?
+* models that take this into account for all island groups does support that hypothesis, by the fact that size, time depth and pol complex comes out as relevant "even" when all are co-estimated
+* however, when we drop island groups out one-by-one, it becomes apparent that the model primarily "uses" pol complex to tell apart Vanuatu from the rest
+* discussion part: 
+* * we know that there is non-austro influence in Vanuatu in particular (cite posth 2018 etc), and it is reasonable to expect that this influence is coupled with greater language diversity because of the imported cultural content as well as other social organisation and attitudes that lead to greater diversification. this "doubling" of factors could help explain why even a poisson distribution can't deal with the gap between vanuatu and almost all other groups (even that skewed distribution can't reach the "heights" of the observed values)
+* conclusions
+* * pol complexity may matter, but if it does it's probably a distance casual relation (see DAGs) such as network modularity and/or ability to create good surplus
+* * in this study, it's hard to tell apart pol complex in "itself" from non-austro influence
+* * it is good to be explicit in precisely how variables track the world, pol complex being a case in point where the ethnographic variable may be a proxy-variable tracking something related to, but not the same as what a given study is after where it is used.
+* * further studies may be needed of the precise nature of non-austro influence in remote Oceania, in particular in new Caledonia
+
+What is new is: 
+* explicitly estimating the importance of different factors by modelling them together, as opposed to making a casual qualitative argument in prose only
+* defining island groups in principled ways
+* deconstructing arguments of what political complexity "is" by the use of DAGs and more extensive qualitative exploration
+
+For the sbzr groups, dropping out Vanuatu means that ea033 is straddling zero (both full and 95%), but this is not true for the medium groups.
