@@ -10,7 +10,6 @@ source("02_subregions_glottocodes_unnesting.R")
 
 source("02_get_glottolog_language_table.R")
 
-source("02_country_pop_vs_lg.R")
 
 source("02_ecoClimate_extract.R")
 
@@ -26,6 +25,8 @@ source("03a_combine_data.R")
 source("03b_scale_data.R")
 
 source("03c_carrying_capacity_PCA.R")
+
+source("03d_country_pop_vs_lg.R")
 
 #PLOT
 source("04_data_maps.R")
