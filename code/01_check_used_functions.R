@@ -101,8 +101,8 @@ output_fn <- "../latex/used_pkgs.bib"
 knitr::write_bib(as.character(most_used$packages), file = output_fn)
 
 readLines(output_fn) %>% 
-  str_replace_all("\\&", "\\\\&") %>% 
-  str_replace_all("\\\\\\&", "\\\\&") %>% 
+  str_replace_all("\\&", "\\\\&") %>%
+  str_replace_all("\\\\\\\\&", "\\\\&") %>% #.[307:319]
     writeLines(output_fn)
 
 cat(paste0("Wrote citations for packages you've used to", output_fn, ".\n There were ", length(!is.na(most_used$packages %>% unique()))
