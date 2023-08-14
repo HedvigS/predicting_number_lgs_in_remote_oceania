@@ -275,21 +275,23 @@ The unit of analysis is ``island group''. We cannot use modern political boundar
 
 %Predicting_lgs_DAG_full
 
-
-A simple test of Spearman's Rank Order correlation reveals that the number of languages and political complexity per island group are indeed correlated (rho  = -0.4, \emph{p} value = >0.001 for islands grouped for shared language). However, this is not sufficient. We want to investigate whether this correlation still holds once we incorporate other variables that we expect might explain language diversity as well, such as time-depth and environmental factors
-
-The data for this study consists of:
+A simple test of Spearman's Rank Order correlation reveals that the number of languages and political complexity per island group are indeed correlated (rho  = -0.4, \emph{p} value = >0.001 for islands grouped for shared language). However, this is not sufficient. We want to investigate whether this correlation still holds once we explicitly incorporate other variables that we expect might explain language diversity as well, such as time-depth and environmental factors. The data for this study consists of:
 
 \begin{itemize}
 \item language classification, based on \citet{glottolog40} and other sources (see Appendix \ref{sec:language_class}).
-\item number of vertical levels of jurisdictional hierarchy per society \footnote{Nota Bene that there are other kinds of political complexity besides vertical, for example horizontal complex exchange networks. See Appendix \ref{appendix_def_pol_complex} for more.}, based on the Ethnographic Atlas variable EA033 \citep{gray1998ethnographic, d_place_all}, \citet{sheehan2018coevolution} and own modifications. Also known as ``political complexity''. (See appendix \ref{appendix_def_pol_complex} for details.)
+\item number of vertical levels of jurisdictional hierarchy per society \footnote{Nota Bene that there are other kinds of political complexity besides vertical, for example horizontal complex exchange networks. See Appendix \ref{appendix_def_pol_complex} for more.}, based on the Ethnographic Atlas \citep{gray1998ethnographic, d_place_all}, \citet{sheehan2018coevolution} and own modifications. Also known as ``political complexity'' and ``EA033'' (see appendix \ref{appendix_def_pol_complex} for details on definition and coding).
 \item archaeological dates, grouped into waves \citep{intoh2007reconnaissance, intoh2008ongoing, rieth_cochrane_2018, levin_seikel_miles_2019, pol_outliers_stat_art, Napolitano_et_al_yap}. (See appendix \ref{appendix_def_dates} for details.)
 \item historical environmental data from \citet{ecoclimate}: mean temperature, temperature seasonality, mean rainfall and rainfall seasonality. (See appendix \ref{appendix_environ} for details.)
 \item environmental data from NASA satellites \citep{running2021modis_aqua, running2021modis_terra}: Net Primary Productivity. See appendix \ref{appendix_environ} for details.)
-\item island geography (latitude and shoreline) from Global Self-consistent, Hierarchical, High-resolution Geography Database (GSHHG) \citep{wessel1996global}.  (See appendix \ref{appendix_environ} for details.)
+\item island geography (latitude and shoreline) from the Global Self-consistent, Hierarchical, High-resolution Geography Database (GSHHG) \citep{wessel1996global}.  (See appendix \ref{appendix_environ} for details.)
 \end{itemize}
 
-In order to create a formula for the statistical model, we consider the estimated causal relationships based on previous research and scientific knowledge of the world (see section \ref{sec:previous_research}). These can be represented in a Directed Acyclic Graph and there are set procedures for how to prune and translate a DAG for modelling (\citet{pearl1995causal} and \citet{mcelreath2020statistical}). Fig. \ref{Predicting_lgs_DAG_slimmed} shows the smaller DAG that represents the final model formula. For the full DAG, including excluded variables and variables with missing data, see appendix \ref{appendix_DAG_def}.
+In order to create a formula for the statistical model, we consider the suggested causal relationships based on previous research (see section \ref{sec:previous_research}). The relationship between variables can be represented in a formalised manner in a Directed Acyclic Graph. There are set procedures for how to prune and translate a DAG for modelling (\citet{pearl1995causal} and \citet{mcelreath2020statistical}). 
+
+The variables Net Primary Production (from NASA satellites Terra and Aqua resp.), temperature \& rainfall (mean and seasonality) and absolute latitude are all related to each other 
+
+
+Fig. \ref{Predicting_lgs_DAG_slimmed} shows the smaller DAG that represents the final model formula. For the full DAG, including excluded variables and variables with missing data, see appendix \ref{appendix_DAG_def}.
 
 \begin{figure}[ht]
 \centering
@@ -413,7 +415,7 @@ Future studies should use a grid and/or otherwise more fine grained approach to 
 
 \newpage
 \section*{Acknowledgements}
-I am fortunate enough to have colleagues in academia who have been generous enough to discuss conceptual methodological matters with me, these are Stephen Mann, Angela Chira, Russell Gray, Oleg Sobchuk, Richard McElreath, Tiago Tresoldi, Michael Dunn, Hannah Haynie, Outi Vesakoski, Fredric Blum and Luke Maurits. I am also grateful for the advice of Mary Walworth, Paul Geraghty and Alexandre François concerning language classification and Matthew Spriggs, Geoff Kushnick and Christopher Ballard regarding archaeology and anthropology of Oceania.
+I am fortunate enough to have colleagues in academia who have been generous enough to discuss conceptual methodological matters with me, these are Stephen Mann, Angela Chira, Russell Gray, Oleg Sobchuk, Richard McElreath, Tiago Tresoldi, Michael Dunn, Hannah Haynie, Outi Vesakoski, Fredric Blum and Luke Maurits. I am also grateful for the advice of Mary Walworth, Ray Harlow, Andrew Pawley, Paul Geraghty and Alexandre François concerning language classification and Matthew Spriggs, Geoff Kushnick and Christopher Ballard regarding archaeology and anthropology of Oceania.
 
 I also want to thank my PhD supervisors who reviewed earlier versions of this study for my thesis \citep{skirgaard2020multilevel} and provided insightful input; Nicholas Evans, Andrew Pawley, Mark Ellison and Simon Greenhill.
 
