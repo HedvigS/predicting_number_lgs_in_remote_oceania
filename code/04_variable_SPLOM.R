@@ -1,11 +1,13 @@
+source("01_requirements.R")
+source("fun_def_SPLOM.R")
+
 #SBZR groups
 
 data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_SBZR_group_scaled.tsv", show_col_types = F)
 
 colnames(data) <- str_replace_all(colnames(data), "_", "\n")
 
-png(filename = "output/plots/SLOM_SBZR_all_variables.png", width = 10, height = 10, units = "in", res = 300)
-data %>%   
+data_for_splom <- data %>%   
   dplyr::select("lg\ncount","EA033",  
                 "Carrying\ncapactiy\nPC1", 
                 "Carrying\ncapactiy\nPC2",
@@ -14,28 +16,31 @@ data %>%
                 #"NPP\nterra\nvar", 
                 "NPP\naqua\nmean" 
                 #"NPP\naqua\nvar"
-  ) %>% 
-  pairs.panels(method = "pearson", # correlation method
-               hist.col = "#a3afd1",# "#a9d1a3","",""),
-               density = TRUE,  # show density plots
-               ellipses = F, # show correlation ellipses
-               cex.labels= 0.7,
-               #           smoother= T,
-               cor=T,
-               lm=T,
-               ci = T, 
-               cex.cor = 1,stars = T)
+                )
+                
+fn <- "SLOM_SBZR_all_variables.png"
+                
+png(filename = paste0("output/plots/", fn), width = 10, height = 10, units = "in", res = 300)
+
+data_for_splom %>% 
+  SPLOM_hedders()
+
 x <- dev.off()
 
+png(filename = paste0("../latex/", fn), width = 10, height = 10, units = "in", res = 300)
+
+data_for_splom %>% 
+  SPLOM_hedders()
+
+
+x <- dev.off()
 
 #medium groups
 data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_medium_group_scaled.tsv", show_col_types = F)
 
 colnames(data) <- str_replace_all(colnames(data), "_", "\n")
 
-png(filename = "output/plots/SLOM_medium_all_variables.png", width = 10, height = 10, units = "in", res = 300)
-data %>%   
-  
+data_for_splom <- data %>%   
   dplyr::select("lg\ncount","EA033",  
                 "Settlement\ndate\ngrouping\nfiner", 
                 "Area\nland" , "Shoreline", "ratio\ncoastline\nto\narea", 
@@ -49,17 +54,24 @@ data %>%
                 "Carrying\ncapactiy\nPC1",
                 "Carrying\ncapactiy\nPC2",
                 "Carrying\ncapactiy\nPC3"
-  ) %>% 
-  pairs.panels(method = "pearson", # correlation method
-               hist.col = "#a3afd1",# "#a9d1a3","",""),
-               density = TRUE,  # show density plots
-               ellipses = F, # show correlation ellipses
-               cex.labels= 0.7,
-               #           smoother= T,
-               cor=T,
-               lm=T,
-               ci = T, 
-               cex.cor = 1,stars = T)
+  )
+
+fn <- "SLOM_medium_all_variables.png"
+
+png(filename = paste0("output/plots/", fn), width = 10, height = 10, units = "in", res = 300)
+
+data_for_splom %>% 
+  SPLOM_hedders()
+
+x <- dev.off()
+
+
+png(filename = paste0("../latex/", fn), width = 10, height = 10, units = "in", res = 300)
+
+data_for_splom %>% 
+  SPLOM_hedders()
+
+
 x <- dev.off()
 
 
@@ -102,33 +114,14 @@ fn <- "SLOM_country_all_variables.png"
 png(filename = paste0("output/plots/", fn), width = 10, height = 10, units = "in", res = 300)
 
 data_for_splom %>% 
-  pairs.panels(method = "pearson", # correlation method
-               hist.col = "#a3afd1",# "#a9d1a3","",""),
-               density = TRUE,  # show density plots
-               ellipses = F, # show correlation ellipses
-               cex.labels= 0.7,
-               #           smoother= T,
-               cor=T,
-               lm=T,
-               ci = T, 
-               cex.cor = 1,stars = T)
-
+  SPLOM_hedders()
 
 x <- dev.off()
 
 png(filename = paste0("../latex/", fn), width = 10, height = 10, units = "in", res = 300)
 
 data_for_splom %>% 
-  pairs.panels(method = "pearson", # correlation method
-               hist.col = "#a3afd1",# "#a9d1a3","",""),
-               density = TRUE,  # show density plots
-               ellipses = F, # show correlation ellipses
-               cex.labels= 0.7,
-               #           smoother= T,
-               cor=T,
-               lm=T,
-               ci = T, 
-               cex.cor = 1,stars = T)
+  SPLOM_hedders()
 
 
 x <- dev.off()
