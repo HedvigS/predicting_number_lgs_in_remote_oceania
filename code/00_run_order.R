@@ -24,7 +24,7 @@ source("03a_combine_data.R")
 
 source("03b_scale_data.R")
 
-source("03c_carrying_capacity_PCA.R")
+source("03c_environ_PCA.R")
 
 source("03d_country_pop_vs_lg.R")
 

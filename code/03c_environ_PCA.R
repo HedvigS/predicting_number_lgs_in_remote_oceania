@@ -35,27 +35,27 @@ writeLines(
   con = file.path(OUTPUTDIR, "PCA_nScree_summary_carrying_SBZR.txt")
 )
 
-carrying_capactiy_PCA_SBZR_df <- found_pcs$data_pca_df[,1:found_pcs$maxcol]  %>% #because the first col is the group we need to do plus one
-    rename(Carrying_capactiy_PC1 = "PC1",
-           Carrying_capactiy_PC2 = "PC2",
+environ_PCA_SBZR_df <- found_pcs$data_pca_df[,1:found_pcs$maxcol]  %>% #because the first col is the group we need to do plus one
+    rename(environ_PC1 = "PC1",
+           environ_PC2 = "PC2",
            SBZR_group = ID)
 
-carrying_capactiy_PCA_SBZR_df$Carrying_capactiy_PC1 <- range_1_2(carrying_capactiy_PCA_SBZR_df$Carrying_capactiy_PC1)
-carrying_capactiy_PCA_SBZR_df$Carrying_capactiy_PC2 <- range_1_2(carrying_capactiy_PCA_SBZR_df$Carrying_capactiy_PC2)
+environ_PCA_SBZR_df$environ_PC1 <- range_1_2(environ_PCA_SBZR_df$environ_PC1)
+environ_PCA_SBZR_df$environ_PC2 <- range_1_2(environ_PCA_SBZR_df$environ_PC2)
 
-carrying_capactiy_PCA_SBZR_df <- data %>% 
+environ_PCA_SBZR_df <- data %>% 
   rownames_to_column("SBZR_group") %>% 
-  full_join(carrying_capactiy_PCA_SBZR_df, by = "SBZR_group") %>% 
-  dplyr::select(SBZR_group, NPP_terra_mean, Carrying_capactiy_PC1, Carrying_capactiy_PC2)
+  full_join(environ_PCA_SBZR_df, by = "SBZR_group") %>% 
+  dplyr::select(SBZR_group, NPP_terra_mean, environ_PC1, environ_PC2)
 
-flip_PCA_if_need_be(df = carrying_capactiy_PCA_SBZR_df, col = "Carrying_capactiy_PC1")
-flip_PCA_if_need_be(df = carrying_capactiy_PCA_SBZR_df, col = "Carrying_capactiy_PC2")
+flip_PCA_if_need_be(df = environ_PCA_SBZR_df, col = "environ_PC1")
+flip_PCA_if_need_be(df = environ_PCA_SBZR_df, col = "environ_PC2")
 
-carrying_capactiy_PCA_SBZR_df <- carrying_capactiy_PCA_SBZR_df %>% 
+environ_PCA_SBZR_df <- environ_PCA_SBZR_df %>% 
   dplyr::select(-NPP_terra_mean)
 
 read_tsv(data_fn_SBZR, show_col_types = F) %>% 
-  full_join(carrying_capactiy_PCA_SBZR_df, by = "SBZR_group") %>%
+  full_join(environ_PCA_SBZR_df, by = "SBZR_group") %>%
   write_tsv(data_fn_SBZR)
 
 PCA_prop_variance_df <- found_pcs$tidied_pca %>%
@@ -122,32 +122,32 @@ writeLines(
   con = file.path(OUTPUTDIR, "PCA_nScree_summary_carrying_medium.txt")
 )
 
-carrying_capactiy_PCA_medium_df <- found_pcs$data_pca_df[,1:found_pcs$maxcol]  %>% #because the first col is the group we need to do plus one
-  rename(Carrying_capactiy_PC1 = "PC1",
-         Carrying_capactiy_PC2 = "PC2",
-         Carrying_capactiy_PC3 = "PC3",
+environ_PCA_medium_df <- found_pcs$data_pca_df[,1:found_pcs$maxcol]  %>% #because the first col is the group we need to do plus one
+  rename(environ_PC1 = "PC1",
+         environ_PC2 = "PC2",
+         environ_PC3 = "PC3",
          Medium_only_merged_for_shared_language = ID)
 
-carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC1 <- range_1_2(carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC1) 
-carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC2 <- range_1_2(carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC2)
-carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC3 <- range_1_2(carrying_capactiy_PCA_medium_df$Carrying_capactiy_PC3)
+environ_PCA_medium_df$environ_PC1 <- range_1_2(environ_PCA_medium_df$environ_PC1) 
+environ_PCA_medium_df$environ_PC2 <- range_1_2(environ_PCA_medium_df$environ_PC2)
+environ_PCA_medium_df$environ_PC3 <- range_1_2(environ_PCA_medium_df$environ_PC3)
 
 #flipping if need be
 
-carrying_capactiy_PCA_medium_df <- data %>% 
+environ_PCA_medium_df <- data %>% 
   rownames_to_column("Medium_only_merged_for_shared_language") %>% 
-  full_join(carrying_capactiy_PCA_medium_df, by = "Medium_only_merged_for_shared_language") %>% 
-  dplyr::select(Medium_only_merged_for_shared_language, NPP_terra_mean, Carrying_capactiy_PC1, Carrying_capactiy_PC2, Carrying_capactiy_PC3)
+  full_join(environ_PCA_medium_df, by = "Medium_only_merged_for_shared_language") %>% 
+  dplyr::select(Medium_only_merged_for_shared_language, NPP_terra_mean, environ_PC1, environ_PC2, environ_PC3)
 
-flip_PCA_if_need_be(df = carrying_capactiy_PCA_medium_df, col = "Carrying_capactiy_PC1")
-flip_PCA_if_need_be(df = carrying_capactiy_PCA_medium_df, col = "Carrying_capactiy_PC2")
-flip_PCA_if_need_be(df = carrying_capactiy_PCA_medium_df, col = "Carrying_capactiy_PC3")
+flip_PCA_if_need_be(df = environ_PCA_medium_df, col = "environ_PC1")
+flip_PCA_if_need_be(df = environ_PCA_medium_df, col = "environ_PC2")
+flip_PCA_if_need_be(df = environ_PCA_medium_df, col = "environ_PC3")
 
-carrying_capactiy_PCA_medium_df <- carrying_capactiy_PCA_medium_df %>% 
+environ_PCA_medium_df <- environ_PCA_medium_df %>% 
   dplyr::select(-NPP_terra_mean)
 
 read_tsv(data_fn_medium, show_col_types = F) %>% 
-  full_join(carrying_capactiy_PCA_medium_df, by = join_by(Medium_only_merged_for_shared_language)) %>%
+  full_join(environ_PCA_medium_df, by = join_by(Medium_only_merged_for_shared_language)) %>%
   write_tsv(data_fn_medium)
 
 PCA_prop_variance_df <- found_pcs$tidied_pca %>%
@@ -220,14 +220,14 @@ writeLines(
   con = file.path(OUTPUTDIR, "PCA_nScree_summary_carrying_country.txt")
 )
 
-carrying_capactiy_PCA_country_df <- found_pcs$data_pca_df[,1:found_pcs$maxcol]  %>% #because the first col is the group we need to do plus one
-  rename(Carrying_capactiy_PC1 = "PC1",
-         Carrying_capactiy_PC2 = "PC2",
+environ_PCA_country_df <- found_pcs$data_pca_df[,1:found_pcs$maxcol]  %>% #because the first col is the group we need to do plus one
+  rename(environ_PC1 = "PC1",
+         environ_PC2 = "PC2",
          `COUNTRY NAME` = ID)
 
-carrying_capactiy_PCA_country_df$Carrying_capactiy_PC1 <- range_1_2(carrying_capactiy_PCA_country_df$Carrying_capactiy_PC1) 
-carrying_capactiy_PCA_country_df$Carrying_capactiy_PC2 <- range_1_2(carrying_capactiy_PCA_country_df$Carrying_capactiy_PC2)
+environ_PCA_country_df$environ_PC1 <- range_1_2(environ_PCA_country_df$environ_PC1) 
+environ_PCA_country_df$environ_PC2 <- range_1_2(environ_PCA_country_df$environ_PC2)
 
 read_tsv(data_fn_country, show_col_types = F) %>% 
-  full_join(carrying_capactiy_PCA_country_df, by = "COUNTRY NAME") %>% 
+  full_join(environ_PCA_country_df, by = "COUNTRY NAME") %>% 
   write_tsv(data_fn_country)

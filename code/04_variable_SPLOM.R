@@ -9,8 +9,8 @@ colnames(data) <- str_replace_all(colnames(data), "_", "\n")
 
 data_for_splom <- data %>%   
   dplyr::select("lg\ncount","EA033",  
-                "Carrying\ncapactiy\nPC1", 
-                "Carrying\ncapactiy\nPC2",
+                "environ\nPC1", 
+                "environ\nPC2",
                 "Settlement\ndate\ngrouping\nfiner", "Area\nland" , "Shoreline", "ratio\ncoastline\nto\narea", 
                 "Latitude\nabs\nmean","Annual\ntemperature\nmean", "Temperature\nseasonality\nmean", "Annual\nprecipitation\nmean", "Precipitation\nseasonality\nmean", "NPP\nterra\nmean", 
                 #"NPP\nterra\nvar", 
@@ -51,9 +51,9 @@ data_for_splom <- data %>%
                 "Precipitation\nseasonality\nmean", 
                 "NPP\nterra\nmean",
                 "NPP\naqua\nmean",
-                "Carrying\ncapactiy\nPC1",
-                "Carrying\ncapactiy\nPC2",
-                "Carrying\ncapactiy\nPC3"
+                "environ\nPC1",
+                "environ\nPC2",
+                "environ\nPC3"
   )
 
 fn <- "SPLOM_medium_all_variables.png"
@@ -105,8 +105,8 @@ data_for_splom <- data %>%
                 "Precipitation\nseasonality\nmean", 
                 "NPP\nterra\nmean",
                 "NPP\naqua\nmean",
-                "Carrying\ncapactiy\nPC1",
-                "Carrying\ncapactiy\nPC2"
+                "environ\nPC1",
+                "environ\nPC2"
   ) 
 
 fn <- "SPLOM_country_all_variables.png"
