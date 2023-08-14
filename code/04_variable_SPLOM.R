@@ -18,7 +18,7 @@ data_for_splom <- data %>%
                 #"NPP\naqua\nvar"
                 )
                 
-fn <- "SLOM_SBZR_all_variables.png"
+fn <- "SPLOM_SBZR_all_variables.png"
                 
 png(filename = paste0("output/plots/", fn), width = 10, height = 10, units = "in", res = 300)
 
@@ -56,7 +56,7 @@ data_for_splom <- data %>%
                 "Carrying\ncapactiy\nPC3"
   )
 
-fn <- "SLOM_medium_all_variables.png"
+fn <- "SPLOM_medium_all_variables.png"
 
 png(filename = paste0("output/plots/", fn), width = 10, height = 10, units = "in", res = 300)
 
@@ -109,7 +109,7 @@ data_for_splom <- data %>%
                 "Carrying\ncapactiy\nPC2"
   ) 
 
-fn <- "SLOM_country_all_variables.png"
+fn <- "SPLOM_country_all_variables.png"
 
 png(filename = paste0("output/plots/", fn), width = 10, height = 10, units = "in", res = 300)
 
