@@ -96,7 +96,7 @@ packages_in_most_scripts[1:5,]
 
 #generating bibtex file of all the packages where you've used at least one funciton
 
-output_fn <- "output/processed_data/used_pkgs.bib"
+output_fn <- "../latex/used_pkgs.bib"
 
 knitr::write_bib(as.character(most_used$packages), file = output_fn)
 
@@ -107,5 +107,11 @@ cat(paste0("Wrote citations for packages you've used to", output_fn, ".\n There 
 
 bibdf <- suppressWarnings(bib2df(output_fn))
 
-bibdf$BIBTEXKEY %>% 
-  writeLines(sep = ", ", con = "output/processed_data/citation_keys.txt")
+#solution to getting an "and" on the last line from SO
+# https://stackoverflow.com/questions/42456452/changing-vector-to-string-special-separator-for-last-element
+fPaste <- function(vec) sub(",\\s+([^,]+)$", " and \\1", toString(vec))
+
+vec <- paste0("\\citet{", bibdf$BIBTEXKEY, "}")
+
+fPaste(vec)   %>% 
+  writeLines(con = "../latex/citation_keys.txt")
