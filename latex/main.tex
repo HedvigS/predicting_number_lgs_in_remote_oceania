@@ -408,7 +408,7 @@ Future studies should use a grid and/or otherwise more fine grained approach to 
 \newpage
 \singlespacing
 \bibliographystyle{unified_edit_HS_SFM}
-\bibliography{latex/HS_Oceanic, }
+\bibliography{latex/HS_Oceanic, latex/used_pkgs}
 %\singlespacing
 
 
@@ -427,6 +427,36 @@ Any mistakes and misconceptions that remain are my own.
 \section*{Appendices}
 \addcontentsline{toc}{section}{Appendices}
 \renewcommand{\thesubsection}{\Alph{subsection}}
+
+\subsection{Data and code availability}
+\label{supp_data_availability}
+
+All data in this study is available freely. The data has been gathered from multiple sources, and is aggregated and published along with the code for the study.
+
+Global Self-consistent, Hierarchical, High-resolution Geography Database (GSHHG) \citep{wessel1996global}
+the ecoClimate database \citep{ecoclimate} 
+United States of America's National Aeronautics and Space Administration's Moderate Resolution Imaging Spectroradiometer (MODIS, \citet{running2021modis_terra, running2021modis_aqua}).
+
+All the R-scripts for data wrangling, analysis and plotting are found on GitHub and Zenodo.
+
+GitHub locations:
+\begin{itemize}
+\item predicting\_number\_lgs\_in\_remote\_oceania  \url{https://github.com/HedvigS/predicting_number_lgs_in_remote_oceania}
+\item glottolog-cldf (v3) \url{https://github.com/glottolog/glottolog/tree/v3.0}
+\item dplace-data (v) \url{}
+%# double check versions
+\end{itemize}
+
+Zenodo locations:
+\begin{itemize}
+\item predicting\_number\_lgs\_in\_remote\_oceania  \textcolor{red}{TBA Zenodo-url}
+\item glottolog-cldf (v3) \url{https://doi.org/10.5281/zenodo.437430}
+\item dplace-data (v) \url{https://doi.org/10.5281/zenodo.5554395}
+%# double check versions
+\end{itemize}
+
+
+
 
 \subsection{Data details}
 
@@ -536,7 +566,7 @@ The splitting of Eastern Fijian [fiji1243] into three languages has as consequen
 
 For this study, we need a good way of grouping islands and atolls in Remote Oceania (5,525 landmasses) that is not dependent on modern politics (e.g. nation states), but that reflects possible meaningful networks in Oceania prior to colonization. For this purpose, we will use two distinct approaches. The first is based on voyaging distances by canoe, and the second is based on whether the islands have a language in common or not. The assumption is that a group of islands is a meaningful unit for comparison if it forms a significant \textit{network of contact} and that this can be approximated by shorter sailing distances or evidenced by the maintenance of a shared language. 
 
-These two principles, overnight sailing distances and sharing a language, have been applied consistently over all islands and all languages using data available in the Ethnologue \citep{ethnologue22}, Glottolog \citep{glottolog40} and in some cases specialist literature (\citet{faaniu1983tuvalu,charpentier2012linguistic, francoisetatl2015, macdonald_2020, omniglot_tuvaluan} and a map of indigenous languages of New Caledonia published by CNRS-LACITO). For more on the definition of languages, see section \ref{sec:language_class}.
+These two principles, overnight sailing distances and sharing a language, have been applied consistently over all islands and all languages using data available in the Ethnologue \citep{ethnologue22}, Glottolog \citep{glottolog3} and in some cases specialist literature (\citet{faaniu1983tuvalu,charpentier2012linguistic, francoisetatl2015, macdonald_2020, omniglot_tuvaluan} and a map of indigenous languages of New Caledonia published by CNRS-LACITO). For more on the definition of languages, see section \ref{sec:language_class}.
 
 
 %\citet{hauofa_1993}
@@ -910,7 +940,8 @@ This dataset does not contain information on population size because there is no
 \subsection{R-packages used}
 \label{appendix_r_packages}
 
+All the analysis for this research project was done in the free and open source programming language R, using a multitude of packages. All code and data for this project are available in supplementary material and the locations listed in Supplementary material section \ref{supp_data_availability}. The scripts have been written so that any user of R can execute them. Please see the bibliography for information on package versions. Below are citations for all used packages.
 
-
+\input{latex/citation_keys.txt}.
 
 \end{document}
