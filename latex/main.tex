@@ -200,7 +200,7 @@ Let us compare two island groups in this region as an example: the S\={a}moa arc
 
 %A measurement of so-called ``political complexity'' in ethnographic surveys (c.f. \citet{gray1998ethnographic}) should then be correlated with different patterns of interaction and show up as a significant factor in language diversification. This is true even if political complexity is merely a proxy measurement of the interaction pattern that is in fact driving language change. 
 
-This study tests the hypothesis that more vertical levels of political organisation is meaningfully connected to the number of languages, also when we incorporate other possible factors like settlement time, size and carrying capacity (c.f. \citet{NETTLE1998}, \citet{gavin2012island} and \citet{hua2019ecological}). If the results show that political complexity has a significant correlation with the number of languages per island group when other relevant factors are controlled for, this lends support to Turner and Pawley's hypothesis.
+This study tests the hypothesis that more vertical levels of political organisation is meaningfully connected to the number of languages, also when we incorporate other possible factors like settlement time, size and ecological environment (c.f. \citet{NETTLE1998}, \citet{gavin2012island} and \citet{hua2019ecological}). If the results show that political complexity has a significant correlation with the number of languages per island group when other relevant factors are controlled for, this lends support to Turner and Pawley's hypothesis.
  
 %We will be using cultural data on societal structures in societies of Remote Oceania, archaeological dates and environmental variables (temperature and rainfall) to test if the political structure still significantly predicts the number of languages once other factors have been taken into account. Fig.~\ref{RO_overnight_coloured_dots} shows languages in Oceania, with islands grouped by overnight sailing distances \citep{mark_1986, marck2000}. In this study, we are concerned with languages of Remote Oceania (see Fig.~\ref{Remote_Oceania_subregions} for subregions of Oceania), and in particular Vanuatu and New Caledonia compared to the rest.
 
@@ -288,7 +288,15 @@ A simple test of Spearman's Rank Order correlation reveals that the number of la
 
 In order to create a formula for the statistical model, we consider the suggested causal relationships based on previous research (see section \ref{sec:previous_research}). The relationship between variables can be represented in a formalised manner in a Directed Acyclic Graph. There are set procedures for how to prune and translate a DAG for modelling (\citet{pearl1995causal} and \citet{mcelreath2020statistical}). 
 
-The variables Net Primary Production (from NASA satellites Terra and Aqua resp.), temperature \& rainfall (mean and seasonality) and absolute latitude are all related to each other 
+The variables Net Primary Production (NPP; the amount of biomass or carbon produced), temperature \& rainfall (mean and seasonality) and absolute latitude are all associated with the suitability of a place for life adn correlated with each other (c.f. Figs \ref{SPLOM_medium_all_variables } and \ref{SPLOM_SBZR_all_variables}). A more fertile environment for plants, animals and humans is generally found in places with higher and stable temperature, higher amounts of biomass etc. They are 
+
+It is not possible to include historic population data, because it does not exist for too many places, but 
+
+\ref{SPLOM_country_all_variables}
+
+
+
+
 
 
 Fig. \ref{Predicting_lgs_DAG_slimmed} shows the smaller DAG that represents the final model formula. For the full DAG, including excluded variables and variables with missing data, see appendix \ref{appendix_DAG_def}.
@@ -296,18 +304,18 @@ Fig. \ref{Predicting_lgs_DAG_slimmed} shows the smaller DAG that represents the 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=16cm]{Predicting_lgs_DAG_slimmed.png}
-\caption{Directed Acyclic Graph of the variables in this study (DAG, c.f. \cite{mcelreath2020statistical}). Blue = variable to be predicted (response), red = predictors. Colon nodes represent variable interactions, a type of deterministic DAG-node. PCA represents Principal Components Analysis. PCA was run on the incoming variables, and the optimal number of components (given a Non Graphical Cattel's Scree Test) were carried forward.}
+\caption{Directed Acyclic Graph of the variables in this study (DAG, c.f. \cite{mcelreath2020statistical}). Blue = variable to be predicted (response), red = predictors. Colon nodes represent variable interactions, a type of deterministic DAG-node. PCA represents Principal Components Analysis. PCA was run on the incoming variables, and the optimal number of components (given a Non Graphical Cattel's Scree Test) were carried forward. Terra and aqua are the names of the NASA satellites.}
 \label{Predicting_lgs_DAG_slimmed}
 \end{figure}
 
-This resulted in the following model formula\footnote{Settlement order was reversed from Fig. \ref{dates_map} such that high numbers represent further back in time and recent waves have a low number.}:
+This resulted in the following model formula\footnote{Settlement order was reversed from Fig. \ref{dates_map} such that high numbers represent further back in time.}:
 
 \begin{quotation}
 
 \texttt{Number of languages \textasciitilde{} Political complexity (mode)} + \\
-\indent \indent \texttt{PCA1\_carrying\_density  *  Shoreline (log10 +} \\
-\indent \indent\texttt{PCA2\_carrying\_density  *  Shoreline (log10 +} \\
-\indent \indent (\texttt{PCA3\_carrying\_density  *  Shoreline (log10) +} \footnote{For the island groups based on shared languages, the optimal number of Principal Components from the Non Graphical Cattel's Scree Test was three, but for the overnight sailing-distance groups two.})\\
+\indent \indent \texttt{Environmental PC1  *  Shoreline (log10 +} \\
+\indent \indent\texttt{Environmental PC2  *  Shoreline (log10 +} \\
+\indent \indent (\texttt{Environmental PC3 *  Shoreline (log10) +} \footnote{For the island groups based on shared languages, the optimal number of Principal Components from the Non Graphical Cattel's Scree Test was three, but for the overnight sailing-distance groups two.})\\
 \indent \indent\texttt{Settlement order *  Shoreline (log10)} \\
 
 \end{quotation}
@@ -755,9 +763,11 @@ For comparison across island groups, the oldest settlement order per group was u
 \FloatBarrier
 \subsubsection{Other environmental factors} 
 \label{appendix_environ}
-As previous studies of language diversification have shown (e.g. \citet{ greenhill2015demographic, gavin2017process, Pacheco_Coelho_2019, hua2019ecological}), environmental factors such as latitude, rainfall etc can be useful in estimating language richness. This is due to the connection between these variables and carrying capacity (the maximum population size that can be sustained by the environment), which in turn suggests how many people can live in an region. In many parts of the world, we have limited data on actual population dynamics --- in particular historically. How many people lived on Efate island 1,000 years ago? This is hard to know. Estimations of carrying capacity can give us an upper limit on how many humans could possible live in an area. The link to languages is as follows: the more groups of people who can sustain themselves on a smaller area each, the more languages there can be in that region.
+As previous studies of language diversification have shown (e.g. \citet{ greenhill2015demographic, gavin2017process, Pacheco_Coelho_2019, hua2019ecological}), environmental factors such as latitude, rainfall etc can be useful in estimating language richness. This is due to the connection between these variables and the ability to sustain several self-sufficient smaller groups.
 
-We are using measurements of absolute latitude, Net Primary Production, Precipitation (rainfall), temperature and size of islands to estimate carrying capacity. The data comes from Global Self-consistent, Hierarchical, High-resolution Geography Database (GSHHG) \citep{wessel1996global}, the ecoClimate database \citep{ecoclimate} and the Moderate Resolution Imaging Spectroradiometer (MODIS, \citet{running2021modis_terra, running2021modis_aqua}). The coordinates of the centroids of each land mass from GSHHG was used to extract the information from ecoClimate and MODIS. The ecoClimate data used are simulations of the pre-industrial period ($\sim$1760).
+%In many parts of the world, we have limited data on actual population dynamics --- in particular historically. How many people lived on Efate island 1,000 years ago? This is hard to know. Estimations of carrying capacity can give us an upper limit on how many humans could possible live in an area. The link to languages is as follows: the more groups of people who can sustain themselves on a smaller area each, the more languages there can be in that region.
+
+We are using measurements of absolute latitude, Net Primary Production, Precipitation (rainfall), temperature and size of islands to estimate the environments ability to sustain small groups. The data comes from Global Self-consistent, Hierarchical, High-resolution Geography Database (GSHHG) \citep{wessel1996global}, the ecoClimate database \citep{ecoclimate} and the Moderate Resolution Imaging Spectroradiometer (MODIS, \citet{running2021modis_terra, running2021modis_aqua}). The coordinates of the centroids of each land mass from GSHHG was used to extract the information from ecoClimate and MODIS. The ecoClimate data used are simulations of the pre-industrial period ($\sim$1760).
 
 The Net Primary Production (NPP) data from from MODIS is from 2001, 2002, 2003 and 2004 (these are the oldest available information). NPP reflects the amount of carbon captured by plants in an ecosystem, after accounting for losses due to respiration. The data is gathered by two space satellites (Terra and Aqua) of the United States of America's National Aeronautics and Space Administration (NASA). They collect spectral indices of land-based vegetation, which are then used to infer NPP which is acculmated into a grid where each cell is 500 meters by 500 meters. For more details, see \citet{running2015daily} \footnote{The manual is for a previous release, where the grid cells were 1km by 1km. The more recent release is 500m by 500m.}.
 
@@ -803,7 +813,7 @@ Figs \ref{fig:un_pop_plot} and \ref{fig:un_pop_plot_log10}
 
 \citet{UN_pop}
 
-\centering
+
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.8\linewidth]{number_of_languages_vs_pop_1950.png}
@@ -873,7 +883,7 @@ This dataset does not contain information on population size because there is no
 
 
 \begin{sidewaysfigure}[p] 
-\centering
+
 \includegraphics[width=23cm]{Predicting_lgs_DAG_full.png}
 \caption{Directed Acyclic Graph of the variables in this study. Blue = variable to be predicted (response).}
 \label{Predicting_lgs_DAG_full}
@@ -885,28 +895,25 @@ This dataset does not contain information on population size because there is no
 \label{appendix_supp_figs}
 
 \begin{figure}[ht]
-\centering
+
 \includegraphics[width=15cm]{brms_Marck_group_full_effect_ridge_panels_plot.png}
 \caption{Coefficient distribution of BRMS model, using overnight sailing distances island groups with all observations.}
 \label{brms_Marck_group_full_effect_ridge_panels}
 \end{figure}
 
 \begin{figure}[ht]
-\centering
 \includegraphics[width=15cm]{brms_medium_group_full_effect_ridge_panels_plot.png}
 \caption{Coefficient distribution of BRMS model, using shared-language island groups with all observations.}
 \label{brms_medium_group_full_effect_ridge_panels}
 \end{figure}
 
 \begin{figure}[ht]
-\centering
 \includegraphics[width=15cm]{brms_Marck_dropped_out_plot_diff.png}
 \caption{Mean absolute difference of predicted and observed number of languages per island group (overnight sailing distances group). Every column represents a new run of the model with a particular group dropped out from the observations. When Vanuatu + Temotu is dropped out, the model predicts numbers that are more similar to the observed values than when that island group is included in the model.}
 \label{brms_Marck_dropped_out_plot_diff}
 \end{figure}
 
 \begin{figure}[ht]
-\centering
 \includegraphics[width=15cm]{brms_medium_dropped_out_plot_diff.png}
 \caption{Mean absolute difference of predicted and observed number of languages per island group (shared language grouping). Every column represents a new run of the model with a particular group dropped out from the observations. When Malakula is dropped out, the model predicts numbers that are more similar to the observed values than when that island group is included in the model.}
 \label{brms_medium_dropped_out_plot_diff}
@@ -914,14 +921,12 @@ This dataset does not contain information on population size because there is no
 
 
 \begin{figure}[ht]
-\centering
 \includegraphics[width=15cm]{latex/SPLOM_SBZR_all_variables.png}
 \caption{Scatterplot matrix of all variables available, over overnight-sailing-groups.}
 \label{SPLOM_SBZR_all_variables}
 \end{figure}
 
 \begin{figure}[ht]
-\centering
 \includegraphics[width=15cm]{latex/SPLOM_medium_all_variables.png}
 \caption{Scatterplot matrix of all variables available, over shared-language-groups.}
 \label{SPLOM_medium_all_variables}
@@ -929,18 +934,18 @@ This dataset does not contain information on population size because there is no
 
 
 \begin{figure}[ht]
-\centering
+
     \includegraphics[width=15cm]{latex/SPLOM_country_all_variables.png}
-\caption{Scatterplot matrix of all variables available, over shared-language-groups.}
+\caption{Scatterplot matrix of all variables available, over countries. Note that the population data is taken from \citet{UN_pop} and refers to the whole country, i.e. the population of the entire USA --- not just Hawai'i..}
 \label{SPLOM_country_all_variables}
 \end{figure}
 
-
+\FloatBarrier
 \newpage
 \subsection{R-packages used}
 \label{appendix_r_packages}
 
-All the analysis for this research project was done in the free and open source programming language R, using a multitude of packages. All code and data for this project are available in supplementary material and the locations listed in Supplementary material section \ref{supp_data_availability}. The scripts have been written so that any user of R can execute them. Please see the bibliography for information on package versions. Below are citations for all used packages.
+All the analysis for this research project was done in the free and open source programming language R, using a multitude of packages. All code and data for this project are available in the locations listed in Supplementary material section \ref{supp_data_availability}. The scripts have been written so that any user of R can execute them. Please see the bibliography for information on package versions. Below are citations for all used packages.
 
 \input{latex/citation_keys.txt}.
 
