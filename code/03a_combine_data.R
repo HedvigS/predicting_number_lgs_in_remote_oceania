@@ -215,17 +215,6 @@ Island_group_summarised_medium <- Island_group_all_sep %>%
 
 write_tsv(Island_group_summarised_medium, "output/processed_data/RO_Hedvig_aggregate_medium_island.tsv")
 
-Island_group_summarised_medium$Medium_only_merged_for_shared_language <- fct_reorder(Island_group_summarised_medium$Medium_only_merged_for_shared_language, Island_group_summarised_medium$lg_count)
-
-Island_group_summarised_medium%>% 
-  rename(`Language count` = lg_count) %>% 
-  rename(`Island group (merged for language)` = Medium_only_merged_for_shared_language) %>% 
-  ggplot() +
-  geom_bar(aes(x = `Island group (merged for language)`, y = `Language count`), stat = "Identity", fill = Island_group_summarised_medium$color) +
-  theme_classic() +
-  theme(axis.text.x = element_blank(), legend.position = "None")
-
-ggsave("output/plots/Lg_distrubition_medium_island_group_lg_merged.png", width = 10, height = 5)
 
 #Marck
 Island_group_summarised_Marck_group <- Island_group_all_sep %>% 
@@ -254,18 +243,6 @@ Island_group_summarised_Marck_group <- Island_group_all_sep %>%
 
 write_tsv(Island_group_summarised_Marck_group, "output/processed_data/RO_Hedvig_aggregate_marck_group.tsv")
 
-Island_group_summarised_Marck_group$Marck_group <- fct_reorder(Island_group_summarised_Marck_group$Marck_group, Island_group_summarised_Marck_group$lg_count)
-
-Island_group_summarised_Marck_group %>% 
-  rename(`Language count` = lg_count) %>% 
-  rename(`Marck group` = Marck_group) %>% 
-  ggplot() +
-  geom_bar(aes(x = `Marck group`, y = `Language count`), stat = "Identity", fill = Island_group_summarised_Marck_group$color) +
-  theme_classic() +
-  theme(axis.text.x = element_blank(), legend.position = "None")
-#  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5), legend.position = "None")
-
-ggsave("output/plots/Lg_distrubition_Marck_group.png", width = 10, height = 5)
 
 #SBZR group
 Island_group_summarised_SBZR_group <- Island_group_all_sep %>% 
@@ -293,19 +270,6 @@ Island_group_summarised_SBZR_group <- Island_group_all_sep %>%
          mean_lat_abs = abs(mean_lat))
 
 write_tsv(Island_group_summarised_SBZR_group, "output/processed_data/RO_Hedvig_aggregate_SBZR_group.tsv")
-
-Island_group_summarised_SBZR_group$SBZR_group <- fct_reorder(Island_group_summarised_SBZR_group$SBZR_group, Island_group_summarised_SBZR_group$lg_count)
-
-Island_group_summarised_SBZR_group %>% 
-  rename(`Language count` = lg_count) %>% 
-  rename(`SBZR group` = SBZR_group) %>% 
-  ggplot() +
-  geom_bar(aes(x = `SBZR group`, y = `Language count`), stat = "Identity", fill = Island_group_summarised_SBZR_group$color) +
-  theme_classic() +
-  theme(axis.text.x = element_blank(), legend.position = "None")
-#  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5), legend.position = "None")
-
-ggsave("output/plots/Lg_distrubition_SBZR_group.png", width = 10, height = 5)
 
 
 ##COUNTRY
