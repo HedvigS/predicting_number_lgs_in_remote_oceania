@@ -3,126 +3,126 @@ mean_Rhat	1.00008789024815
 mean_Bulk_ESS	46519.1417091321
 mean_Tail_ESS	57188.5509605346
 diff_predicted_vs_observed	1.98181818181818
-diff_predicted_vs_observed.1	1.98181818181818
+diff_predicted_vs_observed_abs	1.98181818181818
 dropped_observation_prediction	6.7887
 dropped_observation_prediction_diff	123.2113
 dropped_observation_prediction_diff_abs	123.2113
 b_Intercept_mean	7.45235752787552
-b_Carrying_capactiy_PC1_mean	6.42559490915155
+b_environ_PC1_mean	6.42559490915155
 b_Shoreline_mean	-5.70337039677893
-b_Carrying_capactiy_PC2_mean	-5.99716802998381
+b_environ_PC2_mean	-5.99716802998381
 b_EA033_mean	-0.243628492983081
 b_Settlement_date_grouping_finer_mean	-7.19494170342259
-b_Carrying_capactiy_PC1:Shoreline_mean	-4.90885932550552
-b_Shoreline:Carrying_capactiy_PC2_mean	4.45242189401512
+b_environ_PC1:Shoreline_mean	-4.90885932550552
+b_Shoreline:environ_PC2_mean	4.45242189401512
 b_Shoreline:Settlement_date_grouping_finer_mean	5.7702892036431
 b_Intercept_sd	7.2386496906441
-b_Carrying_capactiy_PC1_sd	2.57661303833631
+b_environ_PC1_sd	2.57661303833631
 b_Shoreline_sd	4.51043842579252
-b_Carrying_capactiy_PC2_sd	4.64099989903855
+b_environ_PC2_sd	4.64099989903855
 b_EA033_sd	0.61328941715041
 b_Settlement_date_grouping_finer_sd	2.68381929417239
-b_Carrying_capactiy_PC1:Shoreline_sd	1.87361178061907
-b_Shoreline:Carrying_capactiy_PC2_sd	3.15686649428809
+b_environ_PC1:Shoreline_sd	1.87361178061907
+b_Shoreline:environ_PC2_sd	3.15686649428809
 b_Shoreline:Settlement_date_grouping_finer_sd	1.85760554905783
 b_Intercept_min	-24.5052
-b_Carrying_capactiy_PC1_min	-5.3958
+b_environ_PC1_min	-5.3958
 b_Shoreline_min	-28.1422
-b_Carrying_capactiy_PC2_min	-22.9934
+b_environ_PC2_min	-22.9934
 b_EA033_min	-3.18227
 b_Settlement_date_grouping_finer_min	-19.3131
-b_Carrying_capactiy_PC1:Shoreline_min	-12.0495
-b_Shoreline:Carrying_capactiy_PC2_min	-9.34592
+b_environ_PC1:Shoreline_min	-12.0495
+b_Shoreline:environ_PC2_min	-9.34592
 b_Shoreline:Settlement_date_grouping_finer_min	-0.778681
 b_Intercept_max	39.4149
-b_Carrying_capactiy_PC1_max	17.0221
+b_environ_PC1_max	17.0221
 b_Shoreline_max	10.7006
-b_Carrying_capactiy_PC2_max	14.7434
+b_environ_PC2_max	14.7434
 b_EA033_max	2.34815
 b_Settlement_date_grouping_finer_max	2.93917
-b_Carrying_capactiy_PC1:Shoreline_max	3.0779
-b_Shoreline:Carrying_capactiy_PC2_max	16.4799
+b_environ_PC1:Shoreline_max	3.0779
+b_Shoreline:environ_PC2_max	16.4799
 b_Shoreline:Settlement_date_grouping_finer_max	14.1232
 b_Intercept_straddle_zero	yes
-b_Carrying_capactiy_PC1_straddle_zero	yes
+b_environ_PC1_straddle_zero	yes
 b_Shoreline_straddle_zero	yes
-b_Carrying_capactiy_PC2_straddle_zero	yes
+b_environ_PC2_straddle_zero	yes
 b_EA033_straddle_zero	yes
 b_Settlement_date_grouping_finer_straddle_zero	yes
-b_Carrying_capactiy_PC1:Shoreline_straddle_zero	yes
-b_Shoreline:Carrying_capactiy_PC2_straddle_zero	yes
+b_environ_PC1:Shoreline_straddle_zero	yes
+b_Shoreline:environ_PC2_straddle_zero	yes
 b_Shoreline:Settlement_date_grouping_finer_straddle_zero	yes
 Intercept§Estimate	7.43185667387953
-Carrying_capactiy_PC1§Estimate	6.43687419544422
+environ_PC1§Estimate	6.43687419544422
 Shoreline§Estimate	-5.69192421095112
-Carrying_capactiy_PC2§Estimate	-5.99655023872192
+environ_PC2§Estimate	-5.99655023872192
 EA033§Estimate	-0.241368884886077
 Settlement_date_grouping_finer§Estimate	-7.19492347754509
-Carrying_capactiy_PC1:Shoreline§Estimate	-4.91671941221853
-Shoreline:Carrying_capactiy_PC2§Estimate	4.45393470912363
+environ_PC1:Shoreline§Estimate	-4.91671941221853
+Shoreline:environ_PC2§Estimate	4.45393470912363
 Shoreline:Settlement_date_grouping_finer§Estimate	5.76874925024828
 Intercept§Est.Error	7.18914998738383
-Carrying_capactiy_PC1§Est.Error	2.57449744583351
+environ_PC1§Est.Error	2.57449744583351
 Shoreline§Est.Error	4.4759849906665
-Carrying_capactiy_PC2§Est.Error	4.60318554917948
+environ_PC2§Est.Error	4.60318554917948
 EA033§Est.Error	0.612835927324708
 Settlement_date_grouping_finer§Est.Error	2.69060736902056
-Carrying_capactiy_PC1:Shoreline§Est.Error	1.87413396467396
-Shoreline:Carrying_capactiy_PC2§Est.Error	3.13317821202579
+environ_PC1:Shoreline§Est.Error	1.87413396467396
+Shoreline:environ_PC2§Est.Error	3.13317821202579
 Shoreline:Settlement_date_grouping_finer§Est.Error	1.86242060789803
 Intercept§l-95% CI	-6.558205
-Carrying_capactiy_PC1§l-95% CI	1.2926085
+environ_PC1§l-95% CI	1.2926085
 Shoreline§l-95% CI	-14.9182
-Carrying_capactiy_PC2§l-95% CI	-14.7955075
+environ_PC2§l-95% CI	-14.7955075
 EA033§l-95% CI	-1.4487525
 Settlement_date_grouping_finer§l-95% CI	-12.56576
-Carrying_capactiy_PC1:Shoreline§l-95% CI	-8.516251
-Shoreline:Carrying_capactiy_PC2§l-95% CI	-1.78942425
+environ_PC1:Shoreline§l-95% CI	-8.516251
+Shoreline:environ_PC2§l-95% CI	-1.78942425
 Shoreline:Settlement_date_grouping_finer§l-95% CI	2.20464525
 Intercept§u-95% CI	21.72561
-Carrying_capactiy_PC1§u-95% CI	11.4038
+environ_PC1§u-95% CI	11.4038
 Shoreline§u-95% CI	2.66567075
-Carrying_capactiy_PC2§u-95% CI	3.2254775
+environ_PC2§u-95% CI	3.2254775
 EA033§u-95% CI	0.95064375
 Settlement_date_grouping_finer§u-95% CI	-1.9878925
-Carrying_capactiy_PC1:Shoreline§u-95% CI	-1.16531925
-Shoreline:Carrying_capactiy_PC2§u-95% CI	10.4710225
+environ_PC1:Shoreline§u-95% CI	-1.16531925
+Shoreline:environ_PC2§u-95% CI	10.4710225
 Shoreline:Settlement_date_grouping_finer§u-95% CI	9.50886525
 Intercept§Rhat	1.00006960959699
-Carrying_capactiy_PC1§Rhat	1.00012605076748
+environ_PC1§Rhat	1.00012605076748
 Shoreline§Rhat	1.00006321268883
-Carrying_capactiy_PC2§Rhat	1.00011986869442
+environ_PC2§Rhat	1.00011986869442
 EA033§Rhat	1.00004286205429
 Settlement_date_grouping_finer§Rhat	1.00007586833313
-Carrying_capactiy_PC1:Shoreline§Rhat	1.00011477456635
-Shoreline:Carrying_capactiy_PC2§Rhat	1.00009878000883
+environ_PC1:Shoreline§Rhat	1.00011477456635
+Shoreline:environ_PC2§Rhat	1.00009878000883
 Shoreline:Settlement_date_grouping_finer§Rhat	1.00007998552301
 Intercept§Bulk_ESS	45260.9057617653
-Carrying_capactiy_PC1§Bulk_ESS	45817.0421693538
+environ_PC1§Bulk_ESS	45817.0421693538
 Shoreline§Bulk_ESS	45793.587825911
-Carrying_capactiy_PC2§Bulk_ESS	38656.1558436389
+environ_PC2§Bulk_ESS	38656.1558436389
 EA033§Bulk_ESS	80730.4901434865
 Settlement_date_grouping_finer§Bulk_ESS	40527.9409351977
-Carrying_capactiy_PC1:Shoreline§Bulk_ESS	44739.7139935632
-Shoreline:Carrying_capactiy_PC2§Bulk_ESS	37970.1337620725
+environ_PC1:Shoreline§Bulk_ESS	44739.7139935632
+Shoreline:environ_PC2§Bulk_ESS	37970.1337620725
 Shoreline:Settlement_date_grouping_finer§Bulk_ESS	39176.3049472004
 Intercept§Tail_ESS	56108.5692100701
-Carrying_capactiy_PC1§Tail_ESS	58307.2246843447
+environ_PC1§Tail_ESS	58307.2246843447
 Shoreline§Tail_ESS	56118.5147796872
-Carrying_capactiy_PC2§Tail_ESS	52463.0107022985
+environ_PC2§Tail_ESS	52463.0107022985
 EA033§Tail_ESS	75384.9877342289
 Settlement_date_grouping_finer§Tail_ESS	55274.3528679424
-Carrying_capactiy_PC1:Shoreline§Tail_ESS	57651.2875919048
-Shoreline:Carrying_capactiy_PC2§Tail_ESS	50213.9813146307
+environ_PC1:Shoreline§Tail_ESS	57651.2875919048
+Shoreline:environ_PC2§Tail_ESS	50213.9813146307
 Shoreline:Settlement_date_grouping_finer§Tail_ESS	53175.0297597039
 Intercept§straddle_zero_95	yes
-Carrying_capactiy_PC1§straddle_zero_95	no
+environ_PC1§straddle_zero_95	no
 Shoreline§straddle_zero_95	yes
-Carrying_capactiy_PC2§straddle_zero_95	yes
+environ_PC2§straddle_zero_95	yes
 EA033§straddle_zero_95	yes
 Settlement_date_grouping_finer§straddle_zero_95	no
-Carrying_capactiy_PC1:Shoreline§straddle_zero_95	no
-Shoreline:Carrying_capactiy_PC2§straddle_zero_95	yes
+environ_PC1:Shoreline§straddle_zero_95	no
+Shoreline:environ_PC2§straddle_zero_95	yes
 Shoreline:Settlement_date_grouping_finer§straddle_zero_95	no
 dropped_observation_prediction_mean	6.7887
 dropped_observation_prediction_diff_mean	123.2113
