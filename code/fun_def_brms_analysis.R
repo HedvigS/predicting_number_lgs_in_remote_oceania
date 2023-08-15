@@ -268,7 +268,7 @@ ms_df <-  ms$fixed %>%
                           mean_Bulk_ESS = ms$fixed$Bulk_ESS %>% mean(),
                           mean_Tail_ESS = ms$fixed$Tail_ESS %>% mean(),
                           diff_predicted_vs_observed = diff,
-                          diff_predicted_vs_observed = diff_abs,
+                          diff_predicted_vs_observed_abs = diff_abs,
                           dropped_observation_prediction = predict_new_data$mean,
                           dropped_observation_prediction_diff = predict_new_data$diff,
                           dropped_observation_prediction_diff_abs = predict_new_data$diff_abs) %>% 
