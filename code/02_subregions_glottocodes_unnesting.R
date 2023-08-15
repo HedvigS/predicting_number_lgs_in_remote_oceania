@@ -49,7 +49,8 @@ SBZR_df_names <- SBZR_df %>%
   mutate(cost_area_name = ifelse(n_cost > 2, paste0(Marck_group), cost_area_name)) %>% 
   distinct(cost_area_name, cost_area_id) %>% 
   mutate(cost_area_name = ifelse(cost_area_name == "North Island (NZ) + South Island (NZ)", "Aotearoa", cost_area_name)) %>% 
-  mutate(cost_area_name = ifelse(cost_area_name == "North Marquesas + South Marquesas", "Marquesas", cost_area_name)) %>% 
+  mutate(cost_area_name = ifelse(cost_area_name == "North Marquesas + South Marquesas", "Marquesas", cost_area_name)) %>%   mutate(cost_area_name = ifelse(cost_area_name == "New Caledonia (incl loyalties)", "Kanaky (greater)", cost_area_name)) %>%
+  mutate(cost_area_name = str_replace_all(cost_area_name, "_", " ")) %>% 
   full_join(SBZR_df, by = "cost_area_id") %>% 
   rename(SBZR_group = cost_area_name)
 
