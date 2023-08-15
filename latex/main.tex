@@ -251,7 +251,7 @@ Unfortunately, it is difficult to incorporate data on contact with non-Austrones
 
 %\footnote{Note that this is separate from theories of effects of culture and environment on the \emph{nature} of language, such as the work by \citet{wraygrace2007}, \citet{lupyandale2010} and \citet{raviv2019compositional}. Their work focusses on why different kinds of interactional patterns has consequences for the compositionality/complexity of a language. For this study, we are concentrating on linguistic \emph{diversity} as opposed to \emph{disparity}.}.
 
-Finally, there has been a growing interest in environmental effects on language diversification\footnote{For a longer summary of recent studies of language diversification, see \citet{gavin2013toward} and \citet{greenhill2015demographic}.}. One of the oldest and most influential bodies of work in this vein is by Nettle. \citet{NETTLE1998} showed that there is a correlation between number of languages per country and ecological risk (as measured by mean growing season). Nettle suggests that high-risk environments encourage wider social networks and therefore reduce the number of languages in that area. In a more recent paper, \citet{hua2019ecological} constructed a more complex and fine grained model of how environmental factors influence language diversity. They found that factors associated with risk (precipitation and temperature seasonality and season length) predict much of the distribution of languages in the world. Similarly, \citet{gavin2017process} showed that a simple model that takes into account rainfall and an upper bound of population size can to a large extent predict the distribution of indigenous languages in Australia. Given the success of these models, the amount and seasonality of rainfall and temperature variables are also included in our model predicting language diversity in Remote Oceania. 
+Finally, there has been a growing interest in environmental effects on language diversification\footnote{For a longer summary of recent studies of language diversification, see \citet{gavin2013toward} and \citet{greenhill2015demographic}.}. One of the oldest and most influential bodies of work in this vein is by Nettle. \citet{NETTLE1998} showed that there is a correlation between number of languages per country and ecological risk (as measured by mean growing season). Nettle suggests that high-risk environments encourage wider social networks and therefore reduce the number of languages in that area. \citet{hua2019ecological} expanded on this idea and explains that \emph{Smaller social groups are presumed to be more likely to be stable and self-sufficient in areas with a more abundant and reliable year-round food supply.} \citet{hua2019ecological} constructed a more complex and fine-grained model of how environmental factors influence language diversity. They found that factors associated with risk (precipitation and temperature seasonality and season length) did indeed predict much of the distribution of languages in the world. Similarly, \citet{gavin2017process} showed that a simple model that takes into account rainfall and an upper bound of population size can to a large extent predict the distribution of indigenous languages in Australia. Given the success of these models, the amount and seasonality of rainfall and temperature variables are also included in our model predicting language diversity in Remote Oceania. 
 
 
 %There are many more papers on demographic, cultural and environmental factors on language diversification, unfortunately there is not space enough here to relate them all. There are two overview papers that summarises many other studies on the topic very well --- \citet{gavin2013toward} and \citet{greenhill2015demographic}. I will refrain from copying their clear and instructive summaries and meta-analysis and instead direct the curious reader to seek those two papers out themselves should they want to explore the topic further.
@@ -269,46 +269,45 @@ This study focuses on a particular hypothesis concerning a particular region of 
 \FloatBarrier
 \section{Materials and Method}
 \label{pol_complex_method}
-The approach of this paper is to gather data on island groups and their societies and then fit a statistical model such that we can evaluate which factors are the best at explaining the observed number of languages when they are co-estimated quantitatively. 
+The approach of this paper is to gather relevant data on island groups and their societies and then fit a statistical model which aims to predict the number of languages given all the variables. From the composition of variables in the resulting model we can infer which have the greatest predicting power when they are co-estimated.
 
-The unit of analysis is ``island group''. We cannot use modern political boundaries, and as we want to capture something about the communities at large we are not satisfied with using individual islands. For these reasons, we use two different ways of grouping islands: overnight sailing distances and shared language (see appendix \ref{sec:island_geo} for details).
+The unit of analysis is ``island group''. We cannot use modern political boundaries (``French Polynesia'', ``Cook Islands'' etc) because they are often historically and culturally inappropriate. As we want to capture something about the communities at large we are not satisfied with using individual islands. For these reasons, we use two different ways of grouping islands: overnight sailing distances and shared language (see appendix \ref{sec:island_geo} for details).
 
 %Predicting_lgs_DAG_full
 
-A simple test of Spearman's Rank Order correlation reveals that the number of languages and political complexity per island group are indeed correlated (rho  = -0.4, \emph{p} value = >0.001 for islands grouped for shared language). However, this is not sufficient. We want to investigate whether this correlation still holds once we explicitly incorporate other variables that we expect might explain language diversity as well, such as time-depth and environmental factors. The data for this study consists of:
+A simple test of Spearman's Rank Order correlation reveals that the number of languages and political complexity per island group are indeed moderately correlated (rho  = -0.4, \emph{p} value = >0.001 for islands grouped for shared language). However, this is not sufficient. We want to investigate whether this correlation still holds once we explicitly incorporate other variables that we expect might explain language diversity as well, such as time-depth and environmental factors. 
+
+Variables were included in the model if they a) have been suggested as relevant in previous literature, b) there is enough data on the variable in a published source and c) if they relate to the response variable (language richness) in a non-mediated manner (c.f. \citet{pearl1995causal}). This results in the following variables:
 
 \begin{itemize}
+\item \textbf{response variable}:
+\begin{itemize}
 \item language classification, based on \citet{glottolog40} and other sources (see Appendix \ref{sec:language_class}).
-\item number of vertical levels of jurisdictional hierarchy per society \footnote{Nota Bene that there are other kinds of political complexity besides vertical, for example horizontal complex exchange networks. See Appendix \ref{appendix_def_pol_complex} for more.}, based on the Ethnographic Atlas \citep{gray1998ethnographic, d_place_all}, \citet{sheehan2018coevolution} and own modifications. Also known as ``political complexity'' and ``EA033'' (see appendix \ref{appendix_def_pol_complex} for details on definition and coding).
+\end{itemize}
+\item \textbf{predicting variables:}
+\begin{itemize}
+\item number of vertical levels of jurisdictional hierarchy per society \footnote{Nota Bene that there are other kinds of political complexity besides vertical, for example, horizontal complex exchange networks. See Appendix \ref{appendix_def_pol_complex} for more.}, based on the Ethnographic Atlas \citep{gray1998ethnographic, d_place_all}, \citet{sheehan2018coevolution} and own modifications. Also known as ``political complexity'' and ``EA033'' (see appendix \ref{appendix_def_pol_complex} for details on definition and coding).
 \item archaeological dates, grouped into waves \citep{intoh2007reconnaissance, intoh2008ongoing, rieth_cochrane_2018, levin_seikel_miles_2019, pol_outliers_stat_art, Napolitano_et_al_yap}. (See appendix \ref{appendix_def_dates} for details.)
 \item historical environmental data from \citet{ecoclimate}: mean temperature, temperature seasonality, mean rainfall and rainfall seasonality. (See appendix \ref{appendix_environ} for details.)
 \item environmental data from NASA satellites \citep{running2021modis_aqua, running2021modis_terra}: Net Primary Productivity. See appendix \ref{appendix_environ} for details.)
 \item island geography (latitude and shoreline) from the Global Self-consistent, Hierarchical, High-resolution Geography Database (GSHHG) \citep{wessel1996global}.  (See appendix \ref{appendix_environ} for details.)
 \end{itemize}
+\end{itemize}
 
-In order to create a formula for the statistical model, we consider the suggested causal relationships based on previous research (see section \ref{sec:previous_research}). The relationship between variables can be represented in a formalised manner in a Directed Acyclic Graph. There are set procedures for how to prune and translate a DAG for modelling (\citet{pearl1995causal} and \citet{mcelreath2020statistical}). 
+The variables Net Primary Production (NPP; the amount of biomass or carbon produced), temperature \& rainfall (mean and seasonality) and absolute latitude are all associated with the suitability of a place for life and they correlate with each other, at least to some degree (c.f. Figs \ref{SPLOM_medium_all_variables} and \ref{SPLOM_SBZR_all_variables}). In this study, they are all tracking a similar concept: the suitability for human populations to thrive in smaller groups. Because of this, we are running a Principal Components Analysis on all seven variables, this allows us to extract a variable that explains most of the information. We ran a Non-Graphical Cattel's Scree Test \citep{cattell1966scree, R-nFactors} to determine the number of optimal components (overnight sailing distance island groups = 2 PCs, shared language island groups = 3 PCs).
 
-The variables Net Primary Production (NPP; the amount of biomass or carbon produced), temperature \& rainfall (mean and seasonality) and absolute latitude are all associated with the suitability of a place for life adn correlated with each other (c.f. Figs \ref{SPLOM_medium_all_variables } and \ref{SPLOM_SBZR_all_variables}). A more fertile environment for plants, animals and humans is generally found in places with higher and stable temperature, higher amounts of biomass etc. They are 
+In order to create a formula for the statistical model, we consider the suggested causal relationships based on previous research (see section \ref{sec:previous_research}). Besides the effect of the environmental variables on language richness, we also hypothesise that there can be a joint effect with the size of the island. Similarly, time-depth and size of islands may also interact to produce an interaction. 
 
-It is not possible to include historic population data, because it does not exist for too many places, but 
+The relationship between variables can be represented in a formalised manner in a Directed Acyclic Graph (DAG; \citet{pearl1995causal} and \citet{mcelreath2020statistical}), see Fig. \ref{Predicting_lgs_DAG_slimmed}. For the full DAG, including excluded variables and variables with missing data, see appendix \ref{appendix_DAG_def}. Interactions are denoted with a deterministic node labelled with $\ast$. 
 
-\ref{SPLOM_country_all_variables}
-
-
-
-
-
-
-Fig. \ref{Predicting_lgs_DAG_slimmed} shows the smaller DAG that represents the final model formula. For the full DAG, including excluded variables and variables with missing data, see appendix \ref{appendix_DAG_def}.
-
-\begin{figure}[ht]
+\begin{figure}[h!]
 \centering
 \includegraphics[width=16cm]{Predicting_lgs_DAG_slimmed.png}
-\caption{Directed Acyclic Graph of the variables in this study (DAG, c.f. \cite{mcelreath2020statistical}). Blue = variable to be predicted (response), red = predictors. Colon nodes represent variable interactions, a type of deterministic DAG-node. PCA represents Principal Components Analysis. PCA was run on the incoming variables, and the optimal number of components (given a Non Graphical Cattel's Scree Test) were carried forward. Terra and aqua are the names of the NASA satellites.}
+\caption{Directed Acyclic Graph of the variables in this study (DAG, c.f. \cite{mcelreath2020statistical}). Blue = variable to be predicted (response), red = predictors. Colon nodes represent variable interactions, a type of deterministic DAG-node. PCA represents Principal Components Analysis. PCA was run on the incoming variables, and the optimal number of components (given a Non-Graphical Cattel's Scree Test) were carried forward. Terra and aqua are the names of the NASA satellites.}
 \label{Predicting_lgs_DAG_slimmed}
 \end{figure}
 
-This resulted in the following model formula\footnote{Settlement order was reversed from Fig. \ref{dates_map} such that high numbers represent further back in time.}:
+This results in the following model formula\footnote{Settlement order was reversed from Fig. \ref{dates_map} such that high numbers represent further back in time.}:
 
 \begin{quotation}
 
@@ -809,6 +808,12 @@ Keeping those problems in mind we can still explore the relationship between the
 
 Figs \ref{fig:un_pop_plot} and \ref{fig:un_pop_plot_log10}
 
+
+
+It is not possible to include population data, because it does not exist for many places --- especially not going back past 1850. While resources like \citet{elcat} have population numbers for many places, it does not sufficiently cover Oceania to allow the variable to be included. However, it is possible that the environmental variables are relevant here as they may suggest island groups that could be home to larger populations. Population size is good to keep in mind for the interpretation of the environmental principal components. 
+
+
+
 <insert paragraph about population size and number of languages being connected and link back to carrying capacity.>
 
 \citet{UN_pop}
@@ -871,7 +876,7 @@ All measurements, except the response variable, were scaled and centred to make 
 \subsection{Defining of Directed Acyclic Graph and variables}
 \label{appendix_DAG_def}
 
-
+ There are set procedures for how to prune and translate a DAG for modelling (\citet{pearl1995causal} and \citet{mcelreath2020statistical}). 
 
 This dataset does not contain information on population size because there is no resource with sufficient coverage for all of the island groups. \citet{raviv2019larger} and other studies have shown that community size may influence language diversification independently from network structure. I am including variables that may correlate with population size, such as area, rainfall and temperature. It is possible to interpret the effect of those variables as related to population size.
 
