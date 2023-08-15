@@ -296,18 +296,18 @@ Variables were included in the model if they a) have been suggested as relevant 
 
 The variables Net Primary Production (NPP; the amount of biomass or carbon produced), temperature \& rainfall (mean and seasonality) and absolute latitude are all associated with the suitability of a place for life and they correlate with each other, at least to some degree (c.f. Figs \ref{SPLOM_medium_all_variables} and \ref{SPLOM_SBZR_all_variables}). In this study, they are all tracking a similar concept: the suitability for human populations to thrive in smaller groups. Because of this, we are running a Principal Components Analysis on all seven variables, this allows us to extract a variable that explains most of the information. We ran a Non-Graphical Cattel's Scree Test \citep{cattell1966scree, R-nFactors} to determine the number of optimal components (overnight sailing distance island groups = 2 PCs, shared language island groups = 3 PCs).
 
-In order to create a formula for the statistical model, we consider the suggested causal relationships based on previous research (see section \ref{sec:previous_research}). Besides the effect of the environmental variables on language richness, we also hypothesise that there can be a joint effect with the size of the island. Similarly, time-depth and size of islands may also interact to produce an interaction. 
+In order to create a formula for the statistical model, we consider the suggested causal relationships based on previous research (see section \ref{sec:previous_research}). Besides the effect of the environmental variables on language richness, we also hypothesise that there can be a joint effect with the size of the island. Similarly, the time-depth and size of islands may also interact. 
 
 The relationship between variables can be represented in a formalised manner in a Directed Acyclic Graph (DAG; \citet{pearl1995causal} and \citet{mcelreath2020statistical}), see Fig. \ref{Predicting_lgs_DAG_slimmed}. For the full DAG, including excluded variables and variables with missing data, see appendix \ref{appendix_DAG_def}. Interactions are denoted with a deterministic node labelled with $\ast$. 
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 \centering
 \includegraphics[width=16cm]{Predicting_lgs_DAG_slimmed.png}
 \caption{Directed Acyclic Graph of the variables in this study (DAG, c.f. \cite{mcelreath2020statistical}). Blue = variable to be predicted (response), red = predictors. Colon nodes represent variable interactions, a type of deterministic DAG-node. PCA represents Principal Components Analysis. PCA was run on the incoming variables, and the optimal number of components (given a Non-Graphical Cattel's Scree Test) were carried forward. Terra and aqua are the names of the NASA satellites.}
 \label{Predicting_lgs_DAG_slimmed}
 \end{figure}
 
-This results in the following model formula\footnote{Settlement order was reversed from Fig. \ref{dates_map} such that high numbers represent further back in time.}:
+This results in the following model formula\footnote {Settlement order was reversed from Fig. \ref{dates_map} such that high numbers represent further back in time.}:
 
 \begin{quotation}
 
@@ -316,43 +316,58 @@ This results in the following model formula\footnote{Settlement order was revers
 \indent \indent\texttt{Environmental PC2  *  Shoreline (log10 +} \\
 \indent \indent (\texttt{Environmental PC3 *  Shoreline (log10) +} \footnote{For the island groups based on shared languages, the optimal number of Principal Components from the Non Graphical Cattel's Scree Test was three, but for the overnight sailing-distance groups two.})\\
 \indent \indent\texttt{Settlement order *  Shoreline (log10)} \\
-
 \end{quotation}
 
-Shoreline was log-10-transformed. All variables were also scaled between 1 and 2 so as to make the coefficients directly comparable and interpretable and make interactions natural.
+Shoreline was log-10-transformed. All predicting variables were then also scaled between 1 and 2 so as to make the coefficients of singular terms and interactions morecomparable and easy to interpret.
 
-To test the impact of several variables predicting the same response variable we can use a Bayesian Regression Model  \citep{burkner2017brms}. The distribution of languages per island group is a kind of count data and it is over-dispersed (c.f. \citet[4-5]{gavin2012island}). There are many island groups with one language and a few with higher numbers (see Figs. \ref{polygon_plot_SBZR} and \ref{polygon_plot_medium} in Appendix \ref{sec:island_geo}). For the overnight-sailing island groups, the group that contains Vanuatu and Temotu has 130 languages. This skewed distribution necessitates a Poisson distribution for the response variable in the model, which is able to adjust the relationship between the mean and the variance appropriately\footnote{This issue was also faced by \citet{gavin2012island} in their study of environmental factors in language diversification in the Pacific. They chose another approach, a reciprocal transformation, based on model fitness compared to two other kinds of transformations of the response variable.}.
+To test the impact of several variables predicting the same response variable we can use a Bayesian Regression Model \citep{burkner2017brms}. The distribution of languages per island group is over-dispersed. There are many island groups with one language and only a few with higher numbers (see Figs. \ref{polygon_plot_SBZR} and \ref{polygon_plot_medium} in Appendix \ref{sec:island_geo}). For the overnight-sailing island groups, the group that contains Vanuatu and Temotu has 130 languages, whereas most island groups in Polynesia have 1 or 2. This skewed distribution necessitates a Poisson distribution for the response variable in the model, which is able to adjust the relationship between the mean and the variance appropriately\footnote{This issue was also faced by \citet{gavin2012island} in their study of environmental factors in language diversification in the Pacific. They chose another approach, a reciprocal transformation, based on model fitness compared to two other kinds of transformations of the response variable.}.
 
-Due to missing data, we are testing our models over 65 out of 104 shared language groups and 56 out of 67 overnight distance groups. This sample still contains some of our more extreme sites, like Santo, Kanaky (New Caledonia mainland) and Malakula. Variables that did not cover Vanuatu and New Caledonia with enough specific data-points are not included in this study, for example historic population data, non-austronesian gene flow or jurisdictional hierarchy within local communities. 
+Due to missing data, we are testing our models over 65 out of 104 shared language groups and 56 out of 67 overnight distance groups. This sample still contains some of our more extreme sites, like Santo, Kanaky (New Caledonia mainland) and Malakula. Variables that did not cover Vanuatu and New Caledonia with enough specific data-points are not included in this study, for example historic population data, non-Austronesian gene flow or jurisdictional hierarchy within local communities. 
 
 The results were calculated in R 3.6.0 \citep{R} using the function \texttt{brms::brm()} \citep{burkner2017brms}, tidyverse suite \citep{tidyverse13} and the modEvA-package \citep{barbosa2016package}. For a full list of packages used, see appendix \ref{appendix_r_packages}.
 
 \FloatBarrier
 \section{Results}
- 
- Fig.~\ref{medium_model_predict} and Fig.~\ref{Marck_model_predict} illustrate the predictions the models make compared to the observed language counts. We will first discuss the shared language island groups, and secondly the overnight distance groups.
+We will first go through the outcomes for the shared language island groups, and secondly the overnight distance groups. In common for both is that political complexity is a relevant predicting factor, with a negative effect (the more political vertical levels, the lower the number of languages). This lends support to the proposal by \citet{pawley81} and \citet{pawley2007}. However, there are details of the result that suggest that the effect may be due to non-Austronesian contact rather than political complexity \emph{per se}.
 
-For the shared language island groups, political complexity and shoreline in interaction with time depth are the variables that have a significant impact, i.e. do not cross zero (see coefficent distributions in Figs. \ref{brms_Marck_group_full_effect_ridge_panels} and \ref{brms_medium_group_full_effect_ridge_panels} in appendix \ref{appendix_supp_figs}).
+Fig.~\ref{medium_model_predict} shows the actual observed language counts (purple triangles) and predictions of this model (green boxplots). The model does predict that Santo, Kanaky and Malakula has the highest language counts in the dataset. Our observed language counts for Santo, Kanky and Malakula are 24, 29 and 33 respectively. The model is very close for Santo and Kanaky, but underestimates Malakula by 17 languages. The absolute average difference between the mean predicted values and the observed is 2.8.
 
-The coefficient distribution of political complexity is negative, which means that the higher the value (the more political levels), the lower the number of languages in that place. 
-
-Fig.~\ref{medium_model_predict} shows the actual observed language counts (purple triangles), predictions of this model (green boxplots). The model does predict that Santo, Kanaky and Malakula has the highest language counts in the dataset. Our observed language counts for Santo, Kanky and Malakula are 24, 29 and 33 respectively. The model is very close for Santo and Kanaky, but underestimates Malakula by 17 languages.
+%The results show that the model run with the shared-language island groups have an absolute average of difference between the predicting number of languages and observed of 2,8 the overnight-sailing distances island groups of 4.3 Fig.~\ref{medium_model_predict} and Fig.~\ref{SBZR_model_predict} illustrate the specific predictions the models make compared to the observed language counts. 
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=\textwidth]{brms_predict_medium.png}
-\caption{Prediction from the model with island grouped for shared language.}
+\includegraphics[width=0.75\textwidth]{brms_predict_medium.png}
+\caption{Prediction from the model with island grouped for shared language. Average absolute difference = 2.8.}
 \label{medium_model_predict}
 \end{figure}
 
+For the shared language island groups, political complexity (EA033) is the only variable that is significantly different from zero, i.e. the full coefficient distribution does not overlap zero. If we only consider the 95\% credibility interval, as is common practice in statistics, there is one additional term that does not overlap zero: shoreline in interaction with time-depth. Fig \ref{brms_SBZR_group_full_effect_ridge_panels} in Appendix \ref{appendix_supp_figs} shows the full distributions.
+
+If we drop one island group out at a time and re-run the model, we can asses which island groups represent the largest challenge to fitting the model. When Malakula (central Vanuatu), Kanaky (New Caledonia main island) and Santo (central Vanuatu) are left out, the difference becomes much lower (see Fig. \ref{brms_medium_dropped_out_plot_diff} in \ref{appendix_supp_figs}). They are the three island groups with the highest number of languages (see Fig \ref{polygon_plot_medium} in appendix \ref{sec:island_geo}). Political complexity remains the most important predicting factor in these three models, the coefficient does not overlap with zero.
+
+%and shoreline in interaction with time depth are the variables that have a significant impact, i.e. do not cross zero (see coefficent distributions in Figs.  and \ref{brms_medium_group_full_effect_ridge_panels} in appendix \ref{appendix_supp_figs}).
+
+For the overnight-sailing distances, several island groups are much larger than the previous grouping. Vanuatu (including Anuta and Tikopia) are all within the same group (see Fig \ref{polygon_plot_SBZR} in appendix \ref{sec:island_geo}). This also leads to a larger discrepancy between the number of languages, with Vanuatu and Temotu having 130 and S\={a}moa still only one. The absolute average difference between the predicted and observed number of languages is greater, 4.3. Fig \ref{SBZR_model_predict} shows the prediction vs observed per island group.
+
 \begin{figure}[ht]
 \centering
-\includegraphics[width=\textwidth]{brms_predict_Marck.png}
-\caption{Prediction from the model with island grouped for overnight sailing distances.}
-\label{Marck_model_predict}
+\includegraphics[width=0.75\textwidth]{latex/brms_predict_SBZR.png}
+\caption{Prediction from the model with island grouped for overnight sailing distances.  Average absolute difference = 4.3.}
+\label{SBZR_model_predict}
 \end{figure}
 
-In addition, we also did a robustness analysis of dropping out one island group at a time to see how this affects the overall performance. Overall, the average absolute difference between the observed number of languages and the predicted was 2.4 for the overnight sailing-groups and 1.5 for the shared language groups. Most island groups can be dropped out without any significant change, however there are some key island groups that stand out. If the overnight sailing distance group Vanuatu + Temotu is dropped, the difference between observed and predicted gets much smaller (0.8 as opposed to 2.4). If Malakula specifically is dropped from the merged-for-shared-languages-groups, the drop is not as steep (1 instead of 1.5). See figs \ref{brms_Marck_dropped_out_plot_diff} and \ref{brms_medium_dropped_out_plot_diff} in appendix \ref{appendix_supp_figs}. Furthermore, if Vanuatu + Temotu is dropped as an observation, political complexity becomes non-relevant as a predictor (coefficient distribution crosses zero).
+
+Shoreline
+Ea033
+Time
+Shoreline and time
+
+\ref{brms_SBZR_group_full_effect_ridge_panels}
+
+
+
+
+In addition, we also did a robustness analysis of dropping out one island group at a time to see how this affects the overall performance. Overall, the average absolute difference between the observed number of languages and the predicted was 2.4 for the overnight sailing-groups and 1.5 for the shared language groups. Most island groups can be dropped out without any significant change, however there are some key island groups that stand out. If the overnight sailing distance group Vanuatu + Temotu is dropped, the difference between observed and predicted gets much smaller (0.8 as opposed to 2.4). If Malakula specifically is dropped from the merged-for-shared-languages-groups, the drop is not as steep (1 instead of 1.5). See figs \ref{brms_SBZR_dropped_out_plot_diff} and \ref{brms_medium_dropped_out_plot_diff} in appendix \ref{appendix_supp_figs}. Furthermore, if Vanuatu + Temotu is dropped as an observation, political complexity becomes non-relevant as a predictor (coefficient distribution crosses zero).
 
 %Most of the island groups in this dataset have only one language, and this seems to have caused some issues (despite the Negative Binomial distribution). The model does best at predicting languages in Polynesia (which is dominated by island groups with only one language). Islands groups in Polynesia can have a very long coastline (like the Paumotu archipelago of French Polynesia) or very short one (like Niue). There is not as much difference in shorelines between islands of Vanuatu. The model seems to have struggled with using shoreline to predict languages globally, even leading to the result that Shoreline as a standalone term comes out in the model as negatively predicting the number of languages (though not with a \emph{p} value that passes traditional thresholds of significance). 
 
@@ -388,7 +403,7 @@ It should also be noted that these preliminary results do not answer the questio
 
 Unlike the studies by \citet{gavin2012island}, \citet{hua2019ecological} and others, these results indicate that environmental factors such as rainfall seasonality and isolation have less of an impact on language diversity in Remote Oceania. The variables that have a significant effect are size (area and shoreline), time depth and political complexity. The fact that the results did not find that variables which have been predictive elsewhere have an impact in these models should not be taken as conclusive and may be due to limitations of this particular work.
 
-%As can be seen from the specific predictions the models make (Fig. \ref{medium_model_predict} and Fig. \ref{Marck_model_predict}), neither model accurately predicts the key island groups in our dataset (Vanuatu, Kanaky (New Caledonia) and Temotu). Explaining the difference between Melanesian Remote Oceania and the rest is the most important factor in evaluating our hypothesis. Therefore the results should be interpreted as ultimately inconclusive. 
+%As can be seen from the specific predictions the models make (Fig. \ref{medium_model_predict} and Fig. \ref{SBZR_model_predict}), neither model accurately predicts the key island groups in our dataset (Vanuatu, Kanaky (New Caledonia) and Temotu). Explaining the difference between Melanesian Remote Oceania and the rest is the most important factor in evaluating our hypothesis. Therefore the results should be interpreted as ultimately inconclusive. 
 
 \citet{Pacheco_Coelho_2019} explore an approach where the predictive power of each variable is not fixed, but changes with respect to location. Such an approach may give more insight into this dataset, and is left as future work.
 
@@ -422,6 +437,9 @@ Future studies should use a grid and/or otherwise more fine grained approach to 
 
 \newpage
 \section*{Acknowledgements}
+
+The research leading to these results has received funding from the Department of Linguistic and Cultural Evolution, Max Planck Institute for Evolutionary, the School of Culture, History and Language at the Australian National University and from the Australian Research Council through The Wellsprings of Linguistic Diversity Laureate Project (awarded to Professor Nicholas Evans 2014-2018) and the Centre of Excellence for the Dynamics of Language (CoEDL).
+
 I am fortunate enough to have colleagues in academia who have been generous enough to discuss conceptual methodological matters with me, these are Stephen Mann, Angela Chira, Russell Gray, Oleg Sobchuk, Richard McElreath, Tiago Tresoldi, Michael Dunn, Hannah Haynie, Outi Vesakoski, Fredric Blum and Luke Maurits. I am also grateful for the advice of Mary Walworth, Ray Harlow, Andrew Pawley, Paul Geraghty and Alexandre François concerning language classification and Matthew Spriggs, Geoff Kushnick and Christopher Ballard regarding archaeology and anthropology of Oceania.
 
 I also want to thank my PhD supervisors who reviewed earlier versions of this study for my thesis \citep{skirgaard2020multilevel} and provided insightful input; Nicholas Evans, Andrew Pawley, Mark Ellison and Simon Greenhill.
@@ -568,6 +586,7 @@ The splitting of Eastern Fijian [fiji1243] into three languages has as consequen
 \FloatBarrier
 \subsubsection{Grouping Islands and atolls}
 \label{sec:island_geo}
+%polygon_plot_SBZR
 
 %When measuring language diversity, many methods do not deal well with islands and water. For example, all islands with only one language were excluded from the study by \citet{curriemace2009} on the relationship between language territory and ethnographic features. This is unfortunate, but understandable. The authors model of language diversification was not able to accurately enough deal with contact over water.
 
@@ -901,9 +920,9 @@ This dataset does not contain information on population size because there is no
 
 \begin{figure}[ht]
 
-\includegraphics[width=15cm]{brms_Marck_group_full_effect_ridge_panels_plot.png}
+\includegraphics[width=15cm]{brms_SBZR_group_full_effect_ridge_panels_plot.png}
 \caption{Coefficient distribution of BRMS model, using overnight sailing distances island groups with all observations.}
-\label{brms_Marck_group_full_effect_ridge_panels}
+\label{brms_SBZR_group_full_effect_ridge_panels}
 \end{figure}
 
 \begin{figure}[ht]
@@ -913,9 +932,9 @@ This dataset does not contain information on population size because there is no
 \end{figure}
 
 \begin{figure}[ht]
-\includegraphics[width=15cm]{brms_Marck_dropped_out_plot_diff.png}
+\includegraphics[width=15cm]{brms_SBZR_dropped_out_plot_diff.png}
 \caption{Mean absolute difference of predicted and observed number of languages per island group (overnight sailing distances group). Every column represents a new run of the model with a particular group dropped out from the observations. When Vanuatu + Temotu is dropped out, the model predicts numbers that are more similar to the observed values than when that island group is included in the model.}
-\label{brms_Marck_dropped_out_plot_diff}
+\label{brms_SBZR_dropped_out_plot_diff}
 \end{figure}
 
 \begin{figure}[ht]
