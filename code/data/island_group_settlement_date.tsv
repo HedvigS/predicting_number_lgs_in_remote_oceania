@@ -1,143 +1,143 @@
-"Island group (overnight distances)"	"Smaller specific island group"	"Name in source"	"Time depth settlement group"	"Date ranges"	"Oldest date"	"Source"	"Meta_source"	"Based on inference from neighbouring island?"	"double_check"	"Description group"	"subregion"	"Comment"	"settlement_date_grouping_6"	"settlement_date_grouping_coarser"	"Order in Rieth Cochrane table"
-"Laguas_yan_gani"	"Guam"	"Mariana Islands"	1	"3500, 2950"	3,500	"Carson (2014) and Athens et al (2004)"	"\citet{rieth_cochrane_2018}"			"Old Micronesia"	"Micronesia"		6	5	
-"Laguas_yan_gani"	"Saipan"	"Mariana Islands"	1	"3500, 2950"	3,500	"Carson (2014) and Athens et al (2004)"	"\citet{rieth_cochrane_2018}"			"Old Micronesia"	"Micronesia"		4	3	17
-"Vanuatu (greater)"	"Tangoa"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	1	1	1
-"Vanuatu (greater)"	"Ambae"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	1	1	1
-"Vanuatu (greater)"	"Ambrym"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	3
-"Vanuatu (greater)"	"Aneityum"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	2
-"Vanuatu (greater)"	"Aore"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	2
-"Vanuatu (greater)"	"Araki"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	2
-"Vanuatu (greater)"	"Efate"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	2
-"Vanuatu (greater)"	"Epi"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	2
-"Vanuatu (greater)"	"Erromango"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	2
-"Vanuatu (greater)"	"Gaua"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	2
-"Vanuatu (greater)"	"Hiu"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	3
-"Vanuatu (greater)"	"Loh-Toga"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	3
-"Vanuatu (greater)"	"Maewo"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Outlier on island as well. Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	3
-"Vanuatu (greater)"	"Mafea"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	3
-"Vanuatu (greater)"	"Malakula"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	3
-"Vanuatu (greater)"	"Merelava group"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	3
-"Vanuatu (greater)"	"Mota"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	3
-"Vanuatu (greater)"	"Mota Lava"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	3
-"Vanuatu (greater)"	"Paama"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	3
-"Vanuatu (greater)"	"Pentecost"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	3
-"Vanuatu (greater)"	"Santo"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	3
-"Vanuatu (greater)"	"Tamambo"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	3
-"Vanuatu (greater)"	"Tanna"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	3
-"Vanuatu (greater)"	"Tongoa"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	3
-"Vanuatu (greater)"	"Tutuba"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	3
-"Vanuatu (greater)"	"Ureparapara"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	3
-"Vanuatu (greater)"	"Vanua Lava"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	3
-"Vanuatu (greater)"	"Vao"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	3
-"Vanuatu (greater)"	"Etarik"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	3
-"Vanuatu (greater)"	"Lopevi"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	3
-"Vanuatu (greater)"	"Mataso"	"Vanuatu"	2	"3200, 3000"	3,200	"Bedford et al (2006)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"	"Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those."	2	2	3
-"Vanuatu (greater)"	"Reef Islands"	"Reef Islands and Santa Cruz Islands"	2	"3185, 2639"	3,185	"Green (1991), Green et al (2008) and Sheppard et al (2015)"	"\citet{rieth_cochrane_2018}"						2	2	3
-"Vanuatu (greater)"	"Lomlom"	"Reef Islands and Santa Cruz Islands"	2	"3185, 2639"	3,185	"Green (1991), Green et al (2008) and Sheppard et al (2015)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"		2	2	3
-"Vanuatu (greater)"	"Nendö"	"Reef Islands and Santa Cruz Islands"	2	"3185, 2639"	3,185	"Green (1991), Green et al (2008) and Sheppard et al (2015)"	"\citet{rieth_cochrane_2018}"		"yes"	"Vanuatu"	"Melanesia"		2	2	3
-"Vanuatu (greater)"	"Te Anu"	"Reef Islands and Santa Cruz Islands"	2	"3185, 2639"	3,185	"Green (1991), Green et al (2008) and Sheppard et al (2015)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"		2	2	3
-"Vanuatu (greater)"	"Utupua"	"Reef Islands and Santa Cruz Islands"	2	"3185, 2639"	3,185	"Green (1991), Green et al (2008) and Sheppard et al (2015)"	"\citet{rieth_cochrane_2018}"			"Vanuatu"	"Melanesia"		2	2	3
-"Vanuatu (greater)"	"Vanikoro"	"Reef Islands and Santa Cruz Islands"	2	"3185, 2639"	3,185	"Green (1991), Green et al (2008) and Sheppard et al (2015)"	"\citet{rieth_cochrane_2018}"		"yes"	"Vanuatu"	"Melanesia"		2	2	3
-"Vanuatu (greater)"	"Tegua"	"Reef Islands and Santa Cruz Islands"	2	"3185, 2639"	3,185	"Green (1991), Green et al (2008) and Sheppard et al (2015)"	"\citet{rieth_cochrane_2018}"						2	2	3
-"Fiji"	"Vanua Levu"	"Fiji"	2	"3130, 2870"	3,130	"Hope et al (2009), Denham et al (2012) and Nunn and Petchey (2013)"	"\citet{rieth_cochrane_2018}"			"Fiji"	"Melanesia"		2	2	3
-"Fiji"	"Yasawa (greater)"	"Fiji"	2	"3130, 2870"	3,130	"Hope et al (2009), Denham et al (2012) and Nunn and Petchey (2013)"	"\citet{rieth_cochrane_2018}"			"Fiji"	"Melanesia"		2	2	3
-"Fiji"	"Taveuni"	"Fiji"	2	"3130, 2870"	3,130	"Hope et al (2009), Denham et al (2012) and Nunn and Petchey (2013)"	"\citet{rieth_cochrane_2018}"			"Fiji"	"Melanesia"		2	2	5
-"Fiji"	"Lau"	"Fiji"	2	"3130, 2870"	3,130	"Hope et al (2009), Denham et al (2012) and Nunn and Petchey (2013)"	"\citet{rieth_cochrane_2018}"			"Fiji"	"Melanesia"		2	2	5
-"Fiji"	"Viti Levu"	"Fiji"	2	"3130, 2870"	3,130	"Hope et al (2009), Denham et al (2012) and Nunn and Petchey (2013)"	"\citet{rieth_cochrane_2018}"			"Fiji"	"Melanesia"		2	2	5
-"Fiji"	"Lomaviti"	"Fiji"	2	"3130, 2870"	3,130	"Hope et al (2009), Denham et al (2012) and Nunn and Petchey (2013)"	"\citet{rieth_cochrane_2018}"			"Fiji"	"Melanesia"		2	2	5
-"Fiji"	"Leveuka (Lomaviti)"	"Fiji"	2	"3130, 2870"	3,130	"Hope et al (2009), Denham et al (2012) and Nunn and Petchey (2013)"	"\citet{rieth_cochrane_2018}"			"Fiji"	"Melanesia"		2	2	5
-"Fiji"	"Vatulele"	"Fiji"	2	"3130, 2870"	3,130	"Hope et al (2009), Denham et al (2012) and Nunn and Petchey (2013)"	"\citet{rieth_cochrane_2018}"			"Fiji"	"Melanesia"		2	2	5
-"Fiji"	"Kadavu"	"Fiji"	2	"3130, 2870"	3,130	"Hope et al (2009), Denham et al (2012) and Nunn and Petchey (2013)"	"\citet{rieth_cochrane_2018}"			"Fiji"	"Melanesia"		2	2	5
-"Palau"	"Palau"	"Palau"	2	"3100, 2900"	3,100	"Athens and Ward (2001), Clark et al (2006) and Liston (2005, 2013)"	"\citet{rieth_cochrane_2018}"			"Old Micronesia"	"Micronesia"		2	2	5
-"Mo-ava-mo-iki"	"Rennelle"	"Rennelle"	2	"3100, 2900"	3,100	"\citet{carson2012recent}"			"yes"	"Southern Poly Outlier"	"Melanesia"	"Older date for pre-polynesian settlement horizon"	2	2	5
-"Mo-ava-mo-iki"	"Bellona"	"Bellona"	2	"3100, 2900"	3,100	"\citet{carson2012recent}"			"yes"	"Southern Poly Outlier"	"Melanesia"	"Older date for pre-polynesian settlement horizon"	2	2	6
-"Kanaky"	"Belep"	"New Caledonia"	2	"3050, 3000"	3,050	"Sand (2001)"	"\citet{rieth_cochrane_2018}"			"New Caledonia"	"Melanesia"		2	2	4
-"Kanaky"	"Kanaky (New Caledonia main island)"	"New Caledonia"	2	"3050, 3000"	3,050	"Sand (2001)"	"\citet{rieth_cochrane_2018}"			"New Caledonia"	"Melanesia"		2	2	4
-"Kanaky"	"Lifou"	"New Caledonia"	2	"3050, 3000"	3,050	"Sand (2001)"	"\citet{rieth_cochrane_2018}"			"New Caledonia"	"Melanesia"		2	2	4
-"Kanaky"	"Nengone"	"New Caledonia"	2	"3050, 3000"	3,050	"Sand (2001)"	"\citet{rieth_cochrane_2018}"			"New Caledonia"	"Melanesia"		2	2	4
-"Kanaky"	"Ouvea"	"New Caledonia"	2	"3050, 3000"	3,050	"Sand (2001)"	"\citet{rieth_cochrane_2018}"			"New Caledonia"	"Melanesia"		2	2	4
-"Kanaky"	"Ouvea (Iaai)"	"Ouvea"	2	"3050, 3000"	3,050	"Sand (2001)"	"\citet{rieth_cochrane_2018}"			"New Caledonia"	"Melanesia"		2	2	4
-"Vanuatu (greater)"	"Duff Islands"	"Taumako"	2	3000	3,000	"Leach and Davidson (2008)"	"\citet{carson2012recent}"					"Carson describes initial Lapita settlement 3,000 years ago and Polynesian outlier settlmenent 1000 years ago."	3	2	7
-"Anuta-Tikopia"	"Tikopia"	"Tikopia"	2	3000	3,000	"\citet{carson2012recent}"				"Southern Poly Outlier"	"Melanesia"		3	2	8
-"Anuta-Tikopia"	"Anuta"	"Anuta"	2	"2950"	2,950	"\citet{carson2012recent}"			"yes"	"Southern Poly Outlier"	"Melanesia"		4	3	11
-"Tonga"	"Tonga"	"Tonga"	3	"2846, 2750"	2,846	"Burley and Connaughton (2007) and Burley et al (1999, 2001, 2012)"	"\citet{rieth_cochrane_2018}"			"Western Poly"	"Polynesia"		4	3	11
-"Samoa"	"Samoa"	"Samoa"	3	"2800, 2400"	2,800	"Cochrane et al (2013), Kurch and Hunt (1993) and Petchey (2001)"	"\citet{rieth_cochrane_2018}"			"Western Poly"	"Polynesia"		4	3	11
-"Waab"	"Nguluwan"	"Nguluwan"	4	"2400, 2100"	2,400	"\citet{Napolitano_et_al_yap}"		"Yes"		"Micronesia Bismarck"	"Micronesia"		4	3	11
-"Waab"	"Yap"	"Yap"	4	"2400, 2100"	2,400	"\citet{Napolitano_et_al_yap}"				"Micronesia Bismarck"	"Micronesia"		4	3	11
-"Chuuk"	"Chuuk"	"Chuuk"	4	"2300, 1750"	2,300	"Shutler (1984)"	"\citet{rieth_cochrane_2018}"			"Nuclear Micronesia"	"Micronesia"		4	3	11
-"Chuuk"	"Mortlock"	"Chuuk"	4	"2300, 1750"	2,300	"Shutler (1984)"	"\citet{rieth_cochrane_2018}"	"Yes"		"Nuclear Micronesia"	"Micronesia"		4	3	11
-"Chuuk"	"Namonuito"	"Chuuk"	4	"2300, 1750"	2,300	"Shutler (1984)"	"\citet{rieth_cochrane_2018}"	"Yes"		"Nuclear Micronesia"	"Micronesia"		4	3	10
-"Chuuk"	"Paafang"	"Chuuk"	4	"2300, 1750"	2,300	"Shutler (1984)"	"\citet{rieth_cochrane_2018}"	"Yes"		"Nuclear Micronesia"	"Micronesia"		4	3	10
-"Chuuk"	"Pollap"	"Chuuk"	4	"2300, 1750"	2,300	"Shutler (1984)"	"\citet{rieth_cochrane_2018}"	"Yes"		"Nuclear Micronesia"	"Micronesia"		4	3	10
-"Chuuk"	"Puluwat"	"Chuuk"	4	"2300, 1750"	2,300	"Shutler (1984)"	"\citet{rieth_cochrane_2018}"	"Yes"		"Nuclear Micronesia"	"Micronesia"		4	3	10
-"Oroluk"	"Oroluk"	"Chuuk"	4	"2300, 1750"	2,300	"Shutler (1984)"	"\citet{rieth_cochrane_2018}"		"yes"				4	3	15
-"East Futuna"	"East Futuna"	"Futuna"	4	"2300, 2200"	2,300	"Kirch (1981)"	"\citet{rieth_cochrane_2018}"			"Western Poly"	"Polynesia"		4	3	15
-"Uvea (Wallis)"	"Uvea (Wallis)"	"Futuna"	4	"2300, 2200"	2,300	"Kirch (1981)"	"\citet{rieth_cochrane_2018}"	"Yes"		"Western Poly"	"Polynesia"		4	3	15
-"Niuafoou"	"Niuafoou"	"Niuafoou"	4	"2300, 2200"	2,300	"Kirch (1981)"	"\citet{rieth_cochrane_2018}"	"Yes"		"Western Poly"	"Polynesia"		4	3	15
-"Niuatoputapu"	"Niuatoputapu"	"Niuatoputapu"	4	"2300, 2200"	2,300	"Kirch (1981)"	"\citet{rieth_cochrane_2018}"	"Yes"		"Western Poly"	"Polynesia"		4	3	14
-"Tungaru"	"Tungaru"	"Tungaru"	5	"2150, 1750"	2,150	"DiPazza (1999)"	"\citet{rieth_cochrane_2018}"			"Nuclear Micronesia"	"Micronesia"		4	3	16
-"Nauru"	"Nauru"	"Tungaru"	5	"2150, 1750"	2,150	"DiPazza (1999)"	"\citet{rieth_cochrane_2018}"	"Yes"		"Nuclear Micronesia"	"Micronesia"		4	3	16
-"Banaba"	"Banaba"	"Tungaru"	5	"2150, 1750"	2,150	"DiPazza (1999)"	"\citet{rieth_cochrane_2018}"	"Yes"	"yes"				4	3	16
-"Tuvalu"	"Niu"	"Tuvalu"	5	"2150, 1750"	2,150	"DiPazza (1999)"	"\citet{rieth_cochrane_2018}"	"Yes"		"Western Poly"	"Polynesia"		4	3	12
-"Kosrae"	"Kosrae"	"Kosrae"	5	"2100, 1750"	2,100	"Athens (1995)"	"\citet{rieth_cochrane_2018}"			"Nuclear Micronesia"	"Micronesia"		4	3	13
-"Ratak"	"Ratak"	"Marshall Islands"	5	"2000, 1600"	2,000	"Beardsley (1994), Riley (1987), weisler (1999, 2001) and Weisler et al (2012)"	"\citet{rieth_cochrane_2018}"			"Nuclear Micronesia"	"Micronesia"		4	3	17
-"Ralik"	"Ralik"	"Marshall Islands"	5	"2000, 1600"	2,000	"Beardsley (1994), Riley (1987), weisler (1999, 2001) and Weisler et al (2012)"	"\citet{rieth_cochrane_2018}"			"Nuclear Micronesia"	"Micronesia"		4	3	17
-"Anewetak"	"Anewetak"	"Marshall Islands"	5	"2000, 1600"	2,000	"Beardsley (1994), Riley (1987), weisler (1999, 2001) and Weisler et al (2012)"	"\citet{rieth_cochrane_2018}"	"Yes"	"yes"				5	4	18
-"Niue"	"Niue"	"Niue"	5	"2000, 1600"	2,000	"Walter and Anderson (2002)"	"\citet{rieth_cochrane_2018}"			"Western Poly"	"Polynesia"		5	4	26
-"Waab"	"Ulithi"	"Ulithi"	5	"2000, 1700"	2,000	"Intoh and Leach (1985) and Takayama (1982)"	"\citet{rieth_cochrane_2018}"			"Nuclear Micronesia"	"Micronesia"		5	4	26
-"Sorol"	"Sorol"	"Ulithi"	5	"2000, 1700"	2,000	"Intoh and Leach (1985) and Takayama (1982)"		"Yes"	"yes"				5	4	26
-"Pohnpei"	"Pohnpei"	"Pohnpei"	6	"1900, 1700"	1,900	"Athens (1990) and Galipaud (2000)"	"\citet{rieth_cochrane_2018}"			"Nuclear Micronesia"	"Micronesia"		5	4	26
-"Pohnpei"	"Ngatik"	"Pohnpei"	6	"1900, 1700"	1,900	"Athens (1990) and Galipaud (2000)"	"\citet{rieth_cochrane_2018}"	"Yes"		"Nuclear Micronesia"	"Micronesia"		5	4	26
-"Satawal"	"Satawal"	"Pohnpei"	6	"1900, 1700"	1,900	"\citet{Napolitano_et_al_yap}"		"Yes"		"Nuclear Micronesia"	"Micronesia"		5	4	26
-"Wolei"	"Wolei"	"Pohnpei"	6	"1900, 1700"	1,900	"\citet{Napolitano_et_al_yap}"		"Yes"		"Nuclear Micronesia"	"Micronesia"		5	4	26
-"Satawal"	"Satawal (Woleai speaking)"	"Pohnpei"	6	"1900, 1700"	1,900	"\citet{Napolitano_et_al_yap}"		"Yes"		"Nuclear Micronesia"	"Micronesia"		5	4	26
-"Pohnpei"	"Mwoakilloa"	"Pohnpei"	7	"1700"	1,700	"Poteate et al (2016) "	"\citet{levin_seikel_miles_2019}"	"Yes"		"Nuclear Micronesia"	"Micronesia"		5	4	26
-"Pohnpei"	"Pingelap"	"Pohnpei"	7	"1700, 1550"	1,700	"\citet{levin_seikel_miles_2019}"		"Yes"		"Nuclear Micronesia"	"Micronesia"		5	4	26
-"Rotuma"	"Rotuma"	"Rotuma"	8	"1300, 1050"	1,300	"Ladefoged et al (1998)"	"\citet{rieth_cochrane_2018}"			"Fiji"	"Melanesia"		4	4	22
-"Hereheretue"	"Hereheretue"	"Tuamotu"	9	"1100, 770"	1,100	"Chazine (1985) and Hatanaka et al (1978)"	"\citet{rieth_cochrane_2018}"		"yes"				5	4	20
-"Morane"	"Morane"	"Tuamotu"	9	"1100, 770"	1,100	"Chazine (1985) and Hatanaka et al (1978)"	"\citet{rieth_cochrane_2018}"		"yes"				5	4	20
-"Nukutaveke"	"Nukutaveke"	"Tuamotu"	9	"1100, 770"	1,100	"Chazine (1985) and Hatanaka et al (1978)"	"\citet{rieth_cochrane_2018}"		"yes"				5	4	21
-"Paumotu"	"Tuamotu"	"Tuamotu"	9	"1100, 770"	1,100	"Chazine (1985) and Hatanaka et al (1978)"	"\citet{rieth_cochrane_2018}"			"Eastern Polynesia"	"Polynesia"		5	4	21
-"Puka-puka"	"Puka-puka"	"Tuamotu"	9	"1100, 770"	1,100	"Chazine (1985) and Hatanaka et al (1978)"	"\citet{rieth_cochrane_2018}"		"yes"				5	4	27
-"Tatakoto"	"Tatakoto"	"Tuamotu"	9	"1100, 770"	1,100	"Chazine (1985) and Hatanaka et al (1978)"	"\citet{rieth_cochrane_2018}"		"yes"				5	4	28
-"Tureia"	"Tureia"	"Tuamotu"	9	"1100, 770"	1,100	"Chazine (1985) and Hatanaka et al (1978)"	"\citet{rieth_cochrane_2018}"		"yes"				5	4	23
-"Marutea"	"Marutea"	"Tuamotu"	9	"1100, 770"	1,100	"Chazine (1985) and Hatanaka et al (1978)"	"\citet{rieth_cochrane_2018}"						5	4	23
-"Napuka"	"Napuka"	"Tuamotu"	9	"1100, 770"	1,100	"Chazine (1985) and Hatanaka et al (1978)"	"\citet{rieth_cochrane_2018}"		"yes"				5	4	24
-"Reao"	"Reao"	"Tuamotu"	9	"1100, 770"	1,100	"Chazine (1985) and Hatanaka et al (1978)"	"\citet{rieth_cochrane_2018}"		"yes"				5	4	24
-"Tuvalu"	"Tuvalu"	"Tuvalu"	9	"1070, 770"	1,070	"Dickinson et al (1990)"	"\citet{rieth_cochrane_2018}"			"Western Poly"	"Polynesia"		5	4	24
-"Vanuatu (greater)"	"Emae"	"Emae"	9	1000	1,000	"\citet{kirch2012basline} and \citet{carson2012recent}"		"Yes"		"Southern Poly Outlier"	"Melanesia"		5	4	30
-"Kapingamarangi"	"Kapingamarangi"	"Kapingamarangi"	9	"1000, 700"	1,000	"\citet{carson2012recent}"				"Northern Poly Outlier"	"Micronesia"		5	4	30
-"Vanuatu (greater)"	"Futuna and Aniwa"	"West Futuna"	9	"1000, 900"	1,000	"\citet{carson2012recent}"			"yes"	"Northern Poly Outlier"	"Melanesia"		5	4	31
-"Raro Matai"	"Raro Matai"	"Society Islands"	9	"960, 800"	960	"Anderson and Sinoto (2002), Kahn (2012), Wilmshurst et al (2011) and Parkes (1997) "	"\citet{rieth_cochrane_2018}"			"Eastern Polynesia"	"Polynesia"		5	4	31
-"Nia Matai"	"Nia Matai"	"Society Islands"	9	"960, 800"	960	"Anderson and Sinoto (2002), Kahn (2012), Wilmshurst et al (2011) and Parkes (1997) "	"\citet{rieth_cochrane_2018}"						6	4	29
-"Mangaia"	"Mangaia"	"Southern Cook Islands"	9	"960, 780"	960	"Walter and Reilly 2010"	"\citet{walworth2015}"			"Eastern Polynesia"	"Polynesia"		6	5	24
-"Marquesas"	"South Marquesas"	"Marquesas"	9	"950, 750"	950	"Allen (2004) and Allen and McAllister (2010, 2013)"	"\citet{rieth_cochrane_2018}"			"Eastern Polynesia"	"Polynesia"		6	5	32
-"Marquesas"	"North Marquesas"	"Marquesas"	9	"950, 750"	950	"Allen (2004) and Allen and McAllister (2010, 2013)"	"\citet{rieth_cochrane_2018}"						6	5	32
-"Hawai'i"	"Hawaii"	"Hawaii"	9	"950, 850"	950	"Athens et al (2014)"	"\citet{rieth_cochrane_2018}"			"Eastern Polynesia"	"Polynesia"		6	5	34
-"Mangareva"	"Mangareva"	"Mangareva"	9	"920, 660"	920	"Anderson et al (2003), Green and Weisler (2002) and Kirch et al (2010)"	"\citet{rieth_cochrane_2018}"		"yes"				5	4	23
-"Rarotonga"	"Rarotonga"	"Southern Cook Islands"	9	"900, 680"	900	"Allen and Morrison (2013), Allen and Wallace (2007), Kirch et al (1995) and Parkes (1997)"	"\citet{rieth_cochrane_2018}"			"Eastern Polynesia"	"Polynesia"		5	4	24
-"Nga Pu Toru"	"Nga Pu Toru"	"Southern Cook Islands"	9	"900, 680"	900	"Allen and Morrison (2013), Allen and Wallace (2007), Kirch et al (1995) and Parkes (1997)"	"\citet{rieth_cochrane_2018}"			"Eastern Polynesia"	"Polynesia"		5	2	
-"Rapa Iti"	"Rapa Iti"	"Austral islands (Rapa)"	9	"850, 750"	850	"Bollt (2008), Kennett et al (2012) and Prebble and Anderson (2012)"	"\citet{rieth_cochrane_2018}"			"Eastern Polynesia"	"Polynesia"		4	3	13
-"Tokelau"	"Tokelau"	"Tokelau"	10	"750, 550"	750	"Petchey et al (2010)"	"\citet{rieth_cochrane_2018}"			"Western Poly"	"Polynesia"		4	3	13
-"Pukapuka"	"Pukapuka"	"Tokelau"	10	"750, 550"	750	"Petchey et al (2010)"	"\citet{rieth_cochrane_2018}"	"Yes"		"Eastern Polynesia"	"Polynesia"		4	3	13
-"Aotearoa"	"South Island (NZ)"	"New Zealand, Auckland Islands"	10	"750, 670"	750	"Higham et al (1999), McGlone and Wilmshurst (1999) and Wilmshurst et al (2008)"	"\citet{rieth_cochrane_2018}"			"Eastern Polynesia"	"Polynesia"		4	3	13
-"Aotearoa"	"North Island (NZ)"	"New Zealand, Auckland Islands"	10	"750, 670"	750	"Higham et al (1999), McGlone and Wilmshurst (1999) and Wilmshurst et al (2008)"	"\citet{rieth_cochrane_2018}"			"Eastern Polynesia"	"Polynesia"		4	3	13
-"Rapa Nui"	"Rapa Nui"	"Rapa Nui"	10	"750, 700"	750	"Hunt and Lipo (2006) and Mann et al (2008)"	"\citet{rieth_cochrane_2018}"			"Eastern Polynesia"	"Polynesia"		4	3	13
-"Rimatara"	"Rimatara"	"Austral islands (Rurutu)"	10	"670, 550"	670	"Bollt (2008), Kennett et al (2012) and Prebble and Anderson (2012)"	"\citet{rieth_cochrane_2018}"	"Yes, Rurutu"		"Eastern Polynesia"	"Polynesia"	"Rurutu specifically mentioned as 670-550"	4	3	17
-"Tupuai"	"Tupuai"	"Austral islands (Rurutu)"	10	"670, 550"	670	"Bollt (2008), Kennett et al (2012) and Prebble and Anderson (2012)"	"\citet{rieth_cochrane_2018}"	"Yes, Rurutu"		"Eastern Polynesia"	"Polynesia"	"Rurutu specifically mentioned as 670-550"	5	4	
-"Raivavae"	"Raivavae"	"Austral islands (Rurutu)"	10	"670, 550"	670	"Bollt (2008), Kennett et al (2012) and Prebble and Anderson (2012)"	"\citet{rieth_cochrane_2018}"	"Yes, Rurutu"		"Eastern Polynesia"	"Polynesia"	"Rurutu specifically mentioned as 670-550"	5	4	
-"Rurutu"	"Rurutu"	"Austral islands (Rurutu)"	10	"670, 550"	670	"Bollt (2008), Kennett et al (2012) and Prebble and Anderson (2012)"	"\citet{rieth_cochrane_2018}"			"Eastern Polynesia"	"Polynesia"	"Rurutu specifically mentioned as 670-550"	5	4	
-"Sonsorol"	"Sonsorol"	"Sonsorol"	10	"600, 450"	600	"\citet{intoh2008ongoing}"			"yes"	"Nuclear Micronesia"	"Micronesia"	"Based on Kirch descirbing them in the same movement as Nukuoro and Kapingamarangi"	5	4	
-"Mangarongaro"	"Mangarongaro"	"Northern Cook Islands"	11	"550, 300"	550	"Chikamori (1998) and Chikamori and Yoshida (1988)"	"\citet{rieth_cochrane_2018}"			"Eastern Polynesia"	"Polynesia"		5	4	
-"Rakahanga-Manihiki"	"Rakahanga-Manihiki"	"Northern Cook Islands"	11	"550, 300"	550	"Chikamori (1998) and Chikamori and Yoshida (1988)"	"\citet{rieth_cochrane_2018}"			"Eastern Polynesia"	"Polynesia"		5	4	
-"Mapia"	"Mapia"	"Mapia"	11	"500, 400"	500	"\citet{intoh2007reconnaissance}"		"Yes"				"Based on Kirch descirbing them in the same movement as Nukuoro and Kapingamarangi"	6	5	
-"Tobi"	"Tobi"	"Tobi"	11	"500, 400"	500	"\citet{intoh2007reconnaissance}"			"yes"			"Based on Kirch descirbing them in the same movement as Nukuoro and Kapingamarangi"	6	5	
-"Nukumanu-Luangiua"	"Luangiua"	"Luangiua"	11	500	500	"\citet{kirch2012basline} and \citet{carson2012recent}"		"Yes"	"yes"	"Northern Poly Outlier"	"Melanesia"	"Based on Kirch descirbing them in the same movement as Nukuoro and Kapingamarangi"	6	5	
-"Nukumanu-Luangiua"	"Nukumanu"	"Nukumanu"	11	500	500	"\citet{kirch2012basline} and \citet{carson2012recent}"		"Yes"	"yes"	"Northern Poly Outlier"	"Melanesia"	"Kirch descirbs them in the same movement as Nukuoro and Kapingamarangi. "	6	5	
-"Nukuoro"	"Nukuoro"	"Nukuoro"	11	500	500	"\citet{kirch2012basline} and \citet{carson2012recent}"				"Northern Poly Outlier"	"Micronesia"	"Carson notes that there is evidence of earlier, possibly short-term, settlement."	6	5	
-"﻿Nukuria (New Guinea Polynesian outlier special case)"	"Nukuria"	"Nukuria"	11	500	500	"\citet{kirch2012basline} and \citet{carson2012recent}"		"Yes"	"yes"	"Northern Poly Outlier"	"Melanesia"	"Based on date for West Uvean"	6	5	
-"Sikaiana"	"Sikaiana"	"Sikaiana"	11	500	500	"\citet{kirch2012basline} and \citet{carson2012recent}"		"Yes"	"yes"	"Northern Poly Outlier"	"Melanesia"		6	5	
-"Takuu"	"Takuu"	"Takuu"	11	500	500	"\citet{kirch2012basline} and \citet{carson2012recent}"		"Yes"	"yes"	"Northern Poly Outlier"	"Melanesia"		6	5	
-"Kanaky"	"Ouvea (West Uvean)"	"None"	11	500	500	"\citet{kirch2012basline} and \citet{carson2012recent}"		"Yes"	"yes"	"Northern Poly Outlier"	"Melanesia"		6	5	
-"Rekohou"	"Rekohou"	"Aotearoa"	11	"450, 400"	450	"McFadgen (1994)"	"\citet{rieth_cochrane_2018}"		"yes"				6	5	
-"Laguas_yan_gani"	"Northern Marianas"	"Mariana Islands (Carolinian settlement)"	12	"185"	185	"Fritz (1911), Spoehr (1954), Bowers (1953) and Quackenbush (1968)"	"\citet{ellis2012saipan}"						6	5	
+Island group (overnight distances)	Smaller specific island group	Name in source	Time depth settlement group	Date ranges	Oldest date	Source	Meta_source	Based on inference from neighbouring island?	double_check	Description group	subregion	Comment	settlement_date_grouping_6	settlement_date_grouping_coarser	Order in Rieth Cochrane table
+Laguas_yan_gani	Guam	Mariana Islands	1	3500, 2950	3500	Carson (2014) and Athens et al (2004)	\citet{rieth_cochrane_2018}			Old Micronesia	Micronesia		6	5	
+Laguas_yan_gani	Saipan	Mariana Islands	1	3500, 2950	3500	Carson (2014) and Athens et al (2004)	\citet{rieth_cochrane_2018}			Old Micronesia	Micronesia		4	3	17
+Vanuatu (greater)	Tangoa	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	1	1	1
+Vanuatu (greater)	Ambae	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	1	1	1
+Vanuatu (greater)	Ambrym	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	3
+Vanuatu (greater)	Aneityum	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	2
+Vanuatu (greater)	Aore	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	2
+Vanuatu (greater)	Araki	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	2
+Vanuatu (greater)	Efate	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	2
+Vanuatu (greater)	Epi	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	2
+Vanuatu (greater)	Erromango	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	2
+Vanuatu (greater)	Gaua	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	2
+Vanuatu (greater)	Hiu	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	3
+Vanuatu (greater)	Loh-Toga	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	3
+Vanuatu (greater)	Maewo	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Outlier on island as well. Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	3
+Vanuatu (greater)	Mafea	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	3
+Vanuatu (greater)	Malakula	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	3
+Vanuatu (greater)	Merelava group	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	3
+Vanuatu (greater)	Mota	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	3
+Vanuatu (greater)	Mota Lava	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	3
+Vanuatu (greater)	Paama	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	3
+Vanuatu (greater)	Pentecost	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	3
+Vanuatu (greater)	Santo	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	3
+Vanuatu (greater)	Tamambo	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	3
+Vanuatu (greater)	Tanna	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	3
+Vanuatu (greater)	Tongoa	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	3
+Vanuatu (greater)	Tutuba	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	3
+Vanuatu (greater)	Ureparapara	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	3
+Vanuatu (greater)	Vanua Lava	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	3
+Vanuatu (greater)	Vao	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	3
+Vanuatu (greater)	Etarik	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	3
+Vanuatu (greater)	Lopevi	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	3
+Vanuatu (greater)	Mataso	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	2	2	3
+Vanuatu (greater)	Reef Islands	Reef Islands and Santa Cruz Islands	2	3185, 2639	3185	Green (1991), Green et al (2008) and Sheppard et al (2015)	\citet{rieth_cochrane_2018}						2	2	3
+Vanuatu (greater)	Lomlom	Reef Islands and Santa Cruz Islands	2	3185, 2639	3185	Green (1991), Green et al (2008) and Sheppard et al (2015)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia		2	2	3
+Vanuatu (greater)	Nendö	Reef Islands and Santa Cruz Islands	2	3185, 2639	3185	Green (1991), Green et al (2008) and Sheppard et al (2015)	\citet{rieth_cochrane_2018}		yes	Vanuatu	Melanesia		2	2	3
+Vanuatu (greater)	Te Anu	Reef Islands and Santa Cruz Islands	2	3185, 2639	3185	Green (1991), Green et al (2008) and Sheppard et al (2015)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia		2	2	3
+Vanuatu (greater)	Utupua	Reef Islands and Santa Cruz Islands	2	3185, 2639	3185	Green (1991), Green et al (2008) and Sheppard et al (2015)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia		2	2	3
+Vanuatu (greater)	Vanikoro	Reef Islands and Santa Cruz Islands	2	3185, 2639	3185	Green (1991), Green et al (2008) and Sheppard et al (2015)	\citet{rieth_cochrane_2018}		yes	Vanuatu	Melanesia		2	2	3
+Vanuatu (greater)	Tegua	Reef Islands and Santa Cruz Islands	2	3185, 2639	3185	Green (1991), Green et al (2008) and Sheppard et al (2015)	\citet{rieth_cochrane_2018}						2	2	3
+Fiji	Vanua Levu	Fiji	2	3130, 2870	3130	Hope et al (2009), Denham et al (2012) and Nunn and Petchey (2013)	\citet{rieth_cochrane_2018}			Fiji	Melanesia		2	2	3
+Fiji	Yasawa (greater)	Fiji	2	3130, 2870	3130	Hope et al (2009), Denham et al (2012) and Nunn and Petchey (2013)	\citet{rieth_cochrane_2018}			Fiji	Melanesia		2	2	3
+Fiji	Taveuni	Fiji	2	3130, 2870	3130	Hope et al (2009), Denham et al (2012) and Nunn and Petchey (2013)	\citet{rieth_cochrane_2018}			Fiji	Melanesia		2	2	5
+Fiji	Lau	Fiji	2	3130, 2870	3130	Hope et al (2009), Denham et al (2012) and Nunn and Petchey (2013)	\citet{rieth_cochrane_2018}			Fiji	Melanesia		2	2	5
+Fiji	Viti Levu	Fiji	2	3130, 2870	3130	Hope et al (2009), Denham et al (2012) and Nunn and Petchey (2013)	\citet{rieth_cochrane_2018}			Fiji	Melanesia		2	2	5
+Fiji	Lomaviti	Fiji	2	3130, 2870	3130	Hope et al (2009), Denham et al (2012) and Nunn and Petchey (2013)	\citet{rieth_cochrane_2018}			Fiji	Melanesia		2	2	5
+Fiji	Leveuka (Lomaviti)	Fiji	2	3130, 2870	3130	Hope et al (2009), Denham et al (2012) and Nunn and Petchey (2013)	\citet{rieth_cochrane_2018}			Fiji	Melanesia		2	2	5
+Fiji	Vatulele	Fiji	2	3130, 2870	3130	Hope et al (2009), Denham et al (2012) and Nunn and Petchey (2013)	\citet{rieth_cochrane_2018}			Fiji	Melanesia		2	2	5
+Fiji	Kadavu	Fiji	2	3130, 2870	3130	Hope et al (2009), Denham et al (2012) and Nunn and Petchey (2013)	\citet{rieth_cochrane_2018}			Fiji	Melanesia		2	2	5
+Palau	Palau	Palau	2	3100, 2900	3100	Athens and Ward (2001), Clark et al (2006) and Liston (2005, 2013)	\citet{rieth_cochrane_2018}			Old Micronesia	Micronesia		2	2	5
+Mo-ava-mo-iki	Rennelle	Rennelle	2	3100, 2900	3100	\citet{carson2012recent}			yes	Southern Poly Outlier	Melanesia	Older date for pre-polynesian settlement horizon	2	2	5
+Mo-ava-mo-iki	Bellona	Bellona	2	3100, 2900	3100	\citet{carson2012recent}			yes	Southern Poly Outlier	Melanesia	Older date for pre-polynesian settlement horizon	2	2	6
+Kanaky	Belep	New Caledonia	2	3050, 3000	3050	Sand (2001)	\citet{rieth_cochrane_2018}			New Caledonia	Melanesia		2	2	4
+Kanaky	Kanaky (New Caledonia main island)	New Caledonia	2	3050, 3000	3050	Sand (2001)	\citet{rieth_cochrane_2018}			New Caledonia	Melanesia		2	2	4
+Kanaky	Lifou	New Caledonia	2	3050, 3000	3050	Sand (2001)	\citet{rieth_cochrane_2018}			New Caledonia	Melanesia		2	2	4
+Kanaky	Nengone	New Caledonia	2	3050, 3000	3050	Sand (2001)	\citet{rieth_cochrane_2018}			New Caledonia	Melanesia		2	2	4
+Kanaky	Ouvea	New Caledonia	2	3050, 3000	3050	Sand (2001)	\citet{rieth_cochrane_2018}			New Caledonia	Melanesia		2	2	4
+Kanaky	Ouvea (Iaai)	Ouvea	2	3050, 3000	3050	Sand (2001)	\citet{rieth_cochrane_2018}			New Caledonia	Melanesia		2	2	4
+Vanuatu (greater)	Duff Islands	Taumako	2	3000	3000	Leach and Davidson (2008)	\citet{carson2012recent}					Carson describes initial Lapita settlement 3,000 years ago and Polynesian outlier settlmenent 1000 years ago.	3	2	7
+Anuta-Tikopia	Tikopia	Tikopia	2	3000	3000	\citet{carson2012recent}				Southern Poly Outlier	Melanesia		3	2	8
+Anuta-Tikopia	Anuta	Anuta	2	2950	2950	\citet{carson2012recent}			yes	Southern Poly Outlier	Melanesia		4	3	11
+Tonga	Tonga	Tonga	3	2846, 2750	2846	Burley and Connaughton (2007) and Burley et al (1999, 2001, 2012)	\citet{rieth_cochrane_2018}			Western Poly	Polynesia		4	3	11
+Samoa	Sāmoa	Samoa	3	2800, 2400	2800	Cochrane et al (2013), Kurch and Hunt (1993) and Petchey (2001)	\citet{rieth_cochrane_2018}			Western Poly	Polynesia		4	3	11
+Waab	Nguluwan	Nguluwan	4	2400, 2100	2400	\citet{Napolitano_et_al_yap}		Yes		Micronesia Bismarck	Micronesia		4	3	11
+Waab	Yap	Yap	4	2400, 2100	2400	\citet{Napolitano_et_al_yap}				Micronesia Bismarck	Micronesia		4	3	11
+Chuuk	Chuuk	Chuuk	4	2300, 1750	2300	Shutler (1984)	\citet{rieth_cochrane_2018}			Nuclear Micronesia	Micronesia		4	3	11
+Chuuk	Mortlock	Chuuk	4	2300, 1750	2300	Shutler (1984)	\citet{rieth_cochrane_2018}	Yes		Nuclear Micronesia	Micronesia		4	3	11
+Chuuk	Namonuito	Chuuk	4	2300, 1750	2300	Shutler (1984)	\citet{rieth_cochrane_2018}	Yes		Nuclear Micronesia	Micronesia		4	3	10
+Chuuk	Paafang	Chuuk	4	2300, 1750	2300	Shutler (1984)	\citet{rieth_cochrane_2018}	Yes		Nuclear Micronesia	Micronesia		4	3	10
+Chuuk	Pollap	Chuuk	4	2300, 1750	2300	Shutler (1984)	\citet{rieth_cochrane_2018}	Yes		Nuclear Micronesia	Micronesia		4	3	10
+Chuuk	Puluwat	Chuuk	4	2300, 1750	2300	Shutler (1984)	\citet{rieth_cochrane_2018}	Yes		Nuclear Micronesia	Micronesia		4	3	10
+Oroluk	Oroluk	Chuuk	4	2300, 1750	2300	Shutler (1984)	\citet{rieth_cochrane_2018}		yes				4	3	15
+East Futuna	East Futuna	Futuna	4	2300, 2200	2300	Kirch (1981)	\citet{rieth_cochrane_2018}			Western Poly	Polynesia		4	3	15
+Uvea (Wallis)	Uvea (Wallis)	Futuna	4	2300, 2200	2300	Kirch (1981)	\citet{rieth_cochrane_2018}	Yes		Western Poly	Polynesia		4	3	15
+Niuafoou	Niuafoou	Niuafoou	4	2300, 2200	2300	Kirch (1981)	\citet{rieth_cochrane_2018}	Yes		Western Poly	Polynesia		4	3	15
+Niuatoputapu	Niuatoputapu	Niuatoputapu	4	2300, 2200	2300	Kirch (1981)	\citet{rieth_cochrane_2018}	Yes		Western Poly	Polynesia		4	3	14
+Tungaru	Tungaru	Tungaru	5	2150, 1750	2150	DiPazza (1999)	\citet{rieth_cochrane_2018}			Nuclear Micronesia	Micronesia		4	3	16
+Nauru	Nauru	Tungaru	5	2150, 1750	2150	DiPazza (1999)	\citet{rieth_cochrane_2018}	Yes		Nuclear Micronesia	Micronesia		4	3	16
+Banaba	Banaba	Tungaru	5	2150, 1750	2150	DiPazza (1999)	\citet{rieth_cochrane_2018}	Yes	yes				4	3	16
+Tuvalu	Niu	Tuvalu	5	2150, 1750	2150	DiPazza (1999)	\citet{rieth_cochrane_2018}	Yes		Western Poly	Polynesia		4	3	12
+Kosrae	Kosrae	Kosrae	5	2100, 1750	2100	Athens (1995)	\citet{rieth_cochrane_2018}			Nuclear Micronesia	Micronesia		4	3	13
+Ratak	Ratak	Marshall Islands	5	2000, 1600	2000	Beardsley (1994), Riley (1987), weisler (1999, 2001) and Weisler et al (2012)	\citet{rieth_cochrane_2018}			Nuclear Micronesia	Micronesia		4	3	17
+Ralik	Rālik	Marshall Islands	5	2000, 1600	2000	Beardsley (1994), Riley (1987), weisler (1999, 2001) and Weisler et al (2012)	\citet{rieth_cochrane_2018}			Nuclear Micronesia	Micronesia		4	3	17
+Anewetak	Ānewetak	Marshall Islands	5	2000, 1600	2000	Beardsley (1994), Riley (1987), weisler (1999, 2001) and Weisler et al (2012)	\citet{rieth_cochrane_2018}	Yes	yes				5	4	18
+Niue	Niue	Niue	5	2000, 1600	2000	Walter and Anderson (2002)	\citet{rieth_cochrane_2018}			Western Poly	Polynesia		5	4	26
+Waab	Ulithi	Ulithi	5	2000, 1700	2000	Intoh and Leach (1985) and Takayama (1982)	\citet{rieth_cochrane_2018}			Nuclear Micronesia	Micronesia		5	4	26
+Sorol	Sorol	Ulithi	5	2000, 1700	2000	Intoh and Leach (1985) and Takayama (1982)		Yes	yes				5	4	26
+Pohnpei	Pohnpei	Pohnpei	6	1900, 1700	1900	Athens (1990) and Galipaud (2000)	\citet{rieth_cochrane_2018}			Nuclear Micronesia	Micronesia		5	4	26
+Pohnpei	Ngatik	Pohnpei	6	1900, 1700	1900	Athens (1990) and Galipaud (2000)	\citet{rieth_cochrane_2018}	Yes		Nuclear Micronesia	Micronesia		5	4	26
+Satawal	Satawal	Pohnpei	6	1900, 1700	1900	\citet{Napolitano_et_al_yap}		Yes		Nuclear Micronesia	Micronesia		5	4	26
+Wolei	Wolei	Pohnpei	6	1900, 1700	1900	\citet{Napolitano_et_al_yap}		Yes		Nuclear Micronesia	Micronesia		5	4	26
+Satawal	Satawal (Woleai speaking)	Pohnpei	6	1900, 1700	1900	\citet{Napolitano_et_al_yap}		Yes		Nuclear Micronesia	Micronesia		5	4	26
+Pohnpei	Mwoakilloa	Pohnpei	7	1700	1700	Poteate et al (2016) 	\citet{levin_seikel_miles_2019}	Yes		Nuclear Micronesia	Micronesia		5	4	26
+Pohnpei	Pingelap	Pohnpei	7	1700, 1550	1700	\citet{levin_seikel_miles_2019}		Yes		Nuclear Micronesia	Micronesia		5	4	26
+Rotuma	Rotuma	Rotuma	8	1300, 1050	1300	Ladefoged et al (1998)	\citet{rieth_cochrane_2018}			Fiji	Melanesia		4	4	22
+Hereheretue	Hereheretue	Tuamotu	9	1100, 770	1100	Chazine (1985) and Hatanaka et al (1978)	\citet{rieth_cochrane_2018}		yes				5	4	20
+Morane	Morane	Tuamotu	9	1100, 770	1100	Chazine (1985) and Hatanaka et al (1978)	\citet{rieth_cochrane_2018}		yes				5	4	20
+Nukutaveke	Nukutaveke	Tuamotu	9	1100, 770	1100	Chazine (1985) and Hatanaka et al (1978)	\citet{rieth_cochrane_2018}		yes				5	4	21
+Paumotu	Tuamotu	Tuamotu	9	1100, 770	1100	Chazine (1985) and Hatanaka et al (1978)	\citet{rieth_cochrane_2018}			Eastern Polynesia	Polynesia		5	4	21
+Puka-puka	Puka-puka	Tuamotu	9	1100, 770	1100	Chazine (1985) and Hatanaka et al (1978)	\citet{rieth_cochrane_2018}		yes				5	4	27
+Tatakoto	Tatakoto	Tuamotu	9	1100, 770	1100	Chazine (1985) and Hatanaka et al (1978)	\citet{rieth_cochrane_2018}		yes				5	4	28
+Tureia	Tureia	Tuamotu	9	1100, 770	1100	Chazine (1985) and Hatanaka et al (1978)	\citet{rieth_cochrane_2018}		yes				5	4	23
+Marutea	Marutea	Tuamotu	9	1100, 770	1100	Chazine (1985) and Hatanaka et al (1978)	\citet{rieth_cochrane_2018}						5	4	23
+Napuka	Napuka	Tuamotu	9	1100, 770	1100	Chazine (1985) and Hatanaka et al (1978)	\citet{rieth_cochrane_2018}		yes				5	4	24
+Reao	Reao	Tuamotu	9	1100, 770	1100	Chazine (1985) and Hatanaka et al (1978)	\citet{rieth_cochrane_2018}		yes				5	4	24
+Tuvalu	Tuvalu	Tuvalu	9	1070, 770	1070	Dickinson et al (1990)	\citet{rieth_cochrane_2018}			Western Poly	Polynesia		5	4	24
+Vanuatu (greater)	Emae	Emae	9	1000	1000	\citet{kirch2012basline} and \citet{carson2012recent}		Yes		Southern Poly Outlier	Melanesia		5	4	30
+Kapingamarangi	Kapingamarangi	Kapingamarangi	9	1000, 700	1000	\citet{carson2012recent}				Northern Poly Outlier	Micronesia		5	4	30
+Vanuatu (greater)	Futuna and Aniwa	West Futuna	9	1000, 900	1000	\citet{carson2012recent}			yes	Northern Poly Outlier	Melanesia		5	4	31
+Raro Matai	Raro Matai	Society Islands	9	960, 800	960	Anderson and Sinoto (2002), Kahn (2012), Wilmshurst et al (2011) and Parkes (1997) 	\citet{rieth_cochrane_2018}			Eastern Polynesia	Polynesia		5	4	31
+Nia Matai	Nia Matai	Society Islands	9	960, 800	960	Anderson and Sinoto (2002), Kahn (2012), Wilmshurst et al (2011) and Parkes (1997) 	\citet{rieth_cochrane_2018}						6	4	29
+Mangaia	Mangaia	Southern Cook Islands	9	960, 780	960	Walter and Reilly 2010	\citet{walworth2015}			Eastern Polynesia	Polynesia		6	5	24
+Marquesas	Te Fenua ’Enata	Marquesas	9	950, 750	950	Allen (2004) and Allen and McAllister (2010, 2013)	\citet{rieth_cochrane_2018}			Eastern Polynesia	Polynesia		6	5	32
+Marquesas	Te Henua ‘Enana	Marquesas	9	950, 750	950	Allen (2004) and Allen and McAllister (2010, 2013)	\citet{rieth_cochrane_2018}						6	5	32
+Hawai'i	Hawaii	Hawaii	9	950, 850	950	Athens et al (2014)	\citet{rieth_cochrane_2018}			Eastern Polynesia	Polynesia		6	5	34
+Mangareva	Mangareva	Mangareva	9	920, 660	920	Anderson et al (2003), Green and Weisler (2002) and Kirch et al (2010)	\citet{rieth_cochrane_2018}		yes				5	4	23
+Rarotonga	Rarotonga	Southern Cook Islands	9	900, 680	900	Allen and Morrison (2013), Allen and Wallace (2007), Kirch et al (1995) and Parkes (1997)	\citet{rieth_cochrane_2018}			Eastern Polynesia	Polynesia		5	4	24
+Nga Pu Toru	Ngā Pū Toru	Southern Cook Islands	9	900, 680	900	Allen and Morrison (2013), Allen and Wallace (2007), Kirch et al (1995) and Parkes (1997)	\citet{rieth_cochrane_2018}			Eastern Polynesia	Polynesia		5	2	
+Rapa Iti	Rapa Iti	Austral islands (Rapa)	9	850, 750	850	Bollt (2008), Kennett et al (2012) and Prebble and Anderson (2012)	\citet{rieth_cochrane_2018}			Eastern Polynesia	Polynesia		4	3	13
+Tokelau	Tokelau	Tokelau	10	750, 550	750	Petchey et al (2010)	\citet{rieth_cochrane_2018}			Western Poly	Polynesia		4	3	13
+Pukapuka	Pukapuka	Tokelau	10	750, 550	750	Petchey et al (2010)	\citet{rieth_cochrane_2018}	Yes		Eastern Polynesia	Polynesia		4	3	13
+Aotearoa	South Island (NZ)	New Zealand, Auckland Islands	10	750, 670	750	Higham et al (1999), McGlone and Wilmshurst (1999) and Wilmshurst et al (2008)	\citet{rieth_cochrane_2018}			Eastern Polynesia	Polynesia		4	3	13
+Aotearoa	North Island (NZ)	New Zealand, Auckland Islands	10	750, 670	750	Higham et al (1999), McGlone and Wilmshurst (1999) and Wilmshurst et al (2008)	\citet{rieth_cochrane_2018}			Eastern Polynesia	Polynesia		4	3	13
+Rapa Nui	Rapa Nui	Rapa Nui	10	750, 700	750	Hunt and Lipo (2006) and Mann et al (2008)	\citet{rieth_cochrane_2018}			Eastern Polynesia	Polynesia		4	3	13
+Rimatara	Rimatara	Austral islands (Rurutu)	10	670, 550	670	Bollt (2008), Kennett et al (2012) and Prebble and Anderson (2012)	\citet{rieth_cochrane_2018}	Yes, Rurutu		Eastern Polynesia	Polynesia	Rurutu specifically mentioned as 670-550	4	3	17
+Tupuai	Tupuai	Austral islands (Rurutu)	10	670, 550	670	Bollt (2008), Kennett et al (2012) and Prebble and Anderson (2012)	\citet{rieth_cochrane_2018}	Yes, Rurutu		Eastern Polynesia	Polynesia	Rurutu specifically mentioned as 670-550	5	4	
+Raivavae	Raivavae	Austral islands (Rurutu)	10	670, 550	670	Bollt (2008), Kennett et al (2012) and Prebble and Anderson (2012)	\citet{rieth_cochrane_2018}	Yes, Rurutu		Eastern Polynesia	Polynesia	Rurutu specifically mentioned as 670-550	5	4	
+Rurutu	Rurutu	Austral islands (Rurutu)	10	670, 550	670	Bollt (2008), Kennett et al (2012) and Prebble and Anderson (2012)	\citet{rieth_cochrane_2018}			Eastern Polynesia	Polynesia	Rurutu specifically mentioned as 670-550	5	4	
+Sonsorol	Sonsorol	Sonsorol	10	600, 450	600	\citet{intoh2008ongoing}			yes	Nuclear Micronesia	Micronesia	Based on Kirch descirbing them in the same movement as Nukuoro and Kapingamarangi	5	4	
+Mangarongaro	Māngarongaro	Northern Cook Islands	11	550, 300	550	Chikamori (1998) and Chikamori and Yoshida (1988)	\citet{rieth_cochrane_2018}			Eastern Polynesia	Polynesia		5	4	
+Rakahanga-Manihiki	Rakahanga-Manihiki	Northern Cook Islands	11	550, 300	550	Chikamori (1998) and Chikamori and Yoshida (1988)	\citet{rieth_cochrane_2018}			Eastern Polynesia	Polynesia		5	4	
+Mapia	Mapia	Mapia	11	500, 400	500	\citet{intoh2007reconnaissance}		Yes				Based on Kirch descirbing them in the same movement as Nukuoro and Kapingamarangi	6	5	
+Tobi	Tobi	Tobi	11	500, 400	500	\citet{intoh2007reconnaissance}			yes			Based on Kirch descirbing them in the same movement as Nukuoro and Kapingamarangi	6	5	
+Nukumanu-Luangiua	Luangiua	Luangiua	11	500	500	\citet{kirch2012basline} and \citet{carson2012recent}		Yes	yes	Northern Poly Outlier	Melanesia	Based on Kirch descirbing them in the same movement as Nukuoro and Kapingamarangi	6	5	
+Nukumanu-Luangiua	Nukumanu	Nukumanu	11	500	500	\citet{kirch2012basline} and \citet{carson2012recent}		Yes	yes	Northern Poly Outlier	Melanesia	Kirch descirbs them in the same movement as Nukuoro and Kapingamarangi. 	6	5	
+Nukuoro	Nukuoro	Nukuoro	11	500	500	\citet{kirch2012basline} and \citet{carson2012recent}				Northern Poly Outlier	Micronesia	Carson notes that there is evidence of earlier, possibly short-term, settlement.	6	5	
+﻿Nukuria (New Guinea Polynesian outlier special case)	Nukuria	Nukuria	11	500	500	\citet{kirch2012basline} and \citet{carson2012recent}		Yes	yes	Northern Poly Outlier	Melanesia	Based on date for West Uvean	6	5	
+Sikaiana	Sikaiana	Sikaiana	11	500	500	\citet{kirch2012basline} and \citet{carson2012recent}		Yes	yes	Northern Poly Outlier	Melanesia		6	5	
+Takuu	Takuu	Takuu	11	500	500	\citet{kirch2012basline} and \citet{carson2012recent}		Yes	yes	Northern Poly Outlier	Melanesia		6	5	
+Kanaky	Ouvea (West Uvean)	None	11	500	500	\citet{kirch2012basline} and \citet{carson2012recent}		Yes	yes	Northern Poly Outlier	Melanesia		6	5	
+Rekohou	Rēkohou	Aotearoa	11	450, 400	450	McFadgen (1994)	\citet{rieth_cochrane_2018}		yes				6	5	
+Laguas_yan_gani	Northern Marianas	Mariana Islands (Carolinian settlement)	12	185	185	Fritz (1911), Spoehr (1954), Bowers (1953) and Quackenbush (1968)	\citet{ellis2012saipan}						6	5	

@@ -49,7 +49,6 @@ polygon_geo <- read_csv("data/RO_polygons_grouped_with_languages.csv", na = c("N
             sum_shoreline = sum(`COASTLINE (km) (perimeter)`), 
             mean_lat = mean(Latitude), 
             mean_long = mean(Longitude), 
-            Melanesia_or_not = dplyr::first(Melanesia_or_not), 
             max_long = max(Longitude), 
             min_long = min(Longitude), 
             max_lat = max(Latitude), 
@@ -152,7 +151,7 @@ dates$settlement_date_grouping_finer <- abs(max_group - dates$settlement_date_gr
 ##All which are at smallest island group level
 Island_group_all_sep <- polygon_geo_grouping_hierarchy %>% 
   full_join(polygon_geo, by = c("Smallest_Island_group", "sum_area", "sum_shoreline", "mean_lat", "mean_long",
-                                "Melanesia_or_not", "max_long", "min_long", "max_lat", "min_lat")) %>% 
+                                "max_long", "min_long", "max_lat", "min_lat")) %>% 
   full_join(dates, by = "Smallest_Island_group") %>% 
   full_join(modis_NPP, by = "Smallest_Island_group", relationship = "many-to-many") %>% 
   full_join(pol_complex, by = "Smallest_Island_group", relationship = "many-to-many")  %>% 
