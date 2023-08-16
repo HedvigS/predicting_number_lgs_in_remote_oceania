@@ -1,5 +1,4 @@
 source("01_requirements.R")
-source("fun_def_range_1_2.R")
 
 ##combining variables that are proxies for "carrying capacity" and different kinds of area-variables by finding the optimal number of pcs with a nscree test.
 
@@ -47,9 +46,6 @@ environ_PCA_SBZR_df <- data %>%
   rownames_to_column("SBZR_group") %>% 
   full_join(environ_PCA_SBZR_df, by = "SBZR_group") %>% 
   dplyr::select(SBZR_group, NPP_terra_mean, environ_PC1, environ_PC2)
-
-flip_PCA_if_need_be(df = environ_PCA_SBZR_df, col = "environ_PC1")
-flip_PCA_if_need_be(df = environ_PCA_SBZR_df, col = "environ_PC2")
 
 environ_PCA_SBZR_df <- environ_PCA_SBZR_df %>% 
   dplyr::select(-NPP_terra_mean)
@@ -138,10 +134,6 @@ environ_PCA_medium_df <- data %>%
   rownames_to_column("Medium_only_merged_for_shared_language") %>% 
   full_join(environ_PCA_medium_df, by = "Medium_only_merged_for_shared_language") %>% 
   dplyr::select(Medium_only_merged_for_shared_language, NPP_terra_mean, environ_PC1, environ_PC2, environ_PC3)
-
-flip_PCA_if_need_be(df = environ_PCA_medium_df, col = "environ_PC1")
-flip_PCA_if_need_be(df = environ_PCA_medium_df, col = "environ_PC2")
-flip_PCA_if_need_be(df = environ_PCA_medium_df, col = "environ_PC3")
 
 environ_PCA_medium_df <- environ_PCA_medium_df %>% 
   dplyr::select(-NPP_terra_mean)
