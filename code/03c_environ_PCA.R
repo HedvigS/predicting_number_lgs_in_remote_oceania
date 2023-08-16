@@ -39,8 +39,8 @@ environ_PCA_SBZR_df <- found_pcs$data_pca_df[,1:found_pcs$maxcol]  %>% #because 
            environ_PC2 = "PC2",
            SBZR_group = ID)
 
-environ_PCA_SBZR_df$environ_PC1 <- range_1_2(environ_PCA_SBZR_df$environ_PC1)
-environ_PCA_SBZR_df$environ_PC2 <- range_1_2(environ_PCA_SBZR_df$environ_PC2)
+environ_PCA_SBZR_df$environ_PC1 <- scale(environ_PCA_SBZR_df$environ_PC1)
+environ_PCA_SBZR_df$environ_PC2 <- scale(environ_PCA_SBZR_df$environ_PC2)
 
 environ_PCA_SBZR_df <- data %>% 
   rownames_to_column("SBZR_group") %>% 
@@ -124,9 +124,9 @@ environ_PCA_medium_df <- found_pcs$data_pca_df[,1:found_pcs$maxcol]  %>% #becaus
          environ_PC3 = "PC3",
          Medium_only_merged_for_shared_language = ID)
 
-environ_PCA_medium_df$environ_PC1 <- range_1_2(environ_PCA_medium_df$environ_PC1) 
-environ_PCA_medium_df$environ_PC2 <- range_1_2(environ_PCA_medium_df$environ_PC2)
-environ_PCA_medium_df$environ_PC3 <- range_1_2(environ_PCA_medium_df$environ_PC3)
+environ_PCA_medium_df$environ_PC1 <- scale(environ_PCA_medium_df$environ_PC1) 
+environ_PCA_medium_df$environ_PC2 <- scale(environ_PCA_medium_df$environ_PC2)
+environ_PCA_medium_df$environ_PC3 <- scale(environ_PCA_medium_df$environ_PC3)
 
 #flipping if need be
 
@@ -217,8 +217,8 @@ environ_PCA_country_df <- found_pcs$data_pca_df[,1:found_pcs$maxcol]  %>% #becau
          environ_PC2 = "PC2",
          `COUNTRY NAME` = ID)
 
-environ_PCA_country_df$environ_PC1 <- range_1_2(environ_PCA_country_df$environ_PC1) 
-environ_PCA_country_df$environ_PC2 <- range_1_2(environ_PCA_country_df$environ_PC2)
+environ_PCA_country_df$environ_PC1 <- scale(environ_PCA_country_df$environ_PC1) 
+environ_PCA_country_df$environ_PC2 <- scale(environ_PCA_country_df$environ_PC2)
 
 read_tsv(data_fn_country, show_col_types = F) %>% 
   full_join(environ_PCA_country_df, by = "COUNTRY NAME") %>% 
