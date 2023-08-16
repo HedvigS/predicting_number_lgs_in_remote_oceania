@@ -36,19 +36,19 @@ data$Area_land <- log10(data$Area_land)
 data$Shoreline <- log10(data$Shoreline)
 data$ratio_coastline_to_area <- data$Shoreline / data$Area_land
 
-#setting all values to between 0 and 1 to make coef easier to interpret. adding 1 so that there aren't actually 0's since the glm.nb otherwise complains about not being able to take the sqrt of 0.
-data$Area_land <- scale(data$Area_land) 
-data$Shoreline <- scale(data$Shoreline) 
-data$ratio_coastline_to_area <- scale(data$ratio_coastline_to_area) 
-data$Annual_precipitation_mean <- scale(data$Annual_precipitation_mean) 
-data$Precipitation_seasonality_mean <- scale(data$Precipitation_seasonality_mean) 
-data$Annual_temperature_mean <- scale(data$Annual_temperature_mean) 
-data$Temperature_seasonality_mean <- scale(data$Temperature_seasonality_mean) 
-data$Settlement_date_grouping_finer <- scale(data$Settlement_date_grouping_finer) 
-data$EA033 <- scale(data$EA033) 
-data$Latitude_abs_mean <- scale(data$Latitude_abs_mean) 
-data$NPP_terra_mean <- scale(data$NPP_terra_mean) 
-data$NPP_aqua_mean <- scale(data$NPP_aqua_mean) 
+#scaling variables
+data$Area_land <- scale(data$Area_land)[,1]
+data$Shoreline <- scale(data$Shoreline)[,1] 
+data$ratio_coastline_to_area <- scale(data$ratio_coastline_to_area)[,1]
+data$Annual_precipitation_mean <- scale(data$Annual_precipitation_mean)[,1] 
+data$Precipitation_seasonality_mean <- scale(data$Precipitation_seasonality_mean)[,1]
+data$Annual_temperature_mean <- scale(data$Annual_temperature_mean)[,1]
+data$Temperature_seasonality_mean <- scale(data$Temperature_seasonality_mean)[,1]
+data$Settlement_date_grouping_finer <- scale(data$Settlement_date_grouping_finer)[,1] 
+data$EA033 <- scale(data$EA033)[,1]
+data$Latitude_abs_mean <- scale(data$Latitude_abs_mean)[,1]
+data$NPP_terra_mean <- scale(data$NPP_terra_mean)[,1] 
+data$NPP_aqua_mean <- scale(data$NPP_aqua_mean)[,1]
 
 data %>% 
   write_tsv("output/processed_data/RO_Hedvig_aggregate_SBZR_group_scaled.tsv")
@@ -92,18 +92,18 @@ data$Shoreline <- log10(data$Shoreline)
 data$ratio_coastline_to_area <- data$Shoreline / data$Area_land
 
 #setting all values to between 0 and 1 to make coef easier to interpret. adding 1 so that there aren't actually 0's since the glm.nb otherwise complains about not being able to take the sqrt of 0.
-data$Area_land <- scale(data$Area_land) 
-data$Shoreline <- scale(data$Shoreline) 
-data$ratio_coastline_to_area <- scale(data$ratio_coastline_to_area) 
-data$Annual_precipitation_mean <- scale(data$Annual_precipitation_mean) 
-data$Precipitation_seasonality_mean <- scale(data$Precipitation_seasonality_mean) 
-data$Annual_temperature_mean <- scale(data$Annual_temperature_mean) 
-data$Temperature_seasonality_mean <- scale(data$Temperature_seasonality_mean) 
-data$Settlement_date_grouping_finer <- scale(data$Settlement_date_grouping_finer) 
-data$EA033 <- scale(data$EA033) 
-data$Latitude_abs_mean <- scale(data$Latitude_abs_mean) 
-data$NPP_terra_mean <- scale(data$NPP_terra_mean) 
-data$NPP_aqua_mean <- scale(data$NPP_aqua_mean) 
+data$Area_land <- scale(data$Area_land)[,1]
+data$Shoreline <- scale(data$Shoreline)[,1] 
+data$ratio_coastline_to_area <- scale(data$ratio_coastline_to_area)[,1]
+data$Annual_precipitation_mean <- scale(data$Annual_precipitation_mean)[,1] 
+data$Precipitation_seasonality_mean <- scale(data$Precipitation_seasonality_mean)[,1]
+data$Annual_temperature_mean <- scale(data$Annual_temperature_mean)[,1]
+data$Temperature_seasonality_mean <- scale(data$Temperature_seasonality_mean)[,1]
+data$Settlement_date_grouping_finer <- scale(data$Settlement_date_grouping_finer)[,1]
+data$EA033 <- scale(data$EA033)[,1]
+data$Latitude_abs_mean <- scale(data$Latitude_abs_mean)[,1]
+data$NPP_terra_mean <- scale(data$NPP_terra_mean)[,1]
+data$NPP_aqua_mean <- scale(data$NPP_aqua_mean)[,1]
 
 data %>% 
   write_tsv("output/processed_data/RO_Hedvig_aggregate_medium_group_scaled.tsv")
@@ -145,18 +145,18 @@ data$Shoreline <- log10(data$Shoreline)
 data$ratio_coastline_to_area <- data$Shoreline / data$Area_land
 
 #setting all values to between 0 and 1 to make coef easier to interpret. adding 1 so that there aren't actually 0's since the glm.nb otherwise complains about not being able to take the sqrt of 0.
-data$Area_land <- scale(data$Area_land) 
-data$Shoreline <- scale(data$Shoreline) 
-data$ratio_coastline_to_area <- scale(data$ratio_coastline_to_area) 
-data$Annual_precipitation_mean <- scale(data$Annual_precipitation_mean) 
-data$Precipitation_seasonality_mean <- scale(data$Precipitation_seasonality_mean) 
-data$Annual_temperature_mean <- scale(data$Annual_temperature_mean) 
-data$Temperature_seasonality_mean <- scale(data$Temperature_seasonality_mean) 
-data$Settlement_date_grouping_finer <- scale(data$Settlement_date_grouping_finer) 
-data$EA033 <- scale(data$EA033) 
-data$Latitude_abs_mean <- scale(data$Latitude_abs_mean) 
-data$NPP_terra_mean <- scale(data$NPP_terra_mean) 
-data$NPP_aqua_mean <- scale(data$NPP_aqua_mean) 
+data$Area_land <- scale(data$Area_land)[,1]
+data$Shoreline <- scale(data$Shoreline)[,1]
+data$ratio_coastline_to_area <- scale(data$ratio_coastline_to_area)[,1]
+data$Annual_precipitation_mean <- scale(data$Annual_precipitation_mean)[,1] 
+data$Precipitation_seasonality_mean <- scale(data$Precipitation_seasonality_mean)[,1]
+data$Annual_temperature_mean <- scale(data$Annual_temperature_mean)[,1]
+data$Temperature_seasonality_mean <- scale(data$Temperature_seasonality_mean)[,1]
+data$Settlement_date_grouping_finer <- scale(data$Settlement_date_grouping_finer)[,1] 
+data$EA033 <- scale(data$EA033)[,1]
+data$Latitude_abs_mean <- scale(data$Latitude_abs_mean)[,1]
+data$NPP_terra_mean <- scale(data$NPP_terra_mean)[,1]
+data$NPP_aqua_mean <- scale(data$NPP_aqua_mean)[,1]
 
 data %>%
   write_tsv("output/processed_data/RO_Hedvig_aggregate_country_group_scaled.tsv")
