@@ -2,7 +2,7 @@
 source("01_requirements.R")
 options(timeout=300)
 
-if(dir.exists(paths = "data/dplace-cldf")){
+if(file.exists(paths = "data/dplace-cldf/cldf/languages.csv")){
   cat(paste0("D-PLACE already downloaded, skipping fetching it anew."))
 }else{
   
