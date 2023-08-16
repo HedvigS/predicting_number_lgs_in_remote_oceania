@@ -11,7 +11,7 @@ All_polygons <- read_csv("data/RO_polygons_grouped_with_languages.csv", show_col
   mutate(Longitude = if_else(Longitude <= -25, Longitude + 360, Longitude)) %>% 
   mutate(area = as.numeric(`AREA (sq km)`)) %>% 
   arrange(area) %>% 
-  full_join(polygon_grouping_hierachy, by = c("Melanesia_or_not", "SBZR_group", "glottocodes", "Smallest_Island_group",  "Medium_only_merged_for_shared_language")) %>% 
+  full_join(polygon_grouping_hierachy, by = c("SBZR_group", "glottocodes", "Smallest_Island_group",  "Medium_only_merged_for_shared_language"), relationship = "many-to-many") %>% 
   filter(!is.na(glottocodes)) %>% 
   mutate(glottocodes = str_split(glottocodes, ",")) %>%
   unnest(glottocodes) %>% 
