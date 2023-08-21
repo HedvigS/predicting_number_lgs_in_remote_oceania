@@ -2,19 +2,22 @@
 %%%%%%%%%%%%%%%%%%%%%%% README %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% Message to colleagues accessing this document, such as Russell (G), Russell (B), Stephen, Angela, Simon, Mary etc.
+%% Information for colleagues accessing this document, such as Russell (G), Russell (B), Stephen, Angela, Simon, Mary etc.
+
 %% If you have the time and feel generous, you are welcome to read through and give comments on this document.
+
+%% The comment character in Latex is "%". Any line that starts with % will not be rendered in the document. So, you can add text in this way and you can ignore any text that I or someone else have commented out. Overleaf will render this text in green in the Code Editor.
 
 %% Thank you for your time, knowledge and patience.
 
 %%%%%%%%%%%%%%%%%%%%%% HOW TO COMMENT %%%%%%%%%%%%%%%%%%%%%%%%
 %% Here are instructions for how to add a comment in Overleaf's online collaborative interface: https://www.overleaf.com/learn/how-to/How_to_make_comments_in_an_Overleaf_LaTeX_project#Commenting:_feature_overview
 
-%% If you wish to leave comments directly in the latex code, you can. Please start such comments with %#comment #STEPHEN (or other name). That way I can easily find them.
+%% If you wish to leave comments directly in the LaTeX code, you can. Please start such comments with %#comment #STEPHEN (or other name). That way I can easily find them and know who has written what.
 
-%% The comment character in Latex is "%". Any line that starts with % will not be rendered in the document. 
+%% Instructions for downloading PDF: https://www.overleaf.com/learn/how-to/Exporting_your_work_from_Overleaf#Downloading_the_typeset_PDF_file
 
-%% If you download the document as a PDF and make comments that way, the easiest on my end is if you write comments in a txt-file and use reference points as "the paragraph starting with <...>". Page numbers can work, but may change if sections or images are moved around. If you use a PDF annotation, if you could please use Preview because other programs tend to crash or otherwise cause problems I am afraid. I am unfortunately speaking from experience.
+%% If you download the document as a PDF and make comments that way, the easiest on my end is if you write comments in a txt-file or Preview. If you use a PDF annotation, if you could please use Preview because other programs tend to crash or otherwise cause problems I am afraid. 
 
 %%%%%%%%%%%%%%%%%%%%%% OTHER %%%%%%%%%%%%%%%%%%%%%%%%
 %% This latex document lives on a GitHub repository: https://github.com/HedvigS/predicting_number_lgs_in_remote_oceania
@@ -26,68 +29,41 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass[12pt,letterpaper]{article}
+\usepackage[lmargin=1.2in,rmargin=1.2in,tmargin=1in,bmargin=1in]{geometry}
+\usepackage[bf,tiny]{titlesec}
+%\usepackage{fontspec,xltxtra,xunicode}
+    	%\defaultfontfeatures{Mapping=tex-text}
+%\usepackage[utf8]{inputenc}
+%\usepackage[utf8]{fontenc}
+%\setmainfont{Junicode}
 
-
-\documentclass[a4paper,10pt]{article} % Artikel med 12pt text och A4 storlek.
-%\documentclass[draft,10pt]{article} % Artikel med 12pt text och A4 storlek.
-\usepackage[english]{babel} % Svensk avstavning istället för engelsk
-%\usepackage[pdflatex]{graphicx}% De här två behövs för svenska
-\usepackage[utf8]{inputenc} % UTF-8 encodad fil. Kan bytas ut mot latin1 om en vill...
-\usepackage[T1]{fontenc}
-\usepackage[authoryear]{natbib}
-\usepackage{bibentry}
-\usepackage{subcaption}
-\usepackage{boldline} 
-%\usepackage[allfiguresdraft]{draftfigure}
-\usepackage{float}
-\usepackage[margin=2.5cm]{geometry}
 \usepackage{setspace}
-\usepackage{color}
-\usepackage{enumitem}   
-\usepackage[T1]{tipa}
-\usepackage{tabu}
-\usepackage{textcomp}
-\usepackage{rotating}
-\usepackage{booktabs}
-\renewcommand{\arraystretch}{1.3}
-\usepackage{tabu}
-
-\usepackage{longtable}
-\usepackage{pbox}
-\usepackage{setspace}
-\usepackage{lscape}
-%\usepackage{enumitem}
-%\usepackage{enumerate}
-\setcounter{secnumdepth}{4}
-\setcounter{tocdepth}{5}
-\usepackage{array}
-\newcolumntype{?}{!{\vrule width 1pt}}
-\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-%\usepackage{graphics}
+%\usepackage{gb4e}
+\let\eachwordone=\it %italicise the first line of examples
+\usepackage[sort]{natbib}
+\bibpunct[: ]{(}{)}{,}{a}{}{,}
+\usepackage{afterpage}
 \usepackage{graphicx}
-%\usepackage{subcaption}
 
-\usepackage{lipsum}
+%%% your packages here; please use sparingly and for things you actually need (not for aesthetics)
 
-
-
-\usepackage{footnote}
-\usepackage{tipx}
-
-\usepackage{placeins}
-\usepackage{wrapfig}
-\usepackage[table,dvipsnames]{xcolor}
-\usepackage{multirow}
-
-\usepackage{titlesec}
-
-\setcounter{secnumdepth}{4}
-
-
-\usepackage{color}  
-\usepackage{hyperref}
+% extra packages
+\usepackage{placeins} %to enable float barriers
+%\usepackage{CJKutf8} %chinese caracthers
+\usepackage[table,dvipsnames]{xcolor} %for specifying colors
+\usepackage{amsmath} % for equations
+\usepackage{booktabs} % for nice looking tables
+\usepackage{longtable} %for tables stretching several pages
+\usepackage{pdflscape} %for making things landscape
+\usepackage{multirow} %merging rows in tables
+\usepackage{rotating} %for sideways figures
+\usepackage{caption} %for making subfigures
+\usepackage{subcaption} %for making subfigures
+\usepackage{newfloat} %making it possible to treat lists as floats
+\DeclareFloatingEnvironment[placement={!ht},name=List]{mylist} %setting a float environment for lists
+\usepackage{enumitem} %make it possible to have other enumerate items, like roman numerals
+\usepackage{hyperref} %for nice looking links
 \hypersetup{
     colorlinks=true, %set true if you want colored links
     linktoc=all,     %set to all if you want both sections and subsections linked
@@ -96,32 +72,13 @@
             citecolor=Thistle,
 }
 
-\usepackage{xcolor}
-\usepackage{CJKutf8} %chinese caracthers
-
-\definecolor{hedvig_blue}{HTML}{7D81F5}
-\definecolor{hedvig_lightgreen}{HTML}{81F093}
-\definecolor{hedvig_darkgreen}{HTML}{0B8C1F}
-\definecolor{hedvig_orange}{HTML}{FFB87A}
-\definecolor{hedvig_red}{HTML}{FFD9E0}
-\definecolor{hedvig_yellow}{HTML}{FCFFA8}
-
-
-
-\setcitestyle{notesep={:},aysep={},aasep={\&}}
-%\renewcommand{\labelitemi}{$\rightarrow$}
-\usepackage{gb4e}
-
 \usepackage{authblk}
 %\usepackage{draftwatermark}
 %\SetWatermarkText{DRAFT}
 %\SetWatermarkScale{4}
 
 %\pagestyle{myheadings}
-
-\noautomath
 \title{Predicting number of languages per island group in Remote Oceania}
-%\large A thesis submitted for the degree of Doctor of Philosophy of The Australian National University\\}
 
 %\author{anon}
 \author{Hedvig Skirg{\aa}rd}
@@ -146,8 +103,11 @@
 \doublespacing
 \normalsize
 %We suggest a maximum length of 350 words for the Abstract
-There are more than 7,000 languages on our planet today, but they are not evenly distributed over the population. For example, there are over 100 languages in Vanuatu but only one in S\={a}moa, despite the populations being plausibly similar historically. Why might this be? This paper explores this question for one particular region: Remote Oceania.
-Remote Oceania comprises the eastern Solomon Islands (Temotu), Vanuatu, New Caledonia, Fiji, Polynesia and Micronesia. The region was settled more recently than the rest of Oceania (3,500 years ago) and entirely by Austronesian speakers. Through studies in archaeology, history and linguistics much is known of migration patterns and societal organization. The comparatively shallow time depth, the relatedness of the languages and established knowledge about the history of this region make it an ideal base for understanding language diversification. This study considers environmental, archaeological and societal variables and their statistical relationship to the number of languages per island group. Of these factors, political complexity, time depth and island size significantly explain the variation. The impact of political complexity is probably due to the fact that more hierarchical societies led to more interactions and cohesion over large distances, which reduced language splitting.
+There are more than 7,000 languages on our planet today, but they are not evenly distributed over the population. There are over 100 languages in Vanuatu, but only one in S\={a}moa. This in sipreof the populations being similarly sized, similar history etc. Why might this be? This paper explores this question for one particular region: Remote Oceania.
+
+Remote Oceania comprises the eastern Solomon Islands (Temotu), Vanuatu, New Caledonia, Fiji, Polynesia and Micronesia. The region was settled more recently than the rest of Oceania (3,500 years ago) and initially entirely by Austronesian speakers. Through community knowledge, studies in archaeology, history and linguistics much is known about migration patterns and societal organization of this part of the world. The comparatively shallow time depth, the relatedness of the languages and established knowledge about the history make it an ideal base for understanding language diversification. 
+
+One particular theory has been proposed to explain the discrepancy in language richness over Remote Oceania --- societal organisation. In this study, we test if this factor remains an important predictor of the number of languages also when other relevant factors are taken into account, such as time-depth and environment. The results show that the theory does hold in terms of statistical power, but that there are important caveats such as the precise implementation of the factor into community structure and influence from Oceanic neighbours further west who do not speak Austronesian languages.
 
 %Scholars have suggested several reasons for the large discrepancy between the number of languages per island group in Remote Oceania, such as societal organisation, environmental factors and settlement time. 
 
@@ -178,11 +138,11 @@ Remote Oceania comprises the eastern Solomon Islands (Temotu), Vanuatu, New Cale
 \section{Introduction}
 \doublespacing
 %\doublespacing
-Why are there more languages in some places than others? The number of languages in the world is not equally distributed over its population. In the modern country of Papua New Guinea, there are 835 languages and 7 million people \citep{ethnologue22, cia_world_factbook_2019, glottolog4_5}. However, in South Korea there are only two indigenous spoken languages in a population of 51 million people. How can this be?
+Why are there more languages in some places than others? The number of languages in the world is not equally distributed over its population. In the modern country of Papua New Guinea, there are 835 languages and 7 million people \citep{ethnologue22, cia_world_factbook_2019, glottolog4_5}. However, in South Korea, there are only two indigenous spoken languages in a population of 51 million people. How can this be?
 
-Understanding the mechanics of language change and diversification is essential to understanding human history. Language is interlinked with cultural identity, learning about the historical dynamics of language informs our understanding of our story generally. The question of language splitting in particular is interesting as it represents community splitting. This research topic has received a lot of attention in recent years (c.f. \citet{gavin2017process,  greenhill2015demographic, Pacheco_Coelho_2019, hua2019ecological}). In this study, we will take a closer look specifically at the region of Remote Oceania. 
+Understanding the mechanics of language change and diversification is essential to understanding human history. Language is interlinked with cultural identity, learning about the historical dynamics of language informs our understanding of our story generally. The question of language splitting in particular is interesting as it also implies community splitting. What causes us to lose touch, to diverge and go separate ways? This research topic has received a lot of attention in recent years (c.f. \citet{gavin2017process,  greenhill2015demographic, Pacheco_Coelho_2019, hua2019ecological}). In this study, we will take a closer look specifically at the region of Remote Oceania. 
 
-Fig.~\ref{RO_overnight_coloured_dots} shows islands of Oceania. Languages are points, coloured by language family. In the Polynesian islands (S\={a}moa, Tonga, Rarotonga, Tokelau etc) there is generally one language per island group. However, in central west Remote Oceania (Vanuatu, Temotu, Fiji and Kanaky) there are many more languages --- sometimes up to 20 languages on the very same island. What explains this difference?
+Fig.~\ref{RO_overnight_coloured_dots} shows the language richness of the islands of Oceania. Languages are points, coloured by language family. In the Polynesian islands (S\={a}moa, Tonga, Rarotonga, Tokelau etc), there is generally one language per island group. However, in central west Remote Oceania (Vanuatu, Temotu, Fiji and Kanaky) there are many more languages --- sometimes up to 20 languages on the very same island. The archipelagos of Chuuk Wa'ab and Pohnpei also feature more languages than the Polynesian islands and atolls. What explains this difference?
 %What are the mechanics of this?
 
 \begin{sidewaysfigure}[p]
@@ -193,11 +153,13 @@ Fig.~\ref{RO_overnight_coloured_dots} shows islands of Oceania. Languages are po
 \label{RO_overnight_coloured_dots}
 \end{sidewaysfigure}
 
-Let us first consider some plausible factors in language diversification. Firstly, diversification takes time. We would expect a higher probability of language diversification in areas where people have lived for a longer time simply due to natural drift as communities spread out and form separate clusters. All of Remote Oceania was settled in the last 3,600 years, but at different stages. A large part of Remote Oceania was settled for the first time by Austronesian speaking people in a rapid expansion 3,600 - 2,800 BP known as the ``Lapita expansion'' (\citet[106-7]{bellwood2006austronesians}; \citet[137]{rieth_cochrane_2018}). This first area covers all islands of Vanuatu, Temotu, New Caledonia, Fiji and parts of Western Polynesia. The dates of the first settlement for these islands are relatively similar, but there still is a large discrepancy in the number of languages (see Fig \ref{RO_overnight_coloured_dots}). This makes for a convenient case for comparison. If we include other regions of Oceania, such as Australia or New Guinea, the comparison becomes more complex as they have been settled for a much much longer time-span, possibly up to 60,000 years. Here we focus specifically on Remote Oceania in order to test specific theories about the diversification there that have been presented by anthropologists and linguists.
+Let us first consider some plausible factors in language diversification. Firstly, diversification takes time. We would expect a higher probability of language diversification in areas where people have lived for a longer time simply due to natural drift as communities spread out and form separate clusters. All of Remote Oceania was settled in the last 3,600 years but at different stages. A large part of Remote Oceania was settled for the first time by Austronesian-speaking people in a rapid expansion 3,600 - 2,800 BP known as the ``Lapita expansion'' (\citet[106-7]{bellwood2006austronesians}; \citet[137]{rieth_cochrane_2018}). This first area covers all islands of Vanuatu, Temotu, New Caledonia, Fiji and parts of Western Polynesia. The dates of the first settlement for these islands are relatively similar, but there still is a large discrepancy in the number of languages (see Fig \ref{RO_overnight_coloured_dots}). This makes for a convenient case for comparison. If we include other regions of Oceania, such as Australia or the New Guinea region \citep{ross2017_new_guinea_region}, the comparison becomes more complex as they have been settled for a much much longer time-span --- possibly up to 60,000 years. Here we focus specifically on Remote Oceania in order to test specific theories about the diversification there that have been presented by anthropologists and linguists.
 
-Let us compare two island groups in this region as an example: the S\={a}moa archipelago in Western Polynesia and the island of Malakula in Vanuatu. There is one indigenous language spoken in  S\={a}moa ---  S\={a}moan --- and in Malakula there are 33 distinct languages spoken. S\={a}moa was settled approximately 400 years after Malakula \citep[137-8]{rieth_cochrane_2018}. This gives Malakula a bit of a ``head-start'', but most likely not enough to explain the vast difference. Besides time depth, we might also expect that more space entails greater language diversity. A larger area makes it possible to spread out and become isolated from each other, which can entail language splitting. However, the shoreline\footnote{Since Austronesian settlements are mainly found on the coast, we are comparing shorelines instead of land area.} of Malakula is 67\% of that of S\={a}moa. What factors are there that can aid our understanding here?
+Let us compare two island groups in this region as an example: the S\={a}moan archipelago in Western Polynesia and the island of Malakula in Vanuatu. There is one indigenous language spoken in S\={a}moa ---  S\={a}moan --- and in Malakula there are 33 distinct languages spoken \citet{glottolog4_5}. S\={a}moa was settled approximately 400 years after Malakula \citep[137-8]{rieth_cochrane_2018}. This gives Malakula a bit of a ``head-start'', but most likely not enough to explain the vast difference.
 
-\citet{turner1884} and \citet{pawley81,pawley2007} have suggested that the discrepancy between the number of languages in different parts of Remote Oceania can be related to societal structure. Societies in Vanuatu and New Caledonia tend to be less hierarchical than societies in Polynesia. Societies with fewer vertical levels of political structure are associated with more linguistic and cultural diversity. Conversely, more hierarchically complex societies are associated with linguistic and cultural homogeneity. This hypothesis does not necessarily entail that individual leaders in more stratified societies have a direct effect on the nature of the language of the community by means of their personality, conscious policies or directives. Instead, it is more likely that the political structure is indicative of different kinds of community network structures and attitudes. Section \ref{sec:previous_research} teases out this line of argumentation in more detail.
+Besides time depth, we might also expect that more space entails greater language diversity. A larger area makes it possible to spread out communities, which can entail language splitting. However, the shoreline\footnote{Since Austronesian settlements are mainly found on the coast, we are comparing shorelines instead of land area.} of Malakula is 67\% of that of S\={a}moa. S\={a}moa is larger than Malakula. What other factors are there that can aid our understanding here?
+
+\citet{turner1884} and \citet{pawley81,pawley2007} have suggested that the discrepancy between the number of languages in different parts of Remote Oceania can be related to societal structure. Societies in Vanuatu and New Caledonia tend to be less hierarchical than societies in Polynesia. Societies with fewer vertical levels of political structure are associated with more linguistic and cultural diversity. Conversely, more hierarchically complex societies are associated with linguistic and cultural homogeneity. This hypothesis does not necessarily entail that individual leaders in more stratified societies have a direct effect on the nature of the language of the community by means of their personality, conscious policies or directives. Instead, it is more likely that the political structure is indicative of different kinds of community network structures and attitudes. A shared cultural identity and frequent interactions might encourage conformity. Section \ref{sec:previous_research} teases out this line of argumentation in more detail.
 
 %A measurement of so-called ``political complexity'' in ethnographic surveys (c.f. \citet{gray1998ethnographic}) should then be correlated with different patterns of interaction and show up as a significant factor in language diversification. This is true even if political complexity is merely a proxy measurement of the interaction pattern that is in fact driving language change. 
 
@@ -210,14 +172,14 @@ This study tests the hypothesis that more vertical levels of political organisat
 \FloatBarrier
 \section{Previous research}
 \label{sec:previous_research}
-Linguists, anthropologists and scholars of other fields have long remarked on the link between linguistic diversity and political structure in Remote Oceania. One of the oldest examples of this observation is Turner who travelled in the region 1861-1884 and hypothesized that the lack of regional variation \emph{within} S\={a}moan entailed that they had long had a more centralized government \citep[172]{turner1884}. Linguists have linked types of societal organization to different diversification processes. Language change is embedded in social structure (c.f. \citep{WLH1968}), or as \citet[124]{grace_1992_aberrant} writes: \emph{linguistic similarities and differences [are] reflections of community structures}. As community ties weaken and what was once one social network splits in twain, we expect that this is reflected in language variation as well. In this way, language studies provide insights to neighbouring fields such as archaeology, anthropology etc.
+Linguists, anthropologists and scholars of other fields have long remarked on the link between linguistic diversity and political structure in Remote Oceania. One of the oldest examples of this observation is the European Turner who travelled in the region 1861-1884 and hypothesized that the lack of regional variation \emph{within} S\={a}moan entailed that they had long had a centralized government \citep[172]{turner1884}. Linguists have linked types of societal organization to different diversification processes. Language change is embedded in social structure (c.f. \citep{WLH1968}), or as \citet[124]{grace_1992_aberrant} writes: \emph{linguistic similarities and differences [are] reflections of community structures}. As community ties weaken and what was once one social network splits in twain, we expect that this is reflected in language variation as well. In this way, language studies provide insights to neighbouring fields such as archaeology, anthropology etc.
 
-\citet{pawley81, pawley2007} discusses the specific hypothesis that while much of Remote Oceania was settled in similar ways by Austronesian-speaking people, and at comparable time depths, and developed similarly immediately after first settlement, the differences between them stem from the rise of powerful chiefs and maintenance of long-distance voyaging in the island groups of Polynesia. This theory suggests that the steps of the diversification process were more or less the same, but that the \emph{rate} by which it progressed differed and that this is the cause for the variation we see today.\footnote{\citet{lynch1981melanesian} calls this ``the diversification cycle theory''.} The societal structure in Polynesia was such that the process of cultural diversification was slower than in Vanuatu and New Caledonia. The following quote from \citet{pawley2007} summarises a few of these points and links them to the political organisation:
+\citet{pawley81, pawley2007} discusses the specific hypothesis that while much of Remote Oceania was settled in similar ways by Austronesian-speaking people, and at comparable time depths, and developed similarly immediately after the first settlement, the differences between them stem from the rise of powerful chiefs and maintenance of long-distance voyaging in the island groups of Polynesia. This theory suggests that the steps of the diversification process were more or less the same, but that the \emph{rate} by which it progressed differed and that this is the cause for the variation we see today.\footnote{\citet{lynch1981melanesian} calls this ``the diversification cycle theory''.} The societal structure in Polynesia was such that the process of cultural diversification was slower than in Vanuatu and New Caledonia. The following quote from \citet{pawley2007} summarises a few of these points and links them to the political organisation:
 
 %This diversification process has two stages. First, there are similar sequences of rapid expansion over the entire island group, and sparse settlement with trade and marriages between different sister communities. Second, there is denser settlement associated with localised trade and marriage practices between sister communities, more intensive agriculture and weakening of kin ties and linguistic divergence. 
 
 \begin{quotation}
-\noindent \emph{In [Fiji and West Polynesia] the maintenance of long-distance voyaging, both within island groups and between neighbouring island groups, can be attributed in large part to the rise of powerful chiefs. These chiefs had political, economic and social motives for maintaining long distance connections and were able to use their authority to drive the production of a food surplus which in turn could be used to support specialist craftsmen who could, among other things, build and sail large ocean-going canoes.} \citep[28]{pawley2007} \end{quotation}
+\noindent \emph{When they found a new island group the Lapita colonists rapidly explored and lightly settled it. This initial colonising phase was typically followed by a sequence of demographic, economic and technological developments. Population growth led to a denser distribution of settlements, more intensive agriculture, more local marriage and trade, weakening of kin ties with distant communities, and linguistic divergence. This sequence of events happened in both Southern Melanesia and West Polynesia and Fiji but it happened more slowly in West Polynesia/Fiji. In [Fiji and West Polynesia] the maintenance of long-distance voyaging, both within island groups and between neighbouring island groups, can be attributed in large part to the rise of powerful chiefs. These chiefs had political, economic and social motives for maintaining long distance connections and were able to use their authority to drive the production of a food surplus which in turn could be used to support specialist craftsmen who could, among other things, build and sail large ocean-going canoes.} \citep[28]{pawley2007} \end{quotation}
 
 This proposal by \citet{pawley81, pawley2007} can be expressed in a Directed Acyclic Graph (DAG, c.f. \citet{pearl1995causal} and \citet{mcelreath2020statistical}. This lets us view the chain of argumentation in a stylized and formal visualisation that can lead directly to statistical modelling and comparison between proposals (c.f. \citet{roberts2020chield}). Fig. \ref{Predicting_lgs_DAG_andy} contains such a graph, based on the author's interpretation of Pawley's proposal in more detail. The connection between the rise of powerful chiefs and language richness is not direct, but mediated through a number of other factors. 
 
@@ -230,9 +192,9 @@ This proposal by \citet{pawley81, pawley2007} can be expressed in a Directed Acy
 
 Fig. \ref{Predicting_lgs_DAG_full} in \ref{appendix_DAG_def} contains a larger version that incorporates more of the suggested linkages beyond those suggested by Pawley, for example, that political complexity may affect the modularity and interconnectedness of social networks and this, in turn, affects language splitting. However, most of these factors are more difficult to measure or have not been measured (dashed outlines in the DAGs), whereas ``political complexity'' is a variable in the Ethnographic Atlas (c.f. \citet{gray1998ethnographic}).
 
-In a similar vein to Pawley, \citet{curriemace2009} suggests that more stratified societies are correlated with larger language areas in Africa and Eurasia. If one language covers a large area, then the number of languages per square kilometre is lower than otherwise --- the language density is lower. Their research can be interpreted to mean that more stratified societal structures are more capable of sustaining linguistic homogeneity over a larger geographical area (or possibly reducing diversity by cultural dominance and warfare). Greater maintenance of cultural homogeneity would result in less language splitting over larger areas, and therefore a larger language area correlates with greater stratification. The approach is different from \citet{pawley81, pawley2007}, but the scientific line of argumentation is congruent.
+In a similar vein to Pawley, \citet{curriemace2009} suggests that more stratified societies are correlated with larger language areas in Africa and Eurasia. If one language covers a large area, then the number of languages per square kilometre is lower than otherwise --- the language density is lower. Their research can be interpreted to mean that more stratified societal structures are more capable of sustaining linguistic homogeneity over a larger geographical area (or possibly reducing diversity by cultural dominance and warfare). Greater maintenance of cultural homogeneity would result in less language splitting over larger areas, and therefore a larger language area correlates with greater stratification. The approach is different from \citet{pawley81, pawley2007}, but the scientific line of argumentation is similar.
 
-Returning to language richness in Remote Oceania; a significant factor to consider is contact --- in particular with people from New Guinea, Solomons and the Bismarck archipelago. Prior to western colonisation, all indigenous communities of Remote Oceania spoke the languages of the Austronesian family (see Fig \ref{RO_overnight_coloured_dots}). This family has its ultimate origins in Taiwan, and spread into the region approximately 3-4,000 years ago (c.f. Fig. \ref{austro_expansion_bellwood}). The peopling of New Guinea, the Bismarck archipelago and Solomons however is older than that, and there is a great amount of language and cultural diversity there that may have influenced Austronesian people during and after their journeys east. 
+Returning to language richness in Remote Oceania; a significant factor to consider besides those already discussed is contact --- in particular with people from the New Guinea region (c.f. \citet{ross2017_new_guinea_region}). Prior to European colonisation, all indigenous communities of Remote Oceania spoke the languages of the Austronesian family (see Fig \ref{RO_overnight_coloured_dots}). This family has its ultimate origins in Taiwan, and spread into the Remote Oceania approximately 3-4,000 years ago (c.f. Fig. \ref{austro_expansion_bellwood}). The peopling of New Guinea, the Bismarck archipelago and much of the Solomon Islands however is older than that, and there is a great amount of language and cultural diversity there that may have influenced Austronesian people during and/or after their journeys east. 
 
 \begin{figure}[ht]
 \centering
@@ -241,7 +203,10 @@ Returning to language richness in Remote Oceania; a significant factor to consid
 \label{austro_expansion_bellwood}
 \end{figure}
 
-Recent studies of ancient DNA \citep{lipson_harvad_ancient_dna_vanuatu_2018, posth_jena_ancient_dna_vanuatu_2018} have shown that there is evidence of significant levels of genes that are associated with origins in non-Austronesian speaking communities from New Guinea and Solomons among Vanuatu people. Likewise, further studies such as \citet{liu2022ancient} show similar influence from New Guinea and Solomons northwards in Palau, Chuuk and Pohnpei island groups. It is becoming increasingly clear in the overall scientific literature on the ancient history of Oceania that there were a lot more connections and interactions than previously postulated. It is not the case that people travelled to one place, and then stayed put there with little influence from other people of Oceania. Oceania is an interconnected place today, and it was historically too.
+Recent studies of ancient and modern DNA \citep{lipson_harvad_ancient_dna_vanuatu_2018, posth_jena_ancient_dna_vanuatu_2018} have shown that there is evidence of significant levels of genes that are associated with origins in non-Austronesian speaking communities from New Guinea and Solomons among Vanuatu people. The suggestion is that while the initial settlement of Remote Oceania was likely to be Austronesian (i.e. genetically similar to Asian populations), there have since been more people coming who have non-Austronesian ancestry from the New Guinea region. Interestingly, \citet{posth_jena_ancient_dna_vanuatu_2018} highlight that this had little effect
+
+
+Likewise, further studies such as \citet{liu2022ancient} show similar influence from New Guinea and Solomons northwards in Palau, Chuuk and Pohnpei island groups. It is becoming increasingly clear in the overall scientific literature on the ancient history of Oceania that there were a lot more connections and interactions than previously postulated. It is not the case that people travelled to one place, and then stayed put there with little influence from other people of Oceania. Oceania is an interconnected place today, and it was historically too.
 
 It is possible that these interactions, which were more frequent in Vanuatu than in Polynesia, have implications for many domains of human life --- including political organisation and language diversity. Linguist and anthropologist \citet[104]{lynch1981melanesian} has stressed the relevance of contact with non-Austroneisan communities from New Guinea, Bismarck, Bougainville and the Solomon Islands as a key factor in explaining why there are more languages in Vanuatu compared to the rest of Oceania \footnote{\citet{lynch1981melanesian} uses the terms ``Papuan'' and contrasts Melanesia and Polynesia. I have chosen to summarise him here in more precise terms in relation to how his work impacts the current study. He writes specifically about the influence of languages of New Britain, Bougainville, central Solomon Islands, Manus and the southeast of New Guinea mainland (Oro province, Milne Bay province and National Capital District) on Oceanic languages of those regions and in Temotu.}. Lynch does not offer a precise account but outlines several different potential scenarios whereby contact with non-Austronesian groups caused greater diversification among Oceanic languages.
 
@@ -582,7 +547,7 @@ The fact that Glottolog provides unique stable identifiers for dialects and fami
 
 %In this case study, I have chosen to go with the classificatory decision that these should be viewed as 4 different languages. It was easy for me to change the coding of languages in my data to include these 4 different glottocodes as separate languages instead of ``Austral'' as one. If any researcher in the future wants to make another call they can access the data and run the analysis with another classification. Since there exists glottocodes for the dialects and these are explicitly linked to their language level parent - Austral - it is easy for make the switch.
 
-Being able to refer to dialects and families with a stable identifier is useful and an important difference between the SIL International ISO 639-3 code standard and Glottolog's glottocodes. When working with cross-linguistic and cross-cultural databases, it is often useful to be able to refer to a language variety in a more granular detail than the ISO 639-3 set allows for. \citet{nordhoff2011glottolog} point out that there may be differences between dialects that are crucial to certain research that would be confused if it was only possible to refer in a stable manner to the language level and not also to specific dialects. For example, certain dialects of German make a distinction between /e\textipa{:}/ and /æ\textipa{:}/ whilst others don't. If references were not accurately tied to a language variety, this would be confusing as ``German'' would have different numbers of vowels in different sources. By providing stable identifiers for dialects as well as languages and providing a controlled hierarchy, it is possible for researchers to document their data accurately while still making it possible to aggregate up to the ``language-level'' when it is desirable. For example, Grambank and the Standard Cross Cultural Sample of D-PLACE both contain entries for specific languages and dialects. There are 158 one-to-one matches between the glottocodes of these two databases. In some cases though, the databases contain different dialects of the same language. If we were to lump dialects of the same language together in each of the datasets, the overlap increases to 183.
+Being able to refer to dialects and families with a stable identifier is useful and an important difference between the SIL International ISO 639-3 code standard and Glottolog's glottocodes. When working with cross-linguistic and cross-cultural databases, it is often useful to be able to refer to a language variety in a more granular detail than the ISO 639-3 set allows for. \citet{nordhoff2011glottolog} point out that there may be differences between dialects that are crucial to certain research that would be confused if it was only possible to refer in a stable manner to the language level and not also to specific dialects. For example, certain dialects of German make a distinction between /e:/ and /æ:/ whilst others don't. If references were not accurately tied to a language variety, this would be confusing as ``German'' would have different numbers of vowels in different sources. By providing stable identifiers for dialects as well as languages and providing a controlled hierarchy, it is possible for researchers to document their data accurately while still making it possible to aggregate up to the ``language-level'' when it is desirable. For example, Grambank and the Standard Cross Cultural Sample of D-PLACE both contain entries for specific languages and dialects. There are 158 one-to-one matches between the glottocodes of these two databases. In some cases though, the databases contain different dialects of the same language. If we were to lump dialects of the same language together in each of the datasets, the overlap increases to 183.
 
 The definitions of language in ISO 639-3 (as described in Ethnologue \citep{ethnologue2019lgident}) and Glottolog both focus on mutual intelligibility. Ethnologue notes that intelligibility does have to be symmetric, but neither of the resources discuss multilingualism, or multidialectalism in any detail. It is possible that the world used to be much more multilingual than it is today \citep{evans2017did}, and there are still many places where communities are highly competent in many different language varieties. Ethnologue state that they focus on \emph{inherent} intelligibility, as opposed to \emph{acquired}, but in situations where languages are not formally taught but rather present in the community continuously it can be difficult to draw the boundary between inherent and acquired. The underestimation of multilingualism has significant consequences for studies of the evolution of language \citep{roberts2013evolutionary}. However, unless two languages are exclusively spoken in a fully multilingual setting and never outside of it, the total count of languages should remain the same. 
 
@@ -769,7 +734,7 @@ Fig.~\ref{pol_complex_map} represents the coding of political complexity for the
 \label{pol_complex_map}
 \end{sidewaysfigure}
 
-For the calculations of this study, the average political complexity per island group was used. This may differ for island groups clustered by overnight distances or based on sharing a language.
+For the calculations of this study, the mode political complexity per island group was used. 
 
 \FloatBarrier
 \subsubsection{Waves of settlement}
@@ -925,6 +890,13 @@ This dataset does not contain information on population size because there is no
 \caption{Directed Acyclic Graph of the variables in this study. Blue = variable to be predicted (response).}
 \label{Predicting_lgs_DAG_full}
 \end{sidewaysfigure}
+
+
+\newpage
+\subsection{BRMS model tables}
+\label{BRMS_model_tables}
+
+
 
 
 \newpage
