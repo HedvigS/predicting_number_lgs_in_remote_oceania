@@ -103,7 +103,7 @@
 \doublespacing
 \normalsize
 %We suggest a maximum length of 350 words for the Abstract
-There are more than 7,000 languages on our planet today, but they are not evenly distributed over the population. There are over 100 languages in Vanuatu, but only one in S\={a}moa. This in sipreof the populations being similarly sized, similar history etc. Why might this be? This paper explores this question for one particular region: Remote Oceania.
+There are more than 7,000 languages on our planet today, but they are not evenly distributed over the population. There are over 100 languages in Vanuatu, but only one in S\={a}moa. This in spite of the populations being similarly sized, similar history etc. Why might this be? This paper explores this question for one particular region: Remote Oceania.
 
 Remote Oceania comprises the eastern Solomon Islands (Temotu), Vanuatu, New Caledonia, Fiji, Polynesia and Micronesia. The region was settled more recently than the rest of Oceania (3,500 years ago) and initially entirely by Austronesian speakers. Through community knowledge, studies in archaeology, history and linguistics much is known about migration patterns and societal organization of this part of the world. The comparatively shallow time depth, the relatedness of the languages and established knowledge about the history make it an ideal base for understanding language diversification. 
 
@@ -138,7 +138,7 @@ One particular theory has been proposed to explain the discrepancy in language r
 \section{Introduction}
 \doublespacing
 %\doublespacing
-Why are there more languages in some places than others? The number of languages in the world is not equally distributed over its population. In the modern country of Papua New Guinea, there are 835 languages and 7 million people \citep{ethnologue22, cia_world_factbook_2019, glottolog4_5}. However, in South Korea, there are only two indigenous spoken languages in a population of 51 million people. How can this be?
+Why are there more languages in some places than others? The number of languages in the world is not equally distributed over area and population. In the modern country of Papua New Guinea, there are 835 languages over 7 million people \citep{ethnologue22, cia_world_factbook_2019, glottolog4_5}. However, in South Korea, there are only two indigenous spoken languages in a population of 51 million people. How can this be?
 
 Understanding the mechanics of language change and diversification is essential to understanding human history. Language is interlinked with cultural identity, learning about the historical dynamics of language informs our understanding of our story generally. The question of language splitting in particular is interesting as it also implies community splitting. What causes us to lose touch, to diverge and go separate ways? This research topic has received a lot of attention in recent years (c.f. \citet{gavin2017process,  greenhill2015demographic, Pacheco_Coelho_2019, hua2019ecological}). In this study, we will take a closer look specifically at the region of Remote Oceania. 
 
@@ -326,7 +326,7 @@ For the overnight-sailing distances, several island groups are much larger than 
 
 The most important variables in this model (i.e. coefficient distribution does not overlap 0) were: Shoreline, Political complexity, time depth and time-depth in interaction with shoreline (see Fig \ref{brms_SBZR_group_full_effect_ridge_panels}). However, if we drop out Vanuatu + Temotu this no longer holds. When Vanuatu + Temotu are left out, the coefficient distribution of political complexity overlaps zero. Instead, the environmental PCs, Shoreline and time depth are relevant predictors.\footnote{They are relevant if we consider the 95\% credibility interval. If we take the full distribution, all terms overlap zero.} When Vanuatu + Temotu are dropped out, the overall difference between predicted and observed values goes down significantly (from 4.3 to 2, see Fig. \ref{brms_SBZR_dropped_out_plot_diff}). If we ask this model that has been trained without the Vanuatu + Temotu data to predict how many languages are there, it grossly underestimates and proposes 7 languages (observed = 130). If we drop out any other island group (including Kanaky), political complexity remains a significant factor as it does in the model with all observations.
 
-
+For tables of the effect Estimate, Rhat and ESS for both models, please see Appendix \ref{BRMS_model_tables}.
 
 
 %Most of the island groups in this dataset have only one language, and this seems to have caused some issues (despite the Negative Binomial distribution). The model does best at predicting languages in Polynesia (which is dominated by island groups with only one language). Islands groups in Polynesia can have a very long coastline (like the Paumotu archipelago of French Polynesia) or very short one (like Niue). There is not as much difference in shorelines between islands of Vanuatu. The model seems to have struggled with using shoreline to predict languages globally, even leading to the result that Shoreline as a standalone term comes out in the model as negatively predicting the number of languages (though not with a \emph{p} value that passes traditional thresholds of significance). 
@@ -416,7 +416,7 @@ Political complexity is, perhaps unsurprisingly, a complex variable. There are a
 \newpage
 \section*{Acknowledgements}
 
-The research leading to these results has received funding from the Department of Linguistic and Cultural Evolution, Max Planck Institute for Evolutionary, the School of Culture, History and Language at the Australian National University and from the Australian Research Council through The Wellsprings of Linguistic Diversity Laureate Project (awarded to Professor Nicholas Evans 2014-2018) and the Centre of Excellence for the Dynamics of Language (CoEDL).
+The research leading to this paper has received funding from the Department of Linguistic and Cultural Evolution, Max Planck Institute for Evolutionary, the School of Culture, History and Language at the Australian National University and from the Australian Research Council through The Wellsprings of Linguistic Diversity Laureate Project (awarded to Professor Nicholas Evans 2014-2018) and the Centre of Excellence for the Dynamics of Language (CoEDL).
 
 I am fortunate enough to have colleagues in academia who have been generous enough to discuss conceptual methodological matters with me, these are Stephen Mann, Angela Chira, Russell Gray, Oleg Sobchuk, Richard McElreath, Tiago Tresoldi, Michael Dunn, Hannah Haynie, Outi Vesakoski, Fredric Blum and Luke Maurits. I am also grateful for the advice of Mary Walworth, Ray Harlow, Andrew Pawley, Paul Geraghty and Alexandre François concerning language classification and Matthew Spriggs, Geoff Kushnick and Christopher Ballard regarding archaeology and anthropology of Oceania.
 
@@ -793,28 +793,31 @@ In total, the following environmental variables are included in the study:
 %number_of_languages_vs_pop_1950.png
 
 \FloatBarrier
+
+
 \newpage
-\subsection{Population 1950 and number of languages per modern country}
+\subsection{Caveat regarding time-span}
+\label{appendix_time_span}
+%Collected thoughts in regards to validity of ethnographic data, may be cut.
+
+To understand the vast majority of human history and diversification, we should consider the state of societies as they were before the introduction of Western colonisation, industrialisation, globalization etc as these have only been around in the last 500 years. Behaviourally modern humans emerged between 90,000 and 160,000 years ago (\citet{powell2009late}: \cite{marean2007early}). The last 500 years represent between 0.6\% and 0.3\% of our history. If we consider only the time period of more sedentary living and agriculture, i.e. approx the last 11,000 years (c.f. \citet{kislev2006early}) the proportion of time since Columbus landing in the Caribbean is 4.5\%.
+
+The aforementioned processes, while recent, have resulted in mass immigration/invasion (c.f. \citet{invasion_day}) to places like the Americas, South Africa, Australia and New Zealand and oppressive policies that reduce language diversity. They have had a massive impact in the comparatively short time span that they have been active and are not only perpetuated by Western forces but also other powerful groups (see for example the case of Indonesian power in Western New Guinea \citep{gietzelt1989indonesianization}). Another driving force that is relatively recent and related is the emergence of modern nation-states (c.f. \citet{foucault2007security}, \citet[21-22]{oakes2001language}). In connection with the aforementioned forces, the formation of modern nation-states has further reduced diversity that was present within groups (through means like ideological movements (e.g.the \emph{Volkgeist}-movement), nationally standardized mass education, mass media, print-media etc). The creation of nation-states and their continued development is tied to ideas of one sole homogeneous culture (c.f. \citet{encyclo_nationalism}), which often results in the disappearance of regional variation, minority languages etc within what we today conceive of as ``countries''/``nation-states''. 
+
+The massive effect of these forces in the last 500 years means that as a historical scientist, there is a big difference between considering the human landscape before and after this point --- especially in terms of cultural history and diversity. \citet[7340-7341]{curriemace2009} find that the data available for language territories in Australia and the Americas is so affected by colonial history and population replacement to make it impossible to include it in the analysis alongside the other regions. 
+
+There is also a problem with data pertaining to history before these massive forces step onto the stage. Ethnographic accounts are often ``snapshots'' with unclear time-depth 
+ \citep[113]{bedford2008northern}. Human culture everywhere is dynamic and changing. This is one of the reasons why the ethnographic database D-PLACE \citep{d_place_all} includes ``focal year'' for each variable.
+
+
+
+
+\newpage
+\subsection{Regarding population and the number of languages}
 \label{appendix_pop_vs_languages}
-While it is true that the number of languages is not entirely evenly spread out over the population, it is still the case that there is a general trend connecting greater number of people with greater number of languages. However, due to difficulties with data this is hard to study. In this particular study, population could not be included due to lack of detailed and reliable enough data on enough island groups prior to western colonization.
+While it is true that the number of languages is not entirely evenly spread out over the population, it is still the case that there is a general trend connecting a greater number of people with a greater number of languages (as can be seen in Figs \ref{fig:un_pop_plot} and \ref{fig:un_pop_plot_log10}). However, due to difficulties with data, this is hard to study historically. In this particular study, population numbers could not be included due to a lack of detailed and reliable enough data on enough island groups prior to Western colonization. While resources like \citet{elcat} have population numbers for many places, it does not sufficiently cover Oceania to allow the variable to be included. This is similar to the study by \citet[7340-7341]{curriemace2009} where they found that the data available for language territories in Australia and the Americas is so affected by colonial history and population replacement to make it impossible to include it in the analysis alongside the other regions. 
 
-To understand the vast majority of human history and diversification, we should consider the state of societies as they were before the introduction of western colonisation, industrialisation, globalization etc. Modern nation-states are a recent phenomena in human history (c.f. \citet{foucault2007security}) and the aforementioned processes have resulted in mass migration in places like the Americas, Australia and New Zealand and oppressive policies that reduce language diversity. Therefore, the population of these places today is unlikely to accurately represent most of the history of humans in those spaces. It is often difficult to find reliable sources on population numbers before 1500.
-
-Keeping those problems in mind we can still explore the relationship between the total population of modern countries and number of languages. The aforementioned reasons will introduce noise and modern countries are not meaningful historically (see \ref{sec:island_geo}. 
-
-
-Figs \ref{fig:un_pop_plot} and \ref{fig:un_pop_plot_log10}
-
-
-
-It is not possible to include population data, because it does not exist for many places --- especially not going back past 1850. While resources like \citet{elcat} have population numbers for many places, it does not sufficiently cover Oceania to allow the variable to be included. However, it is possible that the environmental variables are relevant here as they may suggest island groups that could be home to larger populations. Population size is good to keep in mind for the interpretation of the environmental principal components. 
-
-
-
-<insert paragraph about population size and number of languages being connected and link back to carrying capacity.>
-
-\citet{UN_pop}
-
+Figs \ref{fig:un_pop_plot} and \ref{fig:un_pop_plot_log10} show the relationship between the number of languages per modern country/territory \citep{glottolog4_5} and its population in 1950 \citep{UN_pop}, with Remote Oceanic countries and territories highlighted. Modern nation-states are not historically relevant cultural units in many places in the world, include the Pacific. For example, Cook Islands (also known as Avaiki Nui) and the Federated States of Micronesia encompasses many island groups with diverse histories (c.f. Fig \ref{RO_overnight_coloured_dots} and Appendix \ref{sec:island_geo}). However, even with this noise, there is a relationship --- more people $\rightarrow$ more languages.
 
 \begin{figure}[ht]
     \centering
@@ -828,9 +831,20 @@ It is not possible to include population data, because it does not exist for man
     \caption{Population in 1950 per country (x-axis) and number of languages per country (y-axis) - log-10-transformed. Dark blue triangles = countries with at least some landmasses in Remote Oceania, green cricles = all other countries.}
     \label{fig:un_pop_plot_log10}
     \end{figure}
-    
+
+While it is not possible to include population size as a variable, it is possible that the environmental variables are relevant here as they may suggest island groups that could be home to larger populations. Fig. \ref{SPLOM_country_all_variables} shows the relationshop between
 
 
+<insert paragraph about population size and number of languages being connected and link back to carrying capacity.>
+
+
+
+\begin{figure}[ht]
+
+    \includegraphics[width=15cm]{latex/SPLOM_country_all_variables.png}
+\caption{Scatterplot matrix of all variables available, over countries. Note that the population data is taken from \citet{UN_pop} and refers to the whole country, i.e. the population of the entire USA --- not just Hawai'i..}
+\label{SPLOM_country_all_variables}
+\end{figure}
 
 
 
@@ -949,12 +963,6 @@ This dataset does not contain information on population size because there is no
 \end{figure}
 
 
-\begin{figure}[ht]
-
-    \includegraphics[width=15cm]{latex/SPLOM_country_all_variables.png}
-\caption{Scatterplot matrix of all variables available, over countries. Note that the population data is taken from \citet{UN_pop} and refers to the whole country, i.e. the population of the entire USA --- not just Hawai'i..}
-\label{SPLOM_country_all_variables}
-\end{figure}
 
 \FloatBarrier
 \newpage
