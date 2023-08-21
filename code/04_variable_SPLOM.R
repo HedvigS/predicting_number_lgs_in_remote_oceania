@@ -9,13 +9,12 @@ colnames(data) <- str_replace_all(colnames(data), "_", "\n")
 
 data_for_splom <- data %>%   
   dplyr::select("lg\ncount","EA033",  
+                "Time depth" = "Settlement\ndate\ngrouping\nfiner", 
+                 "Shoreline",
                 "environ\nPC1", 
                 "environ\nPC2",
-                "Settlement\ndate\ngrouping\nfiner", "Area\nland" , "Shoreline", "ratio\ncoastline\nto\narea", 
                 "Latitude\nabs\nmean","Annual\ntemperature\nmean", "Temperature\nseasonality\nmean", "Annual\nprecipitation\nmean", "Precipitation\nseasonality\nmean", "NPP\nterra\nmean", 
-                #"NPP\nterra\nvar", 
                 "NPP\naqua\nmean" 
-                #"NPP\naqua\nvar"
                 )
                 
 fn <- "SPLOM_SBZR_all_variables.png"
@@ -42,18 +41,13 @@ colnames(data) <- str_replace_all(colnames(data), "_", "\n")
 
 data_for_splom <- data %>%   
   dplyr::select("lg\ncount","EA033",  
-                "Settlement\ndate\ngrouping\nfiner", 
-                "Area\nland" , "Shoreline", "ratio\ncoastline\nto\narea", 
-                "Latitude\nabs\nmean",
-                "Annual\ntemperature\nmean", 
-                "Temperature\nseasonality\nmean", 
-                "Annual\nprecipitation\nmean", 
-                "Precipitation\nseasonality\nmean", 
-                "NPP\nterra\nmean",
-                "NPP\naqua\nmean",
-                "environ\nPC1",
+                "Time depth" = "Settlement\ndate\ngrouping\nfiner", 
+                "Shoreline",
+                "environ\nPC1", 
                 "environ\nPC2",
-                "environ\nPC3"
+                "environ\nPC3",
+                "Latitude\nabs\nmean","Annual\ntemperature\nmean", "Temperature\nseasonality\nmean", "Annual\nprecipitation\nmean", "Precipitation\nseasonality\nmean", "NPP\nterra\nmean", 
+                "NPP\naqua\nmean" 
   )
 
 fn <- "SPLOM_medium_all_variables.png"
@@ -90,23 +84,16 @@ colnames(data) <- str_replace_all(colnames(data), "_", "\n")
 colnames(data) <- str_replace_all(colnames(data), " ", "\n")
 
 data_for_splom <- data %>%   
-  dplyr::select("lg\ncount",
-                "Number\nof\nlanguages",
-                "Number\nof\nlanguages\nlog10",
-                "Population\n1950",
-                "Population\n1950\nlog10",
-                "EA033", 
-                "Settlement\ndate\ngrouping\nfiner", 
-                "Area\nland" , "Shoreline", "ratio\ncoastline\nto\narea", 
-                "Latitude\nabs\nmean",
-                "Annual\ntemperature\nmean", 
-                "Temperature\nseasonality\nmean", 
-                "Annual\nprecipitation\nmean", 
-                "Precipitation\nseasonality\nmean", 
-                "NPP\nterra\nmean",
-                "NPP\naqua\nmean",
-                "environ\nPC1",
-                "environ\nPC2"
+  dplyr::select("Number of\nlanguages\n(country)" = "Number\nof\nlanguages",
+                "Number of\nlanguages (log10)\n(country)" = "Number\nof\nlanguages\nlog10",
+                "Population 1950\n(country)" = "Population\n1950",
+                "Population 1950\n(log10)\n(country)"= "Population\n1950\nlog10",
+                "lg count\n(island groups)" = "lg\ncount",
+                "EA033\n(island groups)" = "EA033", 
+                "Time depth\n(island groups)" = "Settlement\ndate\ngrouping\nfiner", 
+                "Shoreline\n(island groups)" = "Shoreline", 
+                "environ PC1\n(island groups)" = "environ\nPC1",
+                "environ PC2\n(island groups)" = "environ\nPC2"
   ) 
 
 fn <- "SPLOM_country_all_variables.png"
