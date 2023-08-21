@@ -45,6 +45,6 @@ df %>%
          align = align) %>% 
   xtable::print.xtable(file = fn_out, sanitize.colnames.function = function(x){x},
                        include.rownames = FALSE, math.style.negative = F,
-                       booktabs = TRUE, floating = F) 
+                       booktabs = TRUE, floating = T) 
 
 }
