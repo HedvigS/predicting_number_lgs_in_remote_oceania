@@ -78,7 +78,7 @@
 %\SetWatermarkScale{4}
 
 %\pagestyle{myheadings}
-\title{Predicting number of languages per island group in Remote Oceania}
+\title{Predicting the number of languages per island group in Remote Oceania}
 
 %\author{anon}
 \author{Hedvig Skirg{\aa}rd}
@@ -103,11 +103,11 @@
 \doublespacing
 \normalsize
 %We suggest a maximum length of 350 words for the Abstract
-There are more than 7,000 languages on our planet today, but they are not evenly distributed over the population. There are over 100 languages in Vanuatu, but only one in S\={a}moa. This in spite of the populations being similarly sized, similar history etc. Why might this be? This paper explores this question for one particular region: Remote Oceania.
+There are more than 7,000 languages on our planet today, but they are not evenly distributed over the population. There are over 100 languages in Vanuatu, but only one in S\={a}moa. This is in spite of the populations being similarly sized, having similar histories etc. Why might this be? This paper explores this question for one particular region: Remote Oceania.
 
-Remote Oceania comprises the eastern Solomon Islands (Temotu), Vanuatu, New Caledonia, Fiji, Polynesia and Micronesia. The region was settled more recently than the rest of Oceania (3,500 years ago) and initially entirely by Austronesian speakers. Through community knowledge, studies in archaeology, history and linguistics much is known about migration patterns and societal organization of this part of the world. The comparatively shallow time depth, the relatedness of the languages and established knowledge about the history make it an ideal base for understanding language diversification. 
+Remote Oceania comprises the eastern Solomon Islands (Temotu), Vanuatu, New Caledonia, Fiji, Polynesia and Micronesia. The region was settled more recently than the rest of Oceania and initially entirely by Austronesian speakers. Through community knowledge, studies in archaeology, history and linguistics much is known about migration patterns and societal organization of this part of the world. The comparatively shallow time depth, the relatedness of the languages and established knowledge about the history make it an ideal base for understanding language diversification. 
 
-One particular theory has been proposed to explain the discrepancy in language richness over Remote Oceania --- societal organisation. In this study, we test if this factor remains an important predictor of the number of languages also when other relevant factors are taken into account, such as time-depth and environment. The results show that the theory does hold in terms of statistical power, but that there are important caveats such as the precise implementation of the factor into community structure and influence from Oceanic neighbours further west who do not speak Austronesian languages.
+One particular theory has been proposed to explain the discrepancy in language richness over Remote Oceania --- societal organisation. In this study, we test if this factor remains an important predictor of the number of languages also when other relevant factors are taken into account, such as time-depth and environment. The results show that the theory does hold in terms of statistical power, but that there are important caveats such as the instantiation of the variable ``political complexity'' and its relationship with contact with Oceanic neighbours further west who do not speak Austronesian languages.
 
 %Scholars have suggested several reasons for the large discrepancy between the number of languages per island group in Remote Oceania, such as societal organisation, environmental factors and settlement time. 
 
@@ -138,24 +138,23 @@ One particular theory has been proposed to explain the discrepancy in language r
 \section{Introduction}
 \doublespacing
 %\doublespacing
-Why are there more languages in some places than others? The number of languages in the world is not equally distributed over area and population. In the modern country of Papua New Guinea, there are 835 languages over 7 million people \citep{ethnologue22, cia_world_factbook_2019, glottolog4_5}. However, in South Korea, there are only two indigenous spoken languages in a population of 51 million people. How can this be?
+The number of languages in the world is not equally distributed over area and population. In the modern country of Papua New Guinea, there are 835 languages over a population of 9.7 million people \citep{UN_pop, glottolog4_5}. However, in South Korea, there are only two indigenous spoken languages in a population of 52 million people. How can this be?
 
 Understanding the mechanics of language change and diversification is essential to understanding human history. Language is interlinked with cultural identity, learning about the historical dynamics of language informs our understanding of our story generally. The question of language splitting in particular is interesting as it also implies community splitting. What causes us to lose touch, to diverge and go separate ways? This research topic has received a lot of attention in recent years (c.f. \citet{gavin2017process,  greenhill2015demographic, Pacheco_Coelho_2019, hua2019ecological}). In this study, we will take a closer look specifically at the region of Remote Oceania. 
 
-Fig.~\ref{RO_overnight_coloured_dots} shows the language richness of the islands of Oceania. Languages are points, coloured by language family. In the Polynesian islands (S\={a}moa, Tonga, Rarotonga, Tokelau etc), there is generally one language per island group. However, in central west Remote Oceania (Vanuatu, Temotu, Fiji and Kanaky) there are many more languages --- sometimes up to 20 languages on the very same island. The archipelagos of Chuuk Wa'ab and Pohnpei also feature more languages than the Polynesian islands and atolls. What explains this difference?
+Fig.~\ref{RO_overnight_coloured_dots} shows the language richness of the islands of Oceania. Languages are points, coloured by language family. In the Polynesian islands (S\={a}moa, Tonga, Rarotonga, Tokelau etc), there is generally one language per island group. However, in central west Remote Oceania (Vanuatu, Temotu, Fiji and Kanaky) there are many more languages --- sometimes up to 20 languages on the very same island. The archipelagos of Chuuk, Wa'ab and Pohnpei also feature more languages than the Polynesian islands and atolls. What explains this difference?
 %What are the mechanics of this?
 
 \begin{sidewaysfigure}[p]
 \centering
 \includegraphics[width=24cm]{CartoGIS_oceania_languages_subgreions_edited.png}
-\caption{Map of Oceania, with the regions of Near and Remote Oceania marked out (first labelled by \citet{pawley1973dating}
-). Points represent languages, based on data \citet{glottolog3} with a few small adjustments by author.} 
+\caption{Map of Oceania, with the regions of Near and Remote Oceania marked out (first labelled by \citet{pawley1973dating}). Points represent languages, based on data \citet{glottolog3} with a few small adjustments by author.} 
 \label{RO_overnight_coloured_dots}
 \end{sidewaysfigure}
 
-Let us first consider some plausible factors in language diversification. Firstly, diversification takes time. We would expect a higher probability of language diversification in areas where people have lived for a longer time simply due to natural drift as communities spread out and form separate clusters. All of Remote Oceania was settled in the last 3,600 years but at different stages. A large part of Remote Oceania was settled for the first time by Austronesian-speaking people in a rapid expansion 3,600 - 2,800 BP known as the ``Lapita expansion'' (\citet[106-7]{bellwood2006austronesians}; \citet[137]{rieth_cochrane_2018}). This first area covers all islands of Vanuatu, Temotu, New Caledonia, Fiji and parts of Western Polynesia. The dates of the first settlement for these islands are relatively similar, but there still is a large discrepancy in the number of languages (see Fig \ref{RO_overnight_coloured_dots}). This makes for a convenient case for comparison. If we include other regions of Oceania, such as Australia or the New Guinea region \citep{ross2017_new_guinea_region}, the comparison becomes more complex as they have been settled for a much much longer time-span --- possibly up to 60,000 years. Here we focus specifically on Remote Oceania in order to test specific theories about the diversification there that have been presented by anthropologists and linguists.
+Let us first consider some plausible factors in language diversification. Firstly, diversification takes time. We would expect a higher probability of language diversification in areas where people have lived for a longer time simply due to natural drift as communities spread out and form separate clusters. All of Remote Oceania was settled in approximately the last 3,500 years but at different stages. A large part of Remote Oceania was settled for the first time by Austronesian-speaking people in a rapid expansion 3,600 - 2,800 BP known as the ``Lapita expansion'' (\citet[106-7]{bellwood2006austronesians}; \citet[137]{rieth_cochrane_2018}). This first area covers all islands of Vanuatu, Temotu, New Caledonia, Fiji and parts of Western Polynesia. The dates of the first settlement for these islands are relatively similar, but there still is a large discrepancy in the number of languages (see Fig \ref{RO_overnight_coloured_dots}). This makes for a convenient case for comparison. If we include other regions of Oceania, such as Australia or the New Guinea region \citep{ross2017_new_guinea_region}, the comparison becomes more complex as they have been settled for a much much longer time-span --- possibly up to 60,000 years. Here we focus specifically on Remote Oceania in order to test specific theories about the diversification there that have been presented by anthropologists and linguists.
 
-Let us compare two island groups in this region as an example: the S\={a}moan archipelago in Western Polynesia and the island of Malakula in Vanuatu. There is one indigenous language spoken in S\={a}moa ---  S\={a}moan --- and in Malakula there are 33 distinct languages spoken \citet{glottolog4_5}. S\={a}moa was settled approximately 400 years after Malakula \citep[137-8]{rieth_cochrane_2018}. This gives Malakula a bit of a ``head-start'', but most likely not enough to explain the vast difference.
+Let us compare two island groups in this region as an example: the S\={a}moan archipelago in Western Polynesia and the island of Malakula in Vanuatu. There is one indigenous language spoken in S\={a}moa ---  S\={a}moan --- and in Malakula there are 33 distinct languages spoken \citep{glottolog4_5}. S\={a}moa was settled approximately 400 years after Malakula \citep[137-8]{rieth_cochrane_2018}. This gives Malakula a bit of a ``head-start'', but most likely not enough to explain the vast difference.
 
 Besides time depth, we might also expect that more space entails greater language diversity. A larger area makes it possible to spread out communities, which can entail language splitting. However, the shoreline\footnote{Since Austronesian settlements are mainly found on the coast, we are comparing shorelines instead of land area.} of Malakula is 67\% of that of S\={a}moa. S\={a}moa is larger than Malakula. What other factors are there that can aid our understanding here?
 
@@ -163,7 +162,7 @@ Besides time depth, we might also expect that more space entails greater languag
 
 %A measurement of so-called ``political complexity'' in ethnographic surveys (c.f. \citet{gray1998ethnographic}) should then be correlated with different patterns of interaction and show up as a significant factor in language diversification. This is true even if political complexity is merely a proxy measurement of the interaction pattern that is in fact driving language change. 
 
-This study tests the hypothesis that more vertical levels of political organisation is meaningfully connected to the number of languages, also when we incorporate other possible factors like settlement time, size and ecological environment (c.f. \citet{NETTLE1998}, \citet{gavin2012island} and \citet{hua2019ecological}). If the results show that political complexity has a significant correlation with the number of languages per island group when other relevant factors are controlled for, this lends support to Turner and Pawley's hypothesis.
+This study tests the hypothesis that more vertical levels of political organisation are meaningfully connected to the number of languages, also when we incorporate other possible factors like settlement time, size and ecological environment (c.f. \citet{NETTLE1998}, \citet{gavin2012island} and \citet{hua2019ecological}). If the results show that political complexity has a significant correlation with the number of languages per island group when other relevant factors are controlled for, this lends support to Turner and Pawley's hypothesis.
  
 %We will be using cultural data on societal structures in societies of Remote Oceania, archaeological dates and environmental variables (temperature and rainfall) to test if the political structure still significantly predicts the number of languages once other factors have been taken into account. Fig.~\ref{RO_overnight_coloured_dots} shows languages in Oceania, with islands grouped by overnight sailing distances \citep{mark_1986, marck2000}. In this study, we are concerned with languages of Remote Oceania (see Fig.~\ref{Remote_Oceania_subregions} for subregions of Oceania), and in particular Vanuatu and New Caledonia compared to the rest.
 
@@ -172,7 +171,7 @@ This study tests the hypothesis that more vertical levels of political organisat
 \FloatBarrier
 \section{Previous research}
 \label{sec:previous_research}
-Linguists, anthropologists and scholars of other fields have long remarked on the link between linguistic diversity and political structure in Remote Oceania. One of the oldest examples of this observation is the European Turner who travelled in the region 1861-1884 and hypothesized that the lack of regional variation \emph{within} S\={a}moan entailed that they had long had a centralized government \citep[172]{turner1884}. Linguists have linked types of societal organization to different diversification processes. Language change is embedded in social structure (c.f. \citep{WLH1968}), or as \citet[124]{grace_1992_aberrant} writes: \emph{linguistic similarities and differences [are] reflections of community structures}. As community ties weaken and what was once one social network splits in twain, we expect that this is reflected in language variation as well. In this way, language studies provide insights to neighbouring fields such as archaeology, anthropology etc.
+Linguists, anthropologists and scholars of other fields have long remarked on the link between linguistic diversity and political structure in Remote Oceania. One of the oldest examples of this observation is the European Turner who travelled in the region 1861-1884 and hypothesized that the lack of regional variation \emph{within} S\={a}moan entailed that they had long had a centralized government \citep[172]{turner1884}. Linguists have linked types of societal organization to different diversification processes. Language change is embedded in social structure (c.f. \citep{WLH1968}), or as \citet[124]{grace_1992_aberrant} writes: ``linguistic similarities and differences [are] reflections of community structures''. As community ties weaken and what was once one social network splits in twain, we expect that this is reflected in language variation as well. In this way, language studies provide insights to neighbouring fields such as archaeology, anthropology etc.
 
 \citet{pawley81, pawley2007} discusses the specific hypothesis that while much of Remote Oceania was settled in similar ways by Austronesian-speaking people, and at comparable time depths, and developed similarly immediately after the first settlement, the differences between them stem from the rise of powerful chiefs and maintenance of long-distance voyaging in the island groups of Polynesia. This theory suggests that the steps of the diversification process were more or less the same, but that the \emph{rate} by which it progressed differed and that this is the cause for the variation we see today.\footnote{\citet{lynch1981melanesian} calls this ``the diversification cycle theory''.} The societal structure in Polynesia was such that the process of cultural diversification was slower than in Vanuatu and New Caledonia. The following quote from \citet{pawley2007} summarises a few of these points and links them to the political organisation:
 
@@ -185,7 +184,7 @@ This proposal by \citet{pawley81, pawley2007} can be expressed in a Directed Acy
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=10cm]{Predicting_lgs_DAG_andy.png}
+\includegraphics[width=\textwidth]{Predicting_lgs_DAG_andy.png}
 \caption{Directed Acyclic Graph of the argument presented in \cite{pawley2007}. Blue = variable to be predicted (response).}
 \label{Predicting_lgs_DAG_andy}
 \end{figure}
@@ -194,7 +193,7 @@ Fig. \ref{Predicting_lgs_DAG_full} in \ref{appendix_DAG_def} contains a larger v
 
 In a similar vein to Pawley, \citet{curriemace2009} suggests that more stratified societies are correlated with larger language areas in Africa and Eurasia. If one language covers a large area, then the number of languages per square kilometre is lower than otherwise --- the language density is lower. Their research can be interpreted to mean that more stratified societal structures are more capable of sustaining linguistic homogeneity over a larger geographical area (or possibly reducing diversity by cultural dominance and warfare). Greater maintenance of cultural homogeneity would result in less language splitting over larger areas, and therefore a larger language area correlates with greater stratification. The approach is different from \citet{pawley81, pawley2007}, but the scientific line of argumentation is similar.
 
-Returning to language richness in Remote Oceania; a significant factor to consider besides those already discussed is contact --- in particular with people from the New Guinea region (c.f. \citet{ross2017_new_guinea_region}). Prior to European colonisation, all indigenous communities of Remote Oceania spoke the languages of the Austronesian family (see Fig \ref{RO_overnight_coloured_dots}). This family has its ultimate origins in Taiwan, and spread into the Remote Oceania approximately 3-4,000 years ago (c.f. Fig. \ref{austro_expansion_bellwood}). The peopling of New Guinea, the Bismarck archipelago and much of the Solomon Islands however is older than that, and there is a great amount of language and cultural diversity there that may have influenced Austronesian people during and/or after their journeys east. 
+Returning to language richness in Remote Oceania, a significant factor to consider besides those already discussed is contact --- in particular with people from the New Guinea region (c.f. \citet{ross2017_new_guinea_region}). Prior to European colonisation, all indigenous communities of Remote Oceania spoke the languages of the Austronesian family (see Fig \ref{RO_overnight_coloured_dots}). This family has its ultimate origins in Taiwan, and spread into the Remote Oceania approximately 3-4,000 years ago (c.f. Fig. \ref{austro_expansion_bellwood}). The peopling of New Guinea, the Bismarck archipelago and much of the Solomon Islands however is older than that, and there is a great amount of language and cultural diversity there that may have influenced Austronesian people during and/or after their journeys east. 
 
 \begin{figure}[ht]
 \centering
@@ -203,12 +202,11 @@ Returning to language richness in Remote Oceania; a significant factor to consid
 \label{austro_expansion_bellwood}
 \end{figure}
 
-Recent studies of ancient and modern DNA \citep{lipson_harvad_ancient_dna_vanuatu_2018, posth_jena_ancient_dna_vanuatu_2018} have shown that there is evidence of significant levels of genes that are associated with origins in non-Austronesian speaking communities from New Guinea and Solomons among Vanuatu people. The suggestion is that while the initial settlement of Remote Oceania was likely to be Austronesian (i.e. genetically similar to Asian populations), there have since been more people coming who have non-Austronesian ancestry from the New Guinea region. Interestingly, \citet{posth_jena_ancient_dna_vanuatu_2018} highlight that this had little effect
+Recent studies of ancient and modern DNA \citep{lipson_harvad_ancient_dna_vanuatu_2018, posth_jena_ancient_dna_vanuatu_2018} have shown that there is evidence of significant levels of genes that are associated with origins in non-Austronesian speaking communities from New Guinea and Solomons among Vanuatu people. The suggestion is that while the initial settlement of Remote Oceania was likely to be Austronesian (i.e. genetically similar to Asian populations), there have since been more people coming who have non-Austronesian ancestry from the New Guinea region. Interestingly, \citet{posth_jena_ancient_dna_vanuatu_2018} highlight that this had little effect on the languages of the region, communities still speak languages that are clearly Austronesian in origin.
 
+Likewise, further studies such as \citet{liu2022ancient} show similar influence from New Guinea and Solomons northwards in Palau, Chuuk and Pohnpei island groups. It is becoming increasingly clear in the overall scientific literature on the ancient history of Oceania that there were a lot more connections and interactions than previously postulated --- including to island groups of Near Oceania. It is not the case that people travelled to one place, and then stayed put there with little influence from other people of Oceania. Oceania is an interconnected place today, and it was historically too.
 
-Likewise, further studies such as \citet{liu2022ancient} show similar influence from New Guinea and Solomons northwards in Palau, Chuuk and Pohnpei island groups. It is becoming increasingly clear in the overall scientific literature on the ancient history of Oceania that there were a lot more connections and interactions than previously postulated. It is not the case that people travelled to one place, and then stayed put there with little influence from other people of Oceania. Oceania is an interconnected place today, and it was historically too.
-
-It is possible that these interactions, which were more frequent in Vanuatu than in Polynesia, have implications for many domains of human life --- including political organisation and language diversity. Linguist and anthropologist \citet[104]{lynch1981melanesian} has stressed the relevance of contact with non-Austroneisan communities from New Guinea, Bismarck, Bougainville and the Solomon Islands as a key factor in explaining why there are more languages in Vanuatu compared to the rest of Oceania \footnote{\citet{lynch1981melanesian} uses the terms ``Papuan'' and contrasts Melanesia and Polynesia. I have chosen to summarise him here in more precise terms in relation to how his work impacts the current study. He writes specifically about the influence of languages of New Britain, Bougainville, central Solomon Islands, Manus and the southeast of New Guinea mainland (Oro province, Milne Bay province and National Capital District) on Oceanic languages of those regions and in Temotu.}. Lynch does not offer a precise account but outlines several different potential scenarios whereby contact with non-Austronesian groups caused greater diversification among Oceanic languages.
+It is possible that these interactions, which were more frequent in Vanuatu than in Polynesia, have implications for many domains of human life --- including political organisation and language diversity. Linguist and anthropologist \citet[104]{lynch1981melanesian} has stressed the relevance of contact with non-Austronesian communities from New Guinea, Bismarck, Bougainville and the Solomon Islands as a key factor in explaining why there are more languages in Vanuatu compared to the rest of Oceania \footnote{\citet{lynch1981melanesian} uses the terms ``Papuan'' and contrasts Melanesia and Polynesia. I have chosen to summarise him here in more precise terms in relation to how his work impacts the current study. He writes specifically about the influence of languages of New Britain, Bougainville, central Solomon Islands, Manus and the southeast of New Guinea mainland (Oro province, Milne Bay province and National Capital District) on Oceanic languages of those regions and in Temotu.}. Lynch does not offer a precise account but outlines several different potential scenarios whereby contact with non-Austronesian groups caused greater diversification among Oceanic languages.
 
 Unfortunately, it is difficult to incorporate data on contact with non-Austronesian speakers explicitly in the models of this study. This is primarily due to lack of information on this variable in island groups such as Kanaky (New Caledonia), Ratak \& Ralik (Marshall Islands), Marquesas, Aotearoa and other island groups. However, this factor is very important and we will return to it in the discussions.
 
@@ -219,7 +217,7 @@ Unfortunately, it is difficult to incorporate data on contact with non-Austrones
 
 %\footnote{Note that this is separate from theories of effects of culture and environment on the \emph{nature} of language, such as the work by \citet{wraygrace2007}, \citet{lupyandale2010} and \citet{raviv2019compositional}. Their work focusses on why different kinds of interactional patterns has consequences for the compositionality/complexity of a language. For this study, we are concentrating on linguistic \emph{diversity} as opposed to \emph{disparity}.}.
 
-Finally, there has been a growing interest in environmental effects on language diversification\footnote{For a longer summary of recent studies of language diversification, see \citet{gavin2013toward} and \citet{greenhill2015demographic}.}. One of the oldest and most influential bodies of work in this vein is by Nettle. \citet{NETTLE1998} showed that there is a correlation between number of languages per country and ecological risk (as measured by mean growing season). Nettle suggests that high-risk environments encourage wider social networks and therefore reduce the number of languages in that area. \citet{hua2019ecological} expanded on this idea and explains that \emph{Smaller social groups are presumed to be more likely to be stable and self-sufficient in areas with a more abundant and reliable year-round food supply.} \citet{hua2019ecological} constructed a more complex and fine-grained model of how environmental factors influence language diversity. They found that factors associated with risk (precipitation and temperature seasonality and season length) did indeed predict much of the distribution of languages in the world. Similarly, \citet{gavin2017process} showed that a simple model that takes into account rainfall and an upper bound of population size can to a large extent predict the distribution of indigenous languages in Australia. Given the success of these models, the amount and seasonality of rainfall and temperature variables are also included in our model predicting language diversity in Remote Oceania. 
+Finally, there has been a growing interest in environmental effects on language diversification\footnote{For a longer summary of recent studies of language diversification, see \citet{gavin2013toward} and \citet{greenhill2015demographic}.}. One of the oldest and most influential bodies of work in this vein is by Nettle. \citet{NETTLE1998} showed that there is a correlation between number of languages per country and ecological risk (as measured by mean growing season). Nettle suggests that high-risk environments encourage wider social networks and therefore reduce the number of languages in that area. \citet{hua2019ecological} expanded on this idea and explains that ``Smaller social groups are presumed to be more likely to be stable and self-sufficient in areas with a more abundant and reliable year-round food supply.'' \citet{hua2019ecological} constructed a more complex and fine-grained model of how environmental factors influence language diversity. They found that factors associated with risk (precipitation and temperature seasonality and season length) did indeed predict much of the distribution of languages in the world. Similarly, \citet{gavin2017process} showed that a simple model that takes into account rainfall and an upper bound of population size can to a large extent predict the distribution of indigenous languages in Australia. Given the success of these models, the amount and seasonality of rainfall and temperature variables are also included in our model predicting language diversity in Remote Oceania. 
 
 
 %There are many more papers on demographic, cultural and environmental factors on language diversification, unfortunately there is not space enough here to relate them all. There are two overview papers that summarises many other studies on the topic very well --- \citet{gavin2013toward} and \citet{greenhill2015demographic}. I will refrain from copying their clear and instructive summaries and meta-analysis and instead direct the curious reader to seek those two papers out themselves should they want to explore the topic further.
@@ -243,9 +241,9 @@ The unit of analysis is ``island group''. We cannot use modern political boundar
 
 %Predicting_lgs_DAG_full
 
-A simple test of Spearman's Rank Order correlation reveals that the number of languages and political complexity per island group are indeed moderately correlated (rho  = -0.4, \emph{p} value = >0.001 for islands grouped for shared language). However, this is not sufficient. We want to investigate whether this correlation still holds once we explicitly incorporate other variables that we expect might explain language diversity as well, such as time-depth and environmental factors. 
+A simple test of Spearman's Rank Order correlation reveals that the number of languages and political complexity per island group are indeed moderately correlated (rho  = -0.4, \emph{p} value < 0.001 for islands grouped for shared language). However, this is not sufficient. We want to investigate whether this correlation still holds once we explicitly incorporate other variables that we expect might explain language diversity as well, such as time-depth and environmental factors. 
 
-Variables were included in the model if they a) have been suggested as relevant in previous literature, b) there is enough data on the variable in a published source and c) if they relate to the response variable (language richness) in a non-mediated manner (c.f. \citet{pearl1995causal}). This results in the following variables:
+Variables were included in the model if they meet all three of the following criteria: a) have been suggested as relevant in previous literature, b) there is enough data on the variable in a published source and c) if they relate to the response variable (language richness) in a non-mediated manner (c.f. \citet{pearl1995causal}). This results in the following variables:
 
 \begin{itemize}
 \item \textbf{response variable}:
@@ -262,7 +260,7 @@ Variables were included in the model if they a) have been suggested as relevant 
 \end{itemize}
 \end{itemize}
 
-The variables Net Primary Production (NPP; the amount of biomass or carbon produced), temperature \& rainfall (mean and seasonality) and absolute latitude are all associated with the suitability of a place for life and they correlate with each other, at least to some degree (c.f. Figs \ref{SPLOM_medium_all_variables} and \ref{SPLOM_SBZR_all_variables}). In this study, they are all tracking a similar concept: the suitability for human populations to thrive in smaller groups. Because of this, we are running a Principal Components Analysis on all seven variables, this allows us to extract a variable that explains most of the information. We ran a Non-Graphical Cattel's Scree Test \citep{cattell1966scree, R-nFactors} to determine the number of optimal components (overnight sailing distance island groups = 2 PCs, shared language island groups = 3 PCs).
+The variables Net Primary Production (NPP; the amount of biomass or carbon produced), temperature \& rainfall (mean and seasonality) and absolute latitude are all associated with the suitability of a place for life and they correlate with each other, at least to some degree (c.f. Figs \ref{SPLOM_medium_all_variables} and \ref{SPLOM_SBZR_all_variables}). In this study, they are all tracking a similar concept: the suitability for human populations to thrive in smaller groups. Because of this, we are running a Principal Components Analysis on all seven variables, this allows us to extract a variable that explains most of the information. We ran a Non-Graphical Cattel's Scree Test \citep{cattell1966scree, R-nFactors} to determine the number of optimal components (overnight sailing distance island groups = 2 PCs, shared language island groups = 3 PCs). For more details, see Appendix \ref{appendix_eniron_PCA}.
 
 In order to create a formula for the statistical model, we consider the suggested causal relationships based on previous research (see section \ref{sec:previous_research}). Besides the effect of the environmental variables on language richness, we also hypothesise that there can be a joint effect with the size of the island. Similarly, the time-depth and size of islands may also interact. 
 
@@ -271,7 +269,7 @@ The relationship between variables can be represented in a formalised manner in 
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=16cm]{Predicting_lgs_DAG_slimmed.png}
-\caption{Directed Acyclic Graph of the variables in this study (DAG, c.f. \cite{mcelreath2020statistical}). Blue = variable to be predicted (response), red = predictors. Colon nodes represent variable interactions, a type of deterministic DAG-node. PCA represents Principal Components Analysis. PCA was run on the incoming variables, and the optimal number of components (given a Non-Graphical Cattel's Scree Test) were carried forward. Terra and aqua are the names of the NASA satellites.}
+\caption{Directed Acyclic Graph of the variables in this study (DAG, c.f. \cite{mcelreath2020statistical}). Blue = variable to be predicted (response), red = predictors. Asterisk nodes represent variable interactions, a type of deterministic DAG-node. PCA represents Principal Components Analysis. PCA was run on the incoming variables, and the optimal number of components (given a Non-Graphical Cattel's Scree Test) were carried forward. Terra and Aqua are the names of the NASA satellites.}
 \label{Predicting_lgs_DAG_slimmed}
 \end{figure}
 
@@ -282,13 +280,13 @@ This results in the following model formula\footnote {Settlement order was rever
 \texttt{Number of languages \textasciitilde{} Political complexity (mode)} + \\
 \indent \indent \texttt{Environmental PC1  *  Shoreline (log10 +} \\
 \indent \indent\texttt{Environmental PC2  *  Shoreline (log10 +} \\
-\indent \indent (\texttt{Environmental PC3 *  Shoreline (log10) +} \footnote{For the island groups based on shared languages, the optimal number of Principal Components from the Non Graphical Cattel's Scree Test was three, but for the overnight sailing-distance groups two.})\\
+\indent \indent (\texttt{Environmental PC3 *  Shoreline (log10) +} \\
 \indent \indent\texttt{Settlement order *  Shoreline (log10)} \\
 \end{quotation}
 
-Shoreline was log-10-transformed. All predicting variables were then also scaled between 1 and 2 so as to make the coefficients of singular terms and interactions morecomparable and easy to interpret.
+Shoreline was log-10-transformed. All predicting variables were then also normalized in the conventional manner by subtracting the mean and dividing by the standard deviation.
 
-To test the impact of several variables predicting the same response variable we can use a Bayesian Regression Model \citep{burkner2017brms}. The distribution of languages per island group is over-dispersed. There are many island groups with one language and only a few with higher numbers (see Figs. \ref{polygon_plot_SBZR} and \ref{polygon_plot_medium} in Appendix \ref{sec:island_geo}). For the overnight-sailing island groups, the group that contains Vanuatu and Temotu has 130 languages, whereas most island groups in Polynesia have 1 or 2. This skewed distribution necessitates a Poisson distribution for the response variable in the model, which is able to adjust the relationship between the mean and the variance appropriately\footnote{This issue was also faced by \citet{gavin2012island} in their study of environmental factors in language diversification in the Pacific. They chose another approach, a reciprocal transformation, based on model fitness compared to two other kinds of transformations of the response variable.}.
+To test the impact of several variables predicting the same response variable we can use a Bayesian Regression Model \citep{gelman2006data, burkner2017brms}. The distribution of languages per island group is over-dispersed. There are many island groups with one language and only a few with higher numbers (see Figs. \ref{polygon_plot_SBZR} and \ref{polygon_plot_medium} in Appendix \ref{sec:island_geo}). For the overnight-sailing island groups, the group that contains Vanuatu and Temotu has 130 languages, whereas most island groups in Polynesia have 1 or 2. This skewed distribution necessitates a Poisson distribution for the response variable in the model, which is able to adjust the relationship between the mean and the variance appropriately\footnote{This issue was also faced by \citet{gavin2012island} in their study of environmental factors in language diversification in the Pacific. They chose another approach, a reciprocal transformation, based on model fitness compared to two other kinds of transformations of the response variable.}. For further details on the model set-up, see appendix \ref{appendix_model_settings}.
 
 Due to missing data, we are testing our models over 65 out of 104 shared language groups and 56 out of 67 overnight distance groups. This sample still contains some of our more extreme sites, like Santo, Kanaky (New Caledonia mainland) and Malakula. Variables that did not cover Vanuatu and New Caledonia with enough specific data-points are not included in this study, for example historic population data, non-Austronesian gene flow or jurisdictional hierarchy within local communities. 
 
@@ -296,35 +294,36 @@ The results were calculated in R 3.6.0 \citep{R} using the function \texttt{brms
 
 \FloatBarrier
 \section{Results}
+% BARG
 We will first go through the outcomes for the shared language island groups, and secondly the overnight distance groups. In common for both is that political complexity is a relevant predicting factor, with a negative effect (the more political vertical levels, the lower the number of languages). This lends support to the proposal by \citet{pawley81} and \citet{pawley2007}. However, there are details of the result that suggest that the effect may be due to non-Austronesian contact rather than political complexity \emph{per se}.
 
-Fig.~\ref{medium_model_predict} shows the actual observed language counts (purple triangles) and predictions of this model (green boxplots). The model does predict that Santo, Kanaky and Malakula has the highest language counts in the dataset. Our observed language counts for Santo, Kanky and Malakula are 24, 29 and 33 respectively. The model is very close for Santo and Kanaky, but underestimates Malakula by 17 languages. The absolute average difference between the mean predicted values and the observed is 2.8.
+Fig.~\ref{medium_model_predict} shows the actual observed language counts (purple triangles) and predictions of this model (green boxplots). The model does predict that Santo, Kanaky and Malakula have the highest language counts in the dataset. Our observed language counts for Santo, Kanky and Malakula are 24, 29 and 33 respectively. The model is very close for Santo and Kanaky for its average prediction value but underestimates Malakula by 17 languages. The absolute average difference between the mean predicted values and the observed is 2.8.
 
 %The results show that the model run with the shared-language island groups have an absolute average of difference between the predicting number of languages and observed of 2,8 the overnight-sailing distances island groups of 4.3 Fig.~\ref{medium_model_predict} and Fig.~\ref{SBZR_model_predict} illustrate the specific predictions the models make compared to the observed language counts. 
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.75\textwidth]{brms_predict_medium.png}
-\caption{Prediction from the model with island grouped for shared language. Average absolute difference = 2.8.}
+\caption{Prediction from the model with island grouped for shared language. Number of languages is on the x-axis, observations on the Y. The dark blue triangles represent the observed number of languages, the green boxplot the predictions of the model. Average absolute difference between the mean of the predictions and the observed = 2.8.}
 \label{medium_model_predict}
 \end{figure}
 
-For the shared language island groups, political complexity (EA033) is the only variable that is significantly different from zero, i.e. the full coefficient distribution does not overlap zero. If we only consider the 95\% credibility interval, as is common practice in statistics, there is one additional term that does not overlap zero: shoreline in interaction with time-depth. Fig \ref{brms_SBZR_group_full_effect_ridge_panels} in Appendix \ref{appendix_supp_figs} shows the full distributions.
+For the shared language island groups, political complexity (EA033) is the only variable that is different from zero, i.e. the full coefficient distribution does not overlap zero. If we only consider the 95\% credibility interval, as is common practice in statistics, there is one additional term that does not overlap zero: shoreline in interaction with time-depth. Fig \ref{brms_SBZR_group_full_effect_ridge_panels} in Appendix \ref{appendix_supp_figs} shows the full distributions.
 
 If we drop one island group out at a time and re-run the model, we can asses which island groups represent the largest challenge to fitting the model. Most of the island groups can be removed with little effect (see Fig. \ref{brms_medium_dropped_out_plot_diff} in \ref{appendix_supp_figs}), however, when Malakula (central Vanuatu), Kanaky (New Caledonia main island) and Santo (central Vanuatu) are left out, the difference becomes much lower. They are the three island groups with the highest number of languages (see Fig \ref{polygon_plot_medium} in appendix \ref{sec:island_geo}). Political complexity remains the most important predicting factor in these three models, the coefficient distributions do not overlap with zero.
 
 %and shoreline in interaction with time depth are the variables that have a significant impact, i.e. do not cross zero (see coefficent distributions in Figs.  and \ref{brms_medium_group_full_effect_ridge_panels} in appendix \ref{appendix_supp_figs}).
 
-For the overnight-sailing distances, several island groups are much larger than the previous grouping. Vanuatu (including Anuta and Tikopia) are all within the same group (see Fig \ref{polygon_plot_SBZR} in appendix \ref{sec:island_geo}; this is similar to the groups considered in \citet{pawley2007}). This also leads to a larger discrepancy between the number of languages, with Vanuatu and Temotu having 130 and S\={a}moa still only one. The absolute average difference between the predicted and observed number of languages is greater than for the previous grouping --- 4.3. Fig \ref{SBZR_model_predict} shows the prediction vs observed per island group.
+For the overnight-sailing distances, several island groups are much larger than the previous grouping. The islands of Vanuatu  (including Anuta and Tikopia) and Temotu are all within the same group (see Fig \ref{polygon_plot_SBZR} in appendix \ref{sec:island_geo}; this is similar to the groups considered in \citet{pawley2007}). This also leads to a larger discrepancy between the number of languages, with Vanuatu and Temotu having 130 and S\={a}moa still only one. The average absolute difference between the predicted and observed number of languages is greater than for the previous grouping --- 4.3. Fig \ref{SBZR_model_predict} shows the prediction vs observed per island group.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.75\textwidth]{latex/brms_predict_SBZR.png}
-\caption{Prediction from the model with island grouped for overnight sailing distances.  Average absolute difference = 4.3.}
+\caption{Prediction from the model with island grouped for overnight sailing distances. Number of languages is on the x-axis, observations on the Y. The dark blue triangles represent the observed number of languages, the green boxplot the predictions of the model. Average absolute difference between the mean of the predictions and the observed  4.3.}
 \label{SBZR_model_predict}
 \end{figure}
 
-The most important variables in this model (i.e. coefficient distribution does not overlap 0) were: Shoreline, Political complexity, time depth and time-depth in interaction with shoreline (see Fig \ref{brms_SBZR_group_full_effect_ridge_panels}). However, if we drop out Vanuatu + Temotu this no longer holds. When Vanuatu + Temotu are left out, the coefficient distribution of political complexity overlaps zero. Instead, the environmental PCs, Shoreline and time depth are relevant predictors.\footnote{They are relevant if we consider the 95\% credibility interval. If we take the full distribution, all terms overlap zero.} When Vanuatu + Temotu are dropped out, the overall difference between predicted and observed values goes down significantly (from 4.3 to 2, see Fig. \ref{brms_SBZR_dropped_out_plot_diff}). If we ask this model that has been trained without the Vanuatu + Temotu data to predict how many languages are there, it grossly underestimates and proposes 7 languages (observed = 130). If we drop out any other island group (including Kanaky), political complexity remains a significant factor as it does in the model with all observations.
+The most important variables in this model (i.e. coefficient distribution does not overlap 0) were: shoreline, political complexity, time depth and time-depth in interaction with shoreline (see Fig \ref{brms_SBZR_group_full_effect_ridge_panels}). However, if we drop out Vanuatu + Temotu this no longer holds. When Vanuatu + Temotu are left out, the coefficient distribution of political complexity overlaps zero. Instead, the environmental PCs, Shoreline and time depth are relevant predictors.\footnote{They are relevant if we consider the 95\% credibility interval. If we take the full distribution, all terms overlap zero.} When Vanuatu + Temotu are dropped out, the overall difference between predicted and observed values goes down significantly (from 4.3 to 2, see Fig. \ref{brms_SBZR_dropped_out_plot_diff}). If we ask this model that has been trained without the Vanuatu + Temotu data to predict how many languages are there, it grossly underestimates and proposes 7 languages (observed = 130). If we drop out any other island group (including Kanaky), political complexity remains a significant factor as it does in the model with all observations.
 
 For tables of the effect Estimate, Rhat and ESS for both models, please see Appendix \ref{BRMS_model_tables}.
 
@@ -347,8 +346,7 @@ The results indicate that political complexity could be relevant for understandi
 
 When the island group Vanuatu + Temotu was dropped, the model for overnight sailing island groups no longer drew on political complexity as a relevant predictor of language richness. This may indicate that it primarily made use of the term to tell apart Vanuatu + Temotu from all other island groups. Vanuatu + Temotu is by far the island group with the most languages, 130, and it is dominated by societies that are classed as level 1 on the scale of vertical political complexity used by the Ethnographic Atlas \citep{gray1998ethnographic} and other studies \citep{watts_2018}, see Fig. \ref{pol_complex_map} in appendix \ref{appendix_pol_complex}).
 
-Furthermore, if we tease apart the argument concerning political complexity (for example in the full DAG 
-\ref{Predicting_lgs_DAG_full} in \ref{appendix_DAG_def} or \ref{Predicting_lgs_DAG_andy} in section \ref{sec:previous_research}), we find that conceptually the link between the number of languages and political complexity is not direct. It could be mediated through other factors such as network modularity, propensity to maintain long-distance contact etc. 
+Furthermore, if we tease apart the argument concerning political complexity (for example in the full DAG in Fig. \ref{Predicting_lgs_DAG_full} in appendix \ref{appendix_DAG_def} or Fig. \ref{Predicting_lgs_DAG_andy} in section \ref{sec:previous_research}), we find that conceptually the link between the number of languages and political complexity is not direct. It could be mediated through other factors such as network modularity, the propensity to maintain long-distance contact etc. 
 
 \citet{watts_2018} found that politically complex societies in Oceania became Christian at a faster speed. This may indicate that changes propagate through a population quicker if the society is not egalitarian. If Christianity spreads faster in societies with higher complexity, it is possible to reason that other changes also might spread faster. If changes propagate quickly throughout a population, that leaves less possibility for diversification through natural drift or groups in the periphery staying more archaic compared to the centre. This interpretation relies on the understanding that the variable for political complexity (EA033) reveals something not only about jurisdictional power relationships in a given society, but also captures something about the social network of \emph{all} of its members (not just the leaders). Under this theory, people living in societies with higher political complexity would be able to travel further and have wider-ranging social networks, which in turn would lead to greater internal cultural homogeneity.
 
@@ -463,6 +461,37 @@ Zenodo locations:
 
 \subsection{Data details}
 
+\FloatBarrier
+\subsubsection{Defining Remote Oceania}
+The distinction of Near and Remote Oceania was first suggested by \citet{pawley1973dating}\footnote{This is the first occurrence of the two terms, although Green wrote earlier papers which included some of the ideas.} and was further elaborated on in \citet{green1991near}. This distinction is based on geology, flora and fauna. Near Oceania consists of chains of inter-visible large islands and archipelagos, whereas the islands and atolls of Remote Oceania are separated by much greater distances. 
+
+There is a marked difference in the biodiversity of Near and Remote Oceania, due to the greater distances between islands in Remote Oceania. This has consequences for both flora and fauna, as \citet{green1991near} and \citet{pawley2007locatingoceanic} write:
+
+\begin{quotation}
+\noindent \emph{all terrestrial mammals other than rats and mice or those which accompanied people reach their eastward limit in the Solomons. The same applies to all fresh-water mussels, and most of the Palaeo-Oriental land-snail fauna. Thirty Papuan and Malayan genera of birds find their eastern limits here, as do 162 genera of seed-plants, about 24\% of the total.}
+\end{quotation}
+\begin{flushright} \citet[495]{green1991near}
+\end{flushright}
+
+\begin{quotation}
+\noindent \emph{Even in marine life the difference is marked. The reefs of the Bismarck and Solomons show a much richer diversity of fish, molluscs, echinoderms, crustacea, seaweeds, and other edible life than those of Remote Oceanic [sic].}
+\end{quotation}
+\begin{flushright}  \citet[19]{pawley2007locatingoceanic} \end{flushright}
+
+The greater distances between the islands of Remote Oceania is also the reason why they were settled by people much later than Near Oceania was (3,000 years versus 20,000-60,000 years ago). It was necessary to develop particular sailing techniques to traverse these greater distances in order to settle the region.
+
+In this study, the region of Remote Oceania is defined slightly differently from the maps in \citet{green1991near} and \citet{pawley2007locatingoceanic}. All Northern Polynesian Outliers in Papua New Guinea and Solomons are incorporated, as is Mapia in northwest Papua New Guinea. The lines in the maps of \citet{green1991near} and \citet{pawley2007locatingoceanic} appear not to include these in Remote Oceania. I have included them in part to complete the Polynesian subgroup of languages and the languages of the Micronesian archipelagos, but also because it appears that these were not inhabited prior to the Austronesian expansion into the rest of Remote Oceania (c.f \citet[23]{kirch2012basline}) which suggests that they are sufficiently distant from the larger islands of Near Oceania to be counted as ``Remote''.
+
+Regarding the terms ``Near'' and ``Remote'', there are two interpretations of what they are referring to:
+
+\begin{enumerate}
+    \item islands and atolls of ``Near Oceania'' are nearer \emph{to each other} 
+    \item islands and atolls of ``Near Oceania'' are nearer to large landmasses west-wards, such as Australia.
+\end{enumerate}
+
+The difference between these two interpretations has no direct bearing on the study at hand, but the first one appears more fitting given the ecological framing of distance for people, flora and fauna to travel to colonise the new land. The islands of the Pacific are often construed as ``islands in a vast sea'' \citep{hauofa_1993} and a reading of ``Remote'' as ``far away from places of power/important places'' may enforce that understanding which is unnecessary and detrimental to our understanding of the history of the region (especially considering the importance of S\={a}moa and Tahiti as centres of power). 
+
+\newpage
 \FloatBarrier
 \subsubsection{Defining ``language''}
 \label{sec:language_class}
@@ -794,6 +823,10 @@ In total, the following environmental variables are included in the study:
 
 \FloatBarrier
 
+\newpage
+\subsubsection{PCA of environmental variables}
+\label{appendix_eniron_PCA}
+
 
 \newpage
 \subsection{Caveat regarding time-span}
@@ -815,40 +848,33 @@ There is also a problem with data pertaining to history before these massive for
 \newpage
 \subsection{Regarding population and the number of languages}
 \label{appendix_pop_vs_languages}
-While it is true that the number of languages is not entirely evenly spread out over the population, it is still the case that there is a general trend connecting a greater number of people with a greater number of languages (as can be seen in Figs \ref{fig:un_pop_plot} and \ref{fig:un_pop_plot_log10}). However, due to difficulties with data, this is hard to study historically. In this particular study, population numbers could not be included due to a lack of detailed and reliable enough data on enough island groups prior to Western colonization. While resources like \citet{elcat} have population numbers for many places, it does not sufficiently cover Oceania to allow the variable to be included. This is similar to the study by \citet[7340-7341]{curriemace2009} where they found that the data available for language territories in Australia and the Americas is so affected by colonial history and population replacement to make it impossible to include it in the analysis alongside the other regions. 
+While it is true that the number of languages is not entirely evenly spread out over the population, it is still the case that there is a general trend connecting a greater number of people with a greater number of languages (as can be seen in Figs \ref{fig:un_pop_plot} and \ref{fig:un_pop_plot_log10}). However, due to difficulties with data, this is hard to study historically. In this particular study, population numbers could not be included due to a lack of detailed and reliable enough data on enough island groups prior to Western colonization. While resources like \citet{elcat} have population numbers for many places, it does not sufficiently cover Oceania to allow the variable to be included. This is similar to \citet[7340-7341]{curriemace2009} who found that the data available for language territories in Australia and the Americas is so affected by colonial history and population replacement to make it impossible to include it in the analysis alongside the other regions. 
 
 Figs \ref{fig:un_pop_plot} and \ref{fig:un_pop_plot_log10} show the relationship between the number of languages per modern country/territory \citep{glottolog4_5} and its population in 1950 \citep{UN_pop}, with Remote Oceanic countries and territories highlighted. Modern nation-states are not historically relevant cultural units in many places in the world, include the Pacific. For example, Cook Islands (also known as Avaiki Nui) and the Federated States of Micronesia encompasses many island groups with diverse histories (c.f. Fig \ref{RO_overnight_coloured_dots} and Appendix \ref{sec:island_geo}). However, even with this noise, there is a relationship --- more people $\rightarrow$ more languages.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.8\linewidth]{number_of_languages_vs_pop_1950.png}
-    \caption{Population in 1950 per country (x-axis) and number of languages per country (y-axis). Dark blue triangles = countries with at least some landmasses in Remote Oceania, green cricles = all other countries.}
+    \caption{Population in 1950 per country (x-axis) and number of languages per country (y-axis). Dark blue triangles = countries with at least some landmasses in Remote Oceania, green circles = all other countries.}
         \label{fig:un_pop_plot}
     \end{figure}
 \begin{figure}[ht]
     \centering
           \includegraphics[width=.8\linewidth]{number_of_languages_vs_pop_1950_log10.png}
-    \caption{Population in 1950 per country (x-axis) and number of languages per country (y-axis) - log-10-transformed. Dark blue triangles = countries with at least some landmasses in Remote Oceania, green cricles = all other countries.}
+    \caption{Population in 1950 per country (x-axis) and number of languages per country (y-axis) - log-10-transformed. Dark blue triangles = countries with at least some landmasses in Remote Oceania, green circles = all other countries.}
     \label{fig:un_pop_plot_log10}
     \end{figure}
 
-While it is not possible to include population size as a variable, it is possible that the environmental variables are relevant here as they may suggest island groups that could be home to larger populations. Fig. \ref{SPLOM_country_all_variables} shows the relationshop between
-
-
-<insert paragraph about population size and number of languages being connected and link back to carrying capacity.>
-
-
+While it is not possible to include population size as a variable, it is possible that the environmental variables are relevant here as they may suggest island groups that could be home to larger populations. Fig. \ref{SPLOM_country_all_variables} shows the relationship between the population data and language count data above to the variables of this study. The first four rows represent the data summarised per entire countries  (i.e. from  \citet{UN_pop} and \citet{glottolog4_5}) and the rest are per island group in Remote Oceania. This means there is a mismatch of units of analysis, for example: Hawai'i is a part of the United States of America and therefore is included in the data point for the entire USA. The ``lg count (island group)'' contains only the number of languages in Hawai'i in the island groups included in this study, i.e. 1.
 
 \begin{figure}[ht]
-
     \includegraphics[width=15cm]{latex/SPLOM_country_all_variables.png}
 \caption{Scatterplot matrix of all variables available, over countries. Note that the population data is taken from \citet{UN_pop} and refers to the whole country, i.e. the population of the entire USA --- not just Hawai'i..}
 \label{SPLOM_country_all_variables}
 \end{figure}
 
 
-
-
+There is a negative correlation of -0.56 between the population (log10) per country and the environmental PC1 per island group. This may indicate that the environmental PCs are picking up on information relevant to population size.
 
 \FloatBarrier
 \newpage
@@ -905,10 +931,78 @@ This dataset does not contain information on population size because there is no
 \label{Predicting_lgs_DAG_full}
 \end{sidewaysfigure}
 
+\newpage
+\subsection{Model settings}
+\label{appendix_model_settings}
+\citep{burkner2017brms}
+
+
+% BARG
+% https://www.nature.com/articles/s41562-021-01177-7/tables/1
+
+
+%A. Why Bayesian. If the audience requires it, explain what benefits will be gleaned by a Bayesian analysis (as opposed to a frequentist analysis).
+
+%B. Goals of analysis. Explain the goals of the analysis. This prepares the audience for the type of models to expect and how the results will be described.
+
+%Step 1. Explain the model
+
+%A. Data variables. Explain the dependent (predicted) variables and independent (predictor) variables.
+
+%B. Likelihood function and parameters. For every model, explain the likelihood function and all the parameters, distinguishing clearly between parameters of primary theoretical interest and ancillary parameters. If the model is multilevel, be sure that the hierarchical structure is clearly explained, along with any covariance structure if multivariate parameter distributions are used.
+
+%C. Prior distribution. For every model, explain and justify the prior distribution of the parameters in the model.
+
+%D. Formal specification. Include a formal specification (mathematical or computer code) of the likelihood and prior, located either in the main text or in in publicly and persistently accessible online supplementary material.
+
+%E. Prior predictive check. Especially when using informed priors but even with broad priors, it is valuable to report a prior predictive check to demonstrate that the prior really generates simulated data consistent with the assumed prior knowledge.
+
+%Step 2. Report details of the computation
+
+%A. Software. Report the software used, including any specific added packages or plugins.
+
+%B. MCMC chain convergence. Report evidence that the chains have converged, using a convergence statistic such as PSRF, for every parameter or derived value.
+
+%C. MCMC chain resolution. Report evidence that the chains have high resolution, using the ESS, for every parameter or derived value.
+
+%D. If not MCMC. If using some computational procedure other than MCMC, be aware of and report inherently inaccurate approximations, especially for the limits of credible intervals.
+
+%Step 3. Describe the posterior distribution
+
+%A. Posterior predictive check. Provide a posterior predictive check to show that the model usefully mimics the data.
+
+%B. Summarize posterior of variables. For continuous parameters, derived variables and predicted values, report the central tendency and limits of the credible interval. Explicitly state whether you are using density-based values (mode and HDI) or quantile-based values (median and ETI), and state the mass of the credible interval (for example, 95%).
+
+%C. BF and posterior model probabilities. If conducting model comparison or hypothesis testing, report the BF and posterior probabilities of models for a range of prior model probabilities.
+
+%Step 4. Report decisions (if any) and their criteria
+
+%A. Why decisions? Explain why the decisions are theoretically meaningful and which decision procedure is being used. Regardless of which decision procedure is used, if it addresses null values, it should be able to accept the null value not only reject it.
+
+%B. Loss function. If utilities and a loss function for a decision rule are defined, these should be explained and reported.
+
+%C. ROPE limits. If using a continuous-parameter posterior distribution as the basis for decision, state and justify the limits of the ROPE and the required probability mass.
+
+%D. BF, decision threshold and model probabilities. If using model comparison or hypothesis testing as the basis for a decision, state and justify the decision threshold for the posterior model probability, and the minimum prior model probability that would make the posterior model probability exceed the decision threshold.
+
+%E. Estimated values too. If deciding about null values, always also report the estimate of the parameter value (central tendency and credible interval).
+
+%Step 5. Report sensitivity analysis
+
+%A. For broad priors. If the prior is intended to be vague or only mildly informed so that it has minimal influence on the posterior, show that other vague priors produce similar posterior results.
+
+%B. For informed priors. If the prior is informed by previous research, show what posterior results from a vague prior or from a range of differently informed priors.
+
+%C. For default priors. If using a default prior, show the effect of varying its settings. Be sure that the range of default priors constitutes theoretically meaningful priors, and consider whether they mimic plausible empirically informed priors.
+
+%D. BFs and model probabilites. If the analysis involves model comparison or hypothesis testing, then for each prior report not only the BFs but also the posterior model probabilities for a range of prior model probabilities.
+
+%E. Decisions. If making decisions, report whether decisions change under different priors. For BFs, report changes in the minimum prior model probability needed to achieve decisive posterior model probability.
 
 \newpage
 \subsection{BRMS model tables}
 \label{BRMS_model_tables}
+Following the principles of Bayesian Analysis Reporting Guidelines \citep{kruschke2021bayesian}, we are reporting Rhat (convergence of chains) and ESS
 
 \begin{landscape}
 \input{latex/BRMS_effects_medium}
