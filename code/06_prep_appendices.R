@@ -43,7 +43,7 @@ pol_complex <- readODS::read_ods("data/Remote_oceania_pol_complex_hedvig_code_la
 fn_out = "../latex/appendix_pol_complex_xtable.tex"
 cap <- "Table of political complexity values (EA033)."
 lbl <- "appendix_pol_complex_xtable"
-align <- c("r","p{2cm}","p{2cm}","p{2cm}", "p{5cm}", "p{7cm}") 
+align <- c("r","p{1.8cm}","p{1.8cm}","p{1.8cm}", "p{2cm}", "p{7cm}") 
 
 pol_complex %>% 
   arrange(`Island group (overnight-sailing)`) %>% 
