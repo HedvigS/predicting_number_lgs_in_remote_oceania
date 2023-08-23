@@ -54,3 +54,6 @@ xtable(caption = cap, label = lbl,
                        include.rownames = FALSE, math.style.negative = F,tabular.environment = "longtable",
                        booktabs = TRUE, floating = F) 
   
+read_tsv("output/processed_data/references.tsv") %>% 
+  distinct() %>% 
+  write_tsv("output/processed_data/references.tsv")
