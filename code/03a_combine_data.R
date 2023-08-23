@@ -115,6 +115,7 @@ subregions %>%
 ##POL COMPLEXITY
 pol_complex <- read_tsv("data/Remote_oceania_pol_complex.tsv", na = "", show_col_types = F) %>%
   dplyr::select(Language_level_ID = glottocode, `Political complexity (EA033)`) %>% 
+  distinct() %>% 
   mutate(glottocode = ifelse(Language_level_ID == "fiji1243", "fiji1243,kada1285,sout2864,nort2843", Language_level_ID)) %>% 
   mutate(glottocode = ifelse(Language_level_ID == "aust1304",  "aust1304,raiv1237,tubu1240,ruru1237", glottocode)) %>% 
   mutate(glottocode = ifelse(Language_level_ID == "maor1246", "maor1246,mori1267", glottocode)) %>% 
