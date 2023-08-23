@@ -44,7 +44,7 @@ pol_complex <- readODS::read_ods("data/Remote_oceania_pol_complex_hedvig_code_la
   filter(!is.na(`Island group (shared language)`)) %>% 
   group_by(`Island group (overnight-sailing)`, `Island group (shared language)`, `Political complexity (EA033)`) %>% 
   summarise(glottocodes = paste0(unique(glottocode), collapse = ", "),
-            References = paste0(citekey, collapse = ", "), .groups = "drop") %>% 
+            References = paste0(unique(citekey), collapse = ", "), .groups = "drop") %>% 
   distinct(`Island group (overnight-sailing)`, `Island group (shared language)`, `Political complexity (EA033)`, glottocodes, References)
   
 #write xtable
@@ -65,5 +65,53 @@ xtable(caption = cap, label = lbl,
                        booktabs = TRUE, floating = F) 
   
 
+#model input
+
+## SBZR
+fn_out = "../latex/appendix_SBZR_group_table.tex"
+cap <- "Table of input values to model, overnight-sailing island groups."
+lbl <- "appendix_SBZR_table"
+align <- c("r","p{4.5cm}","p{2cm}","p{2cm}", "p{2cm}", "p{4cm}",  "p{4cm}") 
+
+read_tsv("output/processed_data/RO_Hedvig_aggregate_SBZR_group_scaled.tsv", show_col_types = F) %>% 
+  dplyr::select(`Island group (overnight-sailing)` = SBZR_group,
+                Shoreline, 
+                environ_PC1,
+                environ_PC2,
+                `Political complexity (EA033)` = EA033, 
+                `Time depth` = Settlement_date_grouping_finer) %>% 
+  xtable(caption = cap, label = lbl,
+         digits = 3, 
+         align = align) %>% 
+  xtable::print.xtable(file = fn_out, 
+                       sanitize.colnames.function = function(x){x},
+                       sanitize.text.function = function(x){x},
+                       include.rownames = FALSE, math.style.negative = F,tabular.environment = "longtable",
+                       booktabs = TRUE, floating = F) 
+
+
+## medium
+fn_out = "../latex/appendix_medium_group_table.tex"
+cap <- "Table of input values to model, shared language island groups."
+lbl <- "appendix_medium_table"
+align <- c("r","p{4.5cm}","p{2cm}","p{2cm}", "p{2cm}", "p{2cm}", "p{4cm}", "p{4cm}") 
+
+
+read_tsv("output/processed_data/RO_Hedvig_aggregate_medium_group_scaled.tsv", show_col_types = F) %>% 
+dplyr::select(`Island group (shared language)` = Medium_only_merged_for_shared_language,
+              Shoreline, 
+              environ_PC1,
+              environ_PC2,
+              environ_PC3,
+              `Political complexity (EA033)` = EA033, 
+              `Time depth` = Settlement_date_grouping_finer) %>% 
+  xtable(caption = cap, label = lbl,
+         digits = 3, 
+         align = align) %>% 
+  xtable::print.xtable(file = fn_out, 
+                       sanitize.colnames.function = function(x){x},
+                       sanitize.text.function = function(x){x},
+                       include.rownames = FALSE, math.style.negative = F,tabular.environment = "longtable",
+                       booktabs = TRUE, floating = F) 
 
 
