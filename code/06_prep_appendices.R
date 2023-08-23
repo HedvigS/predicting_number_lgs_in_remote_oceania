@@ -25,7 +25,7 @@ pol_complex_refs <- read_tsv("data/Remote_oceania_pol_complex.tsv", na = "", sho
   dplyr::select(`Political complexity (EA033)`, glottocode, citekey)
 
 # rename("$$\\textbf{\\parbox{2cm}{\\raggedright Method}}$$" = "Method") %>% 
-pol_complex_refs$citekey <- paste0("$$\\citet{",pol_complex_refs$citekey, "}$$")
+pol_complex_refs$citekey <- paste0("\\citet{",pol_complex_refs$citekey, "}")
 
 #table itself
 pol_complex <- readODS::read_ods("data/Remote_oceania_pol_complex_hedvig_code_latex.ods", sheet = 1) %>%
@@ -58,7 +58,9 @@ pol_complex %>%
 xtable(caption = cap, label = lbl,
        digits = 3, 
        align = align) %>% 
-  xtable::print.xtable(file = fn_out, sanitize.colnames.function = function(x){x},
+  xtable::print.xtable(file = fn_out, 
+                       sanitize.colnames.function = function(x){x},
+                       sanitize.text.function = function(x){x},
                        include.rownames = FALSE, math.style.negative = F,tabular.environment = "longtable",
                        booktabs = TRUE, floating = F) 
   
