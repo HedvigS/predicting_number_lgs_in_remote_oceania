@@ -47,8 +47,9 @@ pol_complex <- readODS::read_ods("data/Remote_oceania_pol_complex_hedvig_code_la
   mutate(references = str_split(references, "%")) %>% 
   unnest(cols = c(references)) %>% 
   distinct() %>% 
-  group_by(`Island group (overnight-sailing)`, `Island group (shared language)`, `Political complexity (EA033)`, glottocodes) %>% 
-  summarise(references = paste0(references, collapse = "; "), .groups = "drop") 
+  group_by(`Island group (overnight-sailing)`) %>% 
+  mutate(references = paste0(references, collapse = "; "), .groups = "drop") %>% 
+  distinct(`Island group (overnight-sailing)`, `Island group (shared language)`, `Political complexity (EA033)`, glottocodes, references)
   
 
 fn_out = "../latex/appendix_pol_complex_xtable.tex"
@@ -56,8 +57,8 @@ cap <- "Table of political complexity values (EA033)."
 lbl <- "appendix_pol_complex_xtable"
 align <- c("r","p{5cm}","p{2cm}","p{2cm}", "p{2cm}", "p{2cm}") 
 
-pol_complex %>% View()
-  dplyr::select()
+pol_complex %>% 
+  arrange(`Island group (overnight-sailing)`) %>% 
 xtable(caption = cap, label = lbl,
        digits = 3, 
        align = align) %>% 
