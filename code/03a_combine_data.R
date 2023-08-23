@@ -64,6 +64,8 @@ polygon_geo_grouping_hierarchy <- read_csv("data/RO_polygons_grouped_with_langua
     full_join(Polygon_lgs_count_smallest, by = "Smallest_Island_group") %>% 
   full_join(polygon_geo, by = "Smallest_Island_group")
 
+polygon_geo_grouping_hierarchy %>% write_tsv("output/processed_data/polygon_geo_grouping_hierarchy.tsv")
+
 #distinct colors
 n <- length(unique(polygon_geo_grouping_hierarchy$Smallest_Island_group))
 color_vector <- sample(distinctColorPalette(n), size = n)
@@ -80,8 +82,6 @@ polygon_geo_grouping_hierarchy$medium_group_color <- color_vector[as.factor(poly
 n <- length(unique(polygon_geo_grouping_hierarchy$SBZR_group))
 color_vector <- sample(distinctColorPalette(n), size = n)
 polygon_geo_grouping_hierarchy$SBZR_group_color <- color_vector[as.factor(polygon_geo_grouping_hierarchy$SBZR_group)]
-
-write_tsv(polygon_geo_grouping_hierarchy, "output/processed_data/Polygon_hierarchy_stats.tsv")
 
 subregions <- read_tsv("data/oceania_subregions.tsv", show_col_types = F) %>% 
   filter(Near_Remote_Oceania == "Remote Oceania") %>% 
@@ -102,17 +102,21 @@ subregions <- read_tsv("data/oceania_subregions.tsv", show_col_types = F) %>%
   mutate(Smallest_Island_group = trimws(Smallest_Island_group)) %>% 
   dplyr::rename(Glottocode_spec = Glottocode) %>% 
   dplyr::rename(Glottocode = Glottocode_language_level) %>% 
+  mutate(Glottocode = trimws(Glottocode)) %>% 
+  mutate(Glottocode_spec = trimws(Glottocode_spec)) %>% 
   distinct(Glottocode_spec, Glottocode, Smallest_Island_group, Smallest_Island_group_main) %>% 
   full_join(polygon_geo_grouping_hierarchy, 
             by = "Smallest_Island_group",
             relationship = "many-to-many")
 
+subregions %>%
+  write_tsv("output/processed_data/subregions.tsv")
 
 ##POL COMPLEXITY
 pol_complex <- readODS::read_ods("data/Remote_oceania_pol_complex_hedvig_code_latex.ods", sheet = 1) %>%
   dplyr::select(Language_level_ID = glottocode, `Political complexity (EA033)`) %>% 
   mutate(glottocode = ifelse(Language_level_ID == "fiji1243", "fiji1243,kada1285,sout2864,nort2843", Language_level_ID)) %>% 
-  mutate(glottocode = ifelse(Language_level_ID == "aust1304",  "aust1304,raiv1237,tubu1240,ruru123", glottocode)) %>% 
+  mutate(glottocode = ifelse(Language_level_ID == "aust1304",  "aust1304,raiv1237,tubu1240,ruru1237", glottocode)) %>% 
   mutate(glottocode = ifelse(Language_level_ID == "maor1246", "maor1246,mori1267", glottocode)) %>% 
   mutate(glottocode = str_split(glottocode, ",")) %>% 
   unnest(cols = c(glottocode)) %>% 
