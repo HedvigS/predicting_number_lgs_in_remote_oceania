@@ -43,7 +43,7 @@ pol_complex <- readODS::read_ods("data/Remote_oceania_pol_complex_hedvig_code_la
   left_join(subregions, by = "glottocode", relationship = "many-to-many") %>% 
   filter(!is.na(`Island group (shared language)`)) %>% 
   group_by(`Island group (overnight-sailing)`, `Island group (shared language)`, `Political complexity (EA033)`) %>% 
-  summarise(glottocodes = paste0(glottocode, collapse = ", "),
+  summarise(glottocodes = paste0(unique(glottocode), collapse = ", "),
             References = paste0(citekey, collapse = ", "), .groups = "drop") %>% 
   distinct(`Island group (overnight-sailing)`, `Island group (shared language)`, `Political complexity (EA033)`, glottocodes, References)
   
