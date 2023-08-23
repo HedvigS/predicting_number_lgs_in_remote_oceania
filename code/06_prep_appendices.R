@@ -76,8 +76,8 @@ align <- c("r","p{4.5cm}","p{2cm}","p{2cm}", "p{2cm}", "p{4cm}",  "p{4cm}")
 read_tsv("output/processed_data/RO_Hedvig_aggregate_SBZR_group_scaled.tsv", show_col_types = F) %>% 
   dplyr::select(`Island group (overnight-sailing)` = SBZR_group,
                 Shoreline, 
-                environ_PC1,
-                environ_PC2,
+                `environ PC1` = environ_PC1,
+                `environ PC2` = environ_PC2,
                 `Political complexity (EA033)` = EA033, 
                 `Time depth` = Settlement_date_grouping_finer) %>% 
   xtable(caption = cap, label = lbl,
@@ -100,9 +100,9 @@ align <- c("r","p{4.5cm}","p{2cm}","p{2cm}", "p{2cm}", "p{2cm}", "p{4cm}", "p{4c
 read_tsv("output/processed_data/RO_Hedvig_aggregate_medium_group_scaled.tsv", show_col_types = F) %>% 
 dplyr::select(`Island group (shared language)` = Medium_only_merged_for_shared_language,
               Shoreline, 
-              environ_PC1,
-              environ_PC2,
-              environ_PC3,
+              `environ PC1` = environ_PC1,
+              `environ PC2` = environ_PC2,
+              `environ PC3` = environ_PC3,
               `Political complexity (EA033)` = EA033, 
               `Time depth` = Settlement_date_grouping_finer) %>% 
   xtable(caption = cap, label = lbl,
