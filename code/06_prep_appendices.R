@@ -164,7 +164,7 @@ align <- c("r","p{4.5cm}","p{2cm}","p{2cm}", "p{2cm}", "p{4cm}", "p{4cm}", "p{4c
 
 dates %>% 
 xtable(caption = cap, label = lbl,
-       digits = 3, 
+       digits = 0, 
        align = align) %>% 
   xtable::print.xtable(file = fn_out, 
                        sanitize.colnames.function = function(x){x},
