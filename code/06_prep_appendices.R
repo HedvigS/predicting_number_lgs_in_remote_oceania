@@ -78,14 +78,14 @@ lbl <- "appendix_SBZR_table"
 align <- c("r","p{4.5cm}","p{1.4cm}","p{1.4cm}", "p{1.7cm}", "p{1.7cm}",  "p{1.7cm}","p{1.7cm}") 
 
 read_tsv("output/processed_data/RO_Hedvig_aggregate_SBZR_group_scaled.tsv", show_col_types = F) %>% 
+  mutate(lg_count = as.character(lg_count)) %>% 
   dplyr::select(`Island group (overnight-sailing)` = SBZR_group,
-                lg_count,
+                `Lang count` = lg_count,
                 Shoreline, 
                 `environ PC1` = environ_PC1,
                 `environ PC2` = environ_PC2,
                 `Political complexity (EA033)` = EA033, 
                 `Time depth` = Settlement_date_grouping_finer) %>% 
-  mutate(lg_count = as.character(lg_count)) %>% 
   xtable(caption = cap, label = lbl,
          digits = 3, 
          align = align) %>% 
@@ -104,15 +104,15 @@ align <- c("r","p{4.5cm}","p{1.4cm}", "p{1.4cm}","p{1.4cm}", "p{1.7cm}", "p{1.7c
 
 
 read_tsv("output/processed_data/RO_Hedvig_aggregate_medium_group_scaled.tsv", show_col_types = F) %>% 
-dplyr::select(`Island group (shared language)` = Medium_only_merged_for_shared_language,
-              lg_count,
+  mutate(lg_count = as.character(lg_count)) %>% 
+  dplyr::select(`Island group (shared language)` = Medium_only_merged_for_shared_language,
+              `Lang count` = lg_count,
               Shoreline, 
               `environ PC1` = environ_PC1,
               `environ PC2` = environ_PC2,
               `environ PC3` = environ_PC3,
               `Political complexity (EA033)` = EA033, 
               `Time depth` = Settlement_date_grouping_finer) %>% 
-  mutate(lg_count = as.character(lg_count)) %>% 
   xtable(caption = cap, label = lbl,
          digits = 3, 
          align = align) %>% 
