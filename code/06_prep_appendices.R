@@ -149,7 +149,8 @@ distinct() %>%
             .groups = "drop"
   ) %>% 
   mutate(`Time depth settlement group` = as.numeric(`Time depth settlement group`)) %>% 
-           arrange(`Time depth settlement group`)
+           arrange(`Time depth settlement group`) %>% 
+  mutate_all(.funs = ~str_replace(.,"NA", ""))
   
 dates %>% 
   write_tsv("output/processed_data/appendix_dates.tsv")
