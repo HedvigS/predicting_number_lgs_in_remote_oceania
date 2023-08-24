@@ -75,10 +75,11 @@ xtable(caption = cap, label = lbl,
 fn_out = "../latex/appendix_SBZR_group_table.tex"
 cap <- "Table of input values to model, overnight-sailing island groups."
 lbl <- "appendix_SBZR_table"
-align <- c("r","p{4.5cm}","p{1.7cm}","p{1.7cm}", "p{1.7cm}", "p{1.7cm}",  "p{1.7cm}") 
+align <- c("r","p{4.5cm}","p{1.7cm}","p{1.7cm}", "p{1.7cm}", "p{1.7cm}",  "p{1.7cm}","p{1.7cm}") 
 
 read_tsv("output/processed_data/RO_Hedvig_aggregate_SBZR_group_scaled.tsv", show_col_types = F) %>% 
   dplyr::select(`Island group (overnight-sailing)` = SBZR_group,
+                lg_count,
                 Shoreline, 
                 `environ PC1` = environ_PC1,
                 `environ PC2` = environ_PC2,
@@ -98,11 +99,12 @@ read_tsv("output/processed_data/RO_Hedvig_aggregate_SBZR_group_scaled.tsv", show
 fn_out = "../latex/appendix_medium_group_table.tex"
 cap <- "Table of input values to model, shared language island groups."
 lbl <- "appendix_medium_table"
-align <- c("r","p{4.5cm}","p{1.7cm}","p{1.7cm}", "p{1.7cm}", "p{1.7cm}", "p{1.7cm}", "p{1.7cm}") 
+align <- c("r","p{4.5cm}","p{1.7cm}","p{1.7cm}", "p{1.7cm}", "p{1.7cm}", "p{1.7cm}", "p{1.7cm}", "p{1.7cm}") 
 
 
 read_tsv("output/processed_data/RO_Hedvig_aggregate_medium_group_scaled.tsv", show_col_types = F) %>% 
 dplyr::select(`Island group (shared language)` = Medium_only_merged_for_shared_language,
+              lg_count,
               Shoreline, 
               `environ PC1` = environ_PC1,
               `environ PC2` = environ_PC2,
@@ -142,7 +144,6 @@ distinct() %>%
             `Time depth settlement group` = paste0(unique(`Time depth settlement group`), collapse= ", "),
                         `Based on inference from neighbouring island?` = paste0(unique(`Based on inference from neighbouring island?`), collapse = ", "),
             `Date ranges` = paste0(unique(`Date ranges`), collapse= ", "),
-            `Oldest date` = paste0(unique(`Oldest date`), collapse = ", "),
             `Name in source` = paste0(unique(`Name in source`), collapse = ", "),
             `Source` = paste0(unique(`Source`), collapse = ", "),
             `Source (meta)` = paste0(unique(`Meta_source`), collapse = ", "),
@@ -159,7 +160,7 @@ dates %>%
 fn_out = "../latex/appendix_dates_xtable.tex"
 cap <- "Table of settlement time depth."
 lbl <- "appendix_dates_xtable"
-align <- c("r","p{4.5cm}","p{2cm}","p{2cm}", "p{2cm}", "p{2cm}", "p{2cm}", "p{2cm}", "p{2cm}", "p{2cm}", "p{2cm}") 
+align <- c("r","p{2cm}","p{2cm}","p{2cm}", "p{2cm}", "p{2cm}", "p{2cm}", "p{2cm}", "p{2cm}", "p{2cm}") 
 
 
 dates %>% 
