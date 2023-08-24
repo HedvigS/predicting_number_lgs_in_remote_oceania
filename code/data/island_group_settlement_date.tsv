@@ -1,4 +1,4 @@
-Island group (overnight distances)	Smaller specific island group	Name in source	Time depth settlement group	Date ranges	Oldest date	Source	Meta_source	Based on inference from neighbouring island?	double_check	Description group	subregion	Comment	settlement_date_grouping_6	settlement_date_grouping_coarser	Order in Rieth Cochrane table
+Island group (overnight distances)	Smallest_Island_group	Name in source	Time depth settlement group	Date ranges	Oldest date	Source	Meta_source	Based on inference from neighbouring island?	double_check	Description group	subregion	Comment	settlement_date_grouping_6	settlement_date_grouping_coarser	Order in Rieth Cochrane table
 Laguas_yan_gani	Guam	Mariana Islands	1	3500, 2950	3500	Carson (2014) and Athens et al (2004)	\citet{rieth_cochrane_2018}			Old Micronesia	Micronesia		6	5	
 Laguas_yan_gani	Saipan	Mariana Islands	1	3500, 2950	3500	Carson (2014) and Athens et al (2004)	\citet{rieth_cochrane_2018}			Old Micronesia	Micronesia		4	3	17
 Vanuatu (greater)	Tangoa	Vanuatu	2	3200, 3000	3200	Bedford et al (2006)	\citet{rieth_cochrane_2018}			Vanuatu	Melanesia	Santa Cruz and Reef islands are mentioned specifically, so we take “Vanuatu” to mean all islands in Vanuatu minus those.	1	1	1
@@ -78,7 +78,6 @@ Niuatoputapu	Niuatoputapu	Niuatoputapu	4	2300, 2200	2300	Kirch (1981)	\citet{rie
 Tungaru	Tungaru	Tungaru	5	2150, 1750	2150	DiPazza (1999)	\citet{rieth_cochrane_2018}			Nuclear Micronesia	Micronesia		4	3	16
 Nauru	Nauru	Tungaru	5	2150, 1750	2150	DiPazza (1999)	\citet{rieth_cochrane_2018}	Yes		Nuclear Micronesia	Micronesia		4	3	16
 Banaba	Banaba	Tungaru	5	2150, 1750	2150	DiPazza (1999)	\citet{rieth_cochrane_2018}	Yes	yes				4	3	16
-Tuvalu	Niu	Tuvalu	5	2150, 1750	2150	DiPazza (1999)	\citet{rieth_cochrane_2018}	Yes		Western Poly	Polynesia		4	3	12
 Kosrae	Kosrae	Kosrae	5	2100, 1750	2100	Athens (1995)	\citet{rieth_cochrane_2018}			Nuclear Micronesia	Micronesia		4	3	13
 Ratak	Ratak	Marshall Islands	5	2000, 1600	2000	Beardsley (1994), Riley (1987), weisler (1999, 2001) and Weisler et al (2012)	\citet{rieth_cochrane_2018}			Nuclear Micronesia	Micronesia		4	3	17
 Ralik	Rālik	Marshall Islands	5	2000, 1600	2000	Beardsley (1994), Riley (1987), weisler (1999, 2001) and Weisler et al (2012)	\citet{rieth_cochrane_2018}			Nuclear Micronesia	Micronesia		4	3	17
@@ -127,7 +126,7 @@ Rimatara	Rimatara	Austral islands (Rurutu)	10	670, 550	670	Bollt (2008), Kennett
 Tupuai	Tupuai	Austral islands (Rurutu)	10	670, 550	670	Bollt (2008), Kennett et al (2012) and Prebble and Anderson (2012)	\citet{rieth_cochrane_2018}	Yes, Rurutu		Eastern Polynesia	Polynesia	Rurutu specifically mentioned as 670-550	5	4	
 Raivavae	Raivavae	Austral islands (Rurutu)	10	670, 550	670	Bollt (2008), Kennett et al (2012) and Prebble and Anderson (2012)	\citet{rieth_cochrane_2018}	Yes, Rurutu		Eastern Polynesia	Polynesia	Rurutu specifically mentioned as 670-550	5	4	
 Rurutu	Rurutu	Austral islands (Rurutu)	10	670, 550	670	Bollt (2008), Kennett et al (2012) and Prebble and Anderson (2012)	\citet{rieth_cochrane_2018}			Eastern Polynesia	Polynesia	Rurutu specifically mentioned as 670-550	5	4	
-Sonsorol	Sonsorol	Sonsorol	10	600, 450	600	\citet{intoh2008ongoing}			yes	Nuclear Micronesia	Micronesia	Based on Kirch descirbing them in the same movement as Nukuoro and Kapingamarangi	5	4	
+Sonsorol	Sonsorol	Sonsorol	10	600, 450	600	\citet{intoh2008ongoing}			yes	Nuclear Micronesia	Micronesia		5	4	
 Mangarongaro	Māngarongaro	Northern Cook Islands	11	550, 300	550	Chikamori (1998) and Chikamori and Yoshida (1988)	\citet{rieth_cochrane_2018}			Eastern Polynesia	Polynesia		5	4	
 Rakahanga-Manihiki	Rakahanga-Manihiki	Northern Cook Islands	11	550, 300	550	Chikamori (1998) and Chikamori and Yoshida (1988)	\citet{rieth_cochrane_2018}			Eastern Polynesia	Polynesia		5	4	
 Mapia	Mapia	Mapia	11	500, 400	500	\citet{intoh2007reconnaissance}		Yes				Based on Kirch descirbing them in the same movement as Nukuoro and Kapingamarangi	6	5	
