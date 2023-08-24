@@ -115,3 +115,8 @@ dplyr::select(`Island group (shared language)` = Medium_only_merged_for_shared_l
                        booktabs = TRUE, floating = F) 
 
 
+
+##
+
+dates <- read_tsv("data/island_group_settlement_date.tsv", show_col_types = F)  
+  
