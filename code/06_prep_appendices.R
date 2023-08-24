@@ -55,6 +55,10 @@ align <- c("r","p{4.5cm}","p{2cm}","p{2cm}", "p{2cm}", "p{4cm}")
 
 pol_complex %>% 
   arrange(`Island group (overnight-sailing)`) %>% 
+  write_tsv("output/processed_data/appendix_pol_complex.tsv")
+
+pol_complex %>% 
+  arrange(`Island group (overnight-sailing)`) %>% 
 xtable(caption = cap, label = lbl,
        digits = 0, 
        align = align) %>% 
@@ -118,5 +122,52 @@ dplyr::select(`Island group (shared language)` = Medium_only_merged_for_shared_l
 
 ##
 
-dates <- read_tsv("data/island_group_settlement_date.tsv", show_col_types = F)  
+dates <- read_tsv("data/island_group_settlement_date.tsv", show_col_types = F)  %>% 
+  inner_join(subregions, by = "Smallest_Island_group") %>% 
+  dplyr::select("Time depth settlement group",
+                `Island group (finest)` = "Smallest_Island_group", 
+              `Island group (overnight-sailing)`, 
+              `Island group (shared language)`,
+              `Oldest date`,
+              `Name in source`,
+              `Date ranges`,
+              `Based on inference from neighbouring island?`,
+              Source, Meta_source, 
+              Comment
+              )  %>% 
+distinct() %>% 
+  group_by( `Island group (finest)`, `Date ranges`) %>% 
+  summarise(`Island group (overnight-sailing)` = paste0(unique(`Island group (overnight-sailing)`), collapse= ", "),
+            `Island group (shared language)` = paste0(unique(`Island group (shared language)`), collapse= ", "),
+            `Time depth settlement group` = paste0(unique(`Time depth settlement group`), collapse= ", "),
+                        `Based on inference from neighbouring island?` = paste0(unique(`Based on inference from neighbouring island?`), collapse = ", "),
+            `Date ranges` = paste0(unique(`Date ranges`), collapse= ", "),
+            `Oldest date` = paste0(unique(`Oldest date`), collapse = ", "),
+            `Name in source` = paste0(unique(`Name in source`), collapse = ", "),
+            `Source` = paste0(unique(`Source`), collapse = ", "),
+            `Source (meta)` = paste0(unique(`Meta_source`), collapse = ", "),
+            .groups = "drop"
+  ) %>% 
+  mutate(`Time depth settlement group` = as.numeric(`Time depth settlement group`)) %>% 
+           arrange(`Time depth settlement group`)
   
+dates %>% 
+  write_tsv("output/processed_data/appendix_dates.tsv")
+
+#write xtable
+fn_out = "../latex/appendix_dates_xtable.tex"
+cap <- "Table of settlement time depth."
+lbl <- "appendix_dates_xtable"
+align <- c("r","p{4.5cm}","p{2cm}","p{2cm}", "p{2cm}", "p{4cm}", "p{4cm}", "p{4cm}", "p{4cm}", "p{4cm}", "p{4cm}") 
+
+
+dates %>% 
+xtable(caption = cap, label = lbl,
+       digits = 3, 
+       align = align) %>% 
+  xtable::print.xtable(file = fn_out, 
+                       sanitize.colnames.function = function(x){x},
+                       sanitize.text.function = function(x){x},
+                       include.rownames = FALSE, math.style.negative = F,tabular.environment = "longtable",
+                       booktabs = TRUE, floating = F) 
+
