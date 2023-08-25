@@ -78,4 +78,17 @@ if(na.rm == T){
   uniqv[which.max(tabulate(match(v, uniqv)))]
 }
 
+distinctive_plot_colors <- c("#FFB6C1",
+            "#FFF44F",
+            "#a6f7c9", 
+            "#FFDAB9",
+            "#87CEEB",
+            "#C8A2C8",
+            "#ebb0df",
+            "#16c7c7",
+            "#edae8e",
+            "#CCCCFF",
+            "#7DDAD9",
+            "#957DAD"
 
+)
