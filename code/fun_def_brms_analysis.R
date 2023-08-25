@@ -300,15 +300,14 @@ ms_df <-  ms$fixed %>%
     
   } #end of dropping out one for-loop
   
-  df_all %>%          
-    write_tsv(file = paste0("output/results/brms_", group, "_group_drop_one_out.tsv"), na = "")
+  df_all <- read_tsv(file = paste0("output/results/brms_", group, "_group_drop_one_out.tsv"))
   
   
-  df_all$dropped_obs <- fct_reorder(df_all$dropped_obs, df_all$diff_predicted_vs_observed)
+  df_all$dropped_obs <- fct_reorder(df_all$dropped_obs, df_all$diff_predicted_vs_observed_abs)
   
   df_all %>% 
     ggplot() +
-    geom_bar(aes(x = dropped_obs, y = diff_predicted_vs_observed, fill = diff_predicted_vs_observed), stat = "identity") +
+    geom_bar(aes(x = dropped_obs, y = diff_predicted_vs_observed_abs, fill = diff_predicted_vs_observed_abs), stat = "identity") +
     theme_fivethirtyeight() +
     theme(axis.text.x =  element_text(angle = 70, hjust = 1) , 
           legend.position = "none") +
@@ -320,10 +319,10 @@ ms_df <-  ms$fixed %>%
   ggsave(filename = paste0("../latex/brms_", group, "_dropped_out_plot_diff.png"), width = 9, height = 9)
   
   df_all %>% 
-    filter(diff_predicted_vs_observed < 2.5) %>% 
+    filter(diff_predicted_vs_observed_abs < 1.4) %>% 
     #  column_to_rownames("dropped_obs") %>% 
     data.table::transpose(make.names = "dropped_obs", keep.names = "variable") %>% 
-    write_tsv(file = paste0("output/results/brms_", group, "_dropped_effects_diff_above__2.24.tsv"), na = "")
+    write_tsv(file = paste0("output/results/brms_", group, "_dropped_effects_diff_above_1.tsv"), na = "")
   
   ######################################
   
