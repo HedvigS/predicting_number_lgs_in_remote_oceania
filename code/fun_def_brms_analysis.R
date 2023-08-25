@@ -301,7 +301,7 @@ ms_df <-  ms$fixed %>%
     
   } #end of dropping out one for-loop
   
-  df_all <- read_tsv(file = paste0("output/results/brms_", group, "_group_drop_one_out.tsv"))
+  #df_all <- read_tsv(file = paste0("output/results/brms_", group, "_group_drop_one_out.tsv"))
   
   
   df_all$dropped_obs <- fct_reorder(df_all$dropped_obs, df_all$diff_predicted_vs_observed_abs)
