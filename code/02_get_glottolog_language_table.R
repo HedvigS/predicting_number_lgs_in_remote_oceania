@@ -12,7 +12,7 @@ if(dir.exists(paths = "output/processed_data/glottolog_language_table_wide_df.ts
 if(!dir.exists(exdir)){  
 source("fun_def_get_zenodo.R")
 
-glottolog_fn <- c("https://zenodo.org/record/7398887/files/glottolog/glottolog-cldf-v4.7.zip")
+glottolog_fn <- c("https://zenodo.org/record/437430/files/clld/glottolog-v3.0.zip")
 
 get_zenodo_dir(url = glottolog_fn, exdir = exdir, remove_git_commit_dir = T)
 }
