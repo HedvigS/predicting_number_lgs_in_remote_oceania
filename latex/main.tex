@@ -100,8 +100,9 @@
 
 
 \begin{abstract}
-\doublespacing
+\singlespacing
 \normalsize
+ \begin{flushleft} 
 %We suggest a maximum length of 350 words for the Abstract
 There are more than 7,000 languages on our planet today, but they are not evenly distributed over the population. There are over 100 languages in Vanuatu, but only one in S\={a}moa. This is in spite of the populations being similarly sized, having similar histories etc. Why might this be? This paper explores this question for one particular region: Remote Oceania.
 
@@ -110,7 +111,7 @@ Remote Oceania comprises the eastern Solomon Islands (Temotu), Vanuatu, New Cale
 One particular theory has been proposed to explain the discrepancy in language richness over Remote Oceania --- societal organisation. In this study, we test if this factor remains an important predictor of the number of languages also when other relevant factors are taken into account, such as time-depth and environment. The results show that the theory does hold in terms of statistical power, but that there are important caveats such as the instantiation of the variable ``political complexity'' and its relationship with contact with Oceanic neighbours further west who do not speak Austronesian languages.
 
 %Scholars have suggested several reasons for the large discrepancy between the number of languages per island group in Remote Oceania, such as societal organisation, environmental factors and settlement time. 
-
+ \end{flushleft}
 
 \end{abstract}
 
@@ -120,12 +121,12 @@ One particular theory has been proposed to explain the discrepancy in language r
 
 \newpage
 \singlespacing
-\tableofcontents
+%\tableofcontents
 
 \newpage
-\listoffigures
- \listoftables
- \vspace{0.7cm}
+%\listoffigures
+% \listoftables
+% \vspace{0.7cm}
 
 
 \newpage
@@ -409,7 +410,7 @@ Political complexity is, perhaps unsurprisingly, a complex variable. There are a
 \bibliography{latex/HS_Oceanic, latex/used_pkgs, latex/pol_complex_refs}
 %\singlespacing
 
-
+%TC:ignore
 
 \newpage
 \section*{Acknowledgements}
@@ -911,32 +912,11 @@ The column ``Time depth settlement group'' contains the grouping of islands into
 \subsection{Input data tables}
 \singlespacing
 \label{appendix_data tables}
+All measurements, except the response variable, were scaled and centred to make the coefficients easier to interpret and compare. Shorelines were also log-10-transformed (before scaling). 
 
 \input{appendix_medium_group_table.tex}
 
 \input{latex/appendix_SBZR_group_table}
-
-
-
-
-
-\subsection{Languages per island group}
-\label{Subregions}
-\singlespacing
-
-\subsection{Data tables for island groups (shared language and overnight distance}
-\singlespacing
-%This section contains the necessary data for the analysis in study \ref{study_pol_complex}. The data is divided up into the two kinds of island groups: shared language (section \ref{shared_language_groups} and overnight sailing distances (section \ref{overnight_groups}). Each section contains two tables: a) data on political complexity, time depth, area, shoreline, isolation and latitude and b) the environmental variables from the ecoClimate datbase.
-
-
-\begin{itemize}
-\item Bio1: Annual mean temperature
-\item Bio4: Temperature seasonality (standard deviation *100) - mean for island group
-\item Bio12: Annual precipitation/rainfall (mm/m2)- mean for island group
-\item Bio15: Precipitation/rainfall seasonality (coefficient of variation)- mean for island group
-\end{itemize}
-
-All measurements, except the response variable, were scaled and centred to make the coefficients easier to interpret and compare. Shorelines were also log-10-transformed. For reasons of space, this data is displayed in two separate tables for each island grouping and the numbers are rounded to 4 digits.
 
 \newpage
 \subsection{Defining of Directed Acyclic Graph and variables}
@@ -1092,8 +1072,10 @@ Following the principles of Bayesian Analysis Reporting Guidelines \citep{krusch
 \subsection{R-packages used}
 \label{appendix_r_packages}
 
-All the analysis for this research project was done in the free and open source programming language R, using a multitude of packages. All code and data for this project are available in the locations listed in Supplementary material section \ref{supp_data_availability}. The scripts have been written so that any user of R can execute them. Please see the bibliography for information on package versions. Below are citations for all used packages.
+All the analysis for this research project was done in the free and open source programming language R, using a multitude of packages. All code and data for this project are available in the locations listed in appendix \ref{supp_data_availability}. The scripts have been written so that any user of R can execute them. Please see the bibliography for information on package versions. Below are citations for all used packages. The citations also include which version of the package was used.
 
 \input{latex/citation_keys.txt}.
+
+%TC:endignore
 
 \end{document}
