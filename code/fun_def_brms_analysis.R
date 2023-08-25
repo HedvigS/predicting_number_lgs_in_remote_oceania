@@ -125,11 +125,9 @@ ms_df_long_straddle <- ms_df_long %>%
     theme(legend.position = "none", 
           axis.ticks.y = element_blank(),
           axis.line.y = element_blank(),
-          axis.text.y = element_blank()) #+
-#    scale_color_manual(values = RColorBrewer::brewer.pal(name = "Set3", n = 10)) +
-#    scale_fill_manual(values = RColorBrewer::brewer.pal(name = "Set3", n = 10))
-  
-  ggsave(filename = paste0("output/plots/brms_", group, "_group_full_effect_ridge_panels_plot.png"), height = 9, width = 10)
+          axis.text.y = element_blank()) 
+
+    ggsave(filename = paste0("output/plots/brms_", group, "_group_full_effect_ridge_panels_plot.png"), height = 9, width = 10)
   ggsave(filename = paste0("../latex/brms_", group, "_group_full_effect_ridge_panels_plot.png"),  height = 9, width = 10) 
   
   
