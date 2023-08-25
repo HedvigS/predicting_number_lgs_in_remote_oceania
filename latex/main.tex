@@ -29,9 +29,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[12pt,letterpaper]{article}
-\usepackage[lmargin=1.2in,rmargin=1.2in,tmargin=1in,bmargin=1in]{geometry}
-\usepackage[bf,tiny]{titlesec}
+%\documentclass[12pt,letterpaper]{article}
+\documentclass[unnumsec,webpdf,modern,medium]{oup-authoring-template}
+
+%\usepackage[lmargin=1.2in,rmargin=1.2in,tmargin=1in,bmargin=1in]{geometry}
+%\usepackage[bf,tiny]{titlesec}
 %\usepackage{fontspec,xltxtra,xunicode}
     	%\defaultfontfeatures{Mapping=tex-text}
 %\usepackage[utf8]{inputenc}
@@ -40,105 +42,99 @@
 
 \usepackage{setspace}
 %\usepackage{gb4e}
-\let\eachwordone=\it %italicise the first line of examples
-\usepackage[sort]{natbib}
-\bibpunct[: ]{(}{)}{,}{a}{}{,}
-\usepackage{afterpage}
-\usepackage{graphicx}
+%\let\eachwordone=\it %italicise the first line of examples
+%\usepackage[sort]{natbib}
+%\bibpunct[: ]{(}{)}{,}{a}{}{,}
+%\usepackage{afterpage}
+%\usepackage{graphicx}
+% OUP PACKAGES
+%\graphicspath{{Fig/}}
 
-%%% your packages here; please use sparingly and for things you actually need (not for aesthetics)
+% line numbers
+%\usepackage[mathlines, switch]{lineno}
+%\usepackage[right]{lineno}
 
-% extra packages
+% extra packages beyond OUP
 \usepackage{placeins} %to enable float barriers
 %\usepackage{CJKutf8} %chinese caracthers
-\usepackage[table,dvipsnames]{xcolor} %for specifying colors
-\usepackage{amsmath} % for equations
+%\usepackage{amsmath} % for equations
 \usepackage{booktabs} % for nice looking tables
 \usepackage{longtable} %for tables stretching several pages
 \usepackage{pdflscape} %for making things landscape
-\usepackage{multirow} %merging rows in tables
-\usepackage{rotating} %for sideways figures
-\usepackage{caption} %for making subfigures
-\usepackage{subcaption} %for making subfigures
-\usepackage{newfloat} %making it possible to treat lists as floats
-\DeclareFloatingEnvironment[placement={!ht},name=List]{mylist} %setting a float environment for lists
-\usepackage{enumitem} %make it possible to have other enumerate items, like roman numerals
-\usepackage{hyperref} %for nice looking links
-\hypersetup{
-    colorlinks=true, %set true if you want colored links
-    linktoc=all,     %set to all if you want both sections and subsections linked
-    linkcolor=violet,  %choose some color if you want links to stand out
-            urlcolor=blue,
-            citecolor=Thistle,
-}
+%\usepackage{multirow} %merging rows in tables
+%\usepackage{caption} %for making subfigures
+%setting a float environment for lists
+%\usepackage{enumitem} %make it possible to have other enumerate items, like roman numerals
 
-\usepackage{authblk}
+%\usepackage{authblk}
 %\usepackage{draftwatermark}
 %\SetWatermarkText{DRAFT}
 %\SetWatermarkScale{4}
 
 %\pagestyle{myheadings}
-\title{Predicting the number of languages per island group in Remote Oceania}
+
 
 %\author{anon}
-\author{Hedvig Skirg{\aa}rd}
-\affil{Department of Linguistic and Cultural Evolution,\linebreak Max Planck Institute for Evolutionary Anthropology.\linebreak Deutscher Platz 6, 04103 Leipzig. \linebreak Hedvig{\_}skirgard$@$eva.mpg.de
-}
 
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+%\setlength{\parindent}{0pt}
+%\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
 
 \begin{document}
-\def\code#1{\texttt{#1}}
 
-\thispagestyle{empty}
-%\singlespacing
+\journaltitle{Journal Title Here}
+\DOI{DOI HERE}
+\copyrightyear{2022}
+\pubyear{2019}
+\access{Advance Access Publication Date: Day Month Year}
+\appnotes{Paper}
 
-\maketitle
-\thispagestyle{empty}
+\firstpage{1}
 
+%\subtitle{Subject Section}
 
+\title[Predicting number of languages in Remote Oceania]{A Sea of Languages: predicting the number of languages per island group in Remote Oceania}
 
-\begin{abstract}
-\singlespacing
-\normalsize
- \begin{flushleft} 
+\author[1,$\ast$]{Anonymous Author}
+
+\authormark{Author Name et al.}
+
+\address[1]{\orgdiv{Department}, \orgname{Organization}, \orgaddress{\street{Street}, \postcode{Postcode}, \state{State}, \country{Country}}}
+
+\corresp[$\ast$]{Corresponding author. \href{email:email-id.com}{email-id.com}}
+
+\received{Date}{0}{Year}
+\revised{Date}{0}{Year}
+\accepted{Date}{0}{Year}
+
+%\editor{Associate Editor: Name}
+
+%\abstract{
+%\textbf{Motivation:} .\\
+%\textbf{Results:} .\\
+%\textbf{Availability:} .\\
+%\textbf{Contact:} \href{name@email.com}{name@email.com}\\
+%\textbf{Supplementary information:} Supplementary data are available at \textit{Journal Name}
+%online.}
 %We suggest a maximum length of 350 words for the Abstract
-There are more than 7,000 languages on our planet today, but they are not evenly distributed over the population. There are over 100 languages in Vanuatu, but only one in S\={a}moa. This is in spite of the populations being similarly sized, having similar histories etc. Why might this be? This paper explores this question for one particular region: Remote Oceania.
 
-Remote Oceania comprises the eastern Solomon Islands (Temotu), Vanuatu, New Caledonia, Fiji, Polynesia and Micronesia. The region was settled more recently than the rest of Oceania and initially entirely by Austronesian speakers. Through community knowledge, studies in archaeology, history and linguistics much is known about migration patterns and societal organization of this part of the world. The comparatively shallow time depth, the relatedness of the languages and established knowledge about the history make it an ideal base for understanding language diversification. 
-
-One particular theory has been proposed to explain the discrepancy in language richness over Remote Oceania --- societal organisation. In this study, we test if this factor remains an important predictor of the number of languages also when other relevant factors are taken into account, such as time-depth and environment. The results show that the theory does hold in terms of statistical power, but that there are important caveats such as the instantiation of the variable ``political complexity'' and its relationship with contact with Oceanic neighbours further west who do not speak Austronesian languages.
+\abstract{There are more than 7,000 languages on our planet today, but they are not evenly distributed over the population. There are over 100 languages in Vanuatu, but only one in S\={a}moa. This is in spite of the populations being similarly sized, having similar histories etc. Why might this be? This paper explores this question for one particular region: Remote Oceania. Remote Oceania comprises the eastern Solomon Islands (Temotu), Vanuatu, New Caledonia, Fiji, Polynesia and Micronesia. The region was settled more recently than the rest of Oceania and initially entirely by Austronesian speakers. Through community knowledge, studies in archaeology, history and linguistics much is known about migration patterns and societal organization of this part of the world. The comparatively shallow time depth, the relatedness of the languages and established knowledge about the history make it an ideal base for understanding language diversification. One particular theory has been proposed to explain the discrepancy in language richness over Remote Oceania --- societal organisation. In this study, we test if this factor remains an important predictor of the number of languages also when other relevant factors are taken into account, such as time-depth and environment. The results show that the theory does hold in terms of statistical power, but that there are important caveats such as the instantiation of the variable ``political complexity'' and its relationship with contact with Oceanic neighbours further west who do not speak Austronesian languages.}
 
 %Scholars have suggested several reasons for the large discrepancy between the number of languages per island group in Remote Oceania, such as societal organisation, environmental factors and settlement time. 
- \end{flushleft}
-
-\end{abstract}
-
-\newpage
 
 
+\keywords{languages, Oceania, predicting, political complexity}
+
+\maketitle
 
 \newpage
-\singlespacing
-%\tableofcontents
-
-\newpage
-%\listoffigures
-% \listoftables
-% \vspace{0.7cm}
-
-
-\newpage
-\pagenumbering{arabic}
 
 %%toberemoved %\doublespacing
 
 
-\newpage
+\onecolumn
 \section{Introduction}
 \doublespacing
-%\doublespacing
+
 The number of languages in the world is not equally distributed over area and population. In the modern country of Papua New Guinea, there are 835 languages over a population of 9.7 million people \citep{UN_pop, glottolog4_5}. However, in South Korea, there are only two indigenous spoken languages in a population of 52 million people. How can this be?
 
 Understanding the mechanics of language change and diversification is essential to understanding human history. Language is interlinked with cultural identity, learning about the historical dynamics of language informs our understanding of our story generally. The question of language splitting in particular is interesting as it also implies community splitting. What causes us to lose touch, to diverge and go separate ways? This research topic has received a lot of attention in recent years (c.f. \citet{gavin2017process,  greenhill2015demographic, Pacheco_Coelho_2019, hua2019ecological}). In this study, we will take a closer look specifically at the region of Remote Oceania. 
@@ -148,7 +144,7 @@ Fig.~\ref{RO_overnight_coloured_dots} shows the language richness of the islands
 
 \begin{sidewaysfigure}[p]
 \centering
-\includegraphics[width=24cm]{CartoGIS_oceania_languages_subgreions_edited.png}
+\includegraphics[width=\textwidth]{CartoGIS_oceania_languages_subgreions_edited.png}
 \caption{Map of Oceania, with the regions of Near and Remote Oceania marked out (first labelled by \citet{pawley1973dating}). Points represent languages, based on data \citet{glottolog3} with a few small adjustments by author.} 
 \label{RO_overnight_coloured_dots}
 \end{sidewaysfigure}
@@ -198,7 +194,7 @@ Returning to language richness in Remote Oceania, a significant factor to consid
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=15cm]{ANU_cartography.jpg}
+\includegraphics[width=\textwidth]{ANU_cartography.jpg}
 \caption{Map of the expansion of the Austronesian language family, based on work by Peter Bellwood. Map made by ANU CartoGIS and Peter Bellwood.}
 \label{austro_expansion_bellwood}
 \end{figure}
@@ -269,7 +265,7 @@ The relationship between variables can be represented in a formalised manner in 
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=16cm]{Predicting_lgs_DAG_slimmed.png}
+\includegraphics[width=\textwidth]{Predicting_lgs_DAG_slimmed.png}
 \caption{Directed Acyclic Graph of the variables in this study (DAG, c.f. \cite{mcelreath2020statistical}). Blue = variable to be predicted (response), red = predictors. Asterisk nodes represent variable interactions, a type of deterministic DAG-node. PCA represents Principal Components Analysis. PCA was run on the incoming variables, and the optimal number of components (given a Non-Graphical Cattel's Scree Test) were carried forward. Terra and Aqua are the names of the NASA satellites.}
 \label{Predicting_lgs_DAG_slimmed}
 \end{figure}
@@ -402,35 +398,21 @@ Political complexity is, perhaps unsurprisingly, a complex variable. There are a
 
 \newpage
 
-
-
-\newpage
-\singlespacing
+%TC:ignore
 \bibliographystyle{unified_edit_HS_SFM}
 \bibliography{latex/HS_Oceanic, latex/used_pkgs, latex/pol_complex_refs}
-%\singlespacing
 
-%TC:ignore
-
-\newpage
-\section*{Acknowledgements}
-
-The research leading to this paper has received funding from the Department of Linguistic and Cultural Evolution, Max Planck Institute for Evolutionary, the School of Culture, History and Language at the Australian National University and from the Australian Research Council through The Wellsprings of Linguistic Diversity Laureate Project (awarded to Professor Nicholas Evans 2014-2018) and the Centre of Excellence for the Dynamics of Language (CoEDL).
-
-I am fortunate enough to have colleagues in academia who have been generous enough to discuss conceptual methodological matters with me, these are Stephen Mann, Angela Chira, Russell Gray, Oleg Sobchuk, Richard McElreath, Tiago Tresoldi, Michael Dunn, Hannah Haynie, Outi Vesakoski, Fredric Blum and Luke Maurits. I am also grateful for the advice of Mary Walworth, Ray Harlow, Andrew Pawley, Paul Geraghty and Alexandre François concerning language classification; Matthew Spriggs, Geoff Kushnick and Christopher Ballard regarding archaeology and anthropology of Oceania and finally Oliver Sheehan for helpful discussions regarding coding of the Ethnographic Atlas variables.
-
-I also want to thank my PhD supervisors who reviewed earlier versions of this study for my thesis \citep{skirgaard2020multilevel} and provided insightful input; Nicholas Evans, Andrew Pawley, Mark Ellison and Simon Greenhill.
-
-Any mistakes and misconceptions that remain are my own.
-
-\newpage
+%\newpage
 \singlespacing
-\appendix
-\section*{Appendices}
-\addcontentsline{toc}{section}{Appendices}
-\renewcommand{\thesubsection}{\Alph{subsection}}
+%\onecolumn
+\begin{appendices}
 
-\subsection{Data and code availability}
+%\appendix
+%\section*{Appendices}
+%\addcontentsline{toc}{section}{Appendices}
+%\renewcommand{\thesubsection}{\Alph{subsection}}
+
+\section{Data and code availability}
 \label{supp_data_availability}
 
 All data in this study is available freely. The data has been gathered from multiple sources, and is aggregated and published along with the code for the study.
@@ -463,7 +445,7 @@ Zenodo locations:
 \subsection{Data details}
 
 \FloatBarrier
-\subsubsection{Defining Remote Oceania}
+\subsection{Defining Remote Oceania}
 The distinction of Near and Remote Oceania was first suggested by \citet{pawley1973dating}\footnote{This is the first occurrence of the two terms, although Green wrote earlier papers which included some of the ideas.} and was further elaborated on in \citet{green1991near}. This distinction is based on geology, flora and fauna. Near Oceania consists of chains of inter-visible large islands and archipelagos, whereas the islands and atolls of Remote Oceania are separated by much greater distances. 
 
 There is a marked difference in the biodiversity of Near and Remote Oceania, due to the greater distances between islands in Remote Oceania. This has consequences for both flora and fauna, as \citet{green1991near} and \citet{pawley2007locatingoceanic} write:
@@ -485,16 +467,16 @@ In this study, the region of Remote Oceania is defined slightly differently from
 
 Regarding the terms ``Near'' and ``Remote'', there are two interpretations of what they are referring to:
 
-\begin{enumerate}
+\begin{itemize}
     \item islands and atolls of ``Near Oceania'' are nearer \emph{to each other} 
     \item islands and atolls of ``Near Oceania'' are nearer to large landmasses west-wards, such as Australia.
-\end{enumerate}
+\end{itemize}
 
 The difference between these two interpretations has no direct bearing on the study at hand, but the first one appears more fitting given the ecological framing of distance for people, flora and fauna to travel to colonise the new land. The islands of the Pacific are often construed as ``islands in a vast sea'' \citep{hauofa_1993} and a reading of ``Remote'' as ``far away from places of power/important places'' may enforce that understanding which is unnecessary and detrimental to our understanding of the history of the region (especially considering the importance of S\={a}moa and Tahiti as centres of power). 
 
-\newpage
+section
 \FloatBarrier
-\subsubsection{Defining ``language''}
+\subsection{Defining ``language''}
 \label{sec:language_class}
 This study investigates factors influencing language diversification. The most central part of our data is the number of languages per island group; this is the response variable of our models. It is notoriously difficult to distinguish dialects, languages and language groups and there exist many different competing standards for defining languages. Linguists and others have debated these issues for a long time. Given their importance and centrality to this research, this section will give an introduction to the language identification standards adopted in two of the most commonly used resources: SIL International's ISO 639-3 codes for language names (which is implemented in Ethnologue \citep{ethnologue22}) and Glottolog's glottocodes.
 
@@ -561,7 +543,7 @@ Unlike SIL's ISO 639-3, Glottolog does not discuss shared cultural identity or l
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=16cm]{Glottolog_classifying_tree.png}
+\includegraphics[width=\textwidth]{Glottolog_classifying_tree.png}
 \caption[Decision tree for language identification and classification in Glottolog]{{Decision tree for language identification and classification in Glottolog \citep{glottologlanguoids}.}}
 \label{glottolog_class_tree}
 \end{figure}
@@ -592,7 +574,7 @@ The splitting of Eastern Fijian [fiji1243] into three languages has as consequen
 
 
 \FloatBarrier
-\subsubsection{Grouping Islands and atolls}
+\subsection{Grouping Islands and atolls}
 \label{sec:island_geo}
 %polygon_plot_SBZR
 
@@ -611,7 +593,7 @@ These two principles, overnight sailing distances and sharing a language, have b
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=13cm]{marck_2000_east_poly.png}
+\includegraphics[width=\textwidth]{marck_2000_east_poly.png}
 \caption{{Map of central East Polynesia from \citet{marck2000}, showing 100 mile radii.}}
 \label{Marck_2000_east_poly}
 \end{figure}
@@ -622,7 +604,7 @@ However, this way of grouping islands does not take into account currents and wi
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=10cm]{Herb-Kane_Fishing-Canoe-off-North-Kona.jpg}
+\includegraphics[width=\textwidth]{Herb-Kane_Fishing-Canoe-off-North-Kona.jpg}
 \caption{{The painting ``A Fishing Canoe off North Kona'' by Herbert Kawainui K{\=a}ne. Illustration of an outrigger canoe with v-shaped hull. Copyright Herbert K. K{\=a}ne, LLC.}}
 \label{kane_fishing_canoe}
 \end{figure}
@@ -661,7 +643,7 @@ Finally, these island groups should be taken with a grain of salt. They are most
 Each island group is associated with the languages spoken there, based on information in the various sources cited earlier for defining groups by shared language. Naturally, some islands will have many languages assigned to them, most notably Santo and Malakula in Vanuatu with 24 and 33 languages respectively. Other languages are spread out over many islands and atolls. Tuamotuan [tuam1242] is for example assigned to 1,302 distinct landmasses (in this dataset atolls and reefs that are above water appear as several small landmasses). For shared language groups, these landmasses are all joined under the label `Paumotu'. However, as defined by overnight sailing distances this archipelago is split into several different island groups each with one language. The fact that it is the same language is not accounted for (\citet{gavin2012island} also arrange their data like this).
 
 \FloatBarrier
-\subsubsection{``Political complexity''}
+\subsection{``Political complexity''}
 \label{appendix_def_pol_complex}
 The hypothesis tested in this study relies on a systematic measure of political structure across societies. The most widely used variable in this regard is variable 33 of the Ethnographic Atlas \citep{EA_1971}: ``jurisdictional hierarchy beyond local community'' (EA033). This section gives an overview of how this variable is defined and its distribution in Remote Oceania. 
 
@@ -691,7 +673,7 @@ Specifically, it is necessary to underline that despite the common name for this
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=10cm]{latex/kula_ring_damon.png}
+\includegraphics[width=\textwidth]{latex/kula_ring_damon.png}
 \caption{Kula exchange ring, from \citet{damon2002kula}.}
 \label{kula_ring}
 \end{figure}
@@ -701,13 +683,13 @@ Complex socio-political horizontal networks can also be found in Vanuatu, for ex
 
 The possible values societies can take for this variable of political complexity are:
 
-\begin{enumerate}
+\begin{itemize}
 \item No levels (no political authority beyond community)
 \item One level (e.g., petty chiefdoms)
 \item Two levels (e.g., larger chiefdoms)
 \item Three levels (e.g., states) 
 \item Four levels (e.g., large states)
-\end{enumerate}
+\end{itemize}
 
 \citet{giuliano2018ancestral} write: 
 
@@ -724,7 +706,7 @@ This way of characterising political structure aligns well with ethnographic acc
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=13cm]{pyramid_meleisea.png}
+\includegraphics[width=\textwidth]{pyramid_meleisea.png}
 \caption[Illustration of traditional political organisation of S\={a}moa.]{{Illustration of the traditional political organisation of S\={a}moa from \citet[22]{meleisea1995}.}}
 \label{meleiseapyramid}
 \end{figure}
@@ -761,7 +743,7 @@ Fig.~\ref{pol_complex_map} represents the coding of political complexity for the
 
 \begin{sidewaysfigure}
 \centering
-\includegraphics[width=19cm]{map_pol_complex.png}
+\includegraphics[width=\textwidth]{map_pol_complex.png}
 \caption[Map of Remote Oceania: Political complexity]{{Map of Remote Oceania with associated values for political complexity (EA033).}}
 \label{pol_complex_map}
 \end{sidewaysfigure}
@@ -769,27 +751,27 @@ Fig.~\ref{pol_complex_map} represents the coding of political complexity for the
 For the calculations of this study, the mode political complexity per island group was used. 
 
 \FloatBarrier
-\subsubsection{Waves of settlement}
+\subsection{Waves of settlement}
 \label{appendix_def_dates}
 In order to test whether political complexity is driving language diversification in Remote Oceania, we need to control for other relevant variables --- in particular time depth of human settlement. The time of settlement indicates how long a community is likely to have been in a certain place. It can also be a proxy measurement of how similar neighbours are likely to be. If a place has only been inhabited by humans for a short amount of time, then it is likely that the communities that exist there today are not so different from each other. However, in order to take into account similarity between communities fully it is necessary to explicitly include measurements of cultural similarity or phylogenetic distance --- which is not part of the methodology of this study, but is left for future studies.
 
 For most islands in our dataset, there is at least one archaeological study indicating time of first settlement. The archaeological data here is mainly based on an overview of the literature by \citet{rieth_cochrane_2018}, supplemented by the following studies: \citet{intoh2007reconnaissance, intoh2008ongoing, carson2012recent, kirch2012basline, Napolitano_et_al_yap, ellis2012saipan} and \citet{levin_seikel_miles_2019}. 
 
-For most of the island groups, the labels provided in \citet{rieth_cochrane_2018} or the other sources neatly corresponded to the island groups in our data (e.g. Mangareva = Mangareva). However, sometimes the label refers to a larger area, this is the case of ``Austral Islands'' which in our dataset is broken down into Rimatara, Tupuai, Ra'ivavae and Rurutu respectively. In such cases it is assumed that the time can be generalised over the smaller island groups (this is also the case for the political complexity metric). Furthermore, some island groups have not been subject to archaeological research, but they are known to have been settled in association with another place which has been studied. For example, while there have been no archaeological excavations on the Sorol atoll of Micronesia, it is known to be closely related to Ulithi \citep[23]{quackenbush1968sonsorol} and it is likely that it was settled at a similar time. In such cases, the time depth is inferred based on information from nearby islands. For every island, the table in the appendix \ref{dates_table_appendic} lists the label of the island group in the source and if the settlement timing has been inferred based on evidence from nearby islands or not.
+For most of the island groups, the labels provided in \citet{rieth_cochrane_2018} or the other sources neatly corresponded to the island groups in our data (e.g. Mangareva = Mangareva). However, sometimes the label refers to a larger area, this is the case of ``Austral Islands'' which in our dataset is broken down into Rimatara, Tupuai, Ra'ivavae and Rurutu respectively. In such cases it is assumed that the time can be generalised over the smaller island groups (this is also the case for the political complexity metric). Furthermore, some island groups have not been subject to archaeological research, but they are known to have been settled in association with another place which has been studied. For example, while there have been no archaeological excavations on the Sorol atoll of Micronesia, it is known to be closely related to Ulithi \citep[23]{quackenbush1968sonsorol} and it is likely that it was settled at a similar time. In such cases, the time depth is inferred based on information from nearby islands. For every island, the table in the appendix \ref{dates_table_appendix} lists the label of the island group in the source and if the settlement timing has been inferred based on evidence from nearby islands or not.
 
-Archaeological dates are based on radiocarbon findings which are calibrated based on conditions at the excavation site and other finds there. There exists different calibration methods\footnote{Radiocarbon calibration is the process by which radiocarbon years are converted into calendar years. Because the ratio of atmospheric $^{14}$C/$^{12}$C, which is a key element in this process, has not been stable historically, different methods exist and these may produce different results.}. In order to make the dates from different sites directly comparable they need to be re-calibrated in the same way. It was not possible to access all the necessary information on each publication and re-calibrate the dates appropriately. Instead of using the raw dates from the different studies, the islands have been sorted into a settlement order with twelve waves based on the dates in the literature and descriptions of what was settled in the same wave. Fig.~\ref{dates_map} illustrates the settlement wave order per island. Exact dates and references are found in appendix \ref{dates_table_appendic}.
+Archaeological dates are based on radiocarbon findings which are calibrated based on conditions at the excavation site and other finds there. There exists different calibration methods\footnote{Radiocarbon calibration is the process by which radiocarbon years are converted into calendar years. Because the ratio of atmospheric $^{14}$C/$^{12}$C, which is a key element in this process, has not been stable historically, different methods exist and these may produce different results.}. In order to make the dates from different sites directly comparable they need to be re-calibrated in the same way. It was not possible to access all the necessary information on each publication and re-calibrate the dates appropriately. Instead of using the raw dates from the different studies, the islands have been sorted into a settlement order with twelve waves based on the dates in the literature and descriptions of what was settled in the same wave. Fig.~\ref{dates_map} illustrates the settlement wave order per island. Exact dates and references are found in appendix \ref{dates_table_appendix}.
 
 For comparison across island groups, the oldest settlement order per group was used. Unfortunately, this means that settlement data for Polynesian outliers in Southern Vanuatu, who arrived much more recently, is ignored.
 
 \begin{sidewaysfigure}
 \centering
-\includegraphics[width=19cm]{Map_RO_dates.png}
+\includegraphics[width=\textwidth]{Map_RO_dates.png}
 \caption{{Map of island groups in Remote Oceania labelled with settlement order.}}
 \label{dates_map}
 \end{sidewaysfigure}
 
 \FloatBarrier
-\subsubsection{Other environmental factors} 
+\subsection{Other environmental factors} 
 \label{appendix_environ}
 As previous studies of language diversification have shown (e.g. \citet{ greenhill2015demographic, gavin2017process, Pacheco_Coelho_2019, hua2019ecological}), environmental factors such as latitude, rainfall etc can be useful in estimating language richness. This is due to the connection between these variables and the ability to sustain several self-sufficient smaller groups.
 
@@ -826,13 +808,13 @@ In total, the following environmental variables are included in the study:
 
 \FloatBarrier
 
-\newpage
-\subsubsection{PCA of environmental variables}
+
+\subsection{PCA of environmental variables}
 \label{appendix_eniron_PCA}
 
 
-\newpage
-\subsection{Caveat regarding time-span}
+
+\section{Caveat regarding time-span}
 \label{appendix_time_span}
 %Collected thoughts in regards to validity of ethnographic data, may be cut.
 
@@ -848,8 +830,8 @@ There is also a problem with data pertaining to history before these massive for
 
 
 
-\newpage
-\subsection{Regarding population and the number of languages}
+
+\section{Regarding population and the number of languages}
 \label{appendix_pop_vs_languages}
 While it is true that the number of languages is not entirely evenly spread out over the population, it is still the case that there is a general trend connecting a greater number of people with a greater number of languages (as can be seen in Figs \ref{fig:un_pop_plot} and \ref{fig:un_pop_plot_log10}). However, due to difficulties with data, this is hard to study historically. In this particular study, population numbers could not be included due to a lack of detailed and reliable enough data on enough island groups prior to Western colonization. While resources like \citet{elcat} have population numbers for many places, it does not sufficiently cover Oceania to allow the variable to be included. This is similar to \citet[7340-7341]{curriemace2009} who found that the data available for language territories in Australia and the Americas is so affected by colonial history and population replacement to make it impossible to include it in the analysis alongside the other regions. 
 
@@ -880,15 +862,15 @@ While it is not possible to include population size as a variable, it is possibl
 There is a negative correlation of -0.56 between the population (log10) per country and the environmental PC1 per island group. This may indicate that the environmental PCs are picking up on information relevant to population size.
 
 \FloatBarrier
-\newpage
-\subsection{Table of political complexity per island group }
+
+\section{Table of political complexity per island group }
 \singlespacing
 \label{appendix_pol_complex}
 
 \input{appendix_pol_complex_xtable.tex}
 
-\newpage
-\subsection{Table of settlement date per island group based on archaeology}
+
+\section{Table of settlement date per island group based on archaeology}
 \singlespacing
 \label{dates_table_appendix}
 
@@ -908,8 +890,8 @@ The column ``Time depth settlement group'' contains the grouping of islands into
 
 
 \FloatBarrier
-\newpage
-\subsection{Input data tables}
+
+\section{Input data tables}
 \singlespacing
 \label{appendix_data tables}
 All measurements, except the response variable, were scaled and centred to make the coefficients easier to interpret and compare. Shorelines were also log-10-transformed (before scaling). 
@@ -918,8 +900,8 @@ All measurements, except the response variable, were scaled and centred to make 
 
 \input{latex/appendix_SBZR_group_table}
 
-\newpage
-\subsection{Defining of Directed Acyclic Graph and variables}
+
+\section{Defining of Directed Acyclic Graph and variables}
 \label{appendix_DAG_def}
 
  There are set procedures for how to prune and translate a DAG for modelling (\citet{pearl1995causal} and \citet{mcelreath2020statistical}). 
@@ -940,8 +922,8 @@ This dataset does not contain information on population size because there is no
 \label{Predicting_lgs_DAG_full}
 \end{sidewaysfigure}
 
-\newpage
-\subsection{Model settings}
+
+\section{Model settings}
 \label{appendix_model_settings}
 \citep{burkner2017brms}
 
@@ -1008,8 +990,8 @@ This dataset does not contain information on population size because there is no
 
 %E. Decisions. If making decisions, report whether decisions change under different priors. For BFs, report changes in the minimum prior model probability needed to achieve decisive posterior model probability.
 
-\newpage
-\subsection{BRMS model tables}
+
+\section{BRMS model tables}
 \label{BRMS_model_tables}
 Following the principles of Bayesian Analysis Reporting Guidelines \citep{kruschke2021bayesian}, we are reporting Rhat (convergence of chains) and ESS
 
@@ -1023,8 +1005,8 @@ Following the principles of Bayesian Analysis Reporting Guidelines \citep{krusch
 
 
 
-\newpage
-\subsection{Supplementary figures}
+
+\section{Supplementary figures}
 \label{appendix_supp_figs}
 
 \begin{figure}[ht]
@@ -1068,13 +1050,33 @@ Following the principles of Bayesian Analysis Reporting Guidelines \citep{krusch
 
 
 \FloatBarrier
-\newpage
-\subsection{R-packages used}
+
+\section{R-packages used}
 \label{appendix_r_packages}
 
 All the analysis for this research project was done in the free and open source programming language R, using a multitude of packages. All code and data for this project are available in the locations listed in appendix \ref{supp_data_availability}. The scripts have been written so that any user of R can execute them. Please see the bibliography for information on package versions. Below are citations for all used packages. The citations also include which version of the package was used.
 
 \input{latex/citation_keys.txt}.
+
+\end{appendices}
+
+
+\newpage
+\section{Competing interests}
+No competing interest is declared.
+
+
+\section*{Acknowledgements}
+
+The research leading to this paper has received funding from the Department of Linguistic and Cultural Evolution, Max Planck Institute for Evolutionary, the School of Culture, History and Language at the Australian National University and from the Australian Research Council through The Wellsprings of Linguistic Diversity Laureate Project (awarded to Professor Nicholas Evans 2014-2018) and the Centre of Excellence for the Dynamics of Language (CoEDL).
+
+I am fortunate enough to have colleagues in academia who have been generous enough to discuss conceptual methodological matters with me, these are Stephen Mann, Angela Chira, Russell Gray, Oleg Sobchuk, Richard McElreath, Tiago Tresoldi, Michael Dunn, Hannah Haynie, Outi Vesakoski, Fredric Blum and Luke Maurits. I am also grateful for the advice of Mary Walworth, Ray Harlow, Andrew Pawley, Paul Geraghty and Alexandre François concerning language classification; Matthew Spriggs, Geoff Kushnick and Christopher Ballard regarding archaeology and anthropology of Oceania and finally Oliver Sheehan for helpful discussions regarding coding of the Ethnographic Atlas variables.
+
+I also want to thank my PhD supervisors who reviewed earlier versions of this study for my thesis \citep{skirgaard2020multilevel} and provided insightful input; Nicholas Evans, Andrew Pawley, Mark Ellison and Simon Greenhill.
+
+Any mistakes and misconceptions that remain are my own.
+
+
 
 %TC:endignore
 
