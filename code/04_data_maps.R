@@ -111,7 +111,7 @@ ggsave("../latex/map_pol_complex.png", width = 9, height = 5)
 
 #dates
 dates <- read_tsv("data/island_group_settlement_date.tsv", show_col_types = F) %>% 
-  rename(settlement_date_grouping_finer = "Time depth settlement group", Smallest_Island_group = `Smaller specific island group`, `Settlement date oldest date` = `Oldest date`) %>% 
+  rename(settlement_date_grouping_finer = "Time depth settlement group", `Settlement date oldest date` = `Oldest date`) %>% 
   dplyr::select(Smallest_Island_group, settlement_date_grouping_finer, `Settlement date oldest date`) %>% 
   full_join(All_polygons, by = "Smallest_Island_group"  ) %>% 
   filter(!is.na(Smallest_Island_group)) %>% 
@@ -124,7 +124,7 @@ dates <- read_tsv("data/island_group_settlement_date.tsv", show_col_types = F) %
   arrange(settlement_date_grouping_finer) 
 
 dates_summarised_for_SM <- read_tsv("data/island_group_settlement_date.tsv", show_col_types = F)%>%
-  rename(settlement_date_grouping_finer = "Time depth settlement group", Smallest_Island_group = `Smaller specific island group`, `Settlement date oldest date` = `Oldest date`) %>% 
+  rename(settlement_date_grouping_finer = "Time depth settlement group", `Settlement date oldest date` = `Oldest date`) %>% 
   group_by(`Name in source`) %>% 
   summarise(`Date ranges` = unique(paste0(`Date ranges`, collapse = ", ")),
             Source = unique(paste0(Source, collapse = ", ")),

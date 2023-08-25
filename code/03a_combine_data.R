@@ -140,7 +140,7 @@ ecoClimate_data <- read_tsv("output/processed_data/RO_polygons_grouped_with_lang
 
 ##dates
 dates <- read_tsv("data/island_group_settlement_date.tsv", show_col_types = F) %>% 
-  rename(settlement_date_grouping_finer = "Time depth settlement group", Smallest_Island_group = `Smaller specific island group`, `Settlement date oldest date` = `Oldest date`) %>% 
+  rename(settlement_date_grouping_finer = "Time depth settlement group", `Settlement date oldest date` = `Oldest date`) %>% 
   mutate(Smallest_Island_group = str_split(Smallest_Island_group, ",")) %>%
   unnest(Smallest_Island_group) %>% 
   mutate(Smallest_Island_group = trimws(Smallest_Island_group)) %>% 

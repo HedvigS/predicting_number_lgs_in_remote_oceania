@@ -1,60 +1,60 @@
 term	variable	value
-b_Intercept	mean	0.260052414220306
-b_environ_PC1	mean	-0.338643742103067
-b_Shoreline	mean	0.639950788071483
-b_environ_PC2	mean	0.190759634721475
-b_environ_PC3	mean	0.166613443472323
-b_EA033	mean	-0.847713986810345
-b_Settlement_date_grouping_finer	mean	0.482515009453621
-b_environ_PC1:Shoreline	mean	0.172631789028162
-b_Shoreline:environ_PC2	mean	-0.342501027840453
-b_Shoreline:environ_PC3	mean	0.0977879605666928
-b_Shoreline:Settlement_date_grouping_finer	mean	0.45182195472931
-Intercept	mean	0.327446909024741
-lprior	mean	-1.9300620537931
-lp__	mean	-116.401704810345
-b_Intercept	sd	0.167960939893688
-b_environ_PC1	sd	0.185189878824405
-b_Shoreline	sd	0.176496236964858
-b_environ_PC2	sd	0.20046422564292
-b_environ_PC3	sd	0.143965704465053
-b_EA033	sd	0.119247774965878
-b_Settlement_date_grouping_finer	sd	0.136716459356777
-b_environ_PC1:Shoreline	sd	0.142517862280221
-b_Shoreline:environ_PC2	sd	0.190596367301708
-b_Shoreline:environ_PC3	sd	0.124015001381926
-b_Shoreline:Settlement_date_grouping_finer	sd	0.128434629945619
-Intercept	sd	0.118764169766951
-lprior	sd	0.00831272268595754
-lp__	sd	2.38484100596218
-b_Intercept	min	-0.427277
-b_environ_PC1	min	-1.07357
-b_Shoreline	min	-0.0754462
-b_environ_PC2	min	-0.808219
-b_environ_PC3	min	-0.503821
-b_EA033	min	-1.38272
-b_Settlement_date_grouping_finer	min	-0.0441037
-b_environ_PC1:Shoreline	min	-0.481588
-b_Shoreline:environ_PC2	min	-1.04481
-b_Shoreline:environ_PC3	min	-0.54555
-b_Shoreline:Settlement_date_grouping_finer	min	-0.0318447
-Intercept	min	-0.181087
-lprior	min	-1.97926
-lp__	min	-131.033
-b_Intercept	max	0.910364
-b_environ_PC1	max	0.509729
-b_Shoreline	max	1.38352
-b_environ_PC2	max	1.01153
-b_environ_PC3	max	0.760674
-b_EA033	max	-0.386644
-b_Settlement_date_grouping_finer	max	1.17738
-b_environ_PC1:Shoreline	max	0.77796
-b_Shoreline:environ_PC2	max	0.563206
-b_Shoreline:environ_PC3	max	0.545796
-b_Shoreline:Settlement_date_grouping_finer	max	1.06358
-Intercept	max	0.768841
+b_Intercept	mean	0.248051313192989
+b_environ_PC1	mean	-0.388320921346677
+b_Shoreline	mean	0.631917781637069
+b_environ_PC2	mean	0.194770828355142
+b_environ_PC3	mean	0.108379478990539
+b_EA033	mean	-0.853258100327586
+b_Settlement_date_grouping_finer	mean	0.466914288309483
+b_environ_PC1:Shoreline	mean	0.144313382365964
+b_Shoreline:environ_PC2	mean	-0.352571113456929
+b_Shoreline:environ_PC3	mean	0.206971277990102
+b_Shoreline:Settlement_date_grouping_finer	mean	0.488334686834483
+Intercept	mean	0.324374233298948
+lprior	mean	-1.92988308258621
+lp__	mean	-114.714563706897
+b_Intercept	sd	0.170848609675675
+b_environ_PC1	sd	0.19633659961866
+b_Shoreline	sd	0.174305766068943
+b_environ_PC2	sd	0.198197136256279
+b_environ_PC3	sd	0.135154057836184
+b_EA033	sd	0.119205558129916
+b_Settlement_date_grouping_finer	sd	0.134623195935531
+b_environ_PC1:Shoreline	sd	0.145759044335338
+b_Shoreline:environ_PC2	sd	0.181483907088164
+b_Shoreline:environ_PC3	sd	0.13781823136285
+b_Shoreline:Settlement_date_grouping_finer	sd	0.130344130081069
+Intercept	sd	0.120084644926367
+lprior	sd	0.00833897684733159
+lp__	sd	2.34002923455589
+b_Intercept	min	-0.530956
+b_environ_PC1	min	-1.29272
+b_Shoreline	min	-0.0207631
+b_environ_PC2	min	-0.619557
+b_environ_PC3	min	-0.459315
+b_EA033	min	-1.41514
+b_Settlement_date_grouping_finer	min	-0.0384761
+b_environ_PC1:Shoreline	min	-0.402607
+b_Shoreline:environ_PC2	min	-1.06155
+b_Shoreline:environ_PC3	min	-0.382126
+b_Shoreline:Settlement_date_grouping_finer	min	-0.0404234
+Intercept	min	-0.252846
+lprior	min	-1.98506
+lp__	min	-131.216
+b_Intercept	max	0.926069
+b_environ_PC1	max	0.474934
+b_Shoreline	max	1.35702
+b_environ_PC2	max	1.10721
+b_environ_PC3	max	0.643769
+b_EA033	max	-0.40217
+b_Settlement_date_grouping_finer	max	1.11487
+b_environ_PC1:Shoreline	max	0.822262
+b_Shoreline:environ_PC2	max	0.556053
+b_Shoreline:environ_PC3	max	0.722985
+b_Shoreline:Settlement_date_grouping_finer	max	1.07454
+Intercept	max	0.80455
 lprior	max	-1.91718
-lp__	max	-111.043
+lp__	max	-109.606
 b_Intercept	straddle_zero	yes
 b_environ_PC1	straddle_zero	yes
 b_Shoreline	straddle_zero	yes
@@ -69,85 +69,85 @@ b_Shoreline:Settlement_date_grouping_finer	straddle_zero	yes
 Intercept	straddle_zero	yes
 lprior	straddle_zero	no
 lp__	straddle_zero	no
-Intercept	Estimate	0.260139587409598
-environ_PC1	Estimate	-0.339025999359543
-Shoreline	Estimate	0.639768741426259
-environ_PC2	Estimate	0.190527170732061
-environ_PC3	Estimate	0.166386033680403
-EA033	Estimate	-0.848110677991379
-Settlement_date_grouping_finer	Estimate	0.481779354636034
-environ_PC1:Shoreline	Estimate	0.172542553386118
-Shoreline:environ_PC2	Estimate	-0.342634144785031
-Shoreline:environ_PC3	Estimate	0.0974610304042649
-Shoreline:Settlement_date_grouping_finer	Estimate	0.451642133031897
-Intercept	Est.Error	0.16822006017672
-environ_PC1	Est.Error	0.184187267270094
-Shoreline	Est.Error	0.175407563652535
-environ_PC2	Est.Error	0.199352544646668
-environ_PC3	Est.Error	0.144145041552866
-EA033	Est.Error	0.11912774052805
-Settlement_date_grouping_finer	Est.Error	0.136245300466016
-environ_PC1:Shoreline	Est.Error	0.141799888249329
-Shoreline:environ_PC2	Est.Error	0.190158568386297
-Shoreline:environ_PC3	Est.Error	0.123938274532535
-Shoreline:Settlement_date_grouping_finer	Est.Error	0.128230565355015
-Intercept	l-95% CI	-0.0796221074999999
-environ_PC1	l-95% CI	-0.700451175
-Shoreline	l-95% CI	0.300188275
-environ_PC2	l-95% CI	-0.202439
-environ_PC3	l-95% CI	-0.117178725
-EA033	l-95% CI	-1.08918025
-Settlement_date_grouping_finer	l-95% CI	0.224011975
-environ_PC1:Shoreline	l-95% CI	-0.09564115
-Shoreline:environ_PC2	l-95% CI	-0.699770125
-Shoreline:environ_PC3	l-95% CI	-0.157778325
-Shoreline:Settlement_date_grouping_finer	l-95% CI	0.210073875
-Intercept	u-95% CI	0.58268475
-environ_PC1	u-95% CI	0.0215479224999998
-Shoreline	u-95% CI	0.991570325
-environ_PC2	u-95% CI	0.576791125
-environ_PC3	u-95% CI	0.44810285
-EA033	u-95% CI	-0.62059885
-Settlement_date_grouping_finer	u-95% CI	0.75845665
-environ_PC1:Shoreline	u-95% CI	0.459702175
-Shoreline:environ_PC2	u-95% CI	0.0481165374999998
-Shoreline:environ_PC3	u-95% CI	0.3299801
-Shoreline:Settlement_date_grouping_finer	u-95% CI	0.71406445
-Intercept	Rhat	1.00006564350588
-environ_PC1	Rhat	1.00006713363249
-Shoreline	Rhat	1.00006386576501
-environ_PC2	Rhat	1.00013467212832
-environ_PC3	Rhat	1.00001492918271
-EA033	Rhat	1.00004962851498
-Settlement_date_grouping_finer	Rhat	1.00001315343045
-environ_PC1:Shoreline	Rhat	1.00005187350284
-Shoreline:environ_PC2	Rhat	1.00006206637268
-Shoreline:environ_PC3	Rhat	1.00002262159899
-Shoreline:Settlement_date_grouping_finer	Rhat	1.0000677734351
-Intercept	Bulk_ESS	69183.9524250165
-environ_PC1	Bulk_ESS	62722.893367781
-Shoreline	Bulk_ESS	57283.1729292922
-environ_PC2	Bulk_ESS	55715.7322963998
-environ_PC3	Bulk_ESS	77362.2364088513
-EA033	Bulk_ESS	86903.1164749819
-Settlement_date_grouping_finer	Bulk_ESS	85944.049895076
-environ_PC1:Shoreline	Bulk_ESS	56177.3288034434
-Shoreline:environ_PC2	Bulk_ESS	60024.5260015967
-Shoreline:environ_PC3	Bulk_ESS	75069.9998331366
-Shoreline:Settlement_date_grouping_finer	Bulk_ESS	90331.1902940502
-Intercept	Tail_ESS	73793.0514985631
-environ_PC1	Tail_ESS	72819.6764814214
-Shoreline	Tail_ESS	69766.2416771405
-environ_PC2	Tail_ESS	68364.256691
-environ_PC3	Tail_ESS	78385.2897119481
-EA033	Tail_ESS	78680.7723400472
-Settlement_date_grouping_finer	Tail_ESS	77272.5462355489
-environ_PC1:Shoreline	Tail_ESS	72113.5431570046
-Shoreline:environ_PC2	Tail_ESS	67019.2489599114
-Shoreline:environ_PC3	Tail_ESS	75363.3715605859
-Shoreline:Settlement_date_grouping_finer	Tail_ESS	73841.9906029126
+Intercept	Estimate	0.247537175725685
+environ_PC1	Estimate	-0.389059001215334
+Shoreline	Estimate	0.63219979571681
+environ_PC2	Estimate	0.195824356196907
+environ_PC3	Estimate	0.109212158329273
+EA033	Estimate	-0.853931637413793
+Settlement_date_grouping_finer	Estimate	0.467615912201897
+environ_PC1:Shoreline	Estimate	0.14507328755999
+Shoreline:environ_PC2	Estimate	-0.353477520542584
+Shoreline:environ_PC3	Estimate	0.20671479509448
+Shoreline:Settlement_date_grouping_finer	Estimate	0.488273276652672
+Intercept	Est.Error	0.170370686317421
+environ_PC1	Est.Error	0.197225760778886
+Shoreline	Est.Error	0.174181725708166
+environ_PC2	Est.Error	0.198124839452466
+environ_PC3	Est.Error	0.135269085504053
+EA033	Est.Error	0.119377714935503
+Settlement_date_grouping_finer	Est.Error	0.135018055867788
+environ_PC1:Shoreline	Est.Error	0.145526012978069
+Shoreline:environ_PC2	Est.Error	0.182375089331379
+Shoreline:environ_PC3	Est.Error	0.137923726197514
+Shoreline:Settlement_date_grouping_finer	Est.Error	0.130745975402522
+Intercept	l-95% CI	-0.09341309
+environ_PC1	l-95% CI	-0.7758535
+Shoreline	l-95% CI	0.295948175
+environ_PC2	l-95% CI	-0.19382655
+environ_PC3	l-95% CI	-0.158030325
+EA033	l-95% CI	-1.0932705
+Settlement_date_grouping_finer	l-95% CI	0.21388265
+environ_PC1:Shoreline	l-95% CI	-0.129593225
+Shoreline:environ_PC2	l-95% CI	-0.696612125
+Shoreline:environ_PC3	l-95% CI	-0.0698589275
+Shoreline:Settlement_date_grouping_finer	l-95% CI	0.240952525
+Intercept	u-95% CI	0.574323075
+environ_PC1	u-95% CI	-0.00388488225000001
+Shoreline	u-95% CI	0.9795404
+environ_PC2	u-95% CI	0.585843125
+environ_PC3	u-95% CI	0.3714097
+EA033	u-95% CI	-0.62590785
+Settlement_date_grouping_finer	u-95% CI	0.74283115
+environ_PC1:Shoreline	u-95% CI	0.4414161
+Shoreline:environ_PC2	u-95% CI	0.0194200675
+Shoreline:environ_PC3	u-95% CI	0.47253315
+Shoreline:Settlement_date_grouping_finer	u-95% CI	0.754333475
+Intercept	Rhat	1.00002547435812
+environ_PC1	Rhat	1.00004364178289
+Shoreline	Rhat	1.00004468298437
+environ_PC2	Rhat	1.0000305761489
+environ_PC3	Rhat	1.00000845303382
+EA033	Rhat	1.00007496304719
+Settlement_date_grouping_finer	Rhat	1.00002442360108
+environ_PC1:Shoreline	Rhat	1.00003283938723
+Shoreline:environ_PC2	Rhat	1.00007625234368
+Shoreline:environ_PC3	Rhat	0.999981614510636
+Shoreline:Settlement_date_grouping_finer	Rhat	1.00000322847377
+Intercept	Bulk_ESS	58590.121210877
+environ_PC1	Bulk_ESS	53786.9057540188
+Shoreline	Bulk_ESS	53563.637729906
+environ_PC2	Bulk_ESS	53715.6939135458
+environ_PC3	Bulk_ESS	75057.067006334
+EA033	Bulk_ESS	84425.2887513659
+Settlement_date_grouping_finer	Bulk_ESS	86204.0094256726
+environ_PC1:Shoreline	Bulk_ESS	51663.9779358998
+Shoreline:environ_PC2	Bulk_ESS	56356.9965304499
+Shoreline:environ_PC3	Bulk_ESS	63281.9463873514
+Shoreline:Settlement_date_grouping_finer	Bulk_ESS	88157.0737909708
+Intercept	Tail_ESS	72978.7523658662
+environ_PC1	Tail_ESS	72777.061551554
+Shoreline	Tail_ESS	70289.7544694194
+environ_PC2	Tail_ESS	71858.1009109941
+environ_PC3	Tail_ESS	79671.4381160215
+EA033	Tail_ESS	81421.5045076714
+Settlement_date_grouping_finer	Tail_ESS	74655.1995127626
+environ_PC1:Shoreline	Tail_ESS	71060.6231428115
+Shoreline:environ_PC2	Tail_ESS	64884.9229171411
+Shoreline:environ_PC3	Tail_ESS	74922.5504584815
+Shoreline:Settlement_date_grouping_finer	Tail_ESS	78784.5985553567
 Intercept	straddle_zero_95	yes
-environ_PC1	straddle_zero_95	yes
+environ_PC1	straddle_zero_95	no
 Shoreline	straddle_zero_95	yes
 environ_PC2	straddle_zero_95	yes
 environ_PC3	straddle_zero_95	yes
