@@ -90,18 +90,34 @@ ms_full <- summary(output_poission)
   chain_joined %>% 
     write_tsv(file = paste0("output/results/brms_", group, "_full_chains.tsv"), na = "")
   
+colnames(chain_joined) <- str_replace_all(colnames(chain_joined), "b_", "")  
+
+#making a straddle df
+ms_df_long <- ms_full$fixed %>% 
+  rownames_to_column("term") %>% 
+  mutate(straddle_zero_95 = ifelse(`l-95% CI` < 0 & `u-95% CI` < 0|
+                                     `l-95% CI`  > 0 & `u-95% CI`  > 0  , "no", "yes")) %>% 
+  reshape2::melt(id.vars = "term") 
+
+ms_df_long_straddle <- ms_df_long %>% 
+  filter(variable == "straddle_zero_95") %>% 
+  dplyr::select(variable = term, straddle_zero_95 = value)
+
   chain_joined %>% 
-    reshape2::melt(id.vars = "chain") %>% 
+    reshape2::melt(id.vars = "chain") %>%  
+    left_join(ms_df_long_straddle, by = "variable" ) %>% 
     filter(variable != "lprior") %>% 
     filter(variable != "lp__") %>% 
     filter(variable != "Intercept") %>%
+    mutate(variable = str_replace_all(variable,"Settlement_date_grouping_finer", "Time depth")) %>% 
     ggplot(aes(x = value, fill = variable, 
                color = variable,
                y = after_stat(density))) + 
-    geom_density(  alpha = 0.8,
+    geom_density(mapping = aes(alpha = as.factor(straddle_zero_95)),
                    color = "darkgray",
                    linewidth = 0.8, adjust = 0.7
     ) +
+    scale_alpha_discrete(range = c(1, 0.1)) +
     lemon::facet_rep_wrap(~variable, 
                           #ncol = 3, 
                           #             scales = "free",
@@ -118,11 +134,9 @@ ms_full <- summary(output_poission)
   ggsave(filename = paste0("output/plots/brms_", group, "_group_full_effect_ridge_panels_plot.png"), height = 9, width = 10)
   ggsave(filename = paste0("../latex/brms_", group, "_group_full_effect_ridge_panels_plot.png"),  height = 9, width = 10) 
   
-ms_df <- ms_full$fixed %>% 
-  rownames_to_column("term") %>% 
-  mutate(straddle_zero_95 = ifelse(`l-95% CI` < 0 & `u-95% CI` < 0|
-                                     `l-95% CI`  > 1 & `u-95% CI`  > 1  , "no", "yes")) %>%
-  reshape2::melt(id.vars = "term") %>% 
+  
+
+  ms_df <- ms_df_long %>% 
   unite(term, variable, sep = "§", col = "variable") %>% 
   data.table::transpose(make.names = "variable")
 
@@ -134,7 +148,7 @@ ms_df <- ms_full$fixed %>%
               min = min(value),
               max = max(value)) %>% 
     mutate(straddle_zero = ifelse(max < 0 & min < 0|
-                                    max > 1 & min > 1  , "no", "yes")) %>%
+                                    max > 0 & min > 0  , "no", "yes")) %>%
     rename(variable_1 = variable) %>% 
     reshape2::melt(id.vars = "variable_1") %>%
     ungroup() %>% 
@@ -186,7 +200,7 @@ chain_summarised  %>%
 ms_df <-  ms$fixed %>% 
   rownames_to_column("term") %>% 
   mutate(straddle_zero_95 = ifelse(`l-95% CI` < 0 & `u-95% CI` < 0|
-                                     `l-95% CI`  > 1 & `u-95% CI`  > 1  , "no", "yes")) %>%
+                                     `l-95% CI`  > 0 & `u-95% CI`  > 0  , "no", "yes")) %>%
   reshape2::melt(id.vars = "term") %>% 
   unite(term, variable, sep = "§", col = "variable") %>% 
   data.table::transpose(make.names = "variable") %>% 
@@ -232,7 +246,7 @@ ms_df <-  ms$fixed %>%
                 min = min(value),
                 max = max(value)) %>% 
       mutate(straddle_zero = ifelse(max < 0 & min < 0|
-                                      max > 1 & min > 1  , "no", "yes")) %>% 
+                                      max > 0 & min > 0  , "no", "yes")) %>% 
       rename(variable_1 = variable) %>% 
       reshape2::melt(id.vars = "variable_1") %>%
       ungroup() %>% 
