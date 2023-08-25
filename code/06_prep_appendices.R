@@ -100,7 +100,7 @@ read_tsv("output/processed_data/RO_Hedvig_aggregate_SBZR_group_scaled.tsv", show
 fn_out = "../latex/appendix_medium_group_table.tex"
 cap <- "Table of input values to model, shared language island groups."
 lbl <- "appendix_medium_table"
-align <- c("r","p{4.5cm}","p{1.4cm}","p{1.4cm}", "p{1.4cm}", "p{1.4cm}",  "p{1.7cm}","p{1.7cm}") 
+align <- c("r","p{4.5cm}","p{1.4cm}","p{1.4cm}", "p{1.4cm}", "p{1.4cm}",  "p{1.7cm}","p{1.7cm}",   "p{1.7cm}") 
 
 read_tsv("output/processed_data/RO_Hedvig_aggregate_medium_group_scaled.tsv", show_col_types = F) %>% 
   mutate(lg_count = as.character(lg_count)) %>% 

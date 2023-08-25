@@ -15,8 +15,6 @@ source("02_ecoClimate_extract.R")
 
 source("02_get_modis.R")
 
-source("02_get_DPLACE.R")
-
 #source("02_isolation_calculation.R")
 
 #WRANGLE
@@ -38,4 +36,6 @@ source("04_variable_SPLOM.R")
 #ANALYZE
 
 source("05_analysis_brms.R")
+
+source("06_prep_appendices.R")
 
