@@ -19,47 +19,43 @@ fun_hedvig_brms_predicting <- function(data = NULL,
   
   ############# ALL OBSERVATIONS ####################
   
-  output_poission <-  brm(data = data, 
+  output_poisson <-  brm(data = data, 
                           family = poisson,
                           formula = formula,
                           iter = iter, 
+                          silent = 2,
+                          refresh = 0,
                           warmup = warmup, 
                           chains = chains, 
-                          silent = 2,
-                          save_pars = save_pars(all = T),
                           cores = cores,
                           seed = seed,
                           backend="cmdstanr") 
   
-ms_full <- summary(output_poission)
+ms_full <- summary(output_poisson)
   
-  posterior_predict_df <- brms::posterior_predict(output_poission, cores = cores, ndraws = ndraws) %>%
+  posterior_predict_df <- brms::posterior_predict(output_poisson, cores = cores, ndraws = ndraws) %>%
     as.data.frame() %>% 
-    data.table::transpose() %>% 
+    data.table::transpose() %>%
     mutate(group = data$group) %>% 
     reshape2::melt(id.vars = "group") %>% 
     group_by(group) %>% 
     mutate(mean = mean(value), 
-           sd = sd(value),
-           min = min(value),
-           max = max(value)) %>% 
-    full_join(data, by = "group") %>% 
-    mutate(diff_poission = lg_count - mean) %>%  
-    mutate(diff_poission_abs = abs(lg_count - mean)) 
+              sd = sd(value),
+              min = min(value),
+              max = max(value)) %>% 
+    left_join(data, by = "group") %>% 
+    mutate(diff_poisson = lg_count - mean) %>%  
+    mutate(diff_poisson_abs = abs(diff_poisson)) 
   
-  cat(paste0("The mean absolute difference between the predicted and observed numbers of languages is ", posterior_predict_df$diff_poission_abs %>% mean() %>% round(2), ".\n"))
+  cat(paste0("The mean absolute difference between the predicted and observed numbers of languages is ", posterior_predict_df$diff_poisson_abs %>% mean() %>% round(2), ".\n"))
   
   posterior_predict_df %>% 
-    distinct(group, mean, sd, min, max, diff_poission, diff_poission_abs, lg_count) %>% 
+    distinct(group, mean, sd, min, max, diff_poisson, diff_poisson_abs, lg_count) %>% 
     write_tsv(file = paste0("output/results/brms_", group, "_predict_table.tsv"), na = "")
   
   #predict plot
   
   posterior_predict_df$group <- fct_reorder(posterior_predict_df$group, posterior_predict_df$lg_count)
-  
-#  c("#440154FF" ,"#481769FF" ,"#472A7AFF" ,"#433D84FF" ,"#3D4E8AFF" ,"#355E8DFF", "#2E6D8EFF",
-#    "#297B8EFF", "#23898EFF" ,"#1F978BFF", "#21A585FF", "#2EB37CFF" ,"#46C06FFF" ,"#65CB5EFF",
-#    "#89D548FF" ,"#B0DD2FFF", "#D8E219FF" ,"#FDE725FF")
   
   p <- posterior_predict_df %>% 
     ggplot() +
@@ -74,14 +70,13 @@ ms_full <- summary(output_poission)
           plot.background = element_rect(fill = "white"))
   
   ggsave(plot = p, filename = paste0("output/plots/brms_predict_", group, ".png"), height = 8, width = 6)  
-  ggsave(filename = paste0("../latex/brms_predict_", group, ".png"),  height = 8, width = 6) 
-  
+  ggsave(plot = p,filename = paste0("../latex/brms_predict_", group, ".png"),  height = 8, width = 6) 
   
   ### model output
-  chain_1 <- output_poission$fit@sim$samples[[1]] %>% as.data.frame()  %>% mutate(chain = "1")
-  chain_2 <- output_poission$fit@sim$samples[[2]] %>% as.data.frame()  %>% mutate(chain = "2")
-  chain_3 <- output_poission$fit@sim$samples[[3]] %>% as.data.frame()  %>% mutate(chain = "3")
-  chain_4 <- output_poission$fit@sim$samples[[4]] %>% as.data.frame()  %>% mutate(chain = "4")
+  chain_1 <- output_poisson$fit@sim$samples[[1]] %>% as.data.frame()  %>% mutate(chain = "1")
+  chain_2 <- output_poisson$fit@sim$samples[[2]] %>% as.data.frame()  %>% mutate(chain = "2")
+  chain_3 <- output_poisson$fit@sim$samples[[3]] %>% as.data.frame()  %>% mutate(chain = "3")
+  chain_4 <- output_poisson$fit@sim$samples[[4]] %>% as.data.frame()  %>% mutate(chain = "4")
   
   chain_joined <- suppressMessages(full_join(chain_1, chain_2)) %>% 
     suppressMessages(full_join(chain_3)) %>%
@@ -117,7 +112,7 @@ ms_df_long_straddle <- ms_df_long %>%
                    color = "darkgray",
                    linewidth = 0.8, adjust = 0.7
     ) +
-    scale_alpha_discrete(range = c(1, 0.1)) +
+  suppressWarnings(  scale_alpha_discrete(range = c(1, 0.1)) )+
     lemon::facet_rep_wrap(~variable, 
                           #ncol = 3, 
                           #             scales = "free",
@@ -166,22 +161,23 @@ chain_summarised  %>%
   
   ########### KICKING OUT ONE OBSERVATION AT A TIME
   
-  
+#empty df to bind to in the for-loop
   df_all <- data.frame(
     "dropped_obs"     = as.character()  )
   
-  obs <- c(data$group, NA)
+  #add NA to the things to exclude, stands for excluding nothing so that it's all in a neat table.
+  obs <- c(NA, data$group)
   
-  for(obs in obs){
+  for(ob in obs){
     
-    #  obs <- obs[1]
+    #  ob <- obs[1]
     
-    cat(paste0("Dropping out ", obs, ".\n"))
+    cat(paste0("Dropping out ", ob, ".\n"))
     
-    if(is.na(obs)){
+    if(is.na(ob)){
       data_spec <-   data 
     }else{data_spec <-   data %>% 
-      filter(group != {{obs}})
+      filter(group != {{ob}})
     }
     output_spec <-  brm(data = data_spec, 
                         family = poisson,
@@ -204,27 +200,27 @@ ms_df <-  ms$fixed %>%
   reshape2::melt(id.vars = "term") %>% 
   unite(term, variable, sep = "§", col = "variable") %>% 
   data.table::transpose(make.names = "variable") %>% 
-  mutate(dropped_obs = obs)
+  mutate(dropped_obs = ob)
   
   #predicting number of lgs
-    posterior_predict_df_spec <- brms::posterior_predict(output_spec, cores = cores, ndraws = 1000) %>%
+    posterior_predict_df_spec <- brms::posterior_predict(output_spec, cores = cores, ndraws = ndraws) %>%
       as.data.frame() %>% 
       data.table::transpose() %>% 
       mutate(group = data_spec$group) %>% 
-      reshape2::melt(id.vars = "group") %>% 
+      reshape2::melt(id.vars = "group") %>%
       group_by(group) %>% 
-      summarise(mean = mean(value), 
+      mutate(mean = mean(value), 
                 sd = sd(value),
                 min = min(value),
                 max = max(value)) %>% 
       left_join(data, by = "group") %>% 
-      mutate(diff = lg_count) %>%  
+      mutate(diff = lg_count-mean) %>%  
       mutate(diff_abs = abs(diff)) 
     
     diff <- mean(posterior_predict_df_spec$diff)
     diff_abs <- mean(posterior_predict_df_spec$diff_abs)
     
-    cat(paste0("The diff was ", diff %>% round(2)
+    cat(paste0("The diff was ", diff_abs %>% round(2)
                , ".\n"))
     
     #coef
@@ -253,7 +249,7 @@ ms_df <-  ms$fixed %>%
       mutate(variable = paste0(`variable_1`, "_", `variable`)) %>% 
       dplyr::select(variable, value) %>% 
       data.table::transpose(make.names = "variable") %>% 
-      mutate(dropped_obs = obs) 
+      mutate(dropped_obs = ob) 
     
     predict_new_data <- brms::posterior_predict(output_spec, newdata = data, ndraws = ndraws) %>% 
       as.data.frame() %>% 
@@ -269,15 +265,15 @@ ms_df <-  ms$fixed %>%
       mutate(diff = lg_count - mean) %>% 
       mutate(diff_abs = abs(diff)) 
     
-    if(!is.na(obs)){
+    if(!is.na(ob)){
       predict_new_data  <- predict_new_data %>% 
-        filter(group == {{obs}})
+        filter(group == {{ob}})
       
     }
     
     #output_data_frame
     
-    df_spec <- data.frame(dropped_obs = obs, 
+    df_spec <- data.frame(dropped_obs = ob, 
                           mean_Rhat =  ms$fixed$Rhat %>% mean(),
                           mean_Bulk_ESS = ms$fixed$Bulk_ESS %>% mean(),
                           mean_Tail_ESS = ms$fixed$Tail_ESS %>% mean(),
@@ -302,7 +298,7 @@ ms_df <-  ms$fixed %>%
     df_all %>%          
       write_tsv(file = paste0("output/results/brms_", group, "_group_drop_one_out.tsv"), na = "")
     
-  }
+  } #end of dropping out one for-loop
   
   df_all %>%          
     write_tsv(file = paste0("output/results/brms_", group, "_group_drop_one_out.tsv"), na = "")
@@ -337,7 +333,7 @@ ms_df <-  ms$fixed %>%
   # 
   #   n <- 13
   # 
-  # model_estimate <- predict_df[n,]$predicted_poission.Estimate
+  # model_estimate <- predict_df[n,]$predicted_poisson.Estimate
   # 
   # manual_estimate <- exp((mean(data_chopped[n,]$Carrying_capactiy_PC1 * chain_joined$b_Carrying_capactiy_PC1)
   #  +
