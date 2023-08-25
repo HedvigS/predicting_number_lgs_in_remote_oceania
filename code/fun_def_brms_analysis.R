@@ -323,7 +323,7 @@ ms_df <-  ms$fixed %>%
     filter(diff_predicted_vs_observed_abs < 1.4) %>% 
     #  column_to_rownames("dropped_obs") %>% 
     data.table::transpose(make.names = "dropped_obs", keep.names = "variable") %>% 
-    write_tsv(file = paste0("output/results/brms_", group, "_dropped_effects_diff_above_1.tsv"), na = "")
+    write_tsv(file = paste0("output/results/brms_", group, "_dropped_effects_diff_below_1.4.tsv"), na = "")
   
   ######################################
   
