@@ -7,8 +7,6 @@ source("fun_def_brms_analysis.R")
 data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_SBZR_group_scaled.tsv", show_col_types = F) %>%  
   rename(group = SBZR_group)
 
-#colnames(data)
-
 #inspired by
 #https://bookdown.org/ajkurz/Statistical_Rethinking_recoded/counting-and-classification.html#binomial-regression
 
