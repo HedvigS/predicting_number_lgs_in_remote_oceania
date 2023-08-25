@@ -79,7 +79,7 @@ if(na.rm == T){
 }
 
 distinctive_plot_colors <- c("#FFB6C1",
-            "#FFF44F",
+            "#faf591",
             "#a6f7c9", 
             "#FFDAB9",
             "#87CEEB",
