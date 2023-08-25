@@ -10,7 +10,6 @@ source("02_subregions_glottocodes_unnesting.R")
 
 source("02_get_glottolog_language_table.R")
 
-
 source("02_ecoClimate_extract.R")
 
 source("02_get_modis.R")
