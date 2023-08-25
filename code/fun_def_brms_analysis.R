@@ -108,7 +108,10 @@ ms_df_long_straddle <- ms_df_long %>%
     ggplot(aes(x = value, fill = variable, 
                color = variable,
                y = after_stat(density))) + 
-    geom_density(mapping = aes(alpha = as.factor(straddle_zero_95)),
+    scale_color_manual(values = distinctive_plot_colors) +
+    scale_fill_manual(values = distinctive_plot_colors) +
+    geom_density(mapping = aes(alpha = as.factor(straddle_zero_95), 
+                               linetype = as.factor(straddle_zero_95)),
                    color = "darkgray",
                    linewidth = 0.8, adjust = 0.7
     ) +
