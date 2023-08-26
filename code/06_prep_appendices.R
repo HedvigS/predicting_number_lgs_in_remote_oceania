@@ -28,7 +28,8 @@ pol_complex_refs <- read_tsv("data/Remote_oceania_pol_complex.tsv", na = "", sho
 pol_complex_refs$citekey <- paste0("\\citet{",pol_complex_refs$citekey, "}")
 
 #table itself
-pol_complex <- readODS::read_ods("data/Remote_oceania_pol_complex_code_latex.ods", sheet = 1) %>%
+pol_complex <- read_tsv("data/Remote_oceania_pol_complex.tsv", na = "", show_col_types = F) %>%
+  dplyr::select(glottocode, `Political complexity (EA033)`) %>% 
   left_join(pol_complex_refs, 
             relationship = "many-to-many",
             by = join_by(`Political complexity (EA033)`, glottocode)) %>% 
