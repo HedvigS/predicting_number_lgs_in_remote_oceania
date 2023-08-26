@@ -15,9 +15,4 @@
 code/data/glottolog-cldf/**
 code/data/dplace-cldf/**
 code/output/plots/*
-code/output/processed_data/isolation*
-code/output/processed_data/RO_Hedvig_aggregate_all_obs_sep.tsv
-code/output/processed_data/RO_Hedvig_aggregate_smallest_island.tsv
-code/output/processed_data/Polygon_hierarchy_stats.tsv
-code/output/processed_data/RO_polygons_grouped_with_languages_with_climate_grouped.tsv
 latex/main.tex.bak
