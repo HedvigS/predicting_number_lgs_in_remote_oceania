@@ -3,7 +3,7 @@ source("fun_def_SPLOM.R")
 
 #SBZR groups
 
-data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_SBZR_group_scaled.tsv", show_col_types = F)
+data <- read_tsv("output/processed_data/RO_aggregate_SBZR_group_scaled.tsv", show_col_types = F)
 
 colnames(data) <- str_replace_all(colnames(data), "_", "\n")
 
@@ -35,7 +35,7 @@ data_for_splom %>%
 x <- dev.off()
 
 #medium groups
-data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_medium_group_scaled.tsv", show_col_types = F)
+data <- read_tsv("output/processed_data/RO_aggregate_medium_group_scaled.tsv", show_col_types = F)
 
 colnames(data) <- str_replace_all(colnames(data), "_", "\n")
 
@@ -76,7 +76,7 @@ COUNTRY_NAMES <- read_tsv("data/country_names.tsv", show_col_types = F)
 UN_pop <- read_tsv("output/processed_data/pop_un_country_data.tsv", show_col_types = F) %>% 
   dplyr::select(ISO2_code, "Population 1950", "Population 1950 log10" , "Number of languages", "Number of languages log10")
 
-data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_country_group_scaled.tsv", show_col_types = F) %>% 
+data <- read_tsv("output/processed_data/RO_aggregate_country_group_scaled.tsv", show_col_types = F) %>% 
   inner_join(COUNTRY_NAMES, by ="COUNTRY NAME") %>% 
   left_join(UN_pop, by = join_by(ISO2_code)) 
 

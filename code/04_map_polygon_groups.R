@@ -41,7 +41,7 @@ basemap <- ggplot(glottolog_lat_long_shifted) +
 
 
 ##groupings per SBZR_group
-SBZR_groups <- read_tsv("output/processed_data/RO_Hedvig_aggregate_SBZR_group.tsv", show_col_types = F) %>% 
+SBZR_groups <- read_tsv("output/processed_data/RO_aggregate_SBZR_group.tsv", show_col_types = F) %>% 
   dplyr::select(SBZR_group, color, lg_count) %>% 
   full_join(Polygon_lgs_glottocodes_sep, by = "SBZR_group") %>% 
   filter(!is.na(lg_count)) %>% 
@@ -100,7 +100,7 @@ ggsave("../latex/polygon_SBZR_group_map.png", width = 15, height = 8)
 
 if(!file.exists("output/plots/maps/polygon_medium_group_map_vanuatu_mh_inset.png")){
 
-medium_groups <- read_tsv("output/processed_data/RO_Hedvig_aggregate_medium_island.tsv", show_col_types = F) %>% 
+medium_groups <- read_tsv("output/processed_data/RO_aggregate_medium_island.tsv", show_col_types = F) %>% 
   dplyr::select(Medium_only_merged_for_shared_language, color, lg_count) %>% 
 full_join(Polygon_lgs_glottocodes_sep, by = "Medium_only_merged_for_shared_language") %>% 
   filter(!is.na(lg_count)) %>% 

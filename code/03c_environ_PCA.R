@@ -11,7 +11,7 @@ if(!dir.exists(OUTPUTDIR)){dir.create(OUTPUTDIR)}
 ###############################################################################
 
 #SBZR + carrying capacity parameters
-data_fn_SBZR <- "output/processed_data/RO_Hedvig_aggregate_SBZR_group_scaled.tsv"
+data_fn_SBZR <- "output/processed_data/RO_aggregate_SBZR_group_scaled.tsv"
 
 data <- read_tsv(file = data_fn_SBZR, show_col_types = F)  %>% 
   column_to_rownames("SBZR_group") %>% 
@@ -95,7 +95,7 @@ ggsave("../latex/PCA_contributions_SBZR_PC2.png", width = 12, height = 10)
 ###############################################################################
 ### medium + carrying capacity
 
-data_fn_medium <- "output/processed_data/RO_Hedvig_aggregate_medium_group_scaled.tsv"
+data_fn_medium <- "output/processed_data/RO_aggregate_medium_group_scaled.tsv"
 
 data <- read_tsv(file = data_fn_medium, show_col_types = F)  %>% 
   column_to_rownames("Medium_only_merged_for_shared_language") %>% 
@@ -189,7 +189,7 @@ ggsave("../latex/PCA_contributions_medium_PC3.png", width = 12, height = 10)
 
 
 #COUNTRY
-data_fn_country <- "output/processed_data/RO_Hedvig_aggregate_country_group_scaled.tsv"
+data_fn_country <- "output/processed_data/RO_aggregate_country_group_scaled.tsv"
 
 data <- read_tsv(file = data_fn_country, show_col_types = F)  %>% 
   column_to_rownames("COUNTRY NAME") %>% 

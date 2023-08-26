@@ -66,20 +66,10 @@ plot(Map_plot_SBZR)
 ggsave("output/plots/maps/Map_RO_SBZR.png", width = 5, height = 4)
 ggsave("../latex/polygon_SBZR_group_map.png", width = 5, height = 3)
 
-##Medium_group
-Map_plot_medium <- basemap + 
-  geom_point(aes(x=Longitude, y=Latitude), color = All_polygons$medium_group_color, size = 0.5) #+
-#  scale_color_manual(values = color_vector_smallest)
-
-plot(Map_plot_medium)
-ggsave("output/plots/maps/Map_RO_Medium.png", width = 5, height = 4)
-ggsave("../latex/polygon_medium_group_map.png", width = 5, height =3)
-
-
 #pol_complex
 col_vector_3 <- c("#91bfdb", "#ffffbf", "#fc8d59", "#d7191c")
 
-pol_complex_data <- readODS::read_ods("data/Remote_oceania_pol_complex_hedvig_code_latex.ods", sheet = 1) %>% 
+pol_complex_data <-  read_tsv("data/Remote_oceania_pol_complex.tsv", na = "", show_col_types = F) %>%
   dplyr::select(Language_level_ID = glottocode, `Political complexity (EA033)`) %>% 
   mutate(glottocode = ifelse(Language_level_ID == "fiji1243", "fiji1243,kada1285,sout2864,nort2843", Language_level_ID)) %>% 
   mutate(glottocode = ifelse(Language_level_ID == "aust1304",  "aust1304,raiv1237,tubu1240,ruru1237,rima1237", glottocode)) %>% 
@@ -89,7 +79,7 @@ pol_complex_data <- readODS::read_ods("data/Remote_oceania_pol_complex_hedvig_co
   dplyr::select(glottocode , `Political complexity (EA033)`) %>% 
   filter(!is.na(`Political complexity (EA033)`)) %>% 
   mutate(`Political complexity (EA033)` = as.character(`Political complexity (EA033)`)) %>% 
-  inner_join(All_polygons, by = "glottocode") %>% 
+  inner_join(All_polygons, by = "glottocode", relationship = "many-to-many") %>% 
     group_by(`Political complexity (EA033)`, glottocode) %>% 
     summarise(Latitude = mean(Latitude, na.rm = T),
               Longitude = mean(Longitude, na.rm = T), .groups = "drop") 

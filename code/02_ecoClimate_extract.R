@@ -1,6 +1,6 @@
 source("01_requirements.R")
 
-#script written by Russell Dinnage (ORCID= 0000-0003-0846-2819), with smaller tweaks by Hedvig Skirgård
+#script written by Russell Dinnage (ORCID= 0000-0003-0846-2819), with smaller tweaks by author
 
 #### extracting ecoClimate data for points ####
 

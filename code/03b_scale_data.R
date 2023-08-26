@@ -1,6 +1,6 @@
 source("01_requirements.R")
 
-data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_SBZR_group.tsv", show_col_types = F) %>% 
+data <- read_tsv("output/processed_data/RO_aggregate_SBZR_group.tsv", show_col_types = F) %>% 
   dplyr::filter(!is.na(SBZR_group)) %>% 
   dplyr::rename(Latitude_abs_mean = mean_lat_abs) %>% 
   filter(!is.na(mode_pol_complex))   %>% 
@@ -51,12 +51,12 @@ data$NPP_terra_mean <- scale(data$NPP_terra_mean)[,1]
 data$NPP_aqua_mean <- scale(data$NPP_aqua_mean)[,1]
 
 data %>% 
-  write_tsv("output/processed_data/RO_Hedvig_aggregate_SBZR_group_scaled.tsv")
+  write_tsv("output/processed_data/RO_aggregate_SBZR_group_scaled.tsv")
 
 
 ##Medium group
 
-data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_medium_island.tsv", show_col_types = F) %>% 
+data <- read_tsv("output/processed_data/RO_aggregate_medium_island.tsv", show_col_types = F) %>% 
   dplyr::filter(!is.na(Medium_only_merged_for_shared_language)) %>% 
   dplyr::rename(Latitude_abs_mean = mean_lat_abs) %>% 
   filter(!is.na(mode_pol_complex))   %>% 
@@ -106,11 +106,11 @@ data$NPP_terra_mean <- scale(data$NPP_terra_mean)[,1]
 data$NPP_aqua_mean <- scale(data$NPP_aqua_mean)[,1]
 
 data %>% 
-  write_tsv("output/processed_data/RO_Hedvig_aggregate_medium_group_scaled.tsv")
+  write_tsv("output/processed_data/RO_aggregate_medium_group_scaled.tsv")
 
 ##COUNTRY
 
-data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_COUNTRY_group.tsv", show_col_types = F) %>% 
+data <- read_tsv("output/processed_data/RO_aggregate_COUNTRY_group.tsv", show_col_types = F) %>% 
   dplyr::filter(!is.na(`COUNTRY NAME`)) %>% 
   dplyr::rename(Latitude_abs_mean = mean_lat_abs) %>% 
   filter(!is.na(mode_pol_complex))   %>% 
@@ -159,4 +159,4 @@ data$NPP_terra_mean <- scale(data$NPP_terra_mean)[,1]
 data$NPP_aqua_mean <- scale(data$NPP_aqua_mean)[,1]
 
 data %>%
-  write_tsv("output/processed_data/RO_Hedvig_aggregate_country_group_scaled.tsv")
+  write_tsv("output/processed_data/RO_aggregate_country_group_scaled.tsv")

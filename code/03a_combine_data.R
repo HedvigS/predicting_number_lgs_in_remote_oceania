@@ -121,11 +121,11 @@ pol_complex <- read_tsv("data/Remote_oceania_pol_complex.tsv", na = "", show_col
   mutate(glottocode = ifelse(Language_level_ID == "maor1246", "maor1246,mori1267", glottocode)) %>% 
   mutate(glottocode = str_split(glottocode, ",")) %>% 
   unnest(cols = c(glottocode)) %>% 
-  dplyr::select(Glottocode = glottocode, pol_complex_code_Hedvig = "Political complexity (EA033)" ) %>% 
+  dplyr::select(Glottocode = glottocode, pol_complex_code = "Political complexity (EA033)" ) %>% 
   left_join(subregions, by = "Glottocode", relationship = "many-to-many") %>% 
   filter(!is.na(Smallest_Island_group)) %>% 
-  distinct(Smallest_Island_group, pol_complex_code_Hedvig) %>% 
-  filter(!is.na(pol_complex_code_Hedvig))
+  distinct(Smallest_Island_group, pol_complex_code) %>% 
+  filter(!is.na(pol_complex_code))
 
 #NPP see 02_get_modis.R
 modis_NPP <- read_tsv("output/processed_data/modis_with_groups.tsv", show_col_types = F, col_types = "c") %>% 
@@ -163,14 +163,14 @@ Island_group_all_sep <- polygon_geo_grouping_hierarchy %>%
   full_join(ecoClimate_data, by = "Smallest_Island_group") %>% 
   distinct()   
 
-write_tsv(Island_group_all_sep, "output/processed_data/RO_Hedvig_aggregate_all_obs_sep.tsv")
+write_tsv(Island_group_all_sep, "output/processed_data/RO_aggregate_all_obs_sep.tsv")
 
 #Aggregation over smallest unit
 Island_group_summarised_smallest <- Island_group_all_sep %>% 
   filter(!is.na(settlement_date_grouping_finer)) %>% 
   group_by(Smallest_Island_group) %>% 
   dplyr::summarise(
-            mode_pol_complex = getmode(pol_complex_code_Hedvig), 
+            mode_pol_complex = getmode(pol_complex_code), 
             sum_area = sum(sum_area, na.rm = T), 
             lg_count_smallest = mean(lg_count_smallest, na.rm = T),
             sum_shoreline = sum(sum_shoreline, na.rm = T),
@@ -190,14 +190,14 @@ Island_group_summarised_smallest <- Island_group_all_sep %>%
   mutate(ratio_coastline_to_area = sum_shoreline / sum_area,
          mean_lat_abs = abs(mean_lat))
 
-write_tsv(Island_group_summarised_smallest, "output/processed_data/RO_Hedvig_aggregate_smallest_island.tsv")
+write_tsv(Island_group_summarised_smallest, "output/processed_data/RO_aggregate_smallest_island.tsv")
 
 #medium_group
 Island_group_summarised_medium <- Island_group_all_sep %>%
   filter(!is.na(settlement_date_grouping_finer)) %>% 
   group_by(Medium_only_merged_for_shared_language) %>% 
   dplyr::summarise(
-        mode_pol_complex = getmode(pol_complex_code_Hedvig), 
+        mode_pol_complex = getmode(pol_complex_code), 
         sum_area = sum(sum_area, na.rm = T), 
         lg_count_smallest = mean(lg_count_smallest, na.rm = T),
         sum_shoreline = sum(sum_shoreline, na.rm = T),
@@ -217,7 +217,7 @@ Island_group_summarised_medium <- Island_group_all_sep %>%
   mutate(ratio_coastline_to_area = sum_shoreline / sum_area,
          mean_lat_abs = abs(mean_lat))
 
-write_tsv(Island_group_summarised_medium, "output/processed_data/RO_Hedvig_aggregate_medium_island.tsv")
+write_tsv(Island_group_summarised_medium, "output/processed_data/RO_aggregate_medium_island.tsv")
 
 
 #Marck
@@ -225,7 +225,7 @@ Island_group_summarised_Marck_group <- Island_group_all_sep %>%
   filter(!is.na(settlement_date_grouping_finer)) %>% 
   group_by(Marck_group) %>% 
   dplyr::summarise(
-    mode_pol_complex = getmode(pol_complex_code_Hedvig), 
+    mode_pol_complex = getmode(pol_complex_code), 
     sum_area = sum(sum_area, na.rm = T), 
     lg_count_smallest = mean(lg_count_smallest, na.rm = T),
     sum_shoreline = sum(sum_shoreline, na.rm = T),
@@ -245,7 +245,7 @@ Island_group_summarised_Marck_group <- Island_group_all_sep %>%
   mutate(ratio_coastline_to_area = sum_shoreline / sum_area,
          mean_lat_abs = abs(mean_lat))
 
-write_tsv(Island_group_summarised_Marck_group, "output/processed_data/RO_Hedvig_aggregate_marck_group.tsv")
+write_tsv(Island_group_summarised_Marck_group, "output/processed_data/RO_aggregate_marck_group.tsv")
 
 
 #SBZR group
@@ -253,7 +253,7 @@ Island_group_summarised_SBZR_group <- Island_group_all_sep %>%
   filter(!is.na(settlement_date_grouping_finer)) %>% 
   group_by(SBZR_group) %>% 
   dplyr::summarise(
-    mode_pol_complex = getmode(pol_complex_code_Hedvig), 
+    mode_pol_complex = getmode(pol_complex_code), 
     sum_area = sum(sum_area, na.rm = T), 
     lg_count_smallest = mean(lg_count_smallest, na.rm = T),
     sum_shoreline = sum(sum_shoreline, na.rm = T),
@@ -273,7 +273,7 @@ Island_group_summarised_SBZR_group <- Island_group_all_sep %>%
   mutate(ratio_coastline_to_area = sum_shoreline / sum_area,
          mean_lat_abs = abs(mean_lat))
 
-write_tsv(Island_group_summarised_SBZR_group, "output/processed_data/RO_Hedvig_aggregate_SBZR_group.tsv")
+write_tsv(Island_group_summarised_SBZR_group, "output/processed_data/RO_aggregate_SBZR_group.tsv")
 
 
 ##COUNTRY
@@ -284,7 +284,7 @@ Island_group_summarised_COUNTRY <- Island_group_all_sep %>%
   filter(!is.na(settlement_date_grouping_finer)) %>% 
   group_by(`COUNTRY NAME`) %>% 
   dplyr::summarise(
-    mode_pol_complex = getmode(pol_complex_code_Hedvig), 
+    mode_pol_complex = getmode(pol_complex_code), 
     sum_area = sum(sum_area, na.rm = T), 
     lg_count_smallest = mean(lg_count_smallest, na.rm = T),
     sum_shoreline = sum(sum_shoreline, na.rm = T),
@@ -303,4 +303,4 @@ Island_group_summarised_COUNTRY <- Island_group_all_sep %>%
   mutate(ratio_coastline_to_area = sum_shoreline / sum_area,
          mean_lat_abs = abs(mean_lat))
 
-write_tsv(Island_group_summarised_COUNTRY, "output/processed_data/RO_Hedvig_aggregate_COUNTRY_group.tsv")
+write_tsv(Island_group_summarised_COUNTRY, "output/processed_data/RO_aggregate_COUNTRY_group.tsv")

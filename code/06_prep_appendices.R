@@ -28,7 +28,7 @@ pol_complex_refs <- read_tsv("data/Remote_oceania_pol_complex.tsv", na = "", sho
 pol_complex_refs$citekey <- paste0("\\citet{",pol_complex_refs$citekey, "}")
 
 #table itself
-pol_complex <- readODS::read_ods("data/Remote_oceania_pol_complex_hedvig_code_latex.ods", sheet = 1) %>%
+pol_complex <- readODS::read_ods("data/Remote_oceania_pol_complex_code_latex.ods", sheet = 1) %>%
   left_join(pol_complex_refs, 
             relationship = "many-to-many",
             by = join_by(`Political complexity (EA033)`, glottocode)) %>% 
@@ -77,7 +77,7 @@ cap <- "Table of input values to model, overnight-sailing island groups."
 lbl <- "appendix_SBZR_table"
 align <- c("r","p{4.5cm}","p{1.4cm}","p{1.4cm}", "p{1.4cm}", "p{1.4cm}",  "p{1.7cm}","p{1.7cm}") 
 
-read_tsv("output/processed_data/RO_Hedvig_aggregate_SBZR_group_scaled.tsv", show_col_types = F) %>% 
+read_tsv("output/processed_data/RO_aggregate_SBZR_group_scaled.tsv", show_col_types = F) %>% 
   mutate(lg_count = as.character(lg_count)) %>% 
   dplyr::select(`Island group (overnight-sailing)` = SBZR_group,
                 `Lang count` = lg_count,
@@ -102,7 +102,7 @@ cap <- "Table of input values to model, shared language island groups."
 lbl <- "appendix_medium_table"
 align <- c("r","p{4.5cm}","p{1.4cm}","p{1.4cm}", "p{1.4cm}", "p{1.4cm}",  "p{1.7cm}","p{1.7cm}",   "p{1.7cm}") 
 
-read_tsv("output/processed_data/RO_Hedvig_aggregate_medium_group_scaled.tsv", show_col_types = F) %>% 
+read_tsv("output/processed_data/RO_aggregate_medium_group_scaled.tsv", show_col_types = F) %>% 
   mutate(lg_count = as.character(lg_count)) %>% 
   dplyr::select(`Island group (shared language)` = Medium_only_merged_for_shared_language,
               `Lang count` = lg_count,

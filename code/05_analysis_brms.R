@@ -4,7 +4,7 @@ source("01_requirements_brms.R")
 source("fun_def_brms_analysis.R")
 
 ###SBZR
-data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_SBZR_group_scaled.tsv", show_col_types = F) %>%  
+data <- read_tsv("output/processed_data/RO_aggregate_SBZR_group_scaled.tsv", show_col_types = F) %>%  
   rename(group = SBZR_group)
 
 #inspired by
@@ -18,12 +18,12 @@ formula <- "lg_count  ~   environ_PC1*Shoreline +
 
 group = "SBZR"
 
-fun_hedvig_brms_predicting(data = data, formula = formula, group = group)
+fun_brms_predicting(data = data, formula = formula, group = group)
 
 
 #MEDIUM
 
-data <- read_tsv("output/processed_data/RO_Hedvig_aggregate_medium_group_scaled.tsv", show_col_types = F) %>%  
+data <- read_tsv("output/processed_data/RO_aggregate_medium_group_scaled.tsv", show_col_types = F) %>%  
   rename(group = Medium_only_merged_for_shared_language)
 
 formula <- "lg_count  ~  environ_PC1*Shoreline +
@@ -34,5 +34,5 @@ formula <- "lg_count  ~  environ_PC1*Shoreline +
 
 group = "medium"
 
-fun_hedvig_brms_predicting(data = data, formula = formula, group = group)
+fun_brms_predicting(data = data, formula = formula, group = group)
 

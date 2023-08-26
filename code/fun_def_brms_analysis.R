@@ -1,5 +1,5 @@
 
-fun_hedvig_brms_predicting <- function(data = NULL, 
+fun_brms_predicting <- function(data = NULL, 
                                        formula = NULL, 
                                        group = NULL,
                                        iter = 30000,
