@@ -330,7 +330,7 @@ For the overnight sailing distances, several island groups are much larger than 
 %Shoreline:Settlement_date_grouping_finer§straddle_zero_95
 %environ_PC1:Shoreline§straddle_zero_95
 
-The most important variables in this model (i.e. 95\% confidence interval of coefficient distribution does not overlap 0) were: political complexity, environmental PC2, shoreline, time depth and time-depth in interaction with shoreline  (see Fig \ref{brms_SBZR_group_full_effect_ridge_panels}). However, if we drop out Vanuatu + Temotu this no longer holds. When Vanuatu + Temotu are left out, the coefficient distribution of political complexity overlaps zero. Instead,  Shoreline in interaction with time depth and environmental PC1 in interaction with Shoreline are relevant predictors. When Vanuatu + Temotu are dropped out, the overall difference between predicted and observed values goes down the most (from 1.6 to 0.7, see Fig. \ref{brms_SBZR_dropped_out_plot_diff}). If we ask this model that has been trained \emph{without} the Vanuatu + Temotu data to predict how many languages there are there, it grossly underestimates and proposes 7 languages (observed = 130). If we drop out any other island group (including Kanaky), political complexity remains an important predictor.
+The most important variables in this model (i.e. 95\% confidence interval of coefficient distribution does not overlap 0) were: political complexity, environmental PC2, shoreline, time depth and time-depth in interaction with shoreline  (see Fig \ref{brms_SBZR_group_full_effect_ridge_panels}). However, if we drop out Vanuatu + Temotu this no longer holds. When Vanuatu + Temotu are left out, the coefficient distribution of political complexity overlaps zero. Instead,  Shoreline in interaction with time depth and environmental PC1 in interaction with Shoreline are relevant predictors. When Vanuatu + Temotu are dropped out, the overall difference between predicted and observed values goes down the most (from 1.6 to 0.7, see Fig. \ref{brms_SBZR_dropped_out_plot_diff}). When Vanuatu + Temotu are excluded, the model is more accurate. If we ask this model that has been trained \emph{without} the Vanuatu + Temotu data to predict how many languages there are there, it grossly underestimates and proposes 7 languages (observed = 130). If we drop out any other island group (including Kanaky), political complexity remains an important predictor.
 
 For tables of the predictor Estimates, Rhat and ESS of both models, please see appendix \ref{BRMS_model_tables}.
 
@@ -426,6 +426,8 @@ Political complexity is, perhaps unsurprisingly, a complex variable. There are a
 
 All data in this study is available freely. The data has been gathered from multiple sources, and is aggregated and will be published along with the code for the study on OSF/GitHub/Zenodo. The code is also made available, from gathering data to conducting analysis and preparing plots and tables. 
 
+Anonymised OSF project for double-blind peer review: \url{https://osf.io/amnh9/?view_only=403d57d715254539a3a99c798b4014d2}.
+
 Information on latitude and shoreline is taken from the Global Self-consistent, Hierarchical, High-resolution Geography Database (GSHHG) \citep{wessel1996global}. Rainfall and temperature information is taken from the ecoClimate database \citep{ecoclimate}. Data on Net Primary Production comes from the  United States of America's National Aeronautics and Space Administration's Moderate Resolution Imaging Spectroradiometer (MODIS, \citet{running2021modis_terra, running2021modis_aqua}). Language classification is taken from Glottolog (version 3.0), with some modification (see section \ref{sec:language_class}).
 
 GitHub locations:
@@ -437,7 +439,7 @@ GitHub locations:
 
 Zenodo locations:
 \begin{itemize}
-\item predicting\_number\_lgs\_in\_remote\_oceania  \textcolor{red}{TBA Zenodo-url}
+\item predicting\_number\_lgs\_in\_remote\_oceania  \textcolor{red}{TBA}
 \item glottolog-cldf (v3) \url{https://doi.org/10.5281/zenodo.437430}
 %\item glottolog-cldf (v4.7) \url{https://doi.org/10.5281/zenodo.7398962}
 \end{itemize}
@@ -860,6 +862,9 @@ There is a negative correlation of -0.56 between the population (log10) per coun
 \section{Table of political complexity per island group }
 \singlespacing
 All code and data will also be available on OSF/GitHub/Zenodo.
+
+Anonymised OSF project for double-blind peer review: \url{https://osf.io/amnh9/?view_only=403d57d715254539a3a99c798b4014d2}.
+
  \begin{landscape}
      
 \label{appendix_pol_complex}
@@ -872,6 +877,8 @@ All code and data will also be available on OSF/GitHub/Zenodo.
 \singlespacing
 \label{dates_table_appendix}
 All code and data will also be available on OSF/GitHub/Zenodo.
+
+Anonymised OSF project for double-blind peer review: \url{https://osf.io/amnh9/?view_only=403d57d715254539a3a99c798b4014d2}.
 
 Table \ref{appendix_dates_xtable} shows data on settlement dates from several different archaeological studies. 
 
@@ -896,6 +903,8 @@ The column ``Time depth settlement group'' contains the grouping of islands into
 All measurements, except the response variable, were scaled and centred to make the coefficients easier to interpret and compare. Shorelines were also log-10-transformed (before scaling). 
 
 All code and data will also be available on OSF/GitHub/Zenodo.
+
+Anonymised OSF project for double-blind peer review: \url{https://osf.io/amnh9/?view_only=403d57d715254539a3a99c798b4014d2}.
 
 \begin{landscape}
 \input{appendix_medium_group_table.tex}
@@ -946,6 +955,8 @@ The list below specifies further settings of the model functions.
 \end{itemize}
 
 All code and data will also be available on OSF/GitHub/Zenodo.
+
+Anonymised OSF project for double-blind peer review: \url{https://osf.io/amnh9/?view_only=403d57d715254539a3a99c798b4014d2}.
 
 % BARG
 % https://www.nature.com/articles/s41562-021-01177-7/tables/1
