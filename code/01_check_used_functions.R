@@ -1,7 +1,8 @@
-#source("01_requirements.R")
-source("fun_def_h_load.R")
+source("01_requirements_brms.R")
 
-h_load(c("NCmisc", "tidyverse", "knitr", "bib2df"))
+pkgs <- c("NCmisc", "tidyverse", "knitr", "bib2df")
+
+groundhog.library(pkgs, groundhog_date)
 
 r_fns <- list.files(path = ".", pattern = "*.R$", full.names = T, recursive = T)
 
