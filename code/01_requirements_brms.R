@@ -1,17 +1,18 @@
 # Please run this script first to make sure you have all the necessary packages 
 # installed for running the rest of the scripts in this R project
 
-source("fun_def_h_load.R")
+source("01_requirements_brms.R")
 
-h_load(pkg = c(
+pkgs = c(
   "coda", 
   "brms", 
   "mvtnorm",
   "devtools",
   "loo",
   "dagitty",
-  "shape"), verbose = F, dependencies = T
-)
+  "shape")
+
+groundhog.library(pkgs, groundhog_date)
 
 if(!("rstan" %in% rownames(installed.packages()))){
 install.packages("rstan", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
