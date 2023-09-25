@@ -1,7 +1,7 @@
 # Please run this script first to make sure you have all the necessary packages 
 # installed for running the rest of the scripts in this R project
 
-source("01_requirements_brms.R")
+source("01_requirements.R")
 
 pkgs = c(
   "coda", 
