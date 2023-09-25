@@ -3,9 +3,33 @@
 
 set.seed(1988)
 
-source("fun_def_h_load.R")
 
-h_load(pkg = c(
+#packages
+
+#groundhogr set-up
+
+groundhog_date = "2023-07-17"
+
+if(!("groundhog" %in% rownames(installed.packages()))){
+  
+  install.packages("groundhog")
+  library(groundhog)
+  
+}else{  
+  
+  library(groundhog)
+  
+}
+
+groundhog_dir <- paste0("groundhog_libraries_", groundhog_date)
+
+if(!dir.exists(groundhog_dir)){
+  dir.create(groundhog_dir)
+}
+
+groundhog::set.groundhog.folder(groundhog_dir)
+
+pkgs = c(
   "tidyverse",
   "reshape2",
   "jsonlite",
@@ -40,9 +64,12 @@ h_load(pkg = c(
   "broom", 
   "nFactors",
   "sp", 
-  "raster"), verbose = F, dependencies = T
-)
+  "raster")
 
+groundhog.library(pkgs, groundhog_date)
+
+
+#funs
 unlist_entire_df <- function(data) {
   temp1 <- sapply(data, is.list)
   temp2 <- do.call(
