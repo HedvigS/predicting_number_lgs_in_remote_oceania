@@ -1,6 +1,6 @@
-source("01_requirements_brms.R")
+source("01_requirements.R")
 
-pkgs <- c("NCmisc", "tidyverse", "knitr", "bib2df")
+pkgs <- c("NCmisc", "knitr", "bib2df")
 
 groundhog.library(pkgs, groundhog_date)
 
