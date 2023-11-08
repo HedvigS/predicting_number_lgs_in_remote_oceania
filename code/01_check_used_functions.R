@@ -4,7 +4,7 @@ pkgs <- c("NCmisc", "knitr", "bib2df")
 
 groundhog.library(pkgs, groundhog_date)
 
-r_fns <- list.files(path = ".", pattern = "*.R$", full.names = T, recursive = T)
+r_fns <- list.files(path = ".", pattern = "*.R$", full.names = T, recursive = F)
 
 df <- data.frame("packages" = as.character(),
                  "functions" = as.character(),
