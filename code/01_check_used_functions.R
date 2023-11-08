@@ -13,7 +13,7 @@ df <- data.frame("packages" = as.character(),
 
 for(fn in r_fns){
 
-#  fn <- r_fns[5]
+#  fn <- r_fns[19]
   
   cat(paste0("I'm on ", fn, ".\n"))
   
@@ -99,7 +99,13 @@ packages_in_most_scripts[1:5,]
 
 output_fn <- "../latex/used_pkgs.bib"
 
-knitr::write_bib(as.character(most_used$packages), file = output_fn)
+#for unclear reasons, NCmisc::list.functions.in.file is not able to pick up on the following packages being in use so they are manually added.
+used_but_not_detected_by_NCmisc <- c("brms", "fs", "patchwork", "cmdstanr")
+
+pkgs_to_cite <- c(used_but_not_detected_by_NCmisc, as.character(most_used$packages)) %>% 
+  unique()
+
+knitr::write_bib(x = pkgs_to_cite, file = output_fn)
 
 readLines(output_fn) %>% 
   str_replace_all("\\&", "\\\\&") %>%
