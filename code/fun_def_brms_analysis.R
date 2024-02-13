@@ -103,9 +103,11 @@ ms_df_long_straddle <- ms_df_long %>%
     left_join(ms_df_long_straddle, by = "variable" ) %>% 
     filter(variable != "lprior") %>% 
     filter(variable != "lp__") %>% 
-    filter(variable != "Intercept") %>%
+    filter(!str_detect(variable, "simo_mo")) %>% 
+    filter(variable != "Intercept") %>% 
     mutate(variable = str_replace_all(variable,"Settlement_date_grouping_finer", "Time depth")) %>% 
-    ggplot(aes(x = value, fill = variable, 
+    mutate(variable = str_replace_all(variable,"bsp_mo", "")) %>% 
+        ggplot(aes(x = value, fill = variable, 
                color = variable,
                y = after_stat(density))) + 
     scale_color_manual(values = distinctive_plot_colors) +
@@ -121,11 +123,13 @@ ms_df_long_straddle <- ms_df_long %>%
                           #             scales = "free",
                           repeat.tick.labels = c('bottom')) +
     geom_vline(aes(xintercept = 0), linetype="dashed", color = "darkgray", alpha = 0.7) +
-    theme_light() +
+    theme_classic() +
     theme(legend.position = "none", 
           axis.ticks.y = element_blank(),
           axis.line.y = element_blank(),
-          axis.text.y = element_blank()) 
+          axis.text.y = element_blank(),
+          axis.title = element_blank(),
+          strip.text = element_text(size = 20))
 
     ggsave(filename = paste0("output/plots/brms_", group, "_group_full_effect_ridge_panels_plot.png"), height = 9, width = 10)
   ggsave(filename = paste0("../latex/brms_", group, "_group_full_effect_ridge_panels_plot.png"),  height = 9, width = 10) 
@@ -167,15 +171,15 @@ chain_summarised  %>%
     "dropped_obs"     = as.character()  )
   
   #add NA to the things to exclude, stands for excluding nothing so that it's all in a neat table.
-  obs <- c(NA, data$group)
+  obs <- c("None", data$group)
   
   for(ob in obs){
     
-    #  ob <- obs[1]
+    #  ob <- obs[6]
     
     cat(paste0("Dropping out ", ob, ".\n"))
     
-    if(is.na(ob)){
+    if(ob = "None"){
       data_spec <-   data 
     }else{data_spec <-   data %>% 
       filter(group != {{ob}})
