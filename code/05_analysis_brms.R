@@ -5,16 +5,16 @@ source("fun_def_brms_analysis.R")
 
 ###SBZR
 data <- read_tsv("output/processed_data/RO_aggregate_SBZR_group_scaled.tsv", show_col_types = F) %>%  
-  rename(group = SBZR_group)
+  rename(group = SBZR_group) 
 
 #inspired by
 #https://bookdown.org/ajkurz/Statistical_Rethinking_recoded/counting-and-classification.html#binomial-regression
 
 #model specs
-formula <- "lg_count  ~   environ_PC1*Shoreline +
+formula <- lg_count  ~   environ_PC1*Shoreline +
   environ_PC2*Shoreline +
-  EA033 + 
-  Shoreline*Settlement_date_grouping_finer"
+  mo(EA033) + 
+  Shoreline*Settlement_date_grouping_finer
 
 group = "SBZR"
 
