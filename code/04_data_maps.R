@@ -4,7 +4,7 @@ source("01_requirements.R")
 glottolog <- read_tsv("output/processed_data/glottolog_language_table_wide_df.tsv", show_col_types = F)  %>% 
   mutate(Longitude = if_else(Longitude <= -25, Longitude + 360, Longitude)) 
 
-polygon_grouping_hierachy <- read_tsv("output/processed_data/Polygon_hierarchy_stats.tsv", show_col_types = F)
+polygon_grouping_hierachy <- read_tsv("output/processed_data/subregions.tsv", show_col_types = F)
   
 #shifting the longlat of the dataframe to match the pacific centered map
 All_polygons <- read_csv("data/RO_polygons_grouped_with_languages.csv", show_col_types = F) %>% 
