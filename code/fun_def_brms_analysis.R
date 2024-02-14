@@ -29,6 +29,7 @@ fun_brms_predicting <- function(data = NULL,
                           chains = chains, 
                           cores = cores,
                           seed = seed,
+                          control = list(adapt_delta = 0.9),
                           backend="cmdstanr") 
   
 ms_full <- summary(output_poisson)
@@ -86,6 +87,7 @@ ms_full <- summary(output_poisson)
     write_tsv(file = paste0("output/results/brms_", group, "_full_chains.tsv"), na = "")
   
 colnames(chain_joined) <- str_replace_all(colnames(chain_joined), "b_", "")  
+colnames(chain_joined) <- str_replace_all(colnames(chain_joined), "bsp_", "")  
 
 #making a straddle df
 ms_df_long <- ms_full$fixed %>% 
@@ -98,7 +100,7 @@ ms_df_long_straddle <- ms_df_long %>%
   filter(variable == "straddle_zero_95") %>% 
   dplyr::select(variable = term, straddle_zero_95 = value)
 
-  chain_joined %>% 
+p <-  chain_joined %>% 
     reshape2::melt(id.vars = "chain") %>%  
     left_join(ms_df_long_straddle, by = "variable" ) %>% 
     filter(variable != "lprior") %>% 
@@ -107,7 +109,9 @@ ms_df_long_straddle <- ms_df_long %>%
     filter(variable != "Intercept") %>% 
     mutate(variable = str_replace_all(variable,"Settlement_date_grouping_finer", "Time depth")) %>% 
     mutate(variable = str_replace_all(variable,"bsp_mo", "")) %>% 
-        ggplot(aes(x = value, fill = variable, 
+    mutate(variable = str_replace_all(variable,"moEA", "EA")) %>% 
+    mutate(variable = str_replace_all(variable,"moTime", "Time")) %>% 
+                ggplot(aes(x = value, fill = variable, 
                color = variable,
                y = after_stat(density))) + 
     scale_color_manual(values = distinctive_plot_colors) +
@@ -129,10 +133,10 @@ ms_df_long_straddle <- ms_df_long %>%
           axis.line.y = element_blank(),
           axis.text.y = element_blank(),
           axis.title = element_blank(),
-          strip.text = element_text(size = 20))
+          strip.text = element_text(size = 14))
 
-    ggsave(filename = paste0("output/plots/brms_", group, "_group_full_effect_ridge_panels_plot.png"), height = 9, width = 10)
-  ggsave(filename = paste0("../latex/brms_", group, "_group_full_effect_ridge_panels_plot.png"),  height = 9, width = 10) 
+    ggsave(plot = p, filename = paste0("output/plots/brms_", group, "_group_full_effect_ridge_panels_plot.png"), height = 9, width = 10)
+  ggsave(plot = p, filename = paste0("../latex/brms_", group, "_group_full_effect_ridge_panels_plot.png"),  height = 9, width = 10) 
   
   
 
@@ -179,7 +183,7 @@ chain_summarised  %>%
     
     cat(paste0("Dropping out ", ob, ".\n"))
     
-    if(ob = "None"){
+    if(ob == "None"){
       data_spec <-   data 
     }else{data_spec <-   data %>% 
       filter(group != {{ob}})
@@ -194,6 +198,7 @@ chain_summarised  %>%
                         chains = chains, 
                         cores = cores,
                         seed = seed,
+                        control = list(adapt_delta = 0.9),
                         backend="cmdstanr") 
     
     ms <- summary(output_spec)
@@ -220,10 +225,12 @@ ms_df <-  ms$fixed %>%
                 max = max(value)) %>% 
       left_join(data, by = "group") %>% 
       mutate(diff = lg_count-mean) %>%  
-      mutate(diff_abs = abs(diff)) 
+      mutate(diff_abs = abs(diff)) %>% 
+      mutate(predicted = mean)
     
     diff <- mean(posterior_predict_df_spec$diff)
     diff_abs <- mean(posterior_predict_df_spec$diff_abs)
+    predicted <- mean(posterior_predict_df_spec$predicted)
     
     cat(paste0("The diff was ", diff_abs %>% round(2)
                , ".\n"))
@@ -255,38 +262,15 @@ ms_df <-  ms$fixed %>%
       dplyr::select(variable, value) %>% 
       data.table::transpose(make.names = "variable") %>% 
       mutate(dropped_obs = ob) 
-    
-    predict_new_data <- brms::posterior_predict(output_spec, newdata = data, ndraws = ndraws) %>% 
-      as.data.frame() %>% 
-      data.table::transpose() %>% 
-      mutate(group = data$group) %>% 
-      reshape2::melt(id.vars = "group") %>% 
-      group_by(group) %>% 
-      summarise(mean = mean(value), 
-                sd = sd(value),
-                min = min(value),
-                max = max(value)) %>%
-      left_join(data, by = "group") %>% 
-      mutate(diff = lg_count - mean) %>% 
-      mutate(diff_abs = abs(diff)) 
-    
-    if(!is.na(ob)){
-      predict_new_data  <- predict_new_data %>% 
-        filter(group == {{ob}})
-      
-    }
-    
-    #output_data_frame
+  
+      #output_data_frame
     
     df_spec <- data.frame(dropped_obs = ob, 
                           mean_Rhat =  ms$fixed$Rhat %>% mean(),
                           mean_Bulk_ESS = ms$fixed$Bulk_ESS %>% mean(),
                           mean_Tail_ESS = ms$fixed$Tail_ESS %>% mean(),
                           diff_predicted_vs_observed = diff,
-                          diff_predicted_vs_observed_abs = diff_abs,
-                          dropped_observation_prediction = predict_new_data$mean,
-                          dropped_observation_prediction_diff = predict_new_data$diff,
-                          dropped_observation_prediction_diff_abs = predict_new_data$diff_abs) %>% 
+                          diff_predicted_vs_observed_abs = diff_abs) %>% 
       full_join(chain_summarised, by = "dropped_obs") %>% 
       full_join(ms_df, by = "dropped_obs")
       
@@ -294,10 +278,8 @@ ms_df <-  ms$fixed %>%
     
     #the run with no dropped generates 58 rows, let's cut that down to one
     df_all <- df_all %>% 
-      mutate(dropped_obs = ifelse(is.na(dropped_obs), "NONE", dropped_obs)) %>% 
       group_by(dropped_obs) %>% 
-      mutate(dropped_observation_prediction_mean = mean(dropped_observation_prediction, na.rm = T),
-             dropped_observation_prediction_diff_mean = mean(dropped_observation_prediction_diff, na.rm = T)) %>% 
+      mutate(dropped_observation_prediction_diff_mean = mean(diff_predicted_vs_observed_abs, na.rm = T)) %>% 
       distinct(dropped_obs, dropped_observation_prediction_diff_mean, .keep_all = T) 
     
     df_all %>%          
