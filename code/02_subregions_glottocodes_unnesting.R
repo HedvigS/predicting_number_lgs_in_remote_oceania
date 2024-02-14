@@ -28,7 +28,7 @@ polygons_df <- read.delim("data/RO_polygons_grouped_with_languages.csv", sep = "
 polygons_df_distinct <- polygons_df %>% 
   distinct(Marck_group, Smallest_Island_group)
 
-SBZR_df <- read_tsv("data/polygons_table_new_group.tsv", show_col_types = F) %>% 
+SBZR_df <- read_tsv("data/polygons_SBZR.tsv", show_col_types = F) %>% 
     distinct(Unique_ID, cost_area_id)
   
 SBZR_df_names <- SBZR_df %>% 
@@ -61,15 +61,3 @@ read_csv("data/RO_polygons_grouped_with_languages.csv", show_col_types = F) %>%
 #  rename(`COASTLINE (km) (perimeter)` = `COASTLINE..km...perimeter.`) %>% 
   distinct() %>%
   write_csv("data/RO_polygons_grouped_with_languages.csv")
-
-#read_tsv("data/oceania_subregions.tsv") %>% 
-#  full_join(SBZR_df_names) %>% 
-#  write_tsv("data/oceania_subregions.tsv")
-
-#read_csv("data/Remote_Oceania_Political_complex_and_more/RO_polygons_grouped_with_languages.csv") %>%
-#  filter(!is.na(glottocodes)) %>%
-#  group_by(Smallest_Island_group, glottocodes, Medium_only_merged_for_shared_language, Marck_group) %>% 
-#  summarise(`Longitude (mean)` = mean(Longitude), 
-#            `Latitude (mean)` = mean(Latitude)) %>% 
-#  write_tsv("output/sheets/grouping_hierarchy_for_latex.tsv")
-  
