@@ -43,7 +43,7 @@ gray_2009_mcct$edge.length = gray_2009_mcct$edge.length / 1000
 # By including the nodes, we create a sparse matrix, which results in significant
 # time improvements within INLA. Note we don't want to scale the phylogeny
 # because we are doing that ourselves in a moment
-phy_inv_nodes = MCMCglmm::inverseA(tree,
+phy_inv_nodes = MCMCglmm::inverseA(gray_2009_mcct,
                                    nodes = "ALL",
                                    scale = FALSE)$Ainv
 
