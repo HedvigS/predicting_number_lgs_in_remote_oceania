@@ -62,6 +62,9 @@ pkgs = c(
   "devtools",
   "xtable",
   "broom", 
+  "ape", 
+  "adephylo", 
+  "MCMCglmm",
   "nFactors",
   "sp", 
   "raster")
