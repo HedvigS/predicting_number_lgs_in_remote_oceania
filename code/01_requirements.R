@@ -122,3 +122,23 @@ distinctive_plot_colors <- c("#FFB6C1",
             "#957DAD"
 
 )
+
+
+
+gray_dup_to_remove <- c("Sisingga", 
+                        "Carolinian",
+                        "Futuna", 
+                        "Aria",
+                        "Madara",
+                        "Maututu",
+                        "Chuukese",
+                        "NakanaiBileki_D",
+                        "LwepeSantaCruz",
+                        "Buma",
+                        "NehanHape",
+                        "Woleai",
+                        "Marshallese", 
+                        "FutunaWest", #mystery language with no entries
+                        "Baliledo" #can't get a glottocode match
+)
+
