@@ -29,6 +29,8 @@ tree_pruned <- compute.brlen(tree_pruned, method = 1)
 
 tree_pruned$edge.length = tree_pruned$edge.length / 1000
 
+tree_pruned %>% ape::write.tree("output/processed_data/tree_glottolog_newick.tree")
+
 # https://github.com/grambank/grambank-analysed/blob/main/R_grambank/spatiophylogenetic_modelling/analysis/make_precisionmatrices.R
 
 ## Calculate precision using typical variance rescaling
