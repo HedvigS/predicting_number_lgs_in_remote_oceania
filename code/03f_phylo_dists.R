@@ -1,30 +1,15 @@
 source("01_requirements.R")
+source("fun_keep_as_tip.R")
 
-glottolog_df <- read.delim("data/glottolog_language_table_wide_df.tsv", sep = "\t")
-
+glottolog_df <- read.delim("data/glottolog_language_table_wide_df.tsv", sep = "\t") %>% 
+  mutate(Language_level_ID = ifelse(is.na(Language_level_ID), Glottocode, Language_level_ID)) %>% 
+  dplyr::select(Language_level_ID, Glottocode, subclassification, level)
   
-#  read_tsv("data/glottolog_language_table_wide_df.tsv", 
-#                        show_col_types = F)
-
 df_line <- glottolog_df %>% 
-  filter(Language_ID == "cent2080") %>% 
+  filter(Language_level_ID == "mala1545") %>% 
   dplyr::select("subclassification") 
 
-df_line$subclassification  %>% str()
 tree_full <- ape::read.tree(text = df_line$subclassification)
-
-tree_full %>% str()
-
-
-df_line$subclassification %>% str()
-
-#get all labels (nodes and tips)
-oceanic_tip_labels <- oceanic_tree_full$tip.label
-oceanic_node_labels <- oceanic_tree_full$node.label
-oceanic_all_labels_df <- c(oceanic_tip_labels, oceanic_node_labels) %>% 
-  as.data.frame() %>%
-  rename(Language_ID = ".")
-
 
 polygons <- read_csv("data/RO_polygons_grouped_with_languages.csv", 
                      show_col_types = F) %>% 
@@ -32,95 +17,17 @@ polygons <- read_csv("data/RO_polygons_grouped_with_languages.csv",
   filter(glottocodes != "") %>% 
   mutate(glottocodes = str_split(glottocodes, ",")) %>%
   unnest(glottocodes) %>% 
-  mutate(Glottocode = trimws(glottocodes)) 
+  mutate(Glottocode = trimws(glottocodes)) %>% 
+  distinct(Glottocode) %>% 
+  left_join(glottolog_df, by = "Glottocode") 
 
+nodes_and_tips <- c(tree_full$tip.label, tree_full$node.label)
 
+tree_pruned <- keep_as_tip(tree_full, tips_and_nodes_to_keep = nodes_and_tips[nodes_and_tips %in% polygons$Language_level_ID])
 
+tree_pruned <- compute.brlen(tree_pruned, method = 1)
 
-#subtree = TRUE
-
-
-#read in GB
-GB_df <- read_tsv(GB_binary_fn) %>% 
-  dplyr::select(Language_ID) %>% 
-  filter(Language_ID != "cent2060") %>% #removing proto-languages
-  filter(Language_ID != "east2449") %>% #removing proto-languages
-  filter(Language_ID != "poly1242") %>% #removing proto-languages
-  filter(Language_ID != "ocea1241") #removing proto-languages
-
-#make df of only things that are languages and oceanic
-oceanic_lgs <- read_tsv("output/processed_data/glottolog_oceanic_languages_df.tsv", show_col_types = F) %>% 
-  dplyr::select("Language_ID") %>% 
-  as.matrix() %>% 
-  as.vector()
-
-#find overlap between glottolog and GB
-overlap <- inner_join(GB_df, oceanic_all_labels_df, by = "Language_ID") %>% 
-  as.matrix() %>% 
-  as.vector()
-
-pruned_tree <-keep_as_tip(oceanic_tree_full, overlap)
-
-pruned_tree <- compute.brlen(pruned_tree, method = 1)
-
-pruned_tree  %>% ape::write.tree( "output/processed_data/trees/glottolog_tree_newick_GB_pruned.txt")
-
-polytomies_n <- pruned_tree$edge %>% 
-  as.data.frame() %>% 
-  group_by(V1) %>% 
-  summarise(n = n()) %>% 
-  filter(n > 2) %>% nrow()
-
-splits <- pruned_tree$edge[,1] %>% length()
-
-message("The Glottolog Oceanic tree (pruned for Grambank matches) has ", splits, " splits. Out of these ",  round(polytomies_n/splits*100, 0), "% are non-binary.")
-
-#prune tree to only languages in oceanic subgroup
-oceanic_tree <-keep_as_tip(oceanic_tree_full, oceanic_lgs)
-
-oceanic_tree <- compute.brlen(oceanic_tree, method = 1)
-
-
-
-oceanic_tree  %>% ape::write.tree("output/processed_data/trees/glottolog_tree_newick_all_oceanic.txt")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+tree_pruned$edge.length = tree_pruned$edge.length / 1000
 
 # https://github.com/grambank/grambank-analysed/blob/main/R_grambank/spatiophylogenetic_modelling/analysis/make_precisionmatrices.R
 
@@ -129,8 +36,8 @@ oceanic_tree  %>% ape::write.tree("output/processed_data/trees/glottolog_tree_ne
 # By including the nodes, we create a sparse matrix, which results in significant
 # time improvements within INLA. Note we don't want to scale the phylogeny
 # because we are doing that ourselves in a moment
-phy_inv_nodes = MCMCglmm::inverseA(gray_2009_mcct_pruned ,
-                                   nodes = "ALL",
+phy_inv_nodes = MCMCglmm::inverseA(tree_pruned,
+                                   nodes = "TIPS",
                                    scale = FALSE)$Ainv
 
 # Next, we invert the precison matrix - creating the covariance matrix
@@ -138,3 +45,30 @@ phy_inv_nodes = MCMCglmm::inverseA(gray_2009_mcct_pruned ,
 phy_covar_nodes = solve(phy_inv_nodes)
 typical_phylogenetic_variance = exp(mean(log(diag(phy_covar_nodes))))
 phy_cov_std = phy_covar_nodes / typical_phylogenetic_variance
+
+dimnames(phy_cov_std) = dimnames(phy_inv_nodes)
+
+tree_scaled <- tree_pruned
+
+tree_scaled$edge.length <- tree_scaled$edge.length / typical_phylogenetic_variance
+phy_prec_mat_new <- MCMCglmm::inverseA(tree_scaled,
+                                       nodes = "TIPS",
+                                       scale = FALSE)$Ainv
+
+# double check the matrix is more or less the same
+phy_prec_mat = solve(phy_cov_std)
+dimnames(phy_prec_mat) = dimnames(phy_inv_nodes)
+
+## matrices are identical up to tolerance
+all.equal(as.matrix(phy_prec_mat), as.matrix(phy_prec_mat_new))
+
+## using this new phylo precision matrix should perform much better
+phy_prec_mat <- phy_prec_mat_new %>% as.matrix() 
+
+colnames(phy_prec_mat) <- rownames(phy_prec_mat)
+
+phy_prec_mat %>% 
+  as.data.frame() %>% 
+  rownames_to_column("Rownames") %>% 
+write_tsv("output/processed_data/phy_prec_mat.tsv", na = "")
+
