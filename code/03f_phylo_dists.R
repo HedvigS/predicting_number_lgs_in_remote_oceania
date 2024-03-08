@@ -4,7 +4,7 @@ glottolog_df <- read_tsv("data/glottolog_language_table_wide_df.tsv",
                         show_col_types = F)
 
 polygons <- read_csv("data/RO_polygons_grouped_with_languages.csv", 
-                     show_col_types = F) %>% 
+                                          show_col_types = F) %>% 
   filter(!is.na(glottocodes)) %>%
   filter(glottocodes != "") %>% 
   mutate(glottocodes = str_split(glottocodes, ",")) %>%
@@ -27,14 +27,16 @@ Gray_et_al_tree_tip.label_df <- tree_removed_dups$tip.label %>%
 
 tree_removed_dups$tip.label <- Gray_et_al_tree_tip.label_df$Glottocode
 
-tips_to_keep <- tree_removed_dups$tip.label %>% 
+tips_to_drop <- tree_removed_dups$tip.label %>% 
   as.data.frame() %>% 
   rename(Glottocode = ".") %>% 
-  inner_join(polygons, by = "Glottocode") %>% 
+  anti_join(polygons, by = "Glottocode") %>% 
   distinct(Glottocode)
 
-gray_2009_mcct_pruned <- ape::keep.tip(phy = tree_removed_dups,tip = tips_to_keep$Glottocode)
+gray_2009_mcct_pruned <- ape::drop.tip(phy = tree_removed_dups,tip = tips_to_drop$Glottocode, rooted = T)
 
+
+plot()
 is.rooted(gray_2009_mcct_pruned)
 
 
