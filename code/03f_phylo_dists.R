@@ -9,12 +9,10 @@ polygons <- read_csv("data/RO_polygons_grouped_with_languages.csv",
   filter(glottocodes != "") %>% 
   mutate(glottocodes = str_split(glottocodes, ",")) %>%
   unnest(glottocodes) %>% 
-  mutate(glottocode = trimws(glottocodes)) 
+  mutate(Glottocode = trimws(glottocodes)) 
   
-lgs <- polygons$glottocode %>% unique()
-
 #read in and prune tree
-gray_2009_mcct <- ape::read.tree("data/trees/gray_et_al2009/original/a400-m1pcv-time.mcct.trees.gz")
+gray_2009_mcct <- ape::read.nexus("data/trees/gray_et_al2009/original/a400-m1pcv-time.mcct.trees.gz")
 
 taxa <- read_csv(file = "data/trees/gray_et_al2009/taxa.csv", show_col_types = F) %>% 
   rename(Glottocode = glottocode) #to conform to what glottolog does elsewhere 
@@ -27,14 +25,21 @@ Gray_et_al_tree_tip.label_df <- tree_removed_dups$tip.label %>%
   left_join(taxa, by = "taxon") %>% 
   left_join(glottolog_df, by = "Glottocode") 
 
-tree_removed_dups$tip.label <- Gray_et_al_tree_tip.label_df$taxon
+tree_removed_dups$tip.label <- Gray_et_al_tree_tip.label_df$Glottocode
 
-overlap <- intersect(tree_removed_dups$tip.label, lgs)
+tips_to_keep <- tree_removed_dups$tip.label %>% 
+  as.data.frame() %>% 
+  rename(Glottocode = ".") %>% 
+  inner_join(polygons, by = "Glottocode") %>% 
+  distinct(Glottocode)
 
-gray_2009_mcct <- ape::keep.tip(phy = tree_removed_dups,
-                                tip = overlap)
+gray_2009_mcct_pruned <- ape::keep.tip(phy = tree_removed_dups,tip = tips_to_keep$Glottocode)
 
-gray_2009_mcct$edge.length = gray_2009_mcct$edge.length / 1000
+is.rooted(gray_2009_mcct_pruned)
+
+
+#gray_2009_mcct_pruned $edge.length = gray_2009_mcct_pruned$edge.length / 1000
+
 
 # https://github.com/grambank/grambank-analysed/blob/main/R_grambank/spatiophylogenetic_modelling/analysis/make_precisionmatrices.R
 
@@ -43,7 +48,7 @@ gray_2009_mcct$edge.length = gray_2009_mcct$edge.length / 1000
 # By including the nodes, we create a sparse matrix, which results in significant
 # time improvements within INLA. Note we don't want to scale the phylogeny
 # because we are doing that ourselves in a moment
-phy_inv_nodes = MCMCglmm::inverseA(gray_2009_mcct,
+phy_inv_nodes = MCMCglmm::inverseA(gray_2009_mcct_pruned ,
                                    nodes = "ALL",
                                    scale = FALSE)$Ainv
 
