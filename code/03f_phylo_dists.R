@@ -24,27 +24,30 @@ polygons <- read_csv("data/RO_polygons_grouped_with_languages.csv",
   left_join(glottolog_df, by = "Glottocode") 
 
 left <- polygons %>% 
-  dplyr::select(Var1 = Glottocode, 
+  dplyr::select(Var1 = Language_level_ID, 
                 SBZR_group_Var1 = SBZR_group, 
                 Medium_only_merged_for_shared_language_Var1 = Medium_only_merged_for_shared_language) %>% 
   distinct()
 
 right <- polygons %>% 
-  dplyr::select(Var2 = Glottocode, 
+  dplyr::select(Var2 = Language_level_ID, 
                 SBZR_group_Var2 = SBZR_group, 
                 Medium_only_merged_for_shared_language_Var2 = Medium_only_merged_for_shared_language) %>% 
   distinct()
 
-
 tree_dists_list <- tree_dists %>% 
   as.matrix() %>% 
-  reshape2::melt() %>% 
-  filter(Var1 %in% unique(polygons$Glottocode)) %>% 
-  filter(Var2 %in% unique(polygons$Glottocode)) %>% 
+  reshape2::melt() %>%
+  filter(Var1 %in% unique(polygons$Language_level_ID)) %>% 
+  filter(Var2 %in% unique(polygons$Language_level_ID)) %>% 
   left_join(left, by = "Var1", relationship = "many-to-many") %>% 
   left_join(right, by = "Var2", relationship = "many-to-many")
 
 #medium
+
+data <- read_tsv("output/processed_data/RO_aggregate_medium_group_scaled.tsv", show_col_types = F) %>%  
+  dplyr::select(Medium_only_merged_for_shared_language)
+
 tree_dists_list_medium <- tree_dists_list %>% 
   distinct(Var1, Var2, Medium_only_merged_for_shared_language_Var1, Medium_only_merged_for_shared_language_Var2, value) %>% 
   group_by(Medium_only_merged_for_shared_language_Var1, Medium_only_merged_for_shared_language_Var2) %>% 
@@ -53,6 +56,11 @@ tree_dists_list_medium <- tree_dists_list %>%
                     Medium_only_merged_for_shared_language_Var2, value.var = "value") %>% 
   column_to_rownames("Medium_only_merged_for_shared_language_Var1") %>% 
   as.matrix()
+
+col_vec <- colnames(tree_dists_list_medium) %in% data$Medium_only_merged_for_shared_language
+row_vec <- rownames(tree_dists_list_medium) %in% data$Medium_only_merged_for_shared_language
+
+tree_dists_list_medium <- tree_dists_list_medium[row_vec, col_vec]
 
 tree_medium <- ape::nj(X = tree_dists_list_medium)
 tree_medium <- phytools::midpoint_root(tree_medium)
@@ -63,6 +71,9 @@ plot(ladderize(tree_medium), cex = 0.4)
 x <- dev.off()
 
 ape::vcv.phylo(tree_medium, corr = FALSE) %>% 
+  saveRDS("output/processed_data/tree_medium_vcv.rds")
+
+tree_medium %>% 
   ape::write.tree(file = "output/processed_data/tree_medium.tree")
 
 #SBZR
@@ -75,6 +86,14 @@ tree_dists_list_SBZR <- tree_dists_list %>%
   column_to_rownames("SBZR_group_Var1") %>% 
   as.matrix()
 
+data <- read_tsv("output/processed_data/RO_aggregate_SBZR_group_scaled.tsv", show_col_types = F) %>%  
+  dplyr::select(SBZR_group)
+
+col_vec <- colnames(tree_dists_list_SBZR) %in% data$SBZR_group
+row_vec <- rownames(tree_dists_list_SBZR) %in% data$SBZR_group
+
+tree_dists_list_SBZR <- tree_dists_list_SBZR[row_vec, col_vec]
+
 tree_SBZR <- ape::nj(X = tree_dists_list_SBZR)
 tree_SBZR <- phytools::midpoint_root(tree_SBZR)
 tree_SBZR <- ape::compute.brlen(tree_SBZR, method = "grafen")
@@ -84,7 +103,7 @@ plot(ladderize(tree_SBZR), cex = 0.4)
 x <- dev.off()
 
 ape::vcv.phylo(tree_SBZR, corr = FALSE) %>% 
-  ape::write.tree(file = "output/processed_data/tree_SBZR.tree")
+  saveRDS("output/processed_data/tree_SBZR.rds")
 
-
-
+tree_SBZR %>% 
+  ape::write.tree(file = "output/processed_data/tree_medium.tree")
