@@ -1,12 +1,18 @@
 source("01_requirements.R")
 source("fun_keep_as_tip.R")
 
+glottolog_df <- read.delim("data/glottolog_language_table_wide_df.tsv", sep = "\t") %>% 
+  mutate(Language_level_ID = ifelse(is.na(Language_level_ID), Glottocode, Language_level_ID)) %>% 
+  dplyr::select(Language_level_ID, Glottocode, subclassification, level, classification)
+
 tree_fn <- "output/processed_data/glottolog_tree_mala1545.tree"
 if(!file.exists(tree_fn)){
   source("03f_pruning_tree.R")
 }
 
 tree_pruned <- ape::read.tree("output/processed_data/glottolog_tree_mala1545.tree")
+
+tree_dists <- adephylo::distTips(tree_pruned, method = "patristic")
 
 polygons <- read_csv("data/RO_polygons_grouped_with_languages.csv", 
                      show_col_types = F) %>% 
@@ -15,11 +21,42 @@ polygons <- read_csv("data/RO_polygons_grouped_with_languages.csv",
   mutate(glottocodes = str_split(glottocodes, ",")) %>%
   unnest(glottocodes) %>% 
   mutate(Glottocode = trimws(glottocodes)) %>% 
-  distinct(Glottocode) %>% 
   left_join(glottolog_df, by = "Glottocode") 
 
-tree_dists <- adephylo::distTips(tree_pruned, method = "patristic", tips = polygons$Glottocode)
+left <- polygons %>% 
+  dplyr::select(Var1 = Glottocode, 
+                SBZR_group_Var1 = SBZR_group, 
+                Medium_only_merged_for_shared_language_Var1 = Medium_only_merged_for_shared_language) %>% 
+  distinct()
+
+right <- polygons %>% 
+  dplyr::select(Var2 = Glottocode, 
+                SBZR_group_Var2 = SBZR_group, 
+                Medium_only_merged_for_shared_language_Var2 = Medium_only_merged_for_shared_language) %>% 
+  distinct()
 
 
+tree_dists_list <- tree_dists %>% 
+  as.matrix() %>% 
+  reshape2::melt() %>% 
+  filter(Var1 %in% unique(polygons$Glottocode)) %>% 
+  filter(Var2 %in% unique(polygons$Glottocode)) %>% 
+  left_join(left, by = "Var1", relationship = "many-to-many") %>% 
+  left_join(right, by = "Var2", relationship = "many-to-many")
 
+tree_dists_list_medium <- tree_dists_list %>% 
+  distinct(Var1, Var2, Medium_only_merged_for_shared_language_Var1, Medium_only_merged_for_shared_language_Var2, value) %>% 
+  group_by(Medium_only_merged_for_shared_language_Var1, Medium_only_merged_for_shared_language_Var2) %>% 
+  summarise(value = median(value), .groups = "drop") %>% 
+  reshape2::dcast(Medium_only_merged_for_shared_language_Var1 ~ 
+                    Medium_only_merged_for_shared_language_Var2, value.var = "value") %>% 
+  column_to_rownames("Medium_only_merged_for_shared_language_Var1") %>% 
+  as.matrix()
 
+tree_medium <- ape::nj(X = tree_dists_list_medium)
+
+tree_medium <- phytools::midpoint_root(tree_medium)
+
+tree_medium <- ape::compute.brlen(tree_medium, method = "grafen")
+
+plot(tree_medium, cex = 0.6)
