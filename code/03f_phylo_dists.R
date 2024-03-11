@@ -44,6 +44,7 @@ tree_dists_list <- tree_dists %>%
   left_join(left, by = "Var1", relationship = "many-to-many") %>% 
   left_join(right, by = "Var2", relationship = "many-to-many")
 
+#medium
 tree_dists_list_medium <- tree_dists_list %>% 
   distinct(Var1, Var2, Medium_only_merged_for_shared_language_Var1, Medium_only_merged_for_shared_language_Var2, value) %>% 
   group_by(Medium_only_merged_for_shared_language_Var1, Medium_only_merged_for_shared_language_Var2) %>% 
@@ -54,9 +55,36 @@ tree_dists_list_medium <- tree_dists_list %>%
   as.matrix()
 
 tree_medium <- ape::nj(X = tree_dists_list_medium)
-
 tree_medium <- phytools::midpoint_root(tree_medium)
-
 tree_medium <- ape::compute.brlen(tree_medium, method = "grafen")
 
-plot(tree_medium, cex = 0.6)
+png("output/plots/island_group_tree_medium.png", width = 20, height = 20, units = "cm", res = 300)
+plot(ladderize(tree_medium), cex = 0.4)
+x <- dev.off()
+
+ape::vcv.phylo(tree_medium, corr = FALSE) %>% 
+  ape::write.tree(file = "output/processed_data/tree_medium.tree")
+
+#SBZR
+tree_dists_list_SBZR <- tree_dists_list %>%
+  distinct(Var1, Var2, SBZR_group_Var1, SBZR_group_Var2, value) %>% 
+  group_by(SBZR_group_Var1, SBZR_group_Var2) %>% 
+  summarise(value = median(value), .groups = "drop") %>% 
+  reshape2::dcast(SBZR_group_Var1 ~ 
+                    SBZR_group_Var2, value.var = "value") %>% 
+  column_to_rownames("SBZR_group_Var1") %>% 
+  as.matrix()
+
+tree_SBZR <- ape::nj(X = tree_dists_list_SBZR)
+tree_SBZR <- phytools::midpoint_root(tree_SBZR)
+tree_SBZR <- ape::compute.brlen(tree_SBZR, method = "grafen")
+
+png("output/plots/island_group_tree_SBZR.png", width = 20, height = 20, units = "cm", res = 300)
+plot(ladderize(tree_SBZR), cex = 0.4)
+x <- dev.off()
+
+ape::vcv.phylo(tree_SBZR, corr = FALSE) %>% 
+  ape::write.tree(file = "output/processed_data/tree_SBZR.tree")
+
+
+
