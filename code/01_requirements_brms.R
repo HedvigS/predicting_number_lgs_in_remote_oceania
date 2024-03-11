@@ -23,7 +23,6 @@ groundhog.library(pkgs, groundhog_date)
   h_load(pkgs)  
 }
 
-
 if(!("rstan" %in% rownames(installed.packages()))){
 install.packages("rstan", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
 }
