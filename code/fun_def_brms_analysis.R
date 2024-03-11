@@ -1,5 +1,7 @@
 
 fun_brms_predicting <- function(data = NULL, 
+                                data2 = NULL,
+                                tree = tree,
                                        formula = NULL, 
                                        group = NULL,
                                        iter = 30000,
@@ -20,7 +22,8 @@ fun_brms_predicting <- function(data = NULL,
   ############# ALL OBSERVATIONS ####################
   
   output_poisson <-  brms::brm(data = data, 
-                          family = poisson,
+                               data2 = data2,
+                               family = poisson,
                           formula = formula,
                           iter = iter, 
                           silent = 2,
@@ -189,6 +192,7 @@ chain_summarised  %>%
       filter(group != {{ob}})
     }
     output_spec <-  brms::brm(data = data_spec, 
+                              data2 = data2, 
                         family = poisson,
                         formula = formula,
                         iter = iter, 
