@@ -42,6 +42,7 @@ pkgs = c(
   "broom", 
   "ape", 
   "adephylo", 
+  "phytools",
   "MCMCglmm",
   "nFactors",
   "sp", 
@@ -55,7 +56,8 @@ groundhog_date = "2023-12-17"
 
 if(!("groundhog" %in% rownames(installed.packages()))){
     install.packages("groundhog")
-}library(groundhog)
+}
+library(groundhog)
 
 groundhog_dir <- paste0("groundhog_libraries_", groundhog_date)
 
