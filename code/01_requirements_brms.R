@@ -12,7 +12,17 @@ pkgs = c(
   "dagitty",
   "shape")
 
+#if you don't want to use the groundhog package manner of loading and installing packages, set groundhog to anything but "yes"
+groundhog <- "yes"
+
+if(groundhog == "yes"){
+  
 groundhog.library(pkgs, groundhog_date)
+}else{
+  source("fun_def_h_load.R")
+  h_load(pkgs)  
+}
+
 
 if(!("rstan" %in% rownames(installed.packages()))){
 install.packages("rstan", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))

@@ -3,32 +3,10 @@
 
 set.seed(1988)
 
+#if you don't want to use the groundhog package manner of loading and installing packages, set groundhog to anything but "yes"
+groundhog <- "yes"
 
 #packages
-
-#groundhogr set-up
-
-groundhog_date = "2023-12-17"
-
-if(!("groundhog" %in% rownames(installed.packages()))){
-  
-  install.packages("groundhog")
-  library(groundhog)
-  
-}else{  
-  
-  library(groundhog)
-  
-}
-
-groundhog_dir <- paste0("groundhog_libraries_", groundhog_date)
-
-if(!dir.exists(groundhog_dir)){
-  dir.create(groundhog_dir)
-}
-
-groundhog::set.groundhog.folder(groundhog_dir)
-
 pkgs = c(
   "tidyverse",
   "reshape2",
@@ -69,7 +47,29 @@ pkgs = c(
   "sp", 
   "raster")
 
+#groundhogr set-up
+
+if(groundhog == "yes"){
+
+groundhog_date = "2023-12-17"
+
+if(!("groundhog" %in% rownames(installed.packages()))){
+    install.packages("groundhog")
+}library(groundhog)
+
+groundhog_dir <- paste0("groundhog_libraries_", groundhog_date)
+
+if(!dir.exists(groundhog_dir)){
+  dir.create(groundhog_dir)
+}
+
+groundhog::set.groundhog.folder(groundhog_dir)
+
 groundhog.library(pkgs, groundhog_date)
+}else{
+  source("fun_def_h_load.R")
+  h_load(pkgs)  
+}
 
 
 #funs
