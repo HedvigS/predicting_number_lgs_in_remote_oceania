@@ -103,7 +103,7 @@ plot(ladderize(tree_SBZR), cex = 0.4)
 x <- dev.off()
 
 ape::vcv.phylo(tree_SBZR, corr = FALSE) %>% 
-  saveRDS("output/processed_data/tree_SBZR.rds")
+  saveRDS("output/processed_data/tree_SBZR_vcv.rds")
 
 tree_SBZR %>% 
   ape::write.tree(file = "output/processed_data/tree_medium.tree")
