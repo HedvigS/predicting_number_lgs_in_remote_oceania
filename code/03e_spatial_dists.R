@@ -67,28 +67,17 @@ dists_vector_SBZR <- as.vector(dist_SBZR) %>% na.omit()
 dists_vector_medium <- as.vector(dist_medium) %>% na.omit()
 
 #SBZR
-spatial_covar_mat_SBZR = varcov.spatial(
+spatial_vcv_SBZR = varcov.spatial(
   dists.lowertri = dists_vector_SBZR,         
   cov.pars = c(1, 1.15),
   kappa = 2
 )$varcov
 
 
-## variance standardisation from above
-typical_variance_spatial = exp(mean(log(diag(spatial_covar_mat_SBZR))))
-spatial_covar_mat_SBZR_std = spatial_covar_mat_SBZR / typical_variance_spatial
-spatial_prec_mat_SBZR = solve(spatial_covar_mat_SBZR_std)
-
-rownames(spatial_prec_mat_SBZR) <- rownames(dist_SBZR)
-colnames(spatial_prec_mat_SBZR) <- colnames(dist_SBZR)
-
-spatial_prec_mat_SBZR %>% 
-  as.data.frame() %>% 
-  rownames_to_column("Rownames") %>% 
-  write_tsv("output/processed_data/spatial_prec_mat_SBZR.tsv", na = "")
+spatial_vcv_SBZR %>% saveRDS("output/processed_data/spatial_vcv_SBZR.rds")
 
 #medium
-spatial_covar_mat_medium = varcov.spatial(
+spatial_vcv_medium = varcov.spatial(
   dists.lowertri = dists_vector_medium,         
   cov.pars = c(1, 1.15),
   kappa = 2
@@ -96,14 +85,4 @@ spatial_covar_mat_medium = varcov.spatial(
 
 
 ## variance standardisation from above
-typical_variance_spatial = exp(mean(log(diag(spatial_covar_mat_medium))))
-spatial_covar_mat_medium_std = spatial_covar_mat_medium / typical_variance_spatial
-spatial_prec_mat_medium = solve(spatial_covar_mat_medium_std)
-
-rownames(spatial_prec_mat_medium) <- rownames(dist_medium)
-colnames(spatial_prec_mat_medium) <- colnames(dist_medium)
-
-spatial_prec_mat_medium %>% 
-  as.data.frame() %>% 
-  rownames_to_column("Rownames") %>% 
-  write_tsv("output/processed_data/spatial_prec_mat_medium.tsv", na = "")
+spatial_vcv_medium %>% saveRDS("output/processed_data/spatial_vcv_medium.rds")
