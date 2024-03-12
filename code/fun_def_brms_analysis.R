@@ -40,9 +40,6 @@ stop("The argument control is not one of the recognised strings.")
     stop("The control argument is set to spatialphylo but the formula does not include spatial_vcv and phylo_vcv.")
   }
   
-  
-  
-  
 #  iter = 30000
 #  warmup = 1000
 #  chains = 4
@@ -65,6 +62,21 @@ stop("The argument control is not one of the recognised strings.")
                           seed = seed,
                           control = list(adapt_delta = 0.9),
                           backend="cmdstanr") 
+  
+  waic <- loo::waic(output_poisson)
+  loo <- loo::loo(output_poisson)
+  
+  waic$estimates %>% 
+    as.data.frame() %>% 
+    rownames_to_column("fit_score") %>% 
+  write_tsv(file = paste0("output/results/brms_", group, "_control_", control,"_model_fit_waic.tsv"), na = "")
+  
+  loo$estimates %>% 
+    as.data.frame() %>% 
+    rownames_to_column("fit_score") %>% 
+    write_tsv(file = paste0("output/results/brms_", group, "_control_", control,"_model_fit_loo.tsv"), na = "")
+  
+  
   
 ms_full <- summary(output_poisson)
   
