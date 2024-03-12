@@ -25,7 +25,11 @@ fun_brms_predicting(data = data, formula = formula, group = group)
 data <- read_tsv("output/processed_data/RO_aggregate_medium_group_scaled.tsv", show_col_types = F) %>%  
   rename(group = Medium_only_merged_for_shared_language)
 
-formula <- lg_count  ~  environ_PC1*Shoreline +
+tree_vcv <- readRDS("output/processed_data/tree_medium_vcv.rds")
+data2 = list(tree_vcv = tree_vcv)
+
+formula <- lg_count  ~    (1 | gr(group, cov = tree_vcv)) +
+  environ_PC1*Shoreline +
   environ_PC2*Shoreline +
   environ_PC3*Shoreline +
   mo(EA033) + 
@@ -33,5 +37,5 @@ formula <- lg_count  ~  environ_PC1*Shoreline +
 
 group = "medium"
 
-fun_brms_predicting(data = data, formula = formula, group = group)
+fun_brms_predicting(data = data, data2 = data2, formula = formula, group = group)
 
