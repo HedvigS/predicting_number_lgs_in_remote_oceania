@@ -1,9 +1,10 @@
 
 fun_brms_predicting <- function(data = NULL, 
                                 data2 = NULL,
-                                tree = tree,
                                        formula = NULL, 
+                                      control = NULL,
                                        group = NULL,
+                                       drop_one_out = TRUE,
                                        iter = 30000,
                                        warmup = 1000,
                                        chains = 4,
@@ -11,6 +12,36 @@ fun_brms_predicting <- function(data = NULL,
                                        seed = 10,
                                        ndraws = 10000
 ){
+
+  #sanity checks of arguments
+  if(length(control) == 0 ){
+    stop("The argument control is NULL.")    
+    
+  }
+  
+  if(!(control %in% c("phylo", "none", "spatial","spatialphylo"))     ){
+stop("The argument control is not one of the recognised strings.")    
+  }
+  
+  if(control == "phylo" & 
+     !str_detect(as.character(formula)[3], pattern = "phylo_vcv")){
+    stop("The control argument is set to phylo but the formula does not include phylo_vcv.")
+    }
+  
+  if(control == "spatial" & 
+     !str_detect(as.character(formula)[3], pattern = "spatial_vcv")){
+    stop("The control argument is set to spatial but the formula does not include spatial_vcv.")
+  }
+  
+  
+  if(control == "spatialphylo" & 
+     !str_detect(as.character(formula)[3], pattern = "spatial_vcv") &
+     !str_detect(as.character(formula)[3], pattern = "phylo_vcv")){
+    stop("The control argument is set to spatialphylo but the formula does not include spatial_vcv and phylo_vcv.")
+  }
+  
+  
+  
   
 #  iter = 30000
 #  warmup = 1000
@@ -108,7 +139,9 @@ p <-  chain_joined %>%
     left_join(ms_df_long_straddle, by = "variable" ) %>% 
     filter(variable != "lprior") %>% 
     filter(variable != "lp__") %>% 
-    filter(!str_detect(variable, "simo_mo")) %>% 
+  filter(!str_detect(variable, "ntercept")) %>%
+  filter(!str_detect(variable, "r_group")) %>%
+  filter(!str_detect(variable, "simo_mo")) %>%
     filter(variable != "Intercept") %>% 
     mutate(variable = str_replace_all(variable,"Settlement_date_grouping_finer", "Time depth")) %>% 
     mutate(variable = str_replace_all(variable,"bsp_mo", "")) %>% 
@@ -173,6 +206,7 @@ chain_summarised  %>%
   
   ########### KICKING OUT ONE OBSERVATION AT A TIME
   
+if(drop_one_out == TRUE){
 #empty df to bind to in the for-loop
   df_all <- data.frame(
     "dropped_obs"     = as.character()  )
@@ -315,33 +349,6 @@ ms_df <-  ms$fixed %>%
     data.table::transpose(make.names = "dropped_obs", keep.names = "variable") %>% 
     write_tsv(file = paste0("output/results/brms_", group, "_dropped_effects_diff_below_1.4.tsv"), na = "")
   
-  ######################################
-  
-  # 
-  # #calculating the estimate value "manually" from the coef vs what predict() does
-  # for(n in 1:58){
-  # 
-  #   n <- 13
-  # 
-  # model_estimate <- predict_df[n,]$predicted_poisson.Estimate
-  # 
-  # manual_estimate <- exp((mean(data_chopped[n,]$Carrying_capactiy_PC1 * chain_joined$b_Carrying_capactiy_PC1)
-  #  +
-  #        mean(data_chopped[n,]$Carrying_capactiy_PC2 * chain_joined$b_Carrying_capactiy_PC2)
-  #  +
-  #        mean(data_chopped[n,]$Shoreline * chain_joined$b_Shoreline)
-  #  +
-  #        mean(data_chopped[n,]$EA033 * chain_joined$b_EA033)
-  #  +
-  #        mean(data_chopped[n,]$Settlement_date_grouping_finer * chain_joined$b_Settlement_date_grouping_finer)) +
-  #    mean(chain_joined$b_Intercept)
-  # )
-  # 
-  # print(manual_estimate-model_estimate)
-  # 
-  # }
-  # 
-  # 
-  
+}
 }
 
