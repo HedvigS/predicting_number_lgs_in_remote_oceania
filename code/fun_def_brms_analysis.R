@@ -86,7 +86,7 @@ ms_full <- summary(output_poisson)
   
   posterior_predict_df %>% 
     distinct(group, mean, sd, min, max, diff_poisson, diff_poisson_abs, lg_count) %>% 
-    write_tsv(file = paste0("output/results/brms_", group, "_predict_table.tsv"), na = "")
+    write_tsv(file = paste0("output/results/brms_", group, "_control_", control,"_predict_table.tsv"), na = "")
   
   #predict plot
   
@@ -104,8 +104,8 @@ ms_full <- summary(output_poisson)
     theme(panel.background = element_rect(fill = "white"), 
           plot.background = element_rect(fill = "white"))
   
-  ggsave(plot = p, filename = paste0("output/plots/brms_predict_", group, ".png"), height = 8, width = 6)  
-  ggsave(plot = p,filename = paste0("../latex/brms_predict_", group, ".png"),  height = 8, width = 6) 
+  ggsave(plot = p, filename = paste0("output/plots/brms_predict_", group, "_control_", control, ".png"), height = 8, width = 6)  
+  ggsave(plot = p,filename = paste0("../latex/brms_predict_", group, "_control_", control, ".png"),  height = 8, width = 6) 
   
   ### model output
   chain_1 <- output_poisson$fit@sim$samples[[1]] %>% as.data.frame()  %>% mutate(chain = "1")
@@ -118,7 +118,7 @@ ms_full <- summary(output_poisson)
     suppressMessages(full_join(chain_4))
   
   chain_joined %>% 
-    write_tsv(file = paste0("output/results/brms_", group, "_full_chains.tsv"), na = "")
+    write_tsv(file = paste0("output/results/brms_", group, "_control_", control, "_full_chains.tsv"), na = "")
   
 colnames(chain_joined) <- str_replace_all(colnames(chain_joined), "b_", "")  
 colnames(chain_joined) <- str_replace_all(colnames(chain_joined), "bsp_", "")  
@@ -171,8 +171,8 @@ p <-  chain_joined %>%
           axis.title = element_blank(),
           strip.text = element_text(size = 14))
 
-    ggsave(plot = p, filename = paste0("output/plots/brms_", group, "_group_full_effect_ridge_panels_plot.png"), height = 9, width = 10)
-  ggsave(plot = p, filename = paste0("../latex/brms_", group, "_group_full_effect_ridge_panels_plot.png"),  height = 9, width = 10) 
+    ggsave(plot = p, filename = paste0("output/plots/brms_", group, "_control_", control, "_group_full_effect_ridge_panels_plot.png"), height = 9, width = 10)
+  ggsave(plot = p, filename = paste0("../latex/brms_", group, "_control_", control, "_group_full_effect_ridge_panels_plot.png"),  height = 9, width = 10) 
   
   
 
@@ -202,7 +202,7 @@ chain_summarised  %>%
   reshape2::melt(id.vars = "dropped_obs") %>% 
   separate(col = variable, into = c("term","variable"), sep = "§", remove = T) %>% 
   dplyr::select(-dropped_obs) %>% 
-  write_tsv(file = paste0("output/results/brms_", group, "_full_effects_table.tsv"))
+  write_tsv(file = paste0("output/results/brms_", group, "_control_", control, "_full_effects_table.tsv"))
   
   ########### KICKING OUT ONE OBSERVATION AT A TIME
   
@@ -321,7 +321,7 @@ ms_df <-  ms$fixed %>%
       distinct(dropped_obs, dropped_observation_prediction_diff_mean, .keep_all = T) 
     
     df_all %>%          
-      write_tsv(file = paste0("output/results/brms_", group, "_group_drop_one_out.tsv"), na = "")
+      write_tsv(file = paste0("output/results/brms_", group, "_control_", control, "_group_drop_one_out.tsv"), na = "")
     
   } #end of dropping out one for-loop
   
@@ -340,14 +340,14 @@ ms_df <-  ms$fixed %>%
     theme(panel.background = element_rect(fill = "white"), 
           plot.background = element_rect(fill = "white"))
   
-  ggsave(filename = paste0("output/plots/brms_", group, "_dropped_out_plot_diff.png"), width = 9, height = 9)
-  ggsave(filename = paste0("../latex/brms_", group, "_dropped_out_plot_diff.png"), width = 9, height = 9)
+  ggsave(filename = paste0("output/plots/brms_", group, "_control_", control, "_dropped_out_plot_diff.png"), width = 9, height = 9)
+  ggsave(filename = paste0("../latex/brms_", group, "_control_", control, "_dropped_out_plot_diff.png"), width = 9, height = 9)
   
   df_all %>% 
     filter(diff_predicted_vs_observed_abs < 1.4) %>% 
     #  column_to_rownames("dropped_obs") %>% 
     data.table::transpose(make.names = "dropped_obs", keep.names = "variable") %>% 
-    write_tsv(file = paste0("output/results/brms_", group, "_dropped_effects_diff_below_1.4.tsv"), na = "")
+    write_tsv(file = paste0("output/results/brms_", group, "_control_", control, "_dropped_effects_diff_below_1.4.tsv"), na = "")
   
 }
 }
