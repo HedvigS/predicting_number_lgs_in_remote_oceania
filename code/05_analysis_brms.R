@@ -26,10 +26,10 @@ data <- read_tsv("output/processed_data/RO_aggregate_medium_group_scaled.tsv", s
   rename(group = Medium_only_merged_for_shared_language)
 
 phylo_vcv <- readRDS("output/processed_data/tree_medium_vcv.rds")
-data2 = list(phylo_vcv = phylo_vcv)
+spatial_vcv <- readRDS("output/processed_data/spatial_vcv_medium.rds")
+data2 = list(phylo_vcv = phylo_vcv, spatial_vcv = spatial_vcv)
 
-formula <- lg_count  ~    (1 | gr(group, cov = phylo_vcv)) +
-  environ_PC1*Shoreline +
+formula <- lg_count  ~    environ_PC1*Shoreline +
   environ_PC2*Shoreline +
   environ_PC3*Shoreline +
   mo(EA033) + 
@@ -38,4 +38,7 @@ formula <- lg_count  ~    (1 | gr(group, cov = phylo_vcv)) +
 group = "medium"
 
 fun_brms_predicting(data = data, data2 = data2, formula = formula, group = group, control = "phylo", drop_one_out = FALSE )
+
+fun_brms_predicting(data = data, data2 = data2, formula = formula, group = group, control = "none", drop_one_out = FALSE )
+
 
