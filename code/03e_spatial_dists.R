@@ -1,6 +1,12 @@
 source("01_requirements.R")
 source("fun_def_varcov_spatial.R")  
 
+data_SBZR <- read_tsv("output/processed_data/RO_aggregate_SBZR_group_scaled.tsv", show_col_types = F) %>%  
+  dplyr::select(SBZR_group)
+
+data_medium <- read_tsv("output/processed_data/RO_aggregate_medium_group_scaled.tsv", show_col_types = F) %>%  
+  dplyr::select(Medium_only_merged_for_shared_language)
+
 polygons <- read_csv("data/RO_polygons_grouped_with_languages.csv", show_col_types = FALSE) %>% 
   filter(!is.na(SBZR_group) & !is.na(Medium_only_merged_for_shared_language)) %>% 
   dplyr::select(Longitude, Latitude, Unique_ID, SBZR_group,Medium_only_merged_for_shared_language) 
@@ -46,6 +52,11 @@ dist_SBZR <- dist_long %>%
   column_to_rownames("SBZR_group_Var1") %>% 
   as.matrix()
 
+col_vec <- colnames(dist_SBZR) %in% data_SBZR$SBZR_group
+row_vec <- rownames(dist_SBZR) %in% data_SBZR$SBZR_group
+
+dist_SBZR <- dist_SBZR[row_vec, col_vec]
+
 #medium
 dist_medium <- dist_long %>% 
   filter(Medium_only_merged_for_shared_language_Var1 != Medium_only_merged_for_shared_language_Var2) %>%  
@@ -54,6 +65,11 @@ dist_medium <- dist_long %>%
   reshape2::dcast(Medium_only_merged_for_shared_language_Var1 ~ Medium_only_merged_for_shared_language_Var2, value.var = "min_dist") %>% 
   column_to_rownames("Medium_only_merged_for_shared_language_Var1") %>% 
   as.matrix()
+
+col_vec <- colnames(dist_medium) %in% data_medium$Medium_only_merged_for_shared_language
+row_vec <- rownames(dist_medium) %in% data_medium$Medium_only_merged_for_shared_language
+
+dist_medium <- dist_medium[row_vec, col_vec]
 
 #make vcv
 #smoothness parameters / spatial decay from Grambank release paper (Skirgård et al 2023)
@@ -73,6 +89,8 @@ spatial_vcv_SBZR = varcov.spatial(
   kappa = 2
 )$varcov
 
+colnames(spatial_vcv_SBZR) <- colnames(dist_SBZR)
+rownames(spatial_vcv_SBZR) <- rownames(dist_SBZR)
 
 spatial_vcv_SBZR %>% saveRDS("output/processed_data/spatial_vcv_SBZR.rds")
 
@@ -83,6 +101,7 @@ spatial_vcv_medium = varcov.spatial(
   kappa = 2
 )$varcov
 
+colnames(spatial_vcv_medium) <- colnames(dist_medium)
+rownames(spatial_vcv_medium) <- rownames(dist_medium)
 
-## variance standardisation from above
 spatial_vcv_medium %>% saveRDS("output/processed_data/spatial_vcv_medium.rds")
