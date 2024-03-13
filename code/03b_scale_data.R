@@ -12,8 +12,8 @@ data <- read_tsv("output/processed_data/RO_aggregate_SBZR_group.tsv", show_col_t
   rename(Area_land = sum_area) %>% 
   rename(Shoreline = sum_shoreline) %>% 
   rename(Settlement_date_grouping_finer = settlement_date_grouping_finer) %>% 
-  mutate(SBZR_group = str_replace_all(SBZR_group, "Kanaky", "New Caledonia (incl loyalties)")) %>% 
-  mutate(SBZR_group = str_replace_all(SBZR_group, "and ", "+ ")) %>% 
+#  mutate(SBZR_group = str_replace_all(SBZR_group, "Kanaky", "New Caledonia (incl loyalties)")) %>% 
+#  mutate(SBZR_group = str_replace_all(SBZR_group, "and ", "+ ")) %>% 
   arrange(-lg_count) %>% 
   dplyr::select(SBZR_group, 
                 lg_count, 
