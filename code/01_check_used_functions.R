@@ -1,6 +1,7 @@
 source("01_requirements.R")
+source("01_requirements_brms.R")
 
-pkgs <- c("NCmisc", "knitr", "bib2df")
+pkgs <- c("NCmisc", "knitr", "bib2df", "tidyr")
 
 groundhog.library(pkgs, groundhog_date)
 
@@ -100,7 +101,11 @@ packages_in_most_scripts[1:5,]
 output_fn <- "../latex/used_pkgs.bib"
 
 #for unclear reasons, NCmisc::list.functions.in.file is not able to pick up on the following packages being in use so they are manually added.
-used_but_not_detected_by_NCmisc <- c("brms", "fs", "patchwork", "cmdstanr")
+used_but_not_detected_by_NCmisc <- c("brms", "fs", "patchwork", "cmdstanr", "MCMCglmm", "maps", 
+                                     "StanHeaders", "mvtnorm", "Rcpp", "coda", "maps" ,"ade4",  "devtools",  "rlang")
+
+
+
 
 pkgs_to_cite <- c(used_but_not_detected_by_NCmisc, as.character(most_used$packages)) %>% 
   unique()
