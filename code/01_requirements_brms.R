@@ -8,9 +8,10 @@ pkgs = c(
   "brms", 
   "mvtnorm",
   "devtools",
-  "loo",
-  "dagitty",
-  "shape")
+  "loo"#,
+#  "dagitty",
+#  "shape"
+)
 
 #if you don't want to use the groundhog package manner of loading and installing packages, set groundhog to anything but "yes"
 groundhog <- "yes"
@@ -34,13 +35,12 @@ cmdstanr::install_cmdstan()
 }
 library(cmdstanr)
 
-if(!("rethinking" %in% rownames(installed.packages()))){
+#if(!("rethinking" %in% rownames(installed.packages()))){
   
-  devtools::install_github("rmcelreath/rethinking", upgrade = "never")
-}
+#  devtools::install_github("rmcelreath/rethinking", upgrade = "never")
+#}
 
-library("rethinking")
+#library("rethinking")
 
-#rethinking slim - no MCMC
 #If you just want to work through the first half of the course, without bothering with MCMC and Stan installs, you can install the 'slim' version of the rethinking package. Do this:
 #devtools::install_github("rmcelreath/rethinking@slim", upgrade = "never")
