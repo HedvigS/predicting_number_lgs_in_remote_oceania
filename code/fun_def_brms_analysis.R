@@ -65,8 +65,9 @@ stop("The argument control is not one of the recognised strings.")
   
   waic <- loo::waic(output_poisson)
   loo <- loo::loo(output_poisson)
-  
-  waic$estimates %>% 
+  bayes_r2 <- bayes_R2(output_poisson, probs = c(0, 0.025, 0.975, 1)) 
+
+    waic$estimates %>% 
     as.data.frame() %>% 
     rownames_to_column("fit_score") %>% 
   write_tsv(file = paste0("output/results/brms_", group, "_control_", control,"_model_fit_waic.tsv"), na = "")
@@ -76,7 +77,10 @@ stop("The argument control is not one of the recognised strings.")
     rownames_to_column("fit_score") %>% 
     write_tsv(file = paste0("output/results/brms_", group, "_control_", control,"_model_fit_loo.tsv"), na = "")
   
-  
+  bayes_r2 %>%
+  as.data.frame() %>% 
+    rownames_to_column("fit_score") %>% 
+    write_tsv(file = paste0("output/results/brms_", group, "_control_", control,"_model_fit_R2.tsv"), na = "")
   
 ms_full <- summary(output_poisson)
   
@@ -96,7 +100,14 @@ ms_full <- summary(output_poisson)
   
   cat(paste0("The mean absolute difference between the predicted and observed numbers of languages is ", posterior_predict_df$diff_poisson_abs %>% mean() %>% round(2), ".\n"))
   
-  posterior_predict_df %>% 
+  data.frame(
+    diff_poisson_abs  =  posterior_predict_df$diff_poisson_abs %>% mean(), 
+    diff_poisson = posterior_predict_df$diff_poisson %>% mean()
+  ) %>% 
+  write_tsv(file = paste0("output/results/brms_", group, "_control_", control,"_diff_means.tsv"), na = "")
+  
+  
+      posterior_predict_df %>% 
     distinct(group, mean, sd, min, max, diff_poisson, diff_poisson_abs, lg_count) %>% 
     write_tsv(file = paste0("output/results/brms_", group, "_control_", control,"_predict_table.tsv"), na = "")
   
