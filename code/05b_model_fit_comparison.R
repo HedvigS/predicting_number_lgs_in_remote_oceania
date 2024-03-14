@@ -40,17 +40,21 @@ joined <- df_fit_loo %>%
   full_join(df_fit_R2,by = join_by(control, group)) %>% 
   full_join(df_fit_diff_means, by = join_by(control, group))
 
+joined_SBZR <- joined %>% 
+  filter(group == "SBZR")
+
+joined_medium <- joined %>% 
+  filter(group == "medium")
+
 png("output/plots/splom_model_fit_medium.png", width = 10, height = 10, res = 300, units = "cm")
-joined %>% 
-  filter(group == "medium") %>% 
+joined_medium %>% 
   dplyr::select(-group, -control) %>% 
     SPLOM_hedders()
 x <- dev.off()
 
 png("output/plots/splom_model_fit_SBZR.png", width = 10, height = 10, res = 300, units = "cm")
 
-joined %>% 
-  filter(group == "SBZR") %>% 
+joined_SBZR %>% 
   dplyr::select(-group, -control) %>% 
   SPLOM_hedders()
 
@@ -63,8 +67,7 @@ cap <- "Comparison of model fit scores of models with different controls for spa
 lbl <- "model_fit_score_table_SBZR"
 align <- c("r","p{2cm}","p{2cm}","p{2cm}", "p{2cm}",  "p{2cm}") 
 
-joined %>% 
-  filter(group == "SBZR") %>% 
+joined_SBZR %>%   
   dplyr::select(-group) %>% 
   xtable(caption = cap, label = lbl,
          digits = 3, 
@@ -80,8 +83,7 @@ cap <- "Comparison of model fit scores of models with different controls for spa
 lbl <- "model_fit_score_table_SBZR"
 align <- c("r","p{2cm}","p{2cm}","p{2cm}", "p{2cm}",  "p{2cm}") 
 
-joined %>% 
-  filter(group == "medium") %>% 
+joined_medium %>% 
   dplyr::select(-group) %>% 
   xtable(caption = cap, label = lbl,
          digits = 3, 
@@ -91,3 +93,16 @@ joined %>%
                        sanitize.text.function = function(x){x},
                        include.rownames = FALSE, math.style.negative = F,
                        booktabs = TRUE, floating = F, tabular.environment = "longtable") 
+
+
+
+best_control_SBZR <- joined_SBZR[which.min(joined_SBZR$WAIC),][1,1] %>% as.character()
+best_control_medium <- joined_medium[which.min(joined_medium$WAIC),][1,1]  %>% as.character()
+
+
+cat(paste0("For the SBZR-island grouping, the best performing model (lowest WAIC) is the one with control for: ", best_control_SBZR, ".\n"))
+
+
+cat(paste0("For the shared language-island grouping, the best performing model (lowest WAIC) is the one with control for: ", best_control_medium, ".\n"))
+
+
