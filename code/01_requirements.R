@@ -11,6 +11,7 @@ pkgs = c(
 #  "tidyverse",
   "dplyr",
   "stringr",
+  "purrr",
   "tidyr",
   "tibble",
   "forcats",
