@@ -12,6 +12,7 @@ pkgs = c(
   "dplyr",
   "stringr",
   "purrr",
+  "readr",
   "tidyr",
   "tibble",
   "forcats",
