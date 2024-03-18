@@ -32,9 +32,9 @@ formula <- lg_count  ~    environ_PC1*Shoreline +
   mo(EA033) + 
   Shoreline*mo(Settlement_date_grouping_finer)
 
-fun_brms_predicting(data = data, data2 = data2, formula = formula, group = group, control = "none", drop_one_out = TRUE)
+fun_brms_predicting(data = data, data2 = NULL, formula = formula, group = group, control = "none", drop_one_out = TRUE)
 
-
+##############################################################################
 #MEDIUM
 data <- read_tsv("output/processed_data/RO_aggregate_medium_group_scaled.tsv", show_col_types = F) %>%  
   rename(group = Medium_only_merged_for_shared_language) %>% 
@@ -47,7 +47,6 @@ phylo_vcv <- readRDS("output/processed_data/tree_medium_vcv.rds")
 spatial_vcv <- readRDS("output/processed_data/spatial_vcv_medium.rds")
 data2 = list(phylo_vcv = phylo_vcv, spatial_vcv = spatial_vcv)
 
-
 #spatial 
 formula <- lg_count  ~    (1 | gr(spatial_id, cov = spatial_vcv)) +
   environ_PC1*Shoreline +
@@ -58,7 +57,6 @@ formula <- lg_count  ~    (1 | gr(spatial_id, cov = spatial_vcv)) +
 
 fun_brms_predicting(data = data, data2 = data2, formula = formula, group = group, control = "spatial", drop_one_out = TRUE)
 
-
 #none
 formula <- lg_count  ~    environ_PC1*Shoreline +
   environ_PC2*Shoreline +
@@ -66,4 +64,6 @@ formula <- lg_count  ~    environ_PC1*Shoreline +
   mo(EA033) + 
   Shoreline*mo(Settlement_date_grouping_finer)
 
-fun_brms_predicting(data = data, data2 = data2, formula = formula, group = group, control = "none", drop_one_out = TRUE)
+#control = "none"
+
+fun_brms_predicting(data = data, data2 = NULL, formula = formula, group = group, control = "none", drop_one_out = TRUE)
