@@ -109,6 +109,9 @@ if(!dir.exists(dir)){dir.create(dir)}
 dir <- "output/results"
 if(!dir.exists(dir)){dir.create(dir)}
 
+dir <- "output/results/drop_one_out/"
+if(!dir.exists(dir)){dir.create(dir)}
+
 
 getmode <- function(v, na.rm = T) {
 if(na.rm == T){
