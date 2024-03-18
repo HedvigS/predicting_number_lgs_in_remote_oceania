@@ -32,4 +32,18 @@ sbzr_phylosig_lambda <- phytools::phylosig(tree = tree_SBZR, x = data_SBZR, meth
 medium_phylosig_lambda <- phytools::phylosig(tree = tree_medium, x = data_medium, method = "lambda")
 
 
+phytools::dotTree(tree = ladderize(tree_SBZR), x = data_SBZR)
+phytools::dotTree(tree = ladderize(tree_medium), x = data_medium)
 
+
+#testing that phylosig works
+clade_1 <- c("Palau", "Vanuatu + Temotu", "Kanaky", "Kosrae", "Ulithi + Yap", "Tungaru", "Banaba","Ratak + Rālik", "Ānewetak", "Pohnpei", "Ngatik", "Sorol", "Woleai", "Laguas yan gåni", "Chuuk")
+
+fake_data <- data.frame(group = rownames(data_SBZR)) %>% 
+  mutate(value = ifelse(group %in% clade_1, 1, 4)) %>% 
+  column_to_rownames("group") %>% 
+  as.matrix()
+
+phytools::dotTree(tree = ladderize(tree_SBZR), x = fake_data)
+
+phytools::phylosig(tree = tree_SBZR, x = fake_data, method = "lambda")
