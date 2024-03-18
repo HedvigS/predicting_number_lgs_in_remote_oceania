@@ -106,4 +106,4 @@ ape::vcv.phylo(tree_SBZR, corr = FALSE) %>%
   saveRDS("output/processed_data/tree_SBZR_vcv.rds")
 
 tree_SBZR %>% 
-  ape::write.tree(file = "output/processed_data/tree_medium.tree")
+  ape::write.tree(file = "output/processed_data/tree_sbzr.tree")
