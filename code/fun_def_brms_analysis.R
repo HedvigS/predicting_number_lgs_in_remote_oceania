@@ -238,16 +238,31 @@ if(drop_one_out == TRUE){
   obs <- c("None", data$group)
   
   for(ob in obs){
-    
     #  ob <- obs[6]
     
-    cat(paste0("Dropping out ", ob, ".\n"))
+    dir_spec <- paste0("output/results/drop_one_out/", group, "_", control, "/")
+    if(!dir.exists(dir_spec)){dir.create(dir_spec)}
     
+    dir_spec <- paste0("output/results/drop_one_out/", group, "_", control, "/", str_replace_all(ob, " ", "_"), "/")
+    if(!dir.exists(dir_spec)){dir.create(dir_spec)}
+
+    
+    cat(paste0("Dropping out ", ob, " with group: ", group, " and control: ", control, ".\n"))
+    
+fn <-     paste0(dir_spec,"model_fit_waic.tsv")
+if(file.exists(fn)){
+
+  cat(paste0("already exists. moving on.\n"))
+  
+}else{
+  
     if(ob == "None"){
       data_spec <-   data 
-    }else{data_spec <-   data %>% 
+  
+        }else{
+      data_spec <-   data %>% 
       filter(group != {{ob}})
-    }
+          }
     output_spec <-  brms::brm(data = data_spec, 
                               data2 = data2, 
                         family = poisson,
@@ -262,6 +277,26 @@ if(drop_one_out == TRUE){
                         control = list(adapt_delta = 0.9),
                         backend="cmdstanr") 
     
+    waic <- loo::waic(output_spec)
+    loo <- loo::loo(output_spec)
+    bayes_r2 <- bayes_R2(output_spec, probs = c(0, 0.025, 0.975, 1)) 
+    
+    waic$estimates %>% 
+      as.data.frame() %>% 
+      rownames_to_column("fit_score") %>% 
+      write_tsv(file = paste0(dir_spec,"model_fit_waic.tsv"), na = "")
+    
+    loo$estimates %>% 
+      as.data.frame() %>% 
+      rownames_to_column("fit_score") %>% 
+      write_tsv(file = paste0(dir_spec, "model_fit_loo.tsv"), na = "")
+    
+    bayes_r2 %>%
+      as.data.frame() %>% 
+      rownames_to_column("fit_score") %>% 
+      write_tsv(file = paste0(dir_spec, "model_fit_R2.tsv"), na = "")
+    
+    
     ms <- summary(output_spec)
     
 ms_df <-  ms$fixed %>% 
@@ -272,7 +307,10 @@ ms_df <-  ms$fixed %>%
   unite(term, variable, sep = "§", col = "variable") %>% 
   data.table::transpose(make.names = "variable") %>% 
   mutate(dropped_obs = ob)
-  
+
+ms_df %>% 
+write_tsv(file = paste0(dir_spec, "ms_df.tsv"), na = "")
+
   #predicting number of lgs
     posterior_predict_df_spec <- brms::posterior_predict(output_spec, cores = cores, ndraws = ndraws) %>%
       as.data.frame() %>% 
@@ -293,6 +331,17 @@ ms_df <-  ms$fixed %>%
     diff_abs <- mean(posterior_predict_df_spec$diff_abs)
     predicted <- mean(posterior_predict_df_spec$predicted)
     
+    
+    data.frame(
+      diff_poisson_abs  =  diff_abs, 
+      diff_poisson = diff
+    ) %>% 
+      write_tsv(file = paste0(dir_spec, "diff_means.tsv"), na = "")
+    
+    
+    posterior_predict_df_spec %>% 
+      write_tsv(file = paste0(dir_spec,"predict_table.tsv"), na = "")
+  
     cat(paste0("The diff was ", diff_abs %>% round(2)
                , ".\n"))
     
@@ -334,7 +383,10 @@ ms_df <-  ms$fixed %>%
                           diff_predicted_vs_observed_abs = diff_abs) %>% 
       full_join(chain_summarised, by = "dropped_obs") %>% 
       full_join(ms_df, by = "dropped_obs")
-      
+    
+    df_spec %>% 
+      write_tsv(file = paste0(dir_spec,"df_spec.tsv"), na = "")
+    
     df_all <- suppressMessages(full_join(df_all, df_spec))
     
     #the run with no dropped generates 58 rows, let's cut that down to one
@@ -346,31 +398,8 @@ ms_df <-  ms$fixed %>%
     df_all %>%          
       write_tsv(file = paste0("output/results/brms_", group, "_control_", control, "_group_drop_one_out.tsv"), na = "")
     
-  } #end of dropping out one for-loop
-  
-  #df_all <- read_tsv(file = paste0("output/results/brms_", group, "_group_drop_one_out.tsv"))
-  
-  
-  df_all$dropped_obs <- fct_reorder(df_all$dropped_obs, df_all$diff_predicted_vs_observed_abs)
-  
-  df_all %>% 
-    ggplot() +
-    geom_bar(aes(x = dropped_obs, y = diff_predicted_vs_observed_abs, fill = diff_predicted_vs_observed_abs), stat = "identity") +
-    theme_fivethirtyeight() +
-    theme(axis.text.x =  element_text(angle = 70, hjust = 1) , 
-          legend.position = "none") +
-    scale_fill_viridis(direction = -1)   +
-    theme(panel.background = element_rect(fill = "white"), 
-          plot.background = element_rect(fill = "white"))
-  
-  ggsave(filename = paste0("output/plots/brms_", group, "_control_", control, "_dropped_out_plot_diff.png"), width = 9, height = 9)
-  ggsave(filename = paste0("../latex/brms_", group, "_control_", control, "_dropped_out_plot_diff.png"), width = 9, height = 9)
-  
-  df_all %>% 
-    filter(diff_predicted_vs_observed_abs < 1.4) %>% 
-    #  column_to_rownames("dropped_obs") %>% 
-    data.table::transpose(make.names = "dropped_obs", keep.names = "variable") %>% 
-    write_tsv(file = paste0("output/results/brms_", group, "_control_", control, "_dropped_effects_diff_below_1.4.tsv"), na = "")
+  } 
+  }
   
 }
 }
