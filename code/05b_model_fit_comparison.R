@@ -82,7 +82,7 @@ joined_SBZR %>%
 
 fn_out = "../latex/model_fit_score_table_medium.tex"
 cap <- "Comparison of model fit scores of models with different controls for spatial and/or phylogenetic non-independence. Shared language island groups."
-lbl <- "model_fit_score_table_SBZR"
+lbl <- "model_fit_score_table_medium"
 align <- c("r","p{2cm}","p{2cm}","p{2cm}", "p{2cm}",  "p{2cm}") 
 
 joined_medium %>% 
