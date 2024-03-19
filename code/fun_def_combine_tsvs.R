@@ -7,7 +7,7 @@ fns %>%
                                   fill = TRUE, blank.lines.skip = TRUE,
                                   sep = "\t", na.strings = "",
     )   %>% 
-      mutate(filename = basename(x)
+      mutate(filename = x
              
       ) 
   ) 
