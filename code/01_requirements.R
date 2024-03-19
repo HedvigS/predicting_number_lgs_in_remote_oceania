@@ -112,13 +112,10 @@ if(!dir.exists(dir)){dir.create(dir)}
 dir <- "output/results/drop_one_out/"
 if(!dir.exists(dir)){dir.create(dir)}
 
+v <- c(7, 1, 1, 7, 7, 1, 5)
 
-getmode <- function(v, na.rm = T) {
-if(na.rm == T){
-    v <- v[which(!is.na(v))] }
-  uniqv <- unique(v)
-  uniqv[which.max(tabulate(match(v, uniqv)))]
-}
+
+ 
 
 distinctive_plot_colors <- c("#FFB6C1",
             "#fcf0b3",
