@@ -114,9 +114,10 @@ ms_full <- summary(output_poisson)
     mutate(group = group) %>% 
   write_tsv(file = paste0("output/results/brms_", group, "_control_", control,"_diff_means.tsv"), na = "")
   
-  
   posterior_predict_df %>% 
     distinct(group, mean, sd, min, max, diff_poisson, diff_poisson_abs, lg_count) %>% 
+    mutate(control = control) %>% 
+    mutate(group = group) %>% 
     write_tsv(file = paste0("output/results/brms_", group, "_control_", control,"_predict_table.tsv"), na = "")
   
   #predict plot
@@ -202,11 +203,9 @@ p <-  chain_joined %>%
           axis.title = element_blank(),
           strip.text = element_text(size = 14))
 
-    ggsave(plot = p, filename = paste0("output/plots/brms_", group, "_control_", control, "_group_full_effect_ridge_panels_plot.png"), height = 9, width = 10)
-  ggsave(plot = p, filename = paste0("../latex/brms_", group, "_control_", control, "_group_full_effect_ridge_panels_plot.png"),  height = 9, width = 10) 
-  
-  
-
+    ggsave(plot = p, filename = paste0("output/plots/brms_", group, "_control_", control, "_group_full_effect_ridge_panels_plot.png"), height = 7, width = 7, dpi = 200)
+  ggsave(plot = p, filename = paste0("../latex/brms_", group, "_control_", control, "_group_full_effect_ridge_panels_plot.png"), height = 7, width = 7, dpi = 200)
+   
   ms_df <- ms_df_long %>% 
   unite(term, variable, sep = "§", col = "variable") %>% 
   data.table::transpose(make.names = "variable")
