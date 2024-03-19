@@ -67,10 +67,10 @@ stop("The argument control is not one of the recognised strings.")
   loo <- loo::loo(output_poisson)
   bayes_r2 <- bayes_R2(output_poisson, probs = c(0, 0.025, 0.975, 1)) 
 
-    waic$estimates %>% 
+  waic$estimates %>% 
     as.data.frame() %>% 
     rownames_to_column("fit_score") %>% 
-  write_tsv(file = paste0("output/results/brms_", group, "_control_", control,"_model_fit_waic.tsv"), na = "")
+    write_tsv(file = paste0("output/results/brms_", group, "_control_", control,"_model_fit_waic.tsv"), na = "")
   
   loo$estimates %>% 
     as.data.frame() %>% 
@@ -78,7 +78,7 @@ stop("The argument control is not one of the recognised strings.")
     write_tsv(file = paste0("output/results/brms_", group, "_control_", control,"_model_fit_loo.tsv"), na = "")
   
   bayes_r2 %>%
-  as.data.frame() %>% 
+    as.data.frame() %>% 
     rownames_to_column("fit_score") %>% 
     write_tsv(file = paste0("output/results/brms_", group, "_control_", control,"_model_fit_R2.tsv"), na = "")
   
@@ -249,7 +249,7 @@ if(drop_one_out == TRUE){
     
     cat(paste0("Dropping out ", ob, " with group: ", group, " and control: ", control, ".\n"))
     
-fn <-     paste0(dir_spec,"model_fit_waic.tsv")
+fn <-     paste0(dir_spec,"diff_means.tsv")
 if(file.exists(fn)){
 
   cat(paste0("already exists. moving on.\n"))
@@ -284,16 +284,25 @@ if(file.exists(fn)){
     waic$estimates %>% 
       as.data.frame() %>% 
       rownames_to_column("fit_score") %>% 
+      mutate(island_group_dropped = ob) %>% 
+      mutate(control = control) %>% 
+      mutate(group = group) %>% 
       write_tsv(file = paste0(dir_spec,"model_fit_waic.tsv"), na = "")
     
     loo$estimates %>% 
       as.data.frame() %>% 
       rownames_to_column("fit_score") %>% 
+      mutate(island_group_dropped = ob) %>% 
+      mutate(control = control) %>% 
+      mutate(group = group) %>% 
       write_tsv(file = paste0(dir_spec, "model_fit_loo.tsv"), na = "")
     
     bayes_r2 %>%
       as.data.frame() %>% 
       rownames_to_column("fit_score") %>% 
+      mutate(island_group_dropped = ob) %>% 
+      mutate(control = control) %>% 
+      mutate(group = group) %>% 
       write_tsv(file = paste0(dir_spec, "model_fit_R2.tsv"), na = "")
     
     
@@ -336,10 +345,16 @@ write_tsv(file = paste0(dir_spec, "ms_df.tsv"), na = "")
       diff_poisson_abs  =  diff_abs, 
       diff_poisson = diff
     ) %>% 
+      mutate(island_group_dropped = ob) %>% 
+      mutate(control = control) %>% 
+      mutate(group = group) %>% 
       write_tsv(file = paste0(dir_spec, "diff_means.tsv"), na = "")
     
     
     posterior_predict_df_spec %>% 
+      mutate(island_group_dropped = ob) %>% 
+      mutate(control = control) %>% 
+      mutate(group = group) %>% 
       write_tsv(file = paste0(dir_spec,"predict_table.tsv"), na = "")
   
     cat(paste0("The diff was ", diff_abs %>% round(2)
