@@ -13,6 +13,9 @@ diff_means_SBZR_phylo <- combine_tsvs(fns = fns) %>%
   mutate(group = "SBZR") %>% 
   mutate(control = "phylo")
 
+diff_means_SBZR_phylo %>% 
+  write_tsv("output/results/SBZR_phylo_drop_one_out_diff_means.tsv")
+
 #SBZR none
 fns <- list.files(path = "output/results/drop_one_out/SBZR_none//", pattern = "diff_means", recursive = T, full.names = T)
 
@@ -24,6 +27,10 @@ diff_means_SBZR_none <- combine_tsvs(fns = fns) %>%
   mutate(island_group_dropped = str_replace_all(island_group_dropped, "_", " ")) %>% 
   mutate(group = "SBZR") %>% 
   mutate(control = "none")
+
+diff_means_SBZR_none %>% 
+  write_tsv("output/results/SBZR_none_drop_one_out_diff_means.tsv")
+
 
 #medium spatial
 fns <- list.files(path = "output/results/drop_one_out/medium_spatial/", pattern = "diff_means", recursive = T, full.names = T)
@@ -37,6 +44,9 @@ diff_means_medium_spatial <- combine_tsvs(fns = fns) %>%
     mutate(group = "medium") %>% 
   mutate(control = "spatial")
 
+diff_means_medium_spatial %>% 
+  write_tsv("output/results/medium_spatial_drop_one_out_diff_means.tsv")
+
 #medium none
 fns <- list.files(path = "output/results/drop_one_out/medium_none//", pattern = "diff_means", recursive = T, full.names = T)
 
@@ -48,6 +58,9 @@ diff_means_medium_none <- combine_tsvs(fns = fns) %>%
   mutate(island_group_dropped = str_replace_all(island_group_dropped, "_", " ")) %>% 
   mutate(group = "medium") %>% 
   mutate(control = "none")
+
+diff_means_medium_none %>% 
+  write_tsv("output/results/medium_none_drop_one_out_diff_means.tsv")
 
 
 plot_diff_cols <- function(df = NULL){
