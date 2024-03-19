@@ -1,4 +1,5 @@
 source("01_requirements.R")
+source("fun_def_get_mode.R")
 
 #this scripts takes all relevant data and combines into approrpaite tables for the two island groupings.
 
@@ -112,6 +113,7 @@ subregions <- read_tsv("data/oceania_subregions.tsv", show_col_types = F) %>%
 subregions %>%
   write_tsv("output/processed_data/subregions.tsv")
 
+
 ##POL COMPLEXITY
 pol_complex <- read_tsv("data/Remote_oceania_pol_complex.tsv", na = "", show_col_types = F) %>%
   dplyr::select(Language_level_ID = glottocode, `Political complexity (EA033)`) %>% 
@@ -170,7 +172,7 @@ Island_group_summarised_smallest <- Island_group_all_sep %>%
   filter(!is.na(settlement_date_grouping_finer)) %>% 
   group_by(Smallest_Island_group) %>% 
   dplyr::summarise(
-            mode_pol_complex = getmode(pol_complex_code), 
+            mode_pol_complex = get_mode(pol_complex_code), 
             sum_area = sum(sum_area, na.rm = T), 
             lg_count_smallest = mean(lg_count_smallest, na.rm = T),
             sum_shoreline = sum(sum_shoreline, na.rm = T),
@@ -197,7 +199,7 @@ Island_group_summarised_medium <- Island_group_all_sep %>%
   filter(!is.na(settlement_date_grouping_finer)) %>% 
   group_by(Medium_only_merged_for_shared_language) %>% 
   dplyr::summarise(
-        mode_pol_complex = getmode(pol_complex_code), 
+        mode_pol_complex = get_mode(pol_complex_code), 
         sum_area = sum(sum_area, na.rm = T), 
         lg_count_smallest = mean(lg_count_smallest, na.rm = T),
         sum_shoreline = sum(sum_shoreline, na.rm = T),
@@ -225,7 +227,7 @@ Island_group_summarised_Marck_group <- Island_group_all_sep %>%
   filter(!is.na(settlement_date_grouping_finer)) %>% 
   group_by(Marck_group) %>% 
   dplyr::summarise(
-    mode_pol_complex = getmode(pol_complex_code), 
+    mode_pol_complex = get_mode(pol_complex_code), 
     sum_area = sum(sum_area, na.rm = T), 
     lg_count_smallest = mean(lg_count_smallest, na.rm = T),
     sum_shoreline = sum(sum_shoreline, na.rm = T),
@@ -253,7 +255,7 @@ Island_group_summarised_SBZR_group <- Island_group_all_sep %>%
   filter(!is.na(settlement_date_grouping_finer)) %>% 
   group_by(SBZR_group) %>% 
   dplyr::summarise(
-    mode_pol_complex = getmode(pol_complex_code), 
+    mode_pol_complex = get_mode(pol_complex_code), 
     sum_area = sum(sum_area, na.rm = T), 
     lg_count_smallest = mean(lg_count_smallest, na.rm = T),
     sum_shoreline = sum(sum_shoreline, na.rm = T),
@@ -284,7 +286,7 @@ Island_group_summarised_COUNTRY <- Island_group_all_sep %>%
   filter(!is.na(settlement_date_grouping_finer)) %>% 
   group_by(`COUNTRY NAME`) %>% 
   dplyr::summarise(
-    mode_pol_complex = getmode(pol_complex_code), 
+    mode_pol_complex = get_mode(pol_complex_code), 
     sum_area = sum(sum_area, na.rm = T), 
     lg_count_smallest = mean(lg_count_smallest, na.rm = T),
     sum_shoreline = sum(sum_shoreline, na.rm = T),
