@@ -28,6 +28,8 @@ df_fit_R2 <- combine_tsvs(fns = fns)  %>%
   dplyr::select(control, group, R2 = Estimate)
 
 fns <- list.files("output/results/", pattern = ".*diff_means.*", full.names = T)
+fns <- fns[!str_detect(fns, "drop")]
+
 df_fit_diff_means <- combine_tsvs(fns = fns)  %>% 
   mutate(group = ifelse(str_detect(filename, "medium"), "medium", "SBZR")) %>% 
   mutate(group = ifelse(str_detect(filename, "medium"), "medium", "SBZR")) %>% 
