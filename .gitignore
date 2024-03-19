@@ -15,6 +15,6 @@
 code/data/glottolog-cldf/**
 code/data/dplace-cldf/**
 code/output/plots/*
-code/output/results/drop_one*
+code/output/results*
 latex/main.tex.bak
 **groundhog_librari**
