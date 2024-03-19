@@ -3,10 +3,6 @@ source("fun_def_get_mode.R")
 
 #this scripts takes all relevant data and combines into approrpaite tables for the two island groupings.
 
-#reading in glottolog for language-levelling
-Glottolog <- read_tsv("output/processed_data/glottolog_language_table_wide_df.tsv", show_col_types = F) %>%   
-  dplyr::select(glottocode = Glottocode, Language_level_ID, level)
-
 #wrangling polygon lists into language counts per island group
 Polygon_lgs_glottocodes_unnested <- read_csv("data/RO_polygons_grouped_with_languages.csv", show_col_types = F) %>% 
   filter(!is.na(glottocodes)) %>% 
