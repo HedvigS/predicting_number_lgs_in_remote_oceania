@@ -81,12 +81,13 @@ df %>%
         legend.position = "none") +
   scale_fill_viridis(direction = -1)   +
   theme(panel.background = element_rect(fill = "white"), 
-        plot.background = element_rect(fill = "white")) +
+        plot.background = element_rect(fill = "white"), 
+        axis.text.x = element_text(size = 7)) +
   ylim(c(0, 1.5))
   
 
-ggsave(filename = paste0("output/plots/brms_", group, "_control_", control, "_dropped_out_plot_diff.png"), width = 9, height = 9)
-ggsave(filename = paste0("../latex/brms_", group, "_control_", control, "_dropped_out_plot_diff.png"), width = 9, height = 9)
+ggsave(filename = paste0("output/plots/brms_", group, "_control_", control, "_dropped_out_plot_diff.png"), width = 7, height = 7, dpi = 200)
+ggsave(filename = paste0("../latex/brms_", group, "_control_", control, "_dropped_out_plot_diff.png"), width = 7, height = 7, dpi = 200)
 
 }
 
