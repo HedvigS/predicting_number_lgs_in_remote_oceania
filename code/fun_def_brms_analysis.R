@@ -127,7 +127,8 @@ ms_full <- summary(output_poisson)
   p <- posterior_predict_df %>% 
     ggplot() +
 #    geom_density_ridges(aes(x = lg_count, y = group, fill = group), quantile_lines = T, quantile_fun = mean, jittered_points = TRUE, point_size = 2, point_shape = 21  ,  position = position_points_jitter(height = 0)) +
-    geom_boxplot(mapping = aes(y = group, x = value), color = "#2EB37CFF", fill = "#65CB5EFF", alpha = 0.2) +
+    geom_boxplot(mapping = aes(y = group, x = value), color = "#2EB37CFF", fill = "#65CB5EFF", alpha = 0.2, 
+                 outlier.size=-1, size = 1) +
     geom_point(aes(y = group, x = mean),
                fill = "#f5ea25", color = "#481769FF",
                shape =21, alpha = 0.4, stroke = 0.6, 
@@ -142,8 +143,8 @@ ms_full <- summary(output_poisson)
       panel.background = element_rect(fill = "white"), 
           plot.background = element_rect(fill = "white"))
   
-  ggsave(plot = p, filename = paste0("output/plots/brms_predict_", group, "_control_", control, ".png"), height = 8, width = 6)  
-  ggsave(plot = p,filename = paste0("../latex/brms_predict_", group, "_control_", control, ".png"),  height = 8, width = 6) 
+  ggsave(plot = p, filename = paste0("output/plots/brms_predict_", group, "_control_", control, ".png"), height = 10, width = 6)  
+  ggsave(plot = p,filename = paste0("../latex/brms_predict_", group, "_control_", control, ".png"),  height = 10, width = 6) 
   
   ### model output
   chain_1 <- output_poisson$fit@sim$samples[[1]] %>% as.data.frame()  %>% mutate(chain = "1")
