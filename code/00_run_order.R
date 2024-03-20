@@ -1,8 +1,9 @@
+source("01_check_used_functions.R")
+
 source("01_requirements.R")
 
 source("01_requirements_brms.R")
 
-source("01_check_used_functions.R")
 
 
 #GET
@@ -34,7 +35,7 @@ source("04_variable_SPLOM.R")
 
 #ANALYZE
 
-source("05_analysis_brms.R")
+source("05a_analysis_brms.R")
 
 source("06_prep_appendices.R")
 
