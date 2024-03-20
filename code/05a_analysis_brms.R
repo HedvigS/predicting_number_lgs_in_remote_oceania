@@ -21,8 +21,8 @@ data2 = list(phylo_vcv = phylo_vcv, spatial_vcv = spatial_vcv)
 formula <- lg_count  ~    (1 | gr(phylo_id, cov = phylo_vcv)) +
   (1 | gr(spatial_id, cov = spatial_vcv)) +
   environ_PC1*Shoreline +
-  environ_PC2*Shoreline +
-  mo(EA033) + 
+  environ_PC2*Shoreline + 
+  Shoreline*mo(EA033) + 
   Shoreline*mo(Settlement_date_grouping_finer)
 
 fun_brms_predicting(data = data, data2 = data2, formula = formula, group = group, control = "spatialphylo", drop_one_out = FALSE )
@@ -32,7 +32,7 @@ fun_brms_predicting(data = data, data2 = data2, formula = formula, group = group
 formula <- lg_count  ~    (1 | gr(phylo_id, cov = phylo_vcv)) +
   environ_PC1*Shoreline +
   environ_PC2*Shoreline +
-  mo(EA033) + 
+  Shoreline*mo(EA033) + 
   Shoreline*mo(Settlement_date_grouping_finer)
 
 fun_brms_predicting(data = data, data2 = data2, formula = formula, group = group, control = "phylo", drop_one_out = FALSE )
@@ -41,7 +41,7 @@ fun_brms_predicting(data = data, data2 = data2, formula = formula, group = group
 formula <- lg_count  ~    (1 | gr(spatial_id, cov = spatial_vcv)) +
   environ_PC1*Shoreline +
   environ_PC2*Shoreline +
-  mo(EA033) + 
+  Shoreline*mo(EA033) + 
   Shoreline*mo(Settlement_date_grouping_finer)
 
 fun_brms_predicting(data = data, data2 = data2, formula = formula, group = group, control = "spatial", drop_one_out = FALSE )
@@ -50,7 +50,7 @@ fun_brms_predicting(data = data, data2 = data2, formula = formula, group = group
 #none
 formula <- lg_count  ~    environ_PC1*Shoreline +
   environ_PC2*Shoreline +
-  mo(EA033) + 
+  Shoreline*mo(EA033) + 
   Shoreline*mo(Settlement_date_grouping_finer)
 
 fun_brms_predicting(data = data, data2 = data2, formula = formula, group = group, control = "none", drop_one_out = FALSE )
@@ -74,7 +74,7 @@ formula <- lg_count  ~    (1 | gr(phylo_id, cov = phylo_vcv)) +
   environ_PC1*Shoreline +
   environ_PC2*Shoreline +
   environ_PC3*Shoreline +
-  mo(EA033) + 
+  Shoreline*mo(EA033) + 
   Shoreline*mo(Settlement_date_grouping_finer)
 
 fun_brms_predicting(data = data, data2 = data2, formula = formula, group = group, control = "spatialphylo", drop_one_out = FALSE )
@@ -85,7 +85,7 @@ formula <- lg_count  ~    (1 | gr(phylo_id, cov = phylo_vcv)) +
   environ_PC1*Shoreline +
   environ_PC2*Shoreline +
   environ_PC3*Shoreline +
-  mo(EA033) + 
+  Shoreline*mo(EA033) + 
   Shoreline*mo(Settlement_date_grouping_finer)
 
 fun_brms_predicting(data = data, data2 = data2, formula = formula, group = group, control = "phylo", drop_one_out = FALSE )
@@ -95,7 +95,7 @@ formula <- lg_count  ~    (1 | gr(spatial_id, cov = spatial_vcv)) +
   environ_PC1*Shoreline +
   environ_PC2*Shoreline +
   environ_PC3*Shoreline +
-  mo(EA033) + 
+  Shoreline*mo(EA033) + 
   Shoreline*mo(Settlement_date_grouping_finer)
 
 fun_brms_predicting(data = data, data2 = data2, formula = formula, group = group, control = "spatial", drop_one_out = FALSE )
@@ -104,7 +104,7 @@ fun_brms_predicting(data = data, data2 = data2, formula = formula, group = group
 formula <- lg_count  ~    environ_PC1*Shoreline +
   environ_PC2*Shoreline +
   environ_PC3*Shoreline +
-  mo(EA033) + 
+  Shoreline*mo(EA033) + 
   Shoreline*mo(Settlement_date_grouping_finer)
 
 fun_brms_predicting(data = data, data2 = data2, formula = formula, group = group, control = "none", drop_one_out = FALSE )
