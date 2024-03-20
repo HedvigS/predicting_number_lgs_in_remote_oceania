@@ -130,21 +130,34 @@ ms_full <- summary(output_poisson)
     geom_boxplot(mapping = aes(y = group, x = value), color = "#2EB37CFF", fill = "#65CB5EFF", alpha = 0.2, 
                  outlier.size=-1, size = 1) +
     geom_point(aes(y = group, x = mean),
-               fill = "#f5ea25", color = "#481769FF",
+               fill = "#FFD087", color = "#481769FF",
                shape =21, alpha = 0.4, stroke = 0.6, 
                size = 1.6) +
     geom_point(aes(y = group, x = lg_count),
                fill = "#355E8DFF", color = "#481769FF",
                shape =24, alpha = 0.4, stroke = 0.6, 
                size = 1.6) +
-    ggthemes::theme_fivethirtyeight() +
-    scale_x_continuous(breaks = c(0, 25, 50, 75, 100, 125, 150, 175)) +
+    ggthemes::theme_fivethirtyeight(base_size = 16) +
+    scale_x_continuous(breaks = c(0, 25, 50, 75, 100, 125, 150, 175, 200)) +
     theme(legend.position = "None",
       panel.background = element_rect(fill = "white"), 
-          plot.background = element_rect(fill = "white"))
+          plot.background = element_rect(fill = "white"), 
+      panel.grid.major = element_line(size = 0.5, linetype = 'solid',
+                                      colour = "#ebeced"))
+  
+  
+  if(group == "medium"){
+    p <- p +
+    ylim(c(0, 75))
+  }
+  
+  if(group == "SBZR"){
+    p <- p +
+      ylim(c(0, 205))
+  }
   
   ggsave(plot = p, filename = paste0("output/plots/brms_predict_", group, "_control_", control, ".png"), height = 10, width = 6)  
-  ggsave(plot = p,filename = paste0("../latex/brms_predict_", group, "_control_", control, ".png"),  height = 10, width = 6) 
+  ggsave(plot = p,filename = paste0("../latex/brms_predict_", group, "_control_", control, ".png"),  height = 12, width = 6) 
   
   ### model output
   chain_1 <- output_poisson$fit@sim$samples[[1]] %>% as.data.frame()  %>% mutate(chain = "1")
