@@ -128,7 +128,7 @@ ms_full <- summary(output_poisson)
     ggplot() +
 #    geom_density_ridges(aes(x = lg_count, y = group, fill = group), quantile_lines = T, quantile_fun = mean, jittered_points = TRUE, point_size = 2, point_shape = 21  ,  position = position_points_jitter(height = 0)) +
     geom_boxplot(mapping = aes(y = group, x = value), color = "#2EB37CFF", fill = "#65CB5EFF", alpha = 0.2, 
-                 outlier.size=-1, size = 1) +
+                 outlier.size=-1, linewidth = 1) +
     geom_point(aes(y = group, x = mean),
                fill = "#FFD087", color = "#481769FF",
                shape =21, alpha = 0.4, stroke = 0.6, 
@@ -148,12 +148,12 @@ ms_full <- summary(output_poisson)
   
   if(group == "medium"){
     p <- p +
-    ylim(c(0, 75))
+    xlim(c(0, 75))
   }
   
   if(group == "SBZR"){
     p <- p +
-      ylim(c(0, 205))
+      xlim(c(0, 205))
   }
   
   ggsave(plot = p, filename = paste0("output/plots/brms_predict_", group, "_control_", control, ".png"), height = 10, width = 6)  
