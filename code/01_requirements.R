@@ -53,15 +53,19 @@ pkgs = c(
   "MCMCglmm",
   "nFactors",
   "sp", 
-  "raster")
+  "raster",
+"ade4"
+) 
+
+pkgs <- unique(pkgs)
 
 #groundhogr set-up
 
 if(groundhog == "yes"){
 
-groundhog_date = "2023-12-17"
+groundhog_date = "2023-08-02"
 
-if(!("groundhog" %in% rownames(installed.packages()))){
+if(!("groundhog"%in% rownames(installed.packages()))){
     install.packages("groundhog")
 }
 library(groundhog)
@@ -148,6 +152,6 @@ gray_dup_to_remove <- c("Sisingga",
                         "Woleai",
                         "Marshallese", 
                         "FutunaWest", #mystery language with no entries
-                        "Baliledo" #can't get a glottocode match
+                        "Baliledo"#can't get a glottocode match
 )
 
