@@ -102,13 +102,11 @@ output_fn <- "../latex/used_pkgs.bib"
 
 #for unclear reasons, NCmisc::list.functions.in.file is not able to pick up on the following packages being in use so they are manually added.
 used_but_not_detected_by_NCmisc <- c("brms", "fs", "patchwork", "cmdstanr", "MCMCglmm", "maps", 
-                                     "StanHeaders", "mvtnorm", "Rcpp", "coda", "maps" ,"ade4",  "devtools",  "rlang")
-
-
+                                     "StanHeaders", "mvtnorm", "Rcpp", "coda", "maps" ,"ade4",  "devtools",  "rlang", "nFactors")
 
 
 pkgs_to_cite <- c(used_but_not_detected_by_NCmisc, as.character(most_used$packages)) %>% 
-  unique()
+  unique() %>% sort()
 
 knitr::write_bib(x = pkgs_to_cite, file = output_fn)
 
