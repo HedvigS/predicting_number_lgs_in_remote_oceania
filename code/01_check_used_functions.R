@@ -130,3 +130,9 @@ vec <- paste0("\\citet{", bibdf$BIBTEXKEY, "}")
 
 fPaste(vec)   %>% 
   writeLines(con = "../latex/citation_keys.txt")
+
+
+
+
+tbl <- installed.packages()[names(sessionInfo()$otherPkgs), "Version"] %>% 
+  as.data.frame() 
