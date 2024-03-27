@@ -5,7 +5,6 @@ source("01_requirements.R")
 source("01_requirements_brms.R")
 
 
-
 #GET
 source("02_subregions_glottocodes_unnesting.R")
 
@@ -26,12 +25,17 @@ source("03c_environ_PCA.R")
 
 source("03d_country_pop_vs_lg.R")
 
+source("03e_spatial_dists.R")
+
+source("03f_phylo_dists.R")
+
 #PLOT
 source("04_data_maps.R")
 
 source("04_map_polygon_groups.R")
 
 source("04_variable_SPLOM.R")
+
 
 #ANALYZE
 
