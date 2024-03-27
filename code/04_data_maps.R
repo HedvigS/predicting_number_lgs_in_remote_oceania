@@ -139,7 +139,7 @@ basemap +
     #                              color = "white",
    #                               size = 3, 
   #                                label.padding = unit(0.15, "lines"), 
- #            position = position_jitter(seed = 4, height =0.7, width = 0.7)) +
+ #            position = position_jitter(seed = 1988, height =0.7, width = 0.7)) +
   scale_fill_viridis() +
   scale_color_viridis(breaks = c(1, 6 , 12)) +
   theme(legend.position = c(0.2,0.42), 
