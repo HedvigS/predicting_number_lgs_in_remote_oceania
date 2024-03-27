@@ -41,5 +41,9 @@ source("04_variable_SPLOM.R")
 
 source("05a_analysis_brms.R")
 
+source("05b_model_fit_comparison.R")
+
+source("05c_best_models.R")
+
 source("06_prep_appendices.R")
 
