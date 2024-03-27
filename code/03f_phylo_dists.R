@@ -1,7 +1,7 @@
 source("01_requirements.R")
 source("fun_keep_as_tip.R")
 
-glottolog_df <- read.delim("data/glottolog_language_table_wide_df.tsv", sep = "\t") %>% 
+glottolog_df <- read.delim("output/processed_data/glottolog_language_table_wide_df.tsv", sep = "\t") %>% 
   mutate(Language_level_ID = ifelse(is.na(Language_level_ID), Glottocode, Language_level_ID)) %>% 
   dplyr::select(Language_level_ID, Glottocode, subclassification, level, classification)
 
