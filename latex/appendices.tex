@@ -1,0 +1,941 @@
+
+\documentclass[12pt,letterpaper]{article}
+
+%\usepackage[lmargin=1.2in,rmargin=1.2in,tmargin=1in,bmargin=1in]{geometry}
+%\usepackage[bf,tiny]{titlesec}
+%\usepackage{fontspec,xltxtra,xunicode}
+    	%\defaultfontfeatures{Mapping=tex-text}
+%\usepackage[utf8]{inputenc}
+%\usepackage[utf8]{fontenc}
+%\setmainfont{Junicode}
+
+\usepackage{setspace}
+%\usepackage{gb4e}
+%\let\eachwordone=\it %italicise the first line of examples
+%\usepackage[sort]{natbib}
+%\bibpunct[: ]{(}{)}{,}{a}{}{,}
+%\usepackage{afterpage}
+%\usepackage{graphicx}
+% OUP PACKAGES
+%\graphicspath{{Fig/}}
+
+% line numbers
+%\usepackage{lineno}
+%\linenumbers
+
+% extra packages beyond OUP
+\usepackage{placeins} %to enable float barriers
+%\usepackage{CJKutf8} %chinese caracthers
+%\usepackage{amsmath} % for equations
+\usepackage{graphicx} 
+\usepackage{booktabs} % for nice looking tables
+\usepackage{longtable} %for tables stretching several pages
+\usepackage{pdflscape} %for making things landscape
+%\usepackage{multirow} %merging rows in tables
+%\usepackage{caption} %for making subfigures
+%setting a float environment for lists
+%\usepackage{enumitem} %make it possible to have other enumerate items, like roman numerals
+\usepackage[english]{babel} % To obtain English text with the blindtext package
+\usepackage{blindtext}
+\usepackage{url} 
+ \usepackage{natbib} 
+ \usepackage{xcolor}
+
+\usepackage{rotating} %for sideways figures
+
+%\usepackage{authblk}
+%\usepackage{draftwatermark}
+%\SetWatermarkText{DRAFT}
+%\SetWatermarkScale{4}
+
+%\pagestyle{myheadings}
+
+
+%\author{anon}
+
+%\setlength{\parindent}{0pt}
+%\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+
+\renewcommand*{\thesection}{\Alph{section}} %section numbering alphabetical
+
+\begin{document}
+%\def\code#1{\texttt{#1}}
+\title{A Sea of Languages: predicting the number of languages per island group in Remote Oceania}
+
+%\author[1,$\ast$]{Hedvig Skirgård}
+\author{Anonymous Author}
+
+
+\maketitle
+%\subtitle{Subject Section}
+
+%\address[1]{\orgdiv{Department of Linguistic and Cultural Evolution}, \orgname{Max Planck Institute for Evolutionary Anthropology}, \orgaddress{\street{Deutscher Platz 6}, \postcode{04103}, \state{Saxony}, \country{Germany}}}
+
+
+%\renewcommand{\thesection}{\Alph{section}}
+
+\tableofcontents
+
+%\begin{appendices}
+
+%\appendix
+%\section*{Appendices}
+%\addcontentsline{toc}{section}{Appendices}
+%\renewcommand{\thesubsection}{\Alph{subsection}}
+
+\newpage
+\section{Data and code availability}
+\label{appendix_supp_data_availability}
+
+All data in this study is available freely. The data has been gathered from multiple sources and is aggregated and will be published along with the code for the study on OSF/GitHub/Zenodo. The code is also made available, from gathering data to conducting analysis and preparing plots and tables. 
+
+Anonymised OSF project for double-blind peer review: \url{https://osf.io/amnh9/?view_only=403d57d715254539a3a99c798b4014d2}.
+
+Information on latitude and shoreline is taken from the Global Self-consistent, Hierarchical, High-resolution Geography Database (GSHHG) \citep{wessel1996global}. Rainfall and temperature information is taken from the ecoClimate database \citep{ecoclimate}. Data on Net Primary Production comes from the  United States of America's National Aeronautics and Space Administration's Moderate Resolution Imaging Spectroradiometer (MODIS, \citet{running2021modis_terra, running2021modis_aqua}). Number of languages per island was originally based on Glottolog (version 3.0), with some modification (see section \ref{appendix_sec:language_class}). Glottolog v5.0 \citet{Glottolog5} was also used for language phylogeny data. 
+
+GitHub locations:
+\begin{itemize}
+\item predicting\_number\_lgs\_in\_remote\_oceania  \textcolor{red}{withheld while in review process}
+\item glottolog (v3.0) \url{https://github.com/glottolog/glottolog/tree/v3.0}
+%\item glottolog-cldf (v4.7) \url{https://github.com/glottolog/glottolog/tree/v4.7}
+\end{itemize}
+
+Zenodo locations:
+\begin{itemize}
+\item predicting\_number\_lgs\_in\_remote\_oceania  \textcolor{red}{TBA}
+\item glottolog (v3.0) \url{https://doi.org/10.5281/zenodo.437430}
+\item glottolog (v5.0) \url{https://zenodo.org/records/10804582}
+
+%\item glottolog-cldf (v4.7) \url{https://doi.org/10.5281/zenodo.7398962}
+\end{itemize}
+
+In the scripts, overnight-sailing distances island groups are labelled ``SBZR'' (initials of authors of \cite{NZSA_overnight_2023}) and shared-language-groups ``medium''.
+\newpage
+
+\section{Definitions of variables}
+
+\FloatBarrier
+\subsection{Defining Remote Oceania}
+The distinction of Near and Remote Oceania was first suggested by \citet{pawley1973dating}\footnote{This is the first occurrence of the two terms, although Green wrote earlier papers which included some of the ideas.} and was further elaborated on in \citet{green1991near}. This distinction is based on geology, flora and fauna. Near Oceania consists of chains of inter-visible large islands and archipelagos, whereas the islands and atolls of Remote Oceania are separated by much greater distances. This also coincides with human settlement patterns, with Remote Oceania only being colonized in the last 3,000 years but Near Oceania long before that.
+
+There is a marked difference in the biodiversity of Near and Remote Oceania, due to the greater distances between islands in Remote Oceania. This has consequences for both flora and fauna, as \citet{green1991near} and \citet{pawley2007locatingoceanic} write:
+
+\begin{quotation}
+\noindent \emph{all terrestrial mammals other than rats and mice or those which accompanied people reach their eastward limit in the Solomons. The same applies to all fresh-water mussels, and most of the Palaeo-Oriental land-snail fauna. Thirty Papuan and Malayan genera of birds find their eastern limits here, as do 162 genera of seed-plants, about 24\% of the total.}
+\end{quotation}
+\begin{flushright} \citet[495]{green1991near}
+\end{flushright}
+
+\begin{quotation}
+\noindent \emph{Even in marine life the difference is marked. The reefs of the Bismarck and Solomons show a much richer diversity of fish, molluscs, echinoderms, crustacea, seaweeds, and other edible life than those of Remote Oceanic [sic].}
+\end{quotation}
+\begin{flushright}  \citet[19]{pawley2007locatingoceanic} \end{flushright}
+
+The greater distances between the islands of Remote Oceania is also the reason why they were settled by people much later than Near Oceania was (3,000 years versus 20,000-60,000 years ago). It was necessary to develop particular sailing techniques to traverse these greater distances in order to settle the region.
+
+In this study, the region of Remote Oceania is defined slightly differently from the maps in \citet{green1991near} and \citet{pawley2007locatingoceanic}. All Northern Polynesian Outliers in Papua New Guinea and Solomons are incorporated, as is Mapia in northwest Papua New Guinea. The lines in the maps of \citet{green1991near} and \citet{pawley2007locatingoceanic} appear not to include these in Remote Oceania. I have included them in part to complete the Polynesian subgroup of languages and the languages of the Micronesian archipelagos, but also because it appears that these were largely not inhabited prior to the Austronesian expansion into the rest of Remote Oceania (c.f. \citet[23]{kirch2012basline}) which suggests that they are sufficiently distant from the larger islands of Near Oceania to be counted as ``Remote''.
+
+Regarding the terms ``Near'' and ``Remote'', there are two interpretations of what they are referring to:
+
+\begin{itemize}
+    \item islands and atolls of ``Near Oceania'' are nearer \emph{to each other} 
+    \item islands and atolls of ``Near Oceania'' are nearer to large landmasses west-wards, such as Australia.
+\end{itemize}
+
+The difference between these two interpretations has no direct bearing on the study at hand, but the first one appears more fitting given the ecological framing of distance for people, flora and fauna to travel to colonise the new land. The islands of the Pacific are often construed as ``islands in a vast sea'' \citep{hauofa_1993} and a reading of ``Remote'' as ``far away from places of power/important places'' may enforce that understanding which is unnecessary and detrimental to our understanding of the history of the region (especially considering the importance of S\={a}moa and Tahiti as centres of power). 
+
+\FloatBarrier
+\subsection{Defining ``language''}
+\label{appendix_sec:language_class}
+This study investigates factors influencing language diversification. The most central part of our data is the number of languages per island group; this is the response variable of our models. It is notoriously difficult to distinguish dialects, languages and language groups and there exist many different competing standards for defining what a language is. Linguists and others have debated these issues for a long time. Given their importance and centrality to this research, this section will give an introduction to the language identification standards adopted in two of the most commonly used resources: SIL International's ISO 639-3 codes for language names (which is implemented in Ethnologue \citep{ethnologue22}) and Glottolog's glottocodes \citet{glottolog3}.
+
+It should be noted that while different language identification standards do differ, their findings do not vary dramatically. For example, SIL's Ethnologue states that there are 7,111 living languages today, Glottolog reports that there are 6,989\footnote{This the number of languoids in glottolog classifies as ``language'' and not labelled as ``extinct''.}. The difference between these two total counts is ``only'' 122 --- which is quite small considering how controversial language identification standards can be. This is in line with Nettle's observation that while linguists often disagree on how precisely to define a language, there is often considerable agreement in practice when it comes to categorising specific language varieties \citep[356]{NETTLE1998}.
+
+The Summer Institute of Linguistics International (SIL) is the official Registration Authority of the International Organization for Standardisation (ISO) standard for codes to represent language names --- ISO 639-3. There are other ISO standards for languages, but ISO 639-3 is the most comprehensive and widely used. Most students and scholars are familiar with this code set from the SIL publication Ethnologue (which in 2016 became fully accessible only to paying subscribers, contributors and users from developing countries). However, it should be noted that the code set is also available independently of Ethnologue at https://iso639-3.sil.org/. The ISO 639-3 is technically separate from Ethnologue, and maintained by separate staff of SIL International.
+
+The purpose of ISO 639-3 is to coordinate language names. There can be many different names for the same language, for example, Armenian is known both as ``Haieren'' and ``Ermenice'' in academic literature \citep{multitree2014}. A code standard is needed in order to coordinate work within language technology, libraries and scholarly research. The ISO published the code standard 639-3 in 2007, but it was based on classifications in editions of Ethnologue published as early as 1984. %The ISO 639-3 code set is very popular and is found in typological surveys as well as language-specific publications. 
+
+How then does ISO 639-3 classify languages? Under the heading ``The Problem of Language Identification'' the editors of Ethnologue outline their approach \citep{ethnologue2019lgident}. While they discuss the inherent complexities with defining languages in a universal standard, and even borrow metaphors from quantum physics (``Language as particle, wave, and field'') they also provide specific criteria in the form of a list:
+\emph{\begin{itemize}
+\item Two related varieties are normally considered varieties of the same language if speakers of each variety have inherent understanding of the other variety at a functional level (that is, can understand based on knowledge of their own variety without needing to learn the other variety).
+\item Where spoken intelligibility between varieties is marginal, the existence of a common literature or of a common ethnolinguistic identity with a central variety that both understand can be a strong indicator that they should nevertheless be considered varieties of the same language.
+\item Where there is enough intelligibility between varieties to enable communication, the existence of long-standing distinctly named ethnolinguistic identities coupled with well-developed standardization and literature that are distinct can be treated as an indicator that they should nevertheless be considered to be different languages.
+\end{itemize}
+} 
+
+These criteria probably correspond rather well to the definition of ``a language'' by non-academics. However, they can be tricky to apply, and they are also very dependent on the particular cultural history and literary development of the communities in question. It is often said that language classification is as much a political issue as it is a matter for scholarly classification. Language is tied to cultural identity and that identity is necessarily defined in opposition to other communities. Self reported group identity is rarely generalisable and possible to distil into a neat universal standard. It has been said that \emph{a language is a dialect with an army and a navy}\footnote{The exact origin of this phrase is not known. It is most often attributed to Max Weinreich, but it may also have been first stated by Joshua Fishman (a student of Weinreich's) or be an expansion of something declared by Antoine Meillet \citep[469]{WB_notes}. Weinreich himself has also said that he got it from an anonymous member of a lecture audience during 1943-4.}, meaning that what is a language versus a dialect may be a product of political power structures in a given region.
+
+The SIL in their definition of language vs dialect also refer to ``intelligibility'', but it is unclear how this is defined and measured. On the page ``Language information'' in the online version of Ethnologue, we learn that there are particular cut-off scores for lexical similarity and intelligibility (85\%):
+
+%\footnote{Any reader who has ever experienced any amount of existential dread or dispute between family members or significant others can probably empathise with the notion that even when two people ``speak the same language'', mutual understanding is not a given.}.
+
+\begin{quotation}
+\noindent\emph{Intelligibility and dialect relations. A measure of inherent intelligibility with other varieties is given by percent. Values of less than 85\% are likely to signal difficulty in comprehension of the indicated language.} \[..\]  
+
+\noindent\emph{Intelligibility may not be reciprocal or mutual, thus the wording of the intelligibility description may indicate the direction of the intelligibility}\[..\]
+
+\noindent\emph{Lexical similarity. The percentage of lexical similarity between two linguistic varieties is determined by comparing a set of standardized wordlists and counting those forms that show similarity in both form and meaning. Percentages higher than 85\% usually indicate a speech variant that is likely a dialect of the language with which it is being compared. Unlike intelligibility, lexical similarity is bidirectional or reciprocal.} 
+\begin{flushright}\citet{ethnologue2019lgident}\end{flushright}
+\end{quotation}
+
+The word lists used are most likely standardised lists of basic vocabulary similar to Swadesh-lists. The particular method of calculating lexical similarity is based on a standardised procedure by \citet{rensch1992calculating}. \citet[326]{swadesh1954perspectives} has suggested a cut-off of lexical similarity as 81\% instead for deeming two varieties to be of the same language. 
+
+It is still unclear how intelligibility is defined and measured by SIL. Mutual intelligibility can vary with context and need not be symmetrical \citep[356]{NETTLE1998}. In their study of mutual intelligibility between pairs of different European languages, \citet{gooskens2017measuring} found that Dutch speakers had a higher than 85\% success rate at a spoken picture task in German\footnote{For more information on how this study took into account schooling and passive knowledge of the target language by their participants, please see \citet{gooskens2017measuring}.}. Their study involved many different kinds of tasks, and depending on which one was used certain language pairs would sometimes be considered as the same language by the ISO 639-3 criteria, and sometimes not.
+
+The ISO 639-3 code standard also recognises so-called ``macrolanguages'', for example ``Arabic'' which covers 30 separate languages. Besides the ISO 639-3, there are also other ISO standards for languages and in some of these ``Chinese'' is counted as one language\footnote{Many of the other ISO standards for language names are primarily focussed on library use, as evidenced by the fact that the registration authority for ISO 639-2 is the American Library of Congress.}. The concept of ``macrolanguage'' aids in linking ISO 639-3 to another set of language codes (ISO 639-2). ``Macrolanguages'' also provide an identifier for sets of languages that could be recognised as one language based on shared literature and ethnolinguistic identity, but they are not sufficiently mutually intelligible to qualify as one language by the 639-3 standard. Languages in this category are for example ``Akan'', which is broken into Fanti and Twi in 639-3 and ``Chinese'' which covers 14 languages. This gives us an insight into borderline cases, linguistic entities that by some of the criteria are the same language but which fail on the crucial test of enough mutual intelligibility and/or lexical similarity. 
+
+SIL International welcomes change requests and are continuously updating their classification. Since 2007, they have adopted 88 requests for splitting languages and 152 for merging. They have also rejected 22 requests for splitting and 11 for merging. Looking through a few of these requests, many make explicit reference to Bible translation projects. For example, change request 2018-090 which seeks to merge [nns] into [nbr] is based on a dialect survey which has as its primary aim ``to determine indicators of Bible translation needs for Luke Initiative for Scripture Translation (LIST)'' \citep{change_request_SIL_example}, in order to optimise the ongoing Bible translation work with speakers there.
+
+SIL International is a ``faith-based'' organisation with its roots in Evangelical Christianity. They conduct a lot of their work together with their sister organisation Wycliffe Bible Translations, which is explicitly a missionary organisation. This has led some to ask whether or not the goal of spreading the word of God has influenced the scholarly work of SIL and Ethnologue. For example, the above criteria of ISO 639-3 (mutual intelligibility, shared literature and distinct ethnolinguistic identities) may in practice be heavily influenced by the work of coordinating and optimising Bible translation. Inspired by this observation, \citet{lupkestorch2013} and \citet{blommaert2008artefactual} reformulated the famous statement about a language being ``a dialect with an army and a navy'' as: 
+
+\begin{quotation}
+\noindent \emph{a language is a dialect with a missionary and a dictionary}.
+\begin{flushright}
+\citet{lupkestorch2013} and \citet{blommaert2008artefactual}
+\end{flushright}
+\end{quotation}
+
+
+%In other words, if a missionary could use the classification proposed to define a community where they could comfortably work, then that is often what has influenced categorisations of what is and what is not a language. As we shall soon see with Glottolog as well, what defines a language is often left up to the convenience of outsiders and the reasons they have for creating the standard by which language classifications are made. That said, it may be that outsiders and their translation and dictionary projects are actually picking up on relevant facts such as mutual intelligibility and cultural identity. These classifications may not characterise reality, but they may serve as good enough proxy measurements of what we actually want to capture.
+
+Alongside SIL International and the ISO 639-3 code standard for language names, an alternative code set has emerged and is gaining in popularity, namely Glottolog's ``glottocodes''. Glottolog started out from the work of \citet{nordhoff2011glottolog} and the online databse is now on its 4th edition \citep{glottolog40}. The aim of the project is to provide stable identifiers for languages (as well as dialects and families) and coordinate bibliographic information on the world's languages. Similarly to Ethnologue, Glottolog also contains information on language genealogy and endangerment levels \citep{hammarstrom2018simultaneous}. If the aims of the SIL and Ethnologue may be influenced by spreading the Bible, it could be said that Glottolog is dominated more by the aim of coordinating existing bibliographic resources.
+
+Glottolog identifies three different kinds of linguistic entities: families, languages and dialects. These are collectively known as ``languoids''. Families are any entity above a ``language'' (highest order genealogical unit as well as lower level branches) and dialects are anything below ``language''. All of these entities are assigned a unique stable identifier, a ``glottocode''. We will first discuss their definition of ``language'' and then the advantages of providing stable identifiers for dialects as well as languages.
+
+Unlike SIL's ISO 639-3, Glottolog does not discuss shared cultural identity or literature but focuses solely on mutual intelligibility when defining what is a language and what is a dialect \citep{glottologlanguoids}. On the website, the editors outline their process for language classification as a decision tree (see Fig.~\ref{appendix_glottolog_class_tree}), with the first question asked being ``Is the putative language assertably distinct from all other known languages?''. 
+%\footnote{\citet{haraldmutual}, one of the editors and founders of Glottolog, writes on the mathematical foundations of defining languages based on mutual intelligibility in dialect continua where A may understand B, and B understand C, but A does not understand C.}
+
+\begin{quotation}
+\noindent\emph{By distinct, we mean not mutually intelligible with any other language. In principle, any convincing evidence to this effect is sufficient. For example, direct comparison of language data or testimonies of non-intelligibility to all neighbouring languages is the most straightforward kind of evidence. But also, various types of evidence for isolation from all other humans for a long time could make a convincing case that a language is indeed distinct from all others.}
+\end{quotation}
+\begin{flushright} \citep{glottologlanguoids}\end{flushright}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{Glottolog_classifying_tree}
+\caption[Decision tree for language identification and classification in Glottolog]{{Decision tree for language identification and classification in Glottolog \citep{glottologlanguoids}.}}
+\label{appendix_glottolog_class_tree}
+\end{figure}
+
+In the quote above from Glottolog on ``distinctiveness'', the editors state that one can use language data and/or reports on mutual intelligibility. When empirical data on mutual intelligibility is missing, ``an approximate minimal requirement is 50 items or so of basic vocabulary'' needed for determining the distinctness of a language and where it should be placed in a genealogical tree  (\citet{glottologlanguoids} and Hammarström p.c.). This is similar to the lexical similarity measurements used by the SIL.
+%and Hammarström (p.c.) has confirmed that is what is needed for distinctiveness as well (at least). SIL also makes references to lexical similarity scores, it is plausible that Glottolog and SIL International do not differ dramatically in this respect and that while the precise material and cut-off points may vary: most of the time they will end up with similar classifications for the same language varieties\footnote{In a recent paper, \citep{wichmann_2019_dialects} shows that with his new method of devising lexical similarity cut-off points, SIL tends to have a bias towards splitting rather than joining. Glottolog classifications are not tested in the paper.}. 
+
+One important difference between Glottolog and SIL International lies in how the evidence is documented. Glottolog provides references for every language identification and tree, making it possible for other researchers to examine the evidence on their own. SIL International does not consistently provide this information. While change requests to ISO 639-3 will often refer to reports etc and many language entries have references for at least part of the information provided, there are many instances where the information is not accessible to readers. While the Ethnologue website states that ``sources used for classifications are available on request by contacting the Editor'' \citep{ethnologue2019lgident}, personal correspondence with the editors revealed that the sources are incomplete and cannot be requested in full.
+
+Glottolog also considers whether or not the putative language has ``served as the main means of communication for a human society'' \citep{glottologlanguoids}. This disqualifies most artificial languages, whistle registers, ritual speech registers and pidgins. SIL International does not discuss this particular criteria explicitly. However, among the artificial languages Esperanto is included in the catalogue but  Klingon, High Valyrian and Angosey are not. Unlike most other artificial languages,  Esperanto does have a few native speakers \citep{bergen2001nativization}, which is probably why it is included in Ethnologue. This suggests that SIL does consider something similar to Glottolog's ``main means of communication'' criteria even if they do not spell it out explicitly. Glottolog does catalogue constructed languages, pidgins etc, placing them in so-called ``non-genealogical trees''\footnote{The list of non-genealogical trees in Glottolog are: Sign Language, Unclassifiable, Pidgin, Unattested (data missing), Mixed Language, Artificial Language and Speech Register.}. These groups of languages are included in the catalogue and given glottocodes, but the editors note that they are not subject to the same process of language identification and classification as the rest.%\footnote{It is up to Glottolog's users to filter these out of the dataset should they want to only consider languoids that are clearly classified by Glottolog's principles.}).
+
+The fact that Glottolog provides unique stable identifiers for dialects and families, as well as languages, makes it possible to represent data in finer detail than previously possible. It also allows individual scholars to make different decisions on what is and what is not a language from Glottolog, while maintaining comparability. For example, there are several language varieties spoken on the Austral islands of the Pacific. Glottolog has classified them as being one language (Austral [aust1304]) with four dialects (Ra'ivavae [raiv1237], Rimatara [rima1237], Rurutu [ruru1237] and Tubuai [tubu1240]). However, other linguists disagree and have argued that these should be viewed as four different languages due to wordlists indicating they were not sufficiently mutually intelligible at the time of the arrival of Europeans (Walworth \& François p.c.). In this dataset, these are counted as four separate languages because it appears to be more in line with the state of the world before the arrival of Europeans. It is easy to adjust for this in the dataset (and simple to undo) because the Glottolog dialect codes are linked to the language Austral [aust1304]. 
+
+%In this case study, I have chosen to go with the classificatory decision that these should be viewed as 4 different languages. It was easy for me to change the coding of languages in my data to include these 4 different glottocodes as separate languages instead of ``Austral'' as one. If any researcher in the future wants to make another call they can access the data and run the analysis with another classification. Since there exists glottocodes for the dialects and these are explicitly linked to their language level parent - Austral - it is easy for make the switch.
+
+Being able to refer to dialects and families with a stable identifier is useful and an important difference between the SIL International ISO 639-3 code standard and Glottolog's glottocodes. When working with cross-linguistic and cross-cultural databases, it is often useful to be able to refer to a language variety in a more granular detail than the ISO 639-3 set allows for. \citet{nordhoff2011glottolog} point out that there may be differences between dialects that are crucial to certain research that would be confused if it was only possible to refer in a stable manner to the language level and not also to specific dialects. For example, certain dialects of German make a distinction between /e:/ and /æ:/ whilst others don't. If references were not accurately tied to a language variety, this would be confusing as ``German'' would have different numbers of vowels in different sources. By providing stable identifiers for dialects as well as languages and providing a controlled hierarchy, it is possible for researchers to document their data accurately while still making it possible to aggregate up to the ``language-level'' when it is desirable. For example, Grambank and the Standard Cross Cultural Sample of D-PLACE both contain entries for specific languages and dialects. There are 158 one-to-one matches between the glottocodes of these two databases. In some cases though, the databases contain different dialects of the same language. If we were to lump dialects of the same language together in each of the datasets, the overlap increases to 183.
+
+The definitions of language in ISO 639-3 (as described in Ethnologue \citep{ethnologue2019lgident}) and Glottolog both focus on mutual intelligibility. Ethnologue notes that intelligibility does have to be symmetric, but neither of the resources discuss multilingualism, or multidialectalism in any detail. It is possible that the world used to be much more multilingual than it is today \citep{evans2017did}, and there are still many places where communities are highly competent in many different language varieties. Ethnologue state that they focus on \emph{inherent} intelligibility, as opposed to \emph{acquired}, but in situations where languages are not formally taught but rather present in the community continuously it can be difficult to draw the boundary between inherent and acquired. The underestimation of multilingualism has significant consequences for studies of the evolution of language \citep{roberts2013evolutionary}. However, unless two languages are exclusively spoken in a fully multilingual setting and never outside of it, the total count of languages should remain the same. 
+
+%It is not within the scope, or indeed even the aim, of the present study to provide a universal and unproblematic classification of languages. 
+The language classification standards for Glottolog and SIL International do differ conceptually, and many of their differences may reflect their different aims (facilitating academic research by making references more accessible and integrated as compared to facilitating description and translation of the Bible into the world's languages). However, the counts for languages in the world that they produce are not that different in the end.
+
+I will be using the classification of Glottolog, with a few adjustments, since it is more transparent and better referenced. It should be noted that using the ISO 639-3 results in the language count for the Vanuatu being 108, as opposed to 105 in Glottolog, which is not a huge difference. 
+
+The aim of this study is to explore language diversification in Remote Oceania prior to the arrival of European people. Because of this, I have made a few adjustments to the Glottolog classifications of languages in the relevant region. Languages that have come into the region directly because of the arrival of Europeans have been excluded (Bislama, English, French etc). Furthermore, I have made three other changes from Glottolog in the classification of indigenous languages of the region based on other accounts of their mutual intelligibility at the relevant point in time\footnote{Tahitianization and dialect/language levelling has occurred, and therefore languages that used to be more different from each other are now more similar.}. Firstly: in Fiji, Glottolog's Eastern Fijian [fiji1243] is split into three languages: Southeast Fijian [sout2864], Northeast Fijian [nort2842] and Kadavu [kada1285] based on personal correspondence with Andrew Pawley and Paul Geraghty. Secondly, M\={a}ori [maor1246] is split into two languages: Morori [mori1267] on R\={e}kohou (Chatham Islands) and M\={a}ori [maor1246] on mainland Aotearoa (New Zealand). This classification is based on \citet{harlow1973regional} and personal advice from Andrew Pawley. Third and finally, as was previously mentioned, the languages of the Austral Islands have been divided from one to four based on advice from Mary Walworth and Alexandre François.
+
+The splitting of Eastern Fijian [fiji1243] into three languages has as consequence that the total language count for Fiji as one island group based on overnight sailing distances is 8 instead of 5. When the island groups are defined in relation to whether they share at least one language, the great island of Viti Levu is paired with Yasawa into one group sporting 4 languages instead of 2 and Kadavu separates out as a separate island group with 1 language. For M\={a}ori [maor1246] the difference in language classification makes less difference. Aotearoa and  R\={e}kohou were always separated as different overnight distance island groups, each sporting one language (even though it is the same language under Glottolog's definition). For the island groups based on shared language they continue to be separated under the new classification, meaning in practice that we have yet another small Polynesian island group with one language. The situation is similar for the Austral islands. The new classification makes no difference for the island groups as defined by overnight distances since all four are separated out from each other already. For the island groups based on shared language, they continue to be separated out as different island groups. Overall the new classification results in more languages in Fiji, and more small Polynesian island groups with one language each.
+
+
+\FloatBarrier
+\subsection{Grouping Islands and atolls}
+\label{appendix_sec:island_geo}
+%polygon_plot_SBZR
+
+%When measuring language diversity, many methods do not deal well with islands and water. For example, all islands with only one language were excluded from the study by \citet{curriemace2009} on the relationship between language territory and ethnographic features. This is unfortunate, but understandable. The authors model of language diversification was not able to accurately enough deal with contact over water.
+
+For this study, we need a good way of grouping islands and atolls in Remote Oceania (5,525 landmasses) that is not dependent on modern politics (e.g. nation-states), but that reflects possible meaningful networks in Oceania prior to colonization. For this purpose, we will use two distinct approaches. The first is based on voyaging distances by canoe, and the second is based on whether the islands have a language in common or not. The assumption is that a group of islands is a meaningful unit for comparison if it forms a significant \textit{network of contact} and that this can be approximated by shorter sailing distances or evidenced by the maintenance of a shared language. 
+
+These two principles, overnight sailing distances and sharing a language, have been applied consistently over all islands and all languages using data available in the Ethnologue \citep{ethnologue22}, Glottolog \citep{glottolog3} and in some cases specialist literature (\citet{faaniu1983tuvalu,charpentier2012linguistic, francoisetatl2015, macdonald_2020, omniglot_tuvaluan} and a map of indigenous languages of New Caledonia published by CNRS-LACITO). For more on the definition of languages, see section \ref{appendix_sec:language_class}.
+
+
+%\citet{hauofa_1993}
+
+%\citep[194]{irwin1994prehistoric} inter-island vogagýing existed and micronesian atolls are precarious
+
+\textbf{Grouping islands based on voyaging distances}. \citet{mark_1986, marck2000} has suggested that islands within 100 miles\footnote{Note that Marck uses \emph{land} miles, not \emph{nautical} miles (Marck personal correspondence).} are reachable by overnight voyages in a traditional canoe (24h). This is taken to represent a good approximation of island connections of frequent contact and is supported by other accounts, such as \citep[38]{gladwin2009east} who notes a higher frequency of travel between islands within 100 miles of each other. This is a distance people may travel for tribute offerings, trade and community events, which strengthens cultural ties. Further away, and it may not be so easy to get together as often. Fig. \ref{appendix_Marck_2000_east_poly} shows this principle applied to central East Polynesia.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{Marck_2000_east_poly}
+\caption{{Map of central East Polynesia from \citet{marck2000}, showing 100 mile radii.}}
+\label{appendix_Marck_2000_east_poly}
+\end{figure}
+
+This idea proved useful also in terms of understanding language communities. \citet{mark_1986, marck2000} demonstrates that this way of grouping islands often conforms neatly to linguistic boundaries --- especially in the north and east Pacific. For example, in Fig  \ref{appendix_Marck_2000_east_poly} the boundaries mostly line up well with well-established linguistic boundaries (with some exceptions, such as Tuamotus being split Australs merged etc). These island groups also line up somewhat with the ``interaction spheres'' in East Polynesia identified by \citet{rolett2002voyaging}\footnote{\citet{rolett2004environmental} consider islands within 50 km of each other as a meaningful unit, but do not extrapolate on why this is.}. 
+
+However, this way of grouping islands does not take into account currents and winds - they are ``just'' a simple 100-mile buffer zone from the coastline. \citet{NZSA_overnight_2023} improved upon this initial idea by incorporating a cost-surface that accounts for wind, currents and canoe profile shapes. Using data on winds and currents from 
+\citet{noaa_2019} and \citet{apdrc_2014}, a cost-surface model of the Pacific Ocean was created. In addition, a vessel model of a canoe was simulated (a v-shaped outrigger, similar toFig. \ref{appendix_kane_fishing_canoe}). Voyages of 12 hours were simulated from different seed points on islands over different times over the year as currents and winds vary with seasons.  
+
+The novel results were largely similar to Marck's groupings, strengthening the assumption that 100 miles is a decent approximation. It is this new island grouping that is used in this study. I refer to these island groups as \textit{overnight distance groups}. Fig. \ref{appendix_polygon_plot_SBZR} shows this grouping, along with the number of languages per group. Out of the 56 island groups of this kind that were possible to include in the analysis, 45 have only one language.
+
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.7\textwidth]{Herb-Kane_Fishing-Canoe-off-North-Kona.jpg}
+\caption{{The painting ``A Fishing Canoe off North Kona'' by Herbert Kawainui K{\=a}ne. Illustration of an outrigger canoe with v-shaped hull. Copyright Herbert K. K{\=a}ne, LLC.}}
+\label{appendix_kane_fishing_canoe}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{SBZR_buffer.png}
+\caption{{}}
+\label{appendix_SBZR_buffer}
+\end{figure}
+
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{SBZR_cost.png}
+\caption{{}}
+\label{appendix_SBZR_cost}
+\end{figure}
+
+
+
+
+
+
+\begin{sidewaysfigure}[p]
+\centering
+\includegraphics[width=\textwidth]{polygon_SBZR_group_map}
+\caption{{Distribution of languages per overnight sailing distance island group.}}
+\label{appendix_polygon_plot_SBZR}
+\end{sidewaysfigure}
+
+\textbf{Grouping islands based on (at least one) shared language}. If two islands share a language, they are classified as of the same island group. For example, all islands of the Tuamotu archipelago (where Tuamotuan [tuam1242] is spoken) are merged, even though they are grouped into several separate island groups by the overnight distance approach. Vanuatu, being a land of great language diversity, has a different group for almost every island. Another example is the Tungaru islands (western islands of modern-day Kiribati) and Tuvalu which actually share a language. Most people of the country of Tuvalu speak Tuvaluan, but there is one island, Nui, where Tungaru (Gilbertese [gilb1244]) is also spoken \citep{faaniu1983tuvalu, macdonald_2020, omniglot_tuvaluan}. We will call these island groups \textit{shared language groups}. Fig \ref{appendix_polygon_plot_medium} shows these groups, and their language counts. Out of the 65 island groups that were included in the modelling, 21 had only one language.
+
+\begin{sidewaysfigure}[p]
+\centering
+\includegraphics[width=\textwidth]{polygon_medium_group_map_vanuatu_mh_inset}
+\caption{{Distribution of languages per shared language island group. Island groups with only one language do not have a label because otherwise the map is too difficult to read. All island groups without a label have 1 language.}}
+\label{appendix_polygon_plot_medium}
+\end{sidewaysfigure}
+
+Finally, these island groups should be taken with a grain of salt. They are most likely better than using modern nation-states and they are more explicitly and principally defined than many other island groups in other studies which rely on conventional definitions of well-known island groups or consider each island separately. However, the task of finding definite meaningful social geographic units in Oceania prior to colonization is difficult. Most likely the parameters vary over the space, for example with access to different kinds of sailing technology or different customs. Furthermore, from the initial settlement of Remote Oceania approximately 3,000 years ago until Western colonisation, there must have been a large amount of variation. \citep{rolett2002voyaging} for example discusses the decline in inter-island group voyaging in East Polynesia after 1450 CE. That said, these two approaches offer two different ways of viewing Oceania as a socially interconnected space --- one more granular than the other --- and are the best available island groupings for historical research known to the author.
+
+
+
+%\footnote{This map has been produced by the team of Oceanic linguists at CNRS-LACITO, but it has never been officially published. It appears in other academic papers, for example \citet{speedy2013reflections}, but regretfully it is not possible to provide a stable bibliographical reference to it independently.}.
+%For each of these island groups, absolute latitude, total area and shoreline were calculated from the Global Self-consistent, Hierarchical, High-resolution Geography Database (GSHHG), version 2.3.7 \citep{wessel1996global}. The analysis of this study also includes the ratio of shoreline to area, as we may expect islands groups with many small islands and atolls to be different from those with one large island, even if their overall area is the same\footnote{Thank you to the anonymous examiner who suggested including this.}. Area and shoreline were both log-transformed (log 10). This was done both to be in line with previous studies \citep{gavin2012island} and because the distributions had extreme outliers (New Caledonia and Aotearoa/New Zealand). Such outliers end up driving the model in a manner that is not representative of the overall sample. By logging these variables the overall structure and order of data-points remains the same but the influence of the extreme outliers is reduced.
+
+%ANU CartoGIS also provided data for the water area which is covered by the overnight sailing distances, the light-blue shaded areas of Fig.~\ref{RO_overnight_coloured_dots}.The area between and around islands is important because it provides access to fish and seafood (c.f. rice or wheat fields to agriculturalists or tundra and taiga to reindeer herders), islands which have less territory of this kind but equal land area to another island may be able to support fewer people. For the island groups defined by shared language which are smaller than Marck groups, the water area was assigned proportionally to the islands landmass size in comparison to the entire Marck group's landmass (i.e. Malakula makes up)
+
+%A score of isolation was also calculated based on the GSHHG-data as well. There are many different ways of measuring island isolation. \citet{rolett2004environmental} use two measures, distance from home island to island which is >25\% larger than home island and distance to island >75\% larger than home island. \citet{gavin2012island} use distance to the Asian continent (after considering three other measurements). The ``Isolation index'' of the Islands database \citep{dahl1991island}  is calculated as follows: (distance to nearest equivalent or larger island)$^{0.5}$ + (distance to nearest island group or archipelago)$^{0.5}$ + (distance to nearest continent)$^{0.5}$. \citet{weigelt_2013} present an overview and comparison of 17 different island isolation measurements used in biology and conclude that it is advisable to consider stepping-stone pathways, larger islands (besides continents), climatic similarity and the area of surrounding landmasses when studying the richness of species in relation to island isolation.
+
+%In light of this, and given the data available, a simple isolation metric has been calculated. This measurement consists of \textit{the distance from the largest landmass of each island group to the closest landmass which is the largest in its island group}. This is essentially a distance of ``home island'' to closest other ``home island''. For example, for Hawai'i the largest island is the Big Island. The closest island to the Big Island which is also itself the largest in its group is part of the M\={a}ngarongaro atoll (also known as Penrhyn or Tongareva). This distance is 3,191 km. This is the largest distance for our isolation measurements, therefore Hawai'i is the most isolated island group. The metric is calculated separately for the overnight distance groups and shared language groups and was also logged (log 10) for the same reasons that area and shoreline was logged.
+
+Each island group is associated with the languages spoken there, based on information in the various sources cited earlier for defining groups by a shared language. Naturally, some islands will have many languages assigned to them, most notably Santo and Malakula in Vanuatu with 24 and 33 languages respectively. Other languages are spread out over many islands and atolls. Tuamotuan [tuam1242] is for example assigned to 1,302 distinct landmasses (in this dataset the parts of atolls and reefs that are above water appear as several small landmasses). For shared language groups, these landmasses are all joined under the label `Tuamotu'. However, as defined by overnight sailing distances this archipelago is split into several different island groups each with one language. The fact that it is the same language is not accounted for. \citet{gavin2012island} also arrange their data similarly.
+
+In the scripts, overnight-sailing distances island groups are labelled ``SBZR'' (initials of authors of \cite{NZSA_overnight_2023}) and shared-language-groups ``medium''.
+
+\FloatBarrier
+\subsection{``Political complexity''}
+\label{appendix_def_pol_complex}
+The hypothesis tested in this study relies on a systematic measure of political structure across societies. The most widely used variable in this regard is variable 33 of the Ethnographic Atlas \citep{EA_1971}: ``jurisdictional hierarchy beyond local community'' (EA033). This section gives an overview of how this variable is defined and its distribution in Remote Oceania. 
+
+The Ethnographic Atlas was first published in 1962 and is one of the data-sets included in D-PLACE \citep{d_place_all}. The variable EA033 is widely used to represent ``political complexity'' in studies of cultural evolution. This variable has been used to study the relationships between language area, subsistence strategies and political organisation \citep{curriemace2009}; processes of rise and fall of ``political complexity'' in South-east Asia and the Pacific \citep{currie2010rise}; the spread of Christianity in the Pacific \citep{watts_2018}; and co-evolution of intensive use of natural resources and political structure \citep{sheehan2018coevolution}. In this study, we will also refer to this variable as ``political complexity''. 
+
+In all of the studies referenced above, EA033 is used as a way of quantifying vertical political structure within a given society beyond the local community. ``Local community'' is in the ethnographic/anthropological literature defined as the ``maximal group of persons who normally reside together in face-to-face association'' \citep{yale1945outline}. The size and distribution of local community may vary greatly. For Remote Oceania, the Ethnographic Atlas records entries ranging from less than 50 (Ponape) to between 400-1000 (Tikopia).
+
+``Society'' is not defined explicitly in most of the literature, but it is sometimes used interchangeably with ``ethnic group'' or ``culture''. \citet{roger1981cultural} write:
+
+\begin{quotation}
+\noindent\emph{[A]ll the communities that are connected politically and economically (and hence comprise a kind of total social system) can be taken as comprising a \textbf{society}. Characteristically, a society comprises a total social system whose members share a common language and cultural tradition}. 
+\begin{flushright}
+\citep[22]{roger1981cultural} \footnote{Ironically, later in this section \citet[23]{roger1981cultural} quote \citet[422]{schwartz1978culture} in saying that the ``Manus people'' as a society are easily linguistically bounded, when linguists have counted up to 19 languages on the island \citep{glottolog40}. In D-PLACE \citep{d_place_all} the society ``Manus'' in the Ethnographic Atlas is specifically linked to one language out of these 19, Titan [tita1241].} 
+
+\end{flushright}
+ \end{quotation}
+
+It is not possible to give more detail to the definition of ``society'' as employed in the Ethnographic Atlas dataset, but it does seem to correspond to ``language community'' to a great extent. In cases where societies are multilingual (c.f. \citet{evans2017did}), it is less likely that the definition relies on at least one shared language even if not all are shared. It is, however, unclear how such cases are represented in the Ethnographic Dataset.
+
+In some instances, it may be that ``local community'' and ``society'' are one and the same. For example, the total population for the ``ethnic group'' (variable EA202) of the society Tikopia is 1,300 which is not that much larger than the mean size of the local community (EA031) noted above. On the other hand, the total population of the ethnic group of Ponape is 8,000, which would result in an estimate of 160 local communities given the value of mean size of local community (EA031).
+  
+Political complexity (EA033) as a variable is observed per society, i.e. it does \emph{not} capture relationships \emph{between} distinct societies. It also does not track the political structure \emph{within} the local community\footnote{Ethnographic Atlas variable 32 captures jurisdictional hierarchies \emph{within} local communities.} or \emph{horizontal} political relationships within a society (e.g. political relationships between equal genealogical groups). It specifically measures \emph{vertical} jurisdictional levels \emph{within} a given society, \emph{beyond} the local community. Furthermore, it targets ``jurisdictional'' authority --- not just the existence of rank. In other words, the levels of authority need to be tied to some kind of jurisdictional power, most likely the power to exert punishment for transgressions and the possibility to declare war upon other societies. 
+
+Specifically, it is necessary to underline that despite the common name for this variable --- ``Political complexity'' --- it does not include politically complex systems such as the Kula exchange ring\citet{damon2002kula}, see Fig \ref{appendix_kula_ring}. Exchange systems of trade/debt are definitely complex and political, but they are not included in EA033 as they do not track \emph{vertical} complexity but rather horizontal.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{latex/kula_ring_damon}
+\caption{Kula exchange ring, from \citet{damon2002kula}.}
+\label{appendix_kula_ring}
+\end{figure}
+
+Complex socio-political horizontal networks can also be found in Vanuatu, for example on the island of Tanna. \citet[314]{lindstroem1991} even remarks on the relationship with cultural diversity, writing: ``Kava-drinking grounds across the island are linked by a complex system of "roads" along which men exchange messages, goods, and spouses. This road network, by which each Tannese village is linked to all others, has produced cultural homogeneity across the island, despite linguistic diversity.''
+
+When interpreting the effects of a variable like EA033, it is necessary to keep the above caveats in mind.
+
+The possible values societies can take for political complexity (EA033) are:
+
+\begin{enumerate}
+\item No levels (no political authority beyond community)
+\item One level (e.g., petty chiefdoms)
+\item Two levels (e.g., larger chiefdoms)
+\item Three levels (e.g., states) 
+\item Four levels (e.g., large states)
+\end{enumerate}
+
+\citet{giuliano2018ancestral} write: 
+
+\begin{quotation}
+\noindent\emph{[I]f the local village chief is the highest level of authority, and he or she does not answer to anyone above them, then the variable would take on a value of [1]. If above the chief, there was a district leader, then above this, there was a territory leader, and above this a provincial leader, and above this the paramount chief, then this variable would take on the value of [5].} 
+\begin{flushright}
+\citet[9]{giuliano2018ancestral}
+\end{flushright}
+\end{quotation}
+
+
+%http://jps.library.usp.ac.fj/gsdl/collect/jps/index/assoc/HASHafcf.dir/doc.pdf 
+This way of characterising political structure aligns well with ethnographic accounts of political structures in Western Polynesia, as we have for example seen in descriptions by \citet{sahlins63}. Consider Fig.~\ref{appendix_meleiseapyramid} \citep[22]{meleisea1995} for example, which illustrates the ideal characterisation of political power in S\={a}moa. The village level (\emph{matai} titles) corresponds to value 1 for EA033, subdistrict (\emph{ali'i} titles) level 2, district level (\emph{ali'i pa'ia / ao} titles) 3 and nation (\emph{tafa'if\={a} / tupu} titles) corresponds to level 4. S\={a}moa is however coded as level 3 since paramount titles are very unstable in the archipelago, even though they theoretically do exist.
+
+%\footnote{There exists some variation in the literature as to where to start this scale, either with 1 = no political authority beyond community, or 1 = missing data. We will be using the default scale in the Ethnographic Atlas Codebook from \citet{gray1998ethnographic} here and adjust quotes from other publications to this scale so as to reduce confusion.}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{pyramid_meleisea}
+\caption[Illustration of traditional political organisation of S\={a}moa.]{{Illustration of the traditional political organisation of S\={a}moa from \citet[22]{meleisea1995}.}}
+\label{appendix_meleiseapyramid}
+\end{figure}
+
+However, this framework is less easy to apply to the Melanesian islands of Remote Oceania where political structure often is described more in terms of autonomous and equal groups organised into horizontal structures such as exchange networks --- both within and between societies (c.f. \citet{bonnemaison1996graded} and \citet{huffman1996trading}). \citet{bolton1998chief} points out that the very concept of ``chief'' is new to Vanuatu, writing that chiefs were in many places first introduced by Europeans to fill the role of ``representative for a community towards outsiders'' and then transformed into ``representative for traditional culture (kastom)'' \citep[185]{bolton1998chief}. In this study, political complexity could also be a proxy measurement of social network cohesiveness (c.f. \citet{grace_1992_aberrant}). Differences between modern Vanuatu ``chiefs'' and pre-European political structures are therefore unlikely to be large enough to give rise to dramatically different scores in this metric. As has been shown in previous studies, while this metric may be coarse-grained and not capture all the nuances of political life in the region, it appears to still be useful in testing hypotheses such as the one investigated in this study.
+
+%, it may still be valuable to us in a) operationalising the hypothesis of Turner/Sahlins/Pawley
+
+%Given this, what does it mean to go looking for ``chiefs'' and ranks in Vanuatu and what would descriptions of such institutions in ethnographies actually capture?
+
+%Problematic as this variable may be in faithfully capturing relevant facts of political structure in all the societies in our sample, it may still be valuable to us in a) operationalising the hypothesis of Turner/Sahlins/Pawley and b) capturing something about social networks and group identity (even if it only measures this by proxy). In this case study, we are testing the hypothesis that societies that are rules by ``powerful chiefs'' and have more levels of vertical jurisdictional structures are slower at diversifying than societies with a more egalitarian/horizontal structure. Given that this is what we are testing, I believe that variable EA033 can still serve us well even if it does not capture the nuances of power structures equally well throughout the region.
+
+Given our language classification earlier, there are 233 language communities in our maximal sample. The ethnographic data is collected per society, and as was mentioned earlier it is possible for different societies to have the same language. Societies with the same language have been merged and our smallest cultural units of analysis are the language-society\footnote{American S\={a}moans and Upolu S\={a}moans were the only societies that needed merging in this fashion.}. Each language is associated with the islands and atolls where it is described as spoken. The full geographical dataset contains 5,525 unique landmass polygons\footnote{The total number of polygons in the geographical dataset is 9,750, but this includes New Guinea and uninhabited islands (Phoenix Islands for example). 5,525 is the number of unique polygons that can be associated with a community of Remote Oceania.} which have been grouped into our smallest geographical unit of analysis: 104 shared language island groups. In the analysis, we will also be aggregating the islands into 67 overnight distance groups.
+
+D-PLACE has a value recorded for political complexity for 44 ``language-societies'' in Remote Oceania. There have also been more recent studies where other authors have added more entries. We will be using additional data-points from a separate publication by \citet{sheehan2018coevolution}, resulting in another 27 data-points. There was an overlap between these two datasets, 26 language-socities having a coding both in the original Ethnographic Atlas dataset in D-PLACE and in Sheehan et al. Of these, 11 societies (i.e. 43\%) were coded exactly the same. Upon closer investigation of the instances where the coding differed, I found that Sheehan et al often had access to \textit{more} data, more \textit{comprehensive} data and more \textit{recent} data. Each of these instances was re-evaluated, and most often the coding from Sheehan et al was kept\footnote{I am grateful to Sheehan for very helpful personal correspondence during this process.}. The data was also further supplemented with information from \citet[201]{bonnemaison1996graded}, resulting in 66 more data-points in Vanuatu. See appendix \ref{appendix_pol_complex} for a table of the coding of this variable.
+
+%For the instances where they had represented the same society with different values, I consulted the relevant ethnographies myself and made my own coding decision. In the most cases, my evaluation of the data sided with the interpretation by Sheehan et al. Given that Sheehan et al have access to more recent and more comprehensive ethnographic material, it shouldn't be surprising that they have made different decisions and that a second look is more likely to agree with their evaluation than the older dataset. 
+
+%Reading ethnographies is difficult and involves a lot of interpretation and additional knowledge of context. It is not that dissimilar from reading grammars (which I have more experience with). If anything, reading ethnographies is tricker than reading grammars since there is more variation in how to describe ``a culture'' than there is on how to describe ``a language''. I had the fortune to be able to correspond with Sheehan and discuss particular cases in greater detail, which was very valuable. During these investigations, I also came across a typology of political systems in Vanuatu compiled by \citet{bonnemaison1996graded} (see Fig.~\ref{Bonnemaison_map}) which provided more data-points. In reading \citet{bonnemaison1996graded, sahlins63},  and discussing with Sheehan, I concluded that it is possible to infer a level of 1 for EA033 where Bonnemaison describes a society as having a ``grade-taking system''. It is however unclear if a coding of 2 or higher can be made when societies are described as ``chieftainship of ``Polynesian'' type, so I did not record those observations in our dataset. In the end, I arrived at a dataset that had good enough coverage for this study (130 out of 233 language-societies and 61/105 island groups) and that I felt confident represented the description of these societies well. 
+
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[width=13cm]{Bonnemaison_1996_vanuatu_map}
+%\caption{{Map of traditional systems of power in Vanuatu, from \citet[201]{bonnemaison1996graded}.}}
+%\label{appendix_Bonnemaison_map}
+%\end{figure}
+
+
+It should be noted that this data does not represent the state of these societies for the entire period between first settlement and European arrival. As \citet{meleisea1995} writes, anthropology of the Pacific often depicts an unrealistic ``ethnographic present''. For example, \citet[185]{schoeffel87} writes about the shift in the political world of S\={a}moa under the rule of Salam\={a}sina which gave rise to a greater distinction between two kinds of chiefs: \emph{tul\={a}fale} and \emph{ali'i}. \citet[249]{kirch2017road} also mentions this distinction but notes that it mainly came to prominence in the 1500's. As a way of avoiding this problem, the D-PLACE database \citep{d_place_all} contains information on the focal years of the description. The data for the variable on political complexity in Remote Oceania varies from 1800 (Hawai'i) and 1940 (Vanua Levu). This study assumes that also more recent data may sufficiently accurately reflect the differences also of past societies, such that it remains useful for testing the central hypothesis.
+
+Fig.~\ref{appendix_pol_complex_map} represents the coding of political complexity for the relevant societies. A more detailed table can be found in appendix \ref{appendix_pol_complex}. While it is indeed the case that societies of Melanesian Remote Oceania tend to have lower levels of political complexity, it should be noted that many societies in Polynesia and Micronesia also score a value of 1.
+
+For the calculations of this study, the mode political complexity per island group was used and it is modelled as a monotonic effect (i.e. it is not assumed that the difference between level 1 and 2 is the same length as the difference between 2 and 3, but they are still on an ordinal scale).
+
+\begin{sidewaysfigure}
+\centering
+\includegraphics[width=0.8\textwidth]{map_pol_complex}
+\caption[Map of Remote Oceania: Political complexity]{{Map of Remote Oceania with associated values for political complexity (EA033).}}
+\label{appendix_pol_complex_map}
+\end{sidewaysfigure}
+
+
+\FloatBarrier
+\subsection{Waves of settlement}
+\label{appendix_def_dates}
+In order to test whether political complexity is driving language diversification in Remote Oceania, we need to control for other relevant variables --- in particular time depth of human settlement. The time of settlement indicates how long a community is likely to have been in a certain place. 
+
+For most islands in our dataset, there is at least one archaeological study indicating time of first settlement. The archaeological data here is mainly based on an overview of the literature by \citet{rieth_cochrane_2018}, supplemented by the following studies: \citet{intoh2007reconnaissance, intoh2008ongoing, carson2012recent, kirch2012basline, Napolitano_et_al_yap, ellis2012saipan} and \citet{levin_seikel_miles_2019}. See appendix \ref{appendix_dates_table_appendix} for a table of dating data.
+
+For most of the island groups, the labels provided in \citet{rieth_cochrane_2018} or the other sources neatly corresponded to the island groups in our data (e.g. Mangareva = Mangareva). However, sometimes the label refers to a larger area, this is the case of ``Austral Islands'' which in our data-set is broken down into Rimatara, Tupuai, Ra'ivavae and Rurutu respectively. In such cases it is assumed that the time can be generalised over the smaller island groups (this is also the case for the political complexity metric). Furthermore, some island groups have not been subject to archaeological research, but they are known to have been settled in association with another place that has been studied. For example, while there have been no archaeological excavations on the Sorol atoll of Micronesia, it is known to be closely related to Ulithi \citep[23]{quackenbush1968sonsorol} and it is likely that it was settled at a similar time. In such cases, the time depth is inferred based on information from nearby islands. For every island, the table in the appendix \ref{appendix_dates_table_appendix} lists the label of the island group in the source and whether the settlement timing has been inferred based on evidence from nearby islands or not.
+
+Archaeological dates are based on radiocarbon findings which are calibrated based on conditions at the excavation site and other finds there. There exist different calibration methods\footnote{Radiocarbon calibration is the process by which radiocarbon years are converted into calendar years. Because the ratio of atmospheric $^{14}$C/$^{12}$C, which is a key element in this process, has not been stable historically, different methods exist and these may produce different results.}. In order to make the dates from different sites directly comparable they need to be re-calibrated in the same way. It was not possible to access all the necessary information on each publication and re-calibrate the dates appropriately. Instead of using the raw dates from the different studies, the islands have been sorted into a settlement order with twelve waves based on the dates in the literature and descriptions of what was settled in the same wave. Fig.~\ref{appendix_dates_map} illustrates the settlement wave order per island. Exact dates and references are found in appendix \ref{appendix_dates_table_appendix}.
+
+For comparison across island groups, the oldest settlement order per group was used. Unfortunately, this means that settlement data for so called Polynesian outlier communities in areas that were already inhabited (c.f. Southern Vanuatu), who arrived much more recently, is ignored.
+
+As with EA033, settlement waves are modelled as monotonic effects in the models. Settlement order was reversed from Fig. \ref{appendix_dates_map} such that high numbers represent further back in time, making the interpretation of effects more intuitive. 
+
+\begin{sidewaysfigure}
+\centering
+\includegraphics[width=0.8\textwidth]{Map_RO_dates}
+\caption{{Map of island groups in Remote Oceania labelled with settlement order.}}
+\label{appendix_dates_map}
+\end{sidewaysfigure}
+
+\FloatBarrier
+\subsection{Environmental factors} 
+\label{appendix_environ}
+As previous studies of language diversification have shown (e.g. \citet{ greenhill2015demographic, gavin2017process, Pacheco_Coelho_2019, hua2019ecological}), environmental factors such as latitude, rainfall etc can be useful in estimating language richness. This is due to the connection between these variables and the ability to sustain several self-sufficient smaller groups.
+
+%In many parts of the world, we have limited data on actual population dynamics --- in particular historically. How many people lived on Efate island 1,000 years ago? This is hard to know. Estimations of carrying capacity can give us an upper limit on how many humans could possible live in an area. The link to languages is as follows: the more groups of people who can sustain themselves on a smaller area each, the more languages there can be in that region.
+
+We are using measurements of absolute latitude, Net Primary Production, Precipitation (rainfall), temperature and size of islands to estimate the environments ability to sustain small groups. The data comes from Global Self-consistent, Hierarchical, High-resolution Geography Database (GSHHG) \citep{wessel1996global}, the ecoClimate database \citep{ecoclimate} and the Moderate Resolution Imaging Spectroradiometer (MODIS, \citet{running2021modis_terra, running2021modis_aqua}). The coordinates of the centroids of each land mass from GSHHG was used to extract the information from ecoClimate and MODIS. The ecoClimate data used are simulations of the pre-industrial period ($\sim$1760).
+
+The Net Primary Production (NPP) data from MODIS is from 2001, 2002, 2003 and 2004 (these are the oldest available dates). NPP reflects the amount of carbon captured by plants in an ecosystem, after accounting for losses due to respiration. The data is gathered by two space satellites (Terra and Aqua) of the United States of America's National Aeronautics and Space Administration (NASA). They collect spectral indices of land-based vegetation, which are then used to infer NPP which is accumulated into a grid where each cell is 500 meters by 500 meters. For more details, see \citet{running2015daily} \footnote{The manual is for a previous release, where the grid cells were 1km by 1km. The more recent release is 500m by 500m.}.
+
+In total, the following environmental variables are included in the study:
+
+\begin{itemize}
+\item Global Self-consistent, Hierarchical, High-resolution Geography Database (GSHHG)
+\begin{itemize}
+    \item Absolute latitude
+    \item Shoreline
+\end{itemize}
+\item ecoClimate
+\begin{itemize}
+\item Bio1: Annual mean temperature (Celsius)
+\item Bio4: Temperature seasonality (standard deviation *100)
+\item Bio12: Annual precipitation (mm/m2)
+\item Bio15: Precipitation seasonality (coefficient of variation)
+\end{itemize}
+\item Moderate Resolution Imaging Spectroradiometer (MODIS)
+\begin{itemize}
+    \item MOD17A3HGF.061: NPP data from the satellite Terra
+    \item MYD17A3HGF.061: NPP data from the satellite Aqua
+\end{itemize}
+\end{itemize}
+
+The variables Net Primary Production (NPP; the amount of biomass or carbon produced), temperature \& rainfall (mean and seasonality) and absolute latitude are all associated with the suitability of a place for life and they correlate with each other, at least to some degree (c.f. Figs \ref{appendix_SPLOM_medium_all_variables} and \ref{appendix_SPLOM_SBZR_all_variables}). In this study, they are all tracking a similar concept: the suitability for human populations to thrive in smaller groups. Because of this, we are running a Principal Components Analysis on all seven variables, this allows us to extract a variable that explains most of the information. We ran a Non-Graphical Cattel's Scree Test \citep{cattell1966scree, R-nFactors} to determine the number of optimal components (overnight sailing distance island groups = 2 PCs, shared language island groups = 3 PCs).
+\FloatBarrier
+
+
+\FloatBarrier
+\subsection{Controls for spatial and phylogenetic non-indepedence} 
+\label{appendix_sp_control}
+
+\newpage
+
+
+
+\section{Caveat regarding time-span}
+\label{appendix_time_span}
+%Collected thoughts in regards to validity of ethnographic data, may be cut.
+
+To understand the vast majority of human history and diversification, we should consider the state of societies as they were before the introduction of Western colonisation, industrialisation, globalization etc as these have only been around in the last 500 years. Behaviourally modern humans emerged between 90,000 and 160,000 years ago (\citet{powell2009late}: \cite{marean2007early}). The last 500 years represent between 0.6\% and 0.3\% of our history. If we consider only the time period of more sedentary living and agriculture, i.e. approximately the last 11,000 years (c.f. \citet{kislev2006early}), the proportion of time since Columbus landing in the Caribbean is 4.5\%.
+
+The aforementioned processes, while recent, have resulted in mass immigration/invasion (c.f. \citet{invasion_day}) to places like the Americas, South Africa, Australia and New Zealand and oppressive policies that reduce language diversity. They have had a massive impact in the comparatively short time span that they have been active and are not only perpetuated by Western forces but also other powerful groups (see for example the case of Indonesian power in Western New Guinea \citep{gietzelt1989indonesianization}). Another driving force that is relatively recent and related is the emergence of modern nation-states and their ideologies (c.f. \citet{foucault2007security}, \citet[21-22]{oakes2001language}). In connection with the aforementioned forces, the formation of modern nation-states has further reduced diversity that was present within groups (through means like ideological movements (e.g.the \emph{Volkgeist}-movement), nationally standardized mass education, mass media, print-media etc). The creation of nation-states and their continued development is often tied to ideas of one sole homogeneous culture (c.f. \citet{encyclo_nationalism}), which results in the disappearance of regional variation, minority languages etc within what we today conceive of as ``countries''/``nation-states''. 
+
+The massive effect of these forces in the last 500 years means that for historical scientists, there is a big difference between considering the human landscape before and after this point --- especially in terms of cultural history and diversity. \citet[7340-7341]{curriemace2009} find that the data available for language territories in Australia and the Americas is so affected by colonial history and population replacement to make it impossible to include it in the analysis alongside the other regions. 
+
+There is also a problem with information pertaining to history before these massive forces step onto the stage. Ethnographic accounts are often ``snapshots'' with unclear time-depth \citep[113]{bedford2008northern}. Human culture everywhere is dynamic and changing. \citet{meleisea1995} has also written about how anthropology of the Pacific often depicts an unrealistic ``ethnographic present''. This is one of the reasons why the ethnographic database D-PLACE \citep{d_place_all} includes ``focal year'' for each variable. 
+
+Through studies like this, we can model and discuss what the past may have been like and what could be driving certain changes, such as language splitting, but we must always be wary of the shortcomings of our data and methods. While the coding of political complexity and environmental data may not perfectly represent all the time between the settlement of Remote Oceania 3,000 years ago until now, it may be a good enough proxy of large patterns and conclusions drawn may still be informative. For a more detailed understanding, deeper engagement with local communities and agent-based modelling is desirable.
+\newpage
+
+\section{Regarding population and the number of languages}
+\label{appendix_pop_vs_languages}
+While it is true that the number of languages is not entirely evenly spread out over the population, it is still the case that there is a general trend connecting a greater number of people with a greater number of languages (as can be seen in Figs \ref{appendix_fig:un_pop_plot} and \ref{appendix_fig:un_pop_plot_log10}). In addition,  \citet{raviv2019larger} and other studies have shown that community size may influence language diversification independently from network structure. 
+
+However, due to difficulties with data, this is hard to study historically. In this particular study, population numbers could not be included due to a lack of detailed and reliable data on enough island groups prior to Western colonization. While resources like \citet{elcat} have population numbers for many places, it does not sufficiently cover Oceania to allow the variable to be included. This is similar to \citet[7340-7341]{curriemace2009} who found that the data available for language territories in Australia and the Americas is so affected by colonial history and population replacement to make it impossible to include it in the analysis alongside the other regions. 
+
+Figs \ref{appendix_fig:un_pop_plot} and \ref{appendix_fig:un_pop_plot_log10} show the relationship between the number of languages per modern country/territory \citep{glottolog3} and its population in 1950 \citep{UN_pop}, with Remote Oceanic countries and territories highlighted. Modern nation-states are not historically relevant cultural units in many places in the world, include the Pacific. For example, Cook Islands (also known as Avaiki Nui) and the Federated States of Micronesia encompasses many island groups with diverse histories (c.f. Fig \ref{appendix_sec:island_geo}). However, even with this noise, there is a relationship --- more people $\rightarrow$ more languages.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.7\textwidth]{number_of_languages_vs_pop_1950}
+    \caption{Population in 1950 per country (x-axis) and number of languages per country (y-axis). Dark blue triangles = countries with at least some landmasses in Remote Oceania, green circles = all other countries.}
+        \label{appendix_fig:un_pop_plot}
+    \end{figure}
+    
+\begin{figure}[ht]
+    \centering
+          \includegraphics[width=.7\textwidth]{number_of_languages_vs_pop_1950_log10}
+    \caption{Population in 1950 per country (x-axis) and number of languages per country (y-axis) - log-10-transformed. Dark blue triangles = countries with at least some landmasses in Remote Oceania, green circles = all other countries.}
+    \label{appendix_fig:un_pop_plot_log10}
+    \end{figure}
+
+While it is not possible to include historic population size as a variable, it is possible that the environmental variables are relevant here as they may suggest island groups that could be home to larger populations. Fig. \ref{appendix_SPLOM_country_all_variables} shows the relationship between the population data and language count data above to the variables of this study. The first four rows represent the data summarised per country (i.e. from  \citet{UN_pop} and \citet{glottolog3}) and the rest are per island group in Remote Oceania. This means there is a mismatch of units of analysis, for example: Hawai'i is a part of the United States of America and therefore is included in the data point for the entire USA. The ``lg count (island group)'' contains only the number of languages in Hawai'i in the island groups included in this study, i.e. 1.
+
+\begin{figure}[ht]
+    \includegraphics[width=\textwidth]{latex/SPLOM_country_all_variables}
+\caption{Scatterplot matrix of all variables available, over countries. Note that the population data is taken from \citet{UN_pop} and refers to the whole country, i.e. the population of the entire USA --- not just Hawai'i..}
+\label{appendix_SPLOM_country_all_variables}
+\end{figure}
+
+
+There is a negative correlation of -0.56 between the population (log10) per country and the environmental PC1 per island group. This may indicate that the environmental PCs are picking up on information relevant to population size.
+
+\FloatBarrier
+\newpage
+
+\section{Table of political complexity per island group }
+\singlespacing
+All code and data will also be available on OSF/GitHub/Zenodo.
+
+Anonymised OSF project for double-blind peer review: \url{https://osf.io/amnh9/?view_only=403d57d715254539a3a99c798b4014d2}.
+
+ \begin{landscape}
+     
+\label{appendix_pol_complex}
+
+\input{appendix_pol_complex_xtable.tex}
+ \end{landscape}
+
+\newpage
+
+\section{Table of settlement date per island group based on archaeology}
+\singlespacing
+\label{appendix_dates_table_appendix}
+All code and data will also be available on OSF/GitHub/Zenodo.
+
+Anonymised OSF project for double-blind peer review: \url{https://osf.io/amnh9/?view_only=403d57d715254539a3a99c798b4014d2}.
+
+Table \ref{appendix_dates_xtable} shows data on settlement dates from several different archaeological studies. 
+
+The column ``Source'' contains the relevant reference, and ``Source (meta)'' the citation for the source that is citing the reference in ``Source'', where that is useful. In cases where it was reasonable to infer a settlement date based on a nearby island, this is indicated in the column ``Based on inference from neighbouring island?''.
+
+In the summary table in \citet{rieth_cochrane_2018},  the Vanuatu islands Santa Cruz and Reef islands are mentioned specifically on a separate row to ``Vanuatu''. Therefore, we take ``Vanuatu'' to mean islands in Vanutu excluding Santa Cruz and Reef islands 
+
+In the case of the so-called ``Polynesian Outliers'', i.e. communities who speak languages that belong to the Polynesian linguistic group but are living in islands outside of the traditional ``Polynesian triangle'', where possible we used the settlement dates of the first human settlement even if this is different from the Polynesian outlier socities living there today. For example, \citet{carson2012recent} describes non-Polynesian horizons in Mo-ava-mo-iki (a.k.a Renelle and Bellona). For Taumako, Carson describes the initial Lapita settlement as 3,000 years ago and the Polynesian outlier settlement 1000 years ago.
+
+The column ``Time depth settlement group'' contains the grouping of islands into settlement waves, which is what is used in the models. For each of the island groups, the oldest settlement group was used.
+
+\begin{landscape}
+\input{appendix_dates_xtable.tex}
+\end{landscape}
+
+
+\FloatBarrier
+\newpage
+
+\section{Input data tables}
+\singlespacing
+\label{appendix_data tables}
+All measurements, except the response variable, were scaled and centred to make the coefficients easier to interpret and compare. Shorelines were also log-10-transformed (before scaling) to avoid an outsized effect of outliers (c.f. \citet{rolett2004environmental} and \citet{atkinson2016cultural}).
+
+All code and data will also be available on OSF/GitHub/Zenodo.
+
+\begin{landscape}
+\input{appendix_medium_group_table.tex}
+
+\input{latex/appendix_SBZR_group_table}
+\end{landscape}
+\newpage
+
+\section{Directed Acyclic Graph}
+\label{appendix_DAG_def}
+Directed Acyclic Graphs are a helpful tool in causal reasoning (\citet{pearl1995causal} and \citet{mcelreath2020statistical}). Fig. \ref{appendix_Predicting_lgs_DAG_full} shows a full DAG of all variables discussed in the literature that are related to this topic. Nodes with dashed outlines indicate that the variable cannot be instantiated in a measurable predictor for modelling, most often due to a lack of data. Variables that only relate to the response variable through measurable intermediate nodes (e.g. isolation) are excluded.
+ 
+%Another environmental factor that has been used in previous studies is island isolation. How distant are the islands from each other, or from a large landmass? This is a common variable in studies of species richness  in biology. The theory is that the more isolated an island is, the harder it is to reach for plants and animals --- the lower the immigration rate and therefore lower biological diversity. It has been shown, among other results, that isolation can account for 85\%-90\% of variance of species richness in birds on islands \citep{kalmar2006global}. \citet{terrell1976island} suggested that isolation may also be helpful in explaining the distribution of languages over islands of Near Oceania. The more isolated an island is, the fewer people would reach it and this would lead to lower cultural diversity as well as biodiversity. In a recent study, \citet{gavin2012island} showed that isolation is indeed a relevant factor in explaining language diversity in Oceania at large. 
+
+%However, while isolation and other environmental factors significantly explained much of the distribution of languages in their study, it did not account for as much as in studies of biological species. In her description of S\={a}moa, \citet[287]{mead1937samoans} writes of an economy of plenty that still maintains cultural homogeneity over several islands. This would seem to contradict the ecological risk hypothesis. \citet{gavin2012island} conclude that human diversity may also be influenced by social, economic and political factors. This aligns well with the theories of Oceanic scholars. Results from this study may contribute to our understanding of these factors.
+
+
+
+\begin{sidewaysfigure}[p] 
+
+\includegraphics[width=\textwidth]{Predicting_lgs_DAG_full}
+\caption{Directed Acyclic Graph of the variables in this study. Blue = variable to be predicted (response). Asterisk-nodes represent interactions.}
+\label{appendix_Predicting_lgs_DAG_full}
+\end{sidewaysfigure}
+
+
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=\textwidth]{Predicting_lgs_DAG_slimmed}
+\caption{Directed Acyclic Graph of the variables in this study (DAG, cf. \cite{mcelreath2020statistical}). Blue = variable to be predicted (response), red = predictors. Asterisk nodes represent variable interactions, a type of deterministic DAG-node. PCA represents Principal Components Analysis. PCA was run on the incoming variables, and the optimal number of components (given a Non-Graphical Cattel's Scree Test) were carried forward. Terra and Aqua are the names of the NASA satellites.}
+\label{appendix_Predicting_lgs_DAG_slimmed}
+\end{figure}
+
+
+\newpage
+
+\section{Model settings}
+\label{appendix_model_settings}
+The Bayesian Regression model used is implemented in the R-package BRMS \citep{burkner2017brms}. There is no clear evidence for an informative prior for the predictors (a.k.a. fixed effects), therefore a prior was not specified which means the default is used, i.e. a flat prior.
+
+The list below specifies further settings of the model functions.
+
+\begin{itemize}
+    \item brms::brm()
+    \begin{itemize}
+    \item  iter = 30000
+    \item  warmup = 1000
+    \item  chains = 4
+    \item  cores = 4
+    \item  seed = 10
+    \item family = poisson
+    \item backend = cmdstanr
+    \end{itemize}
+    \item brms::posterior\_predict()
+    \begin{itemize}
+    \item  ndraws = 10000
+    \item  cores = 4
+    \end{itemize}
+\end{itemize}
+
+All code and data will also be available on OSF/GitHub/Zenodo.
+
+Anonymised OSF project for double-blind peer review: \url{https://osf.io/amnh9/?view_only=403d57d715254539a3a99c798b4014d2}.
+
+% BARG
+% https://www.nature.com/articles/s41562-021-01177-7/tables/1
+
+
+%A. Why Bayesian. If the audience requires it, explain what benefits will be gleaned by a Bayesian analysis (as opposed to a frequentist analysis).
+
+%B. Goals of analysis. Explain the goals of the analysis. This prepares the audience for the type of models to expect and how the results will be described.
+
+%Step 1. Explain the model
+
+%A. Data variables. Explain the dependent (predicted) variables and independent (predictor) variables.
+
+%B. Likelihood function and parameters. For every model, explain the likelihood function and all the parameters, distinguishing clearly between parameters of primary theoretical interest and ancillary parameters. If the model is multilevel, be sure that the hierarchical structure is clearly explained, along with any covariance structure if multivariate parameter distributions are used.
+
+%C. Prior distribution. For every model, explain and justify the prior distribution of the parameters in the model.
+
+%D. Formal specification. Include a formal specification (mathematical or computer code) of the likelihood and prior, located either in the main text or in in publicly and persistently accessible online supplementary material.
+
+%E. Prior predictive check. Especially when using informed priors but even with broad priors, it is valuable to report a prior predictive check to demonstrate that the prior really generates simulated data consistent with the assumed prior knowledge.
+
+%Step 2. Report details of the computation
+
+%A. Software. Report the software used, including any specific added packages or plugins.
+
+%B. MCMC chain convergence. Report evidence that the chains have converged, using a convergence statistic such as PSRF, for every parameter or derived value.
+
+%C. MCMC chain resolution. Report evidence that the chains have high resolution, using the ESS, for every parameter or derived value.
+
+%D. If not MCMC. If using some computational procedure other than MCMC, be aware of and report inherently inaccurate approximations, especially for the limits of credible intervals.
+
+%Step 3. Describe the posterior distribution
+
+%A. Posterior predictive check. Provide a posterior predictive check to show that the model usefully mimics the data.
+
+%B. Summarize posterior of variables. For continuous parameters, derived variables and predicted values, report the central tendency and limits of the credible interval. Explicitly state whether you are using density-based values (mode and HDI) or quantile-based values (median and ETI), and state the mass of the credible interval (for example, 95%).
+
+%C. BF and posterior model probabilities. If conducting model comparison or hypothesis testing, report the BF and posterior probabilities of models for a range of prior model probabilities.
+
+%Step 4. Report decisions (if any) and their criteria
+
+%A. Why decisions? Explain why the decisions are theoretically meaningful and which decision procedure is being used. Regardless of which decision procedure is used, if it addresses null values, it should be able to accept the null value not only reject it.
+
+%B. Loss function. If utilities and a loss function for a decision rule are defined, these should be explained and reported.
+
+%C. ROPE limits. If using a continuous-parameter posterior distribution as the basis for decision, state and justify the limits of the ROPE and the required probability mass.
+
+%D. BF, decision threshold and model probabilities. If using model comparison or hypothesis testing as the basis for a decision, state and justify the decision threshold for the posterior model probability, and the minimum prior model probability that would make the posterior model probability exceed the decision threshold.
+
+%E. Estimated values too. If deciding about null values, always also report the estimate of the parameter value (central tendency and credible interval).
+
+%Step 5. Report sensitivity analysis
+
+%A. For broad priors. If the prior is intended to be vague or only mildly informed so that it has minimal influence on the posterior, show that other vague priors produce similar posterior results.
+
+%B. For informed priors. If the prior is informed by previous research, show what posterior results from a vague prior or from a range of differently informed priors.
+
+%C. For default priors. If using a default prior, show the effect of varying its settings. Be sure that the range of default priors constitutes theoretically meaningful priors, and consider whether they mimic plausible empirically informed priors.
+
+%D. BFs and model probabilites. If the analysis involves model comparison or hypothesis testing, then for each prior report not only the BFs but also the posterior model probabilities for a range of prior model probabilities.
+
+%E. Decisions. If making decisions, report whether decisions change under different priors. For BFs, report changes in the minimum prior model probability needed to achieve decisive posterior model probability.
+
+\newpage
+
+\section{BRMS model tables}
+\label{appendix_BRMS_model_tables}
+%Following the principles of Bayesian Analysis Reporting Guidelines \citep{kruschke2021bayesian}, we are reporting Rhat (convergence of chains) and ESS
+
+\begin{landscape}
+\input{latex/BRMS_effects_medium}
+\end{landscape}
+
+\begin{landscape}
+\input{latex/BRMS_effects_SBZR}
+\end{landscape}
+
+\newpage
+
+\section{Model comparisons}
+\label{appendix_model_fit_scores}
+To evaluate if the hypothesis holds also when taking into account spatial and phylogenetic non-independence of the island groups we ran four models for each of the two island groupings:
+
+\begin{itemize}
+
+    \item none - no control for spatial or phylogenetic non-independence
+    \item phylo - control for phylogenetic non-independence by taking the median pairwise distance of languages of the different groups in a language family tree (specifically Glottolog 3 \citet{glottolog3}\footnote{The language family tree from glottolog was modified with Grafen's transform in order to become ultrametric, lest the distances be only number of nodes.})
+    \item spatial - minimum haversine distance between island groups
+    \item spatialphylo - both spatial and phylo controls
+    
+\end{itemize}
+
+The spatial and phylogenetic relationships were taken into account by including a Variance-Covariance matrix into the BRMS-models. The different models only differ in regards to the introduction of control of phylogenetic and/or spatial non-independence. The priors, formula etc are all identical otherwise.
+
+Spatial relationships and phylogenetic relationships are related, which is why it's worth evaluating models with only one of them compared to models with both.
+
+To compare the models, I have calculated four metrics:
+
+\begin{itemize}
+    \item LOO - specifically PSIS-LOO CV which is an efficient approximate leave-one-out (LOO) cross-validation (CV) for Bayesian models using Pareto smoothed importance sampling (PSIS) . Implemented with the function loo in the R-package loo \citep{R-loo, loo2017a, loo2017b}.
+    \item WAIC - Watanabe–Akaike Cnformation Criterion. Implemented with the function waic in the R-package loo.
+    \item Bayesian $R^2$ - a Bayesian version of R-squared for regression models \citep{R-brms, brms2017, brms2018, brms2021}. Implemented with the function bayes\_R2 in the R-package rstanarm.
+    \item Absolute diff - the mean absolute numeric difference between the predicted number of languages per island group of the model and the observed number.
+\end{itemize}
+
+When comparing models, the model with the lower LOO, WAIC or absolute diff fits the data better whereas the model with higher $R^2$ fits the data better. 
+
+\input{model_fit_score_table_medium.tex}
+
+\input{model_fit_score_table_SBZR.tex}
+
+The different metrics are highly correlated. For the shared language island groups, the best-performing model is the one that includes control for spatial and phylogenetic relationships. For the overnight-sailing distances, the best-performing model is the one that includes phylogenetic control only.
+
+\newpage
+\section{Supplementary figures}
+\label{appendix_supp_figs}
+
+
+
+
+\begin{figure}[ht]
+\includegraphics[width=0.85\textwidth]{brms_SBZR_control_phylo_group_full_effect_ridge_panels_plot.png}
+\caption{Coefficient distribution of BRMS model, using overnight sailing distances island groups with all observations - including control for phylogenetic non-independence. Distributions, where the 95\% confidence interval straddles zero, are marked as more transparent and with dashed outlines.}
+\label{brms_SBZR_group_full_effect_ridge_panels_phylo}
+\end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=0.85\textwidth]{brms_SBZR_control_none_group_full_effect_ridge_panels_plot.png}
+\caption{}
+\label{brms_SBZR_control_none_group_full_effect_ridge_panels_plot}
+\end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=0.85\textwidth]{brms_SBZR_control_spatial_group_full_effect_ridge_panels_plot.png}
+\caption{}
+\label{brms_SBZR_control_spatial_group_full_effect_ridge_panels_plot}
+\end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=0.85\textwidth]{brms_SBZR_control_spatialphylo_group_full_effect_ridge_panels_plot.png}
+\caption{}
+\label{brms_SBZR_control_spatialphylo_group_full_effect_ridge_panels_plot}
+\end{figure}
+
+%%%%%%%%%%%%%%MEDIUM
+
+\begin{figure}[ht]
+\includegraphics[width=0.85\textwidth]{brms_medium_control_phylo_group_full_effect_ridge_panels_plot.png}
+\caption{}
+\label{brms_medium_group_full_effect_ridge_panels_phylo}
+\end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=0.85\textwidth]{brms_medium_control_none_group_full_effect_ridge_panels_plot.png}
+\caption{}
+\label{brms_medium_control_none_group_full_effect_ridge_panels_plot}
+\end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=0.85\textwidth]{brms_medium_control_spatial_group_full_effect_ridge_panels_plot.png}
+\caption{}
+\label{brms_medium_control_spatial_group_full_effect_ridge_panels_plot}
+\end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=0.85\textwidth]{brms_medium_control_spatialphylo_group_full_effect_ridge_panels_plot.png}
+\caption{}
+\label{brms_medium_control_spatialphylo_group_full_effect_ridge_panels_plot}
+\end{figure}
+
+
+
+
+\begin{figure}[ht]
+\centering
+%\includegraphics[width=0.8\textwidth]{brms_SBZR_control_phylo_dropped_out_plot_diff.png}
+\caption{Mean absolute difference of predicted and observed number of languages per island group (overnight sailing distances groups) including control for phylogenetic non-independence. Every column represents a new run of the model with a particular group dropped out from the observations (x-axis).}
+\label{appendix_SBZR_control_phylo_dropped_out_plot_diff}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+%\includegraphics[width=0.8\textwidth]{brms_SBZR_control_none_dropped_out_plot_diff.png}
+\caption{Mean absolute difference of predicted and observed number of languages per island group (overnight sailing distances groups), no phylogenetic or spatial control. Every column represents a new run of the model with a particular group dropped out from the observations (x-axis).}
+\label{appendix_SBZR_control_none_dropped_out_plot_diff}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{brms_medium_control_spatialphylo_dropped_out_plot_diff.png}
+\caption{Mean absolute difference of predicted and observed number of languages per island group (shared language island groups) including control for spatial and phylogenetic non-independence. Every column represents a new run of the model with a particular group dropped out from the observations (x-axis).}
+\label{appendix_medium_control_spatialphylo_dropped_out_plot_diff}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+%\includegraphics[width=0.8\textwidth]{brms_medium_control_none_dropped_out_plot_diff.png}
+\caption{Mean absolute difference of predicted and observed number of languages per island group (shared language island groups), no phylogenetic or spatial control. Every column represents a new run of the model with a particular group dropped out from the observations (x-axis).}
+\label{appendix_medium_control_none_dropped_out_plot_diff}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{figure}[ht]
+\centering
+%\includegraphics[width=\textwidth]{latex/SPLOM_SBZR_all_variables}
+\caption{Scatterplot matrix of all variables available, over overnight-sailing-groups.}
+\label{appendix_SPLOM_SBZR_all_variables}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+%\includegraphics[width=\textwidth]{latex/SPLOM_medium_all_variables}
+\caption{Scatterplot matrix of all variables available, over shared-language-groups.}
+\label{appendix_SPLOM_medium_all_variables}
+\end{figure}
+
+
+
+\FloatBarrier
+
+\section{R-packages used}
+\label{appendix_r_packages}
+
+All the analysis for this research project was done in the free and open source programming language R, using a multitude of packages. All code and data for this project are available in the locations listed in appendix \ref{appendix_supp_data_availability}. The scripts have been written so that any user of R can execute them. Please see the bibliography for information on package versions. Below are citations for all used packages. The citations also include which version of the package was used.
+
+\input{latex/citation_keys.txt}.
+\newpage
+Table \ref{appendix_r_package_table} shows all packages used and their versions.
+
+\input{latex/appendix_used_packages_table_versions.tex}
+%\end{appendices}
+
+\section{Competing interests}
+No competing interest is declared.
+
+
+%\section*{Acknowledgements}
+
+%The research leading to this paper has received funding from the Department of Linguistic and Cultural Evolution at the Max Planck Institute for Evolutionary Anthropology, the School of Culture, History and Language at the Australian National University and from the Australian Research Council through The Wellsprings of Linguistic Diversity Laureate Project (awarded to Professor Nicholas Evans 2014-2018) and the Centre of Excellence for the Dynamics of Language (CoEDL).
+
+%I am fortunate enough to have colleagues in academia who have been generous enough to discuss conceptual methodological matters with me, these are Stephen Mann, Angela Chira, Russell Gray, Oleg Sobchuk, Richard McElreath, Tiago Tresoldi, Michael Dunn, Hannah Haynie, Outi Vesakoski, Fredric Blum and Luke Maurits. I am also grateful for the advice of Mary Walworth, Ray Harlow, Andrew Pawley, Paul Geraghty and Alexandre François concerning language classification; Matthew Spriggs, Russell Barlow, Geoff Kushnick and Christopher Ballard regarding archaeology and anthropology of Oceania and finally Oliver Sheehan for helpful discussions regarding coding of the Ethnographic Atlas variables.
+
+%I also want to thank my PhD supervisors who reviewed earlier versions of this study for my thesis \citep{skirgaard2020multilevel} and provided insightful input; Nicholas Evans, Andrew Pawley, Mark Ellison and Simon Greenhill.
+
+%Any mistakes and misconceptions that remain are my own.
+
+\newpage
+%\section{Supplementary Material bibliography}
+\bibliographystyle{unified_edit_HS_SFM}
+
+\bibliography{latex/used_pkgs, latex/pol_complex_refs}
+
+
+
+
+\end{document}
