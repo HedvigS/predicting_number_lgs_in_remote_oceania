@@ -31,7 +31,7 @@ df_fit_R2 <- combine_tsvs(fns = fns)  %>%
   mutate(group = ifelse(str_detect(filename, "medium"), "medium", "SBZR")) %>% 
   mutate(control = str_extract(filename, "control_[:alpha:]*")) %>% 
   mutate(control = str_replace(string = control, pattern = "control_",replacement = "")) %>% 
-  dplyr::select(control, group, R2 = Estimate)
+  dplyr::select(control, group, "$R^2$" = Estimate)
 
 fns <- list.files("output/results/", pattern = ".*diff_means.*", full.names = T)
 fns <- fns[!str_detect(fns, "drop")]
