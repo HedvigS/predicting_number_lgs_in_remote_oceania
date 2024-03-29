@@ -1,7 +1,10 @@
 
 fun_brms_predicting <- function(data = NULL, 
+                                data2 = NULL,
                                        formula = NULL, 
+                                      control = NULL,
                                        group = NULL,
+                                       drop_one_out = TRUE,
                                        iter = 30000,
                                        warmup = 1000,
                                        chains = 4,
@@ -9,6 +12,33 @@ fun_brms_predicting <- function(data = NULL,
                                        seed = 10,
                                        ndraws = 10000
 ){
+
+  #sanity checks of arguments
+  if(length(control) == 0 ){
+    stop("The argument control is NULL.")    
+    
+  }
+  
+  if(!(control %in% c("phylo", "none", "spatial","spatialphylo"))     ){
+stop("The argument control is not one of the recognised strings.")    
+  }
+  
+  if(control == "phylo" & 
+     !str_detect(as.character(formula)[3], pattern = "phylo_vcv")){
+    stop("The control argument is set to phylo but the formula does not include phylo_vcv.")
+    }
+  
+  if(control == "spatial" & 
+     !str_detect(as.character(formula)[3], pattern = "spatial_vcv")){
+    stop("The control argument is set to spatial but the formula does not include spatial_vcv.")
+  }
+  
+  
+  if(control == "spatialphylo" & 
+     !str_detect(as.character(formula)[3], pattern = "spatial_vcv") &
+     !str_detect(as.character(formula)[3], pattern = "phylo_vcv")){
+    stop("The control argument is set to spatialphylo but the formula does not include spatial_vcv and phylo_vcv.")
+  }
   
 #  iter = 30000
 #  warmup = 1000
@@ -20,7 +50,8 @@ fun_brms_predicting <- function(data = NULL,
   ############# ALL OBSERVATIONS ####################
   
   output_poisson <-  brms::brm(data = data, 
-                          family = poisson,
+                               data2 = data2,
+                               family = poisson,
                           formula = formula,
                           iter = iter, 
                           silent = 2,
@@ -29,7 +60,33 @@ fun_brms_predicting <- function(data = NULL,
                           chains = chains, 
                           cores = cores,
                           seed = seed,
+                          control = list(adapt_delta = 0.9),
                           backend="cmdstanr") 
+  
+  waic <- loo::waic(output_poisson)
+  loo <- loo::loo(output_poisson)
+  bayes_r2 <- bayes_R2(output_poisson, probs = c(0, 0.025, 0.975, 1)) 
+
+  waic$estimates %>% 
+    as.data.frame() %>% 
+    rownames_to_column("fit_score") %>%
+    mutate(control = control) %>% 
+    mutate(group = group) %>% 
+    write_tsv(file = paste0("output/results/brms_", group, "_control_", control,"_model_fit_waic.tsv"), na = "")
+  
+  loo$estimates %>% 
+    as.data.frame() %>% 
+    rownames_to_column("fit_score") %>% 
+    mutate(control = control) %>% 
+    mutate(group = group) %>% 
+    write_tsv(file = paste0("output/results/brms_", group, "_control_", control,"_model_fit_loo.tsv"), na = "")
+  
+  bayes_r2 %>%
+    as.data.frame() %>% 
+    rownames_to_column("fit_score") %>% 
+    mutate(control = control) %>% 
+    mutate(group = group) %>% 
+    write_tsv(file = paste0("output/results/brms_", group, "_control_", control,"_model_fit_R2.tsv"), na = "")
   
 ms_full <- summary(output_poisson)
   
@@ -49,9 +106,19 @@ ms_full <- summary(output_poisson)
   
   cat(paste0("The mean absolute difference between the predicted and observed numbers of languages is ", posterior_predict_df$diff_poisson_abs %>% mean() %>% round(2), ".\n"))
   
+  data.frame(
+    diff_poisson_abs  =  posterior_predict_df$diff_poisson_abs %>% mean(), 
+    diff_poisson = posterior_predict_df$diff_poisson %>% mean()
+  ) %>% 
+    mutate(control = control) %>% 
+    mutate(group = group) %>% 
+  write_tsv(file = paste0("output/results/brms_", group, "_control_", control,"_diff_means.tsv"), na = "")
+  
   posterior_predict_df %>% 
     distinct(group, mean, sd, min, max, diff_poisson, diff_poisson_abs, lg_count) %>% 
-    write_tsv(file = paste0("output/results/brms_", group, "_predict_table.tsv"), na = "")
+    mutate(control = control) %>% 
+    mutate(group = group) %>% 
+    write_tsv(file = paste0("output/results/brms_", group, "_control_", control,"_predict_table.tsv"), na = "")
   
   #predict plot
   
@@ -59,18 +126,38 @@ ms_full <- summary(output_poisson)
   
   p <- posterior_predict_df %>% 
     ggplot() +
-    geom_boxplot(mapping = aes(y = group, x = value), color = "#2EB37CFF", fill = "#65CB5EFF", alpha = 0.2) +
+#    geom_density_ridges(aes(x = lg_count, y = group, fill = group), quantile_lines = T, quantile_fun = mean, jittered_points = TRUE, point_size = 2, point_shape = 21  ,  position = position_points_jitter(height = 0)) +
+    geom_boxplot(mapping = aes(y = group, x = value), color = "#2EB37CFF", fill = "#65CB5EFF", alpha = 0.2, 
+                 outlier.size=-1, linewidth = 1) +
+    geom_point(aes(y = group, x = mean),
+               fill = "#FFD087", color = "#481769FF",
+               shape =21, alpha = 0.4, stroke = 0.6, 
+               size = 1.6) +
     geom_point(aes(y = group, x = lg_count),
                fill = "#355E8DFF", color = "#481769FF",
-               shape =24, alpha = 0.2, stroke = 0.6, 
+               shape =24, alpha = 0.4, stroke = 0.6, 
                size = 1.6) +
-    ggthemes::theme_fivethirtyeight() +
-    scale_x_continuous(breaks = c(0, 25, 50, 75, 100, 125)) +
-    theme(panel.background = element_rect(fill = "white"), 
-          plot.background = element_rect(fill = "white"))
+    ggthemes::theme_fivethirtyeight(base_size = 16) +
+    scale_x_continuous(breaks = c(0, 25, 50, 75, 100, 125, 150, 175, 200)) +
+    theme(legend.position = "None",
+      panel.background = element_rect(fill = "white"), 
+          plot.background = element_rect(fill = "white"), 
+      panel.grid.major = element_line(size = 0.5, linetype = 'solid',
+                                      colour = "#ebeced"))
   
-  ggsave(plot = p, filename = paste0("output/plots/brms_predict_", group, ".png"), height = 8, width = 6)  
-  ggsave(plot = p,filename = paste0("../latex/brms_predict_", group, ".png"),  height = 8, width = 6) 
+  
+  if(group == "medium"){
+    p <- p +
+    xlim(c(0, 75))
+  }
+  
+  if(group == "SBZR"){
+    p <- p +
+      xlim(c(0, 205))
+  }
+  
+  ggsave(plot = p, filename = paste0("output/plots/brms_predict_", group, "_control_", control, ".png"), height = 10, width = 6)  
+  ggsave(plot = p,filename = paste0("../latex/brms_predict_", group, "_control_", control, ".png"),  height = 12, width = 6) 
   
   ### model output
   chain_1 <- output_poisson$fit@sim$samples[[1]] %>% as.data.frame()  %>% mutate(chain = "1")
@@ -83,9 +170,10 @@ ms_full <- summary(output_poisson)
     suppressMessages(full_join(chain_4))
   
   chain_joined %>% 
-    write_tsv(file = paste0("output/results/brms_", group, "_full_chains.tsv"), na = "")
+    write_tsv(file = paste0("output/results/brms_", group, "_control_", control, "_full_chains.tsv"), na = "")
   
 colnames(chain_joined) <- str_replace_all(colnames(chain_joined), "b_", "")  
+colnames(chain_joined) <- str_replace_all(colnames(chain_joined), "bsp_", "")  
 
 #making a straddle df
 ms_df_long <- ms_full$fixed %>% 
@@ -98,14 +186,20 @@ ms_df_long_straddle <- ms_df_long %>%
   filter(variable == "straddle_zero_95") %>% 
   dplyr::select(variable = term, straddle_zero_95 = value)
 
-  chain_joined %>% 
+p <-  chain_joined %>% 
     reshape2::melt(id.vars = "chain") %>%  
     left_join(ms_df_long_straddle, by = "variable" ) %>% 
     filter(variable != "lprior") %>% 
     filter(variable != "lp__") %>% 
-    filter(variable != "Intercept") %>%
+  filter(!str_detect(variable, "ntercept")) %>%
+  filter(!str_detect(variable, "r_group")) %>%
+  filter(!str_detect(variable, "simo_mo")) %>%
+    filter(variable != "Intercept") %>% 
     mutate(variable = str_replace_all(variable,"Settlement_date_grouping_finer", "Time depth")) %>% 
-    ggplot(aes(x = value, fill = variable, 
+    mutate(variable = str_replace_all(variable,"bsp_mo", "")) %>% 
+    mutate(variable = str_replace_all(variable,"moEA", "EA")) %>% 
+    mutate(variable = str_replace_all(variable,"moTime", "Time")) %>% 
+                ggplot(aes(x = value, fill = variable, 
                color = variable,
                y = after_stat(density))) + 
     scale_color_manual(values = distinctive_plot_colors) +
@@ -121,17 +215,17 @@ ms_df_long_straddle <- ms_df_long %>%
                           #             scales = "free",
                           repeat.tick.labels = c('bottom')) +
     geom_vline(aes(xintercept = 0), linetype="dashed", color = "darkgray", alpha = 0.7) +
-    theme_light() +
+    theme_classic() +
     theme(legend.position = "none", 
           axis.ticks.y = element_blank(),
           axis.line.y = element_blank(),
-          axis.text.y = element_blank()) 
+          axis.text.y = element_blank(),
+          axis.title = element_blank(),
+          strip.text = element_text(size = 14))
 
-    ggsave(filename = paste0("output/plots/brms_", group, "_group_full_effect_ridge_panels_plot.png"), height = 9, width = 10)
-  ggsave(filename = paste0("../latex/brms_", group, "_group_full_effect_ridge_panels_plot.png"),  height = 9, width = 10) 
-  
-  
-
+    ggsave(plot = p, filename = paste0("output/plots/brms_", group, "_control_", control, "_group_full_effect_ridge_panels_plot.png"), height = 7, width = 7, dpi = 200)
+  ggsave(plot = p, filename = paste0("../latex/brms_", group, "_control_", control, "_group_full_effect_ridge_panels_plot.png"), height = 7, width = 7, dpi = 200)
+   
   ms_df <- ms_df_long %>% 
   unite(term, variable, sep = "§", col = "variable") %>% 
   data.table::transpose(make.names = "variable")
@@ -158,29 +252,46 @@ chain_summarised  %>%
   reshape2::melt(id.vars = "dropped_obs") %>% 
   separate(col = variable, into = c("term","variable"), sep = "§", remove = T) %>% 
   dplyr::select(-dropped_obs) %>% 
-  write_tsv(file = paste0("output/results/brms_", group, "_full_effects_table.tsv"))
+  write_tsv(file = paste0("output/results/brms_", group, "_control_", control, "_full_effects_table.tsv"))
   
   ########### KICKING OUT ONE OBSERVATION AT A TIME
   
+if(drop_one_out == TRUE){
 #empty df to bind to in the for-loop
   df_all <- data.frame(
     "dropped_obs"     = as.character()  )
   
   #add NA to the things to exclude, stands for excluding nothing so that it's all in a neat table.
-  obs <- c(NA, data$group)
+  obs <- c("None", data$group)
   
   for(ob in obs){
+    #  ob <- obs[6]
     
-    #  ob <- obs[1]
+    dir_spec <- paste0("output/results/drop_one_out/", group, "_", control, "/")
+    if(!dir.exists(dir_spec)){dir.create(dir_spec)}
     
-    cat(paste0("Dropping out ", ob, ".\n"))
+    dir_spec <- paste0("output/results/drop_one_out/", group, "_", control, "/", str_replace_all(ob, " ", "_"), "/")
+    if(!dir.exists(dir_spec)){dir.create(dir_spec)}
+
     
-    if(is.na(ob)){
+    cat(paste0("Dropping out ", ob, " with group: ", group, " and control: ", control, ".\n"))
+    
+fn <-     paste0(dir_spec,"diff_means.tsv")
+if(file.exists(fn)){
+
+  cat(paste0("already exists. moving on.\n"))
+  
+}else{
+  
+    if(ob == "None"){
       data_spec <-   data 
-    }else{data_spec <-   data %>% 
+  
+        }else{
+      data_spec <-   data %>% 
       filter(group != {{ob}})
-    }
+          }
     output_spec <-  brms::brm(data = data_spec, 
+                              data2 = data2, 
                         family = poisson,
                         formula = formula,
                         iter = iter, 
@@ -190,7 +301,37 @@ chain_summarised  %>%
                         chains = chains, 
                         cores = cores,
                         seed = seed,
+                        control = list(adapt_delta = 0.9),
                         backend="cmdstanr") 
+    
+    waic <- loo::waic(output_spec)
+    loo <- loo::loo(output_spec)
+    bayes_r2 <- bayes_R2(output_spec, probs = c(0, 0.025, 0.975, 1)) 
+    
+    waic$estimates %>% 
+      as.data.frame() %>% 
+      rownames_to_column("fit_score") %>% 
+      mutate(island_group_dropped = ob) %>% 
+      mutate(control = control) %>% 
+      mutate(group = group) %>% 
+      write_tsv(file = paste0(dir_spec,"model_fit_waic.tsv"), na = "")
+    
+    loo$estimates %>% 
+      as.data.frame() %>% 
+      rownames_to_column("fit_score") %>% 
+      mutate(island_group_dropped = ob) %>% 
+      mutate(control = control) %>% 
+      mutate(group = group) %>% 
+      write_tsv(file = paste0(dir_spec, "model_fit_loo.tsv"), na = "")
+    
+    bayes_r2 %>%
+      as.data.frame() %>% 
+      rownames_to_column("fit_score") %>% 
+      mutate(island_group_dropped = ob) %>% 
+      mutate(control = control) %>% 
+      mutate(group = group) %>% 
+      write_tsv(file = paste0(dir_spec, "model_fit_R2.tsv"), na = "")
+    
     
     ms <- summary(output_spec)
     
@@ -202,7 +343,10 @@ ms_df <-  ms$fixed %>%
   unite(term, variable, sep = "§", col = "variable") %>% 
   data.table::transpose(make.names = "variable") %>% 
   mutate(dropped_obs = ob)
-  
+
+ms_df %>% 
+write_tsv(file = paste0(dir_spec, "ms_df.tsv"), na = "")
+
   #predicting number of lgs
     posterior_predict_df_spec <- brms::posterior_predict(output_spec, cores = cores, ndraws = ndraws) %>%
       as.data.frame() %>% 
@@ -216,10 +360,22 @@ ms_df <-  ms$fixed %>%
                 max = max(value)) %>% 
       left_join(data, by = "group") %>% 
       mutate(diff = lg_count-mean) %>%  
-      mutate(diff_abs = abs(diff)) 
+      mutate(diff_abs = abs(diff)) %>% 
+      mutate(predicted = mean)
     
     diff <- mean(posterior_predict_df_spec$diff)
     diff_abs <- mean(posterior_predict_df_spec$diff_abs)
+    predicted <- mean(posterior_predict_df_spec$predicted)
+    
+    
+    data.frame(
+      diff_poisson_abs  =  diff_abs, 
+      diff_poisson = diff
+    ) %>% 
+      mutate(island_group_dropped = ob) %>% 
+      mutate(control = control) %>% 
+      mutate(group = group) %>% 
+      write_tsv(file = paste0(dir_spec, "diff_means.tsv"), na = "")
     
     cat(paste0("The diff was ", diff_abs %>% round(2)
                , ".\n"))
@@ -251,107 +407,35 @@ ms_df <-  ms$fixed %>%
       dplyr::select(variable, value) %>% 
       data.table::transpose(make.names = "variable") %>% 
       mutate(dropped_obs = ob) 
-    
-    predict_new_data <- brms::posterior_predict(output_spec, newdata = data, ndraws = ndraws) %>% 
-      as.data.frame() %>% 
-      data.table::transpose() %>% 
-      mutate(group = data$group) %>% 
-      reshape2::melt(id.vars = "group") %>% 
-      group_by(group) %>% 
-      summarise(mean = mean(value), 
-                sd = sd(value),
-                min = min(value),
-                max = max(value)) %>%
-      left_join(data, by = "group") %>% 
-      mutate(diff = lg_count - mean) %>% 
-      mutate(diff_abs = abs(diff)) 
-    
-    if(!is.na(ob)){
-      predict_new_data  <- predict_new_data %>% 
-        filter(group == {{ob}})
-      
-    }
-    
-    #output_data_frame
+  
+      #output_data_frame
     
     df_spec <- data.frame(dropped_obs = ob, 
                           mean_Rhat =  ms$fixed$Rhat %>% mean(),
                           mean_Bulk_ESS = ms$fixed$Bulk_ESS %>% mean(),
                           mean_Tail_ESS = ms$fixed$Tail_ESS %>% mean(),
                           diff_predicted_vs_observed = diff,
-                          diff_predicted_vs_observed_abs = diff_abs,
-                          dropped_observation_prediction = predict_new_data$mean,
-                          dropped_observation_prediction_diff = predict_new_data$diff,
-                          dropped_observation_prediction_diff_abs = predict_new_data$diff_abs) %>% 
+                          diff_predicted_vs_observed_abs = diff_abs) %>% 
       full_join(chain_summarised, by = "dropped_obs") %>% 
       full_join(ms_df, by = "dropped_obs")
-      
+    
+    df_spec %>% 
+      write_tsv(file = paste0(dir_spec,"df_spec.tsv"), na = "")
+    
     df_all <- suppressMessages(full_join(df_all, df_spec))
     
     #the run with no dropped generates 58 rows, let's cut that down to one
     df_all <- df_all %>% 
-      mutate(dropped_obs = ifelse(is.na(dropped_obs), "NONE", dropped_obs)) %>% 
       group_by(dropped_obs) %>% 
-      mutate(dropped_observation_prediction_mean = mean(dropped_observation_prediction, na.rm = T),
-             dropped_observation_prediction_diff_mean = mean(dropped_observation_prediction_diff, na.rm = T)) %>% 
+      mutate(dropped_observation_prediction_diff_mean = mean(diff_predicted_vs_observed_abs, na.rm = T)) %>% 
       distinct(dropped_obs, dropped_observation_prediction_diff_mean, .keep_all = T) 
     
     df_all %>%          
-      write_tsv(file = paste0("output/results/brms_", group, "_group_drop_one_out.tsv"), na = "")
+      write_tsv(file = paste0("output/results/brms_", group, "_control_", control, "_group_drop_one_out.tsv"), na = "")
     
-  } #end of dropping out one for-loop
+  } 
+  }
   
-  #df_all <- read_tsv(file = paste0("output/results/brms_", group, "_group_drop_one_out.tsv"))
-  
-  
-  df_all$dropped_obs <- fct_reorder(df_all$dropped_obs, df_all$diff_predicted_vs_observed_abs)
-  
-  df_all %>% 
-    ggplot() +
-    geom_bar(aes(x = dropped_obs, y = diff_predicted_vs_observed_abs, fill = diff_predicted_vs_observed_abs), stat = "identity") +
-    theme_fivethirtyeight() +
-    theme(axis.text.x =  element_text(angle = 70, hjust = 1) , 
-          legend.position = "none") +
-    scale_fill_viridis(direction = -1)   +
-    theme(panel.background = element_rect(fill = "white"), 
-          plot.background = element_rect(fill = "white"))
-  
-  ggsave(filename = paste0("output/plots/brms_", group, "_dropped_out_plot_diff.png"), width = 9, height = 9)
-  ggsave(filename = paste0("../latex/brms_", group, "_dropped_out_plot_diff.png"), width = 9, height = 9)
-  
-  df_all %>% 
-    filter(diff_predicted_vs_observed_abs < 1.4) %>% 
-    #  column_to_rownames("dropped_obs") %>% 
-    data.table::transpose(make.names = "dropped_obs", keep.names = "variable") %>% 
-    write_tsv(file = paste0("output/results/brms_", group, "_dropped_effects_diff_below_1.4.tsv"), na = "")
-  
-  ######################################
-  
-  # 
-  # #calculating the estimate value "manually" from the coef vs what predict() does
-  # for(n in 1:58){
-  # 
-  #   n <- 13
-  # 
-  # model_estimate <- predict_df[n,]$predicted_poisson.Estimate
-  # 
-  # manual_estimate <- exp((mean(data_chopped[n,]$Carrying_capactiy_PC1 * chain_joined$b_Carrying_capactiy_PC1)
-  #  +
-  #        mean(data_chopped[n,]$Carrying_capactiy_PC2 * chain_joined$b_Carrying_capactiy_PC2)
-  #  +
-  #        mean(data_chopped[n,]$Shoreline * chain_joined$b_Shoreline)
-  #  +
-  #        mean(data_chopped[n,]$EA033 * chain_joined$b_EA033)
-  #  +
-  #        mean(data_chopped[n,]$Settlement_date_grouping_finer * chain_joined$b_Settlement_date_grouping_finer)) +
-  #    mean(chain_joined$b_Intercept)
-  # )
-  # 
-  # print(manual_estimate-model_estimate)
-  # 
-  # }
-  # 
-  # 
-  
+}
 }
 

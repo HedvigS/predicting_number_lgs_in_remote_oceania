@@ -3,23 +3,72 @@
 
 set.seed(1988)
 
+#if you don't want to use the groundhog package manner of loading and installing packages, set groundhog to anything but "yes"
+groundhog <- "yes"
 
 #packages
+pkgs = c(
+#  "tidyverse",
+  "dplyr",
+  "stringr",
+  "purrr",
+  "readr",
+  "tidyr",
+  "tibble",
+  "forcats",
+  "magrittr",
+  "reshape2",
+  "jsonlite",
+#  "modEvA",
+  "MuMIn",
+  "rsq",
+  "viridis",
+  "rlang",
+  "devtools",
+  "MASS", 
+  "colorspace",
+#  "wesanderson",
+  "ggalt",
+  "randomcoloR",
+#  "RColorBrewer",
+  "ggplot2",
+  "readxl",
+  "ggrepel",
+  "psych",
+  "ggthemes",
+#  "readxl",
+#  "broom", 
+  "ggpubr",
+  "lemon",
+  "data.table",
+  "naniar", 
+  "fields",
+  "scales",
+  "devtools",
+  "xtable",
+  "ape", 
+  "loo",
+  "adephylo", 
+  "phytools",
+  "MCMCglmm",
+  "nFactors",
+  "sp", 
+  "raster",
+"ade4"
+) 
+
+pkgs <- unique(pkgs)
 
 #groundhogr set-up
 
-groundhog_date = "2023-07-17"
+if(groundhog == "yes"){
 
-if(!("groundhog" %in% rownames(installed.packages()))){
-  
-  install.packages("groundhog")
-  library(groundhog)
-  
-}else{  
-  
-  library(groundhog)
-  
+groundhog_date = "2023-08-02"
+
+if(!("groundhog"%in% rownames(installed.packages()))){
+    install.packages("groundhog")
 }
+library(groundhog)
 
 groundhog_dir <- paste0("groundhog_libraries_", groundhog_date)
 
@@ -29,44 +78,11 @@ if(!dir.exists(groundhog_dir)){
 
 groundhog::set.groundhog.folder(groundhog_dir)
 
-pkgs = c(
-  "tidyverse",
-  "reshape2",
-  "jsonlite",
-  "modEvA",
-  "MuMIn",
-  "rsq",
-  "viridis",
-  "rlang",
-  "readODS",
-  "devtools",
-  "MASS", 
-  "colorspace",
-  "wesanderson",
-  "ggalt",
-  "randomcoloR",
-  "RColorBrewer",
-  "ggplot2",
-  "readxl",
-  "ggrepel",
-  "psych",
-  "ggthemes",
-  "readxl",
-  "broom", 
-  "ggpubr",
-  "lemon",
-  "data.table",
-  "naniar", 
-  "fields",
-  "scales",
-  "devtools",
-  "xtable",
-  "broom", 
-  "nFactors",
-  "sp", 
-  "raster")
-
 groundhog.library(pkgs, groundhog_date)
+}else{
+  source("fun_def_h_load.R")
+  h_load(pkgs)  
+}
 
 
 #funs
@@ -97,16 +113,16 @@ if(!dir.exists(dir)){dir.create(dir)}
 dir <- "output/results"
 if(!dir.exists(dir)){dir.create(dir)}
 
+dir <- "output/results/drop_one_out/"
+if(!dir.exists(dir)){dir.create(dir)}
 
-getmode <- function(v, na.rm = T) {
-if(na.rm == T){
-    v <- v[which(!is.na(v))] }
-  uniqv <- unique(v)
-  uniqv[which.max(tabulate(match(v, uniqv)))]
-}
+v <- c(7, 1, 1, 7, 7, 1, 5)
+
+
+ 
 
 distinctive_plot_colors <- c("#FFB6C1",
-            "#faf591",
+            "#fcf0b3",
             "#a6f7c9", 
             "#FFDAB9",
             "#87CEEB",
@@ -119,3 +135,23 @@ distinctive_plot_colors <- c("#FFB6C1",
             "#957DAD"
 
 )
+
+
+
+gray_dup_to_remove <- c("Sisingga", 
+                        "Carolinian",
+                        "Futuna", 
+                        "Aria",
+                        "Madara",
+                        "Maututu",
+                        "Chuukese",
+                        "NakanaiBileki_D",
+                        "LwepeSantaCruz",
+                        "Buma",
+                        "NehanHape",
+                        "Woleai",
+                        "Marshallese", 
+                        "FutunaWest", #mystery language with no entries
+                        "Baliledo"#can't get a glottocode match
+)
+

@@ -12,8 +12,8 @@ data <- read_tsv("output/processed_data/RO_aggregate_SBZR_group.tsv", show_col_t
   rename(Area_land = sum_area) %>% 
   rename(Shoreline = sum_shoreline) %>% 
   rename(Settlement_date_grouping_finer = settlement_date_grouping_finer) %>% 
-  mutate(SBZR_group = str_replace_all(SBZR_group, "Kanaky", "New Caledonia (incl loyalties)")) %>% 
-  mutate(SBZR_group = str_replace_all(SBZR_group, "and ", "+ ")) %>% 
+#  mutate(SBZR_group = str_replace_all(SBZR_group, "Kanaky", "New Caledonia (incl loyalties)")) %>% 
+#  mutate(SBZR_group = str_replace_all(SBZR_group, "and ", "+ ")) %>% 
   arrange(-lg_count) %>% 
   dplyr::select(SBZR_group, 
                 lg_count, 
@@ -44,8 +44,8 @@ data$Annual_precipitation_mean <- scale(data$Annual_precipitation_mean)[,1]
 data$Precipitation_seasonality_mean <- scale(data$Precipitation_seasonality_mean)[,1]
 data$Annual_temperature_mean <- scale(data$Annual_temperature_mean)[,1]
 data$Temperature_seasonality_mean <- scale(data$Temperature_seasonality_mean)[,1]
-data$Settlement_date_grouping_finer <- scale(data$Settlement_date_grouping_finer)[,1] 
-data$EA033 <- scale(data$EA033)[,1]
+#data$Settlement_date_grouping_finer <- scale(data$Settlement_date_grouping_finer)[,1] 
+#data$EA033 <- scale(data$EA033)[,1]
 data$Latitude_abs_mean <- scale(data$Latitude_abs_mean)[,1]
 data$NPP_terra_mean <- scale(data$NPP_terra_mean)[,1] 
 data$NPP_aqua_mean <- scale(data$NPP_aqua_mean)[,1]
@@ -99,8 +99,8 @@ data$Annual_precipitation_mean <- scale(data$Annual_precipitation_mean)[,1]
 data$Precipitation_seasonality_mean <- scale(data$Precipitation_seasonality_mean)[,1]
 data$Annual_temperature_mean <- scale(data$Annual_temperature_mean)[,1]
 data$Temperature_seasonality_mean <- scale(data$Temperature_seasonality_mean)[,1]
-data$Settlement_date_grouping_finer <- scale(data$Settlement_date_grouping_finer)[,1]
-data$EA033 <- scale(data$EA033)[,1]
+#data$Settlement_date_grouping_finer <- scale(data$Settlement_date_grouping_finer)[,1]
+#data$EA033 <- scale(data$EA033)[,1]
 data$Latitude_abs_mean <- scale(data$Latitude_abs_mean)[,1]
 data$NPP_terra_mean <- scale(data$NPP_terra_mean)[,1]
 data$NPP_aqua_mean <- scale(data$NPP_aqua_mean)[,1]
@@ -153,7 +153,7 @@ data$Precipitation_seasonality_mean <- scale(data$Precipitation_seasonality_mean
 data$Annual_temperature_mean <- scale(data$Annual_temperature_mean)[,1]
 data$Temperature_seasonality_mean <- scale(data$Temperature_seasonality_mean)[,1]
 data$Settlement_date_grouping_finer <- scale(data$Settlement_date_grouping_finer)[,1] 
-data$EA033 <- scale(data$EA033)[,1]
+#data$EA033 <- scale(data$EA033)[,1]
 data$Latitude_abs_mean <- scale(data$Latitude_abs_mean)[,1]
 data$NPP_terra_mean <- scale(data$NPP_terra_mean)[,1]
 data$NPP_aqua_mean <- scale(data$NPP_aqua_mean)[,1]
