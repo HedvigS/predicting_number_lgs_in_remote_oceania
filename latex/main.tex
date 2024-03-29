@@ -71,6 +71,8 @@
 \usepackage[english]{babel} % To obtain English text with the blindtext package
 \usepackage{blindtext}
 
+\usepackage{subcaption}
+
 \usepackage{colortbl}
 \definecolor{spec_color_lightgreen}{HTML}{81F093}
 \definecolor{spec_color_lightgrey}{HTML}{e6e6e6}
@@ -364,7 +366,7 @@ The results were calculated in R 4.3.3 \citep{R} using the function \texttt{brms
 The results show that EA033 has a significant effect in some of the models, but not all. This lends support to the proposal by \citet{pawley81, pawley2007}. However, there are details of the result that suggest that the effect may be due to non-Austronesian contact rather than political complexity \emph{per se}.
 
 The model comparisons showed that the models without control for spatial and/or phylogenetic non-independence fit the data less well. The model fit scores were overall similar for the other models (see appendix 
-\ref{appendix_model_fit_scores}). Table \ref{brms_results_summary} shows whether or not EA033 and/or EA033 in interaction with shoreline (EA033:Shoreline) had a significant effect in each model (i.e. 95\% confidence interval of the posterior effect distribution does not straddle zero) and the WAIC scores of each model. The model fit scores reported very similar ranking of the models, in the table \ref{brms_results_summary} only WAIC is included but the others can be found in Appendix \ref{appendix_model_fit_scores}.
+\ref{appendix_model_fit_scores}). Table \ref{brms_results_summary} shows whether or not EA033 and/or EA033 in interaction with shoreline (EA033:Shoreline) had a significant effect in each of the 8 model (i.e. the 95\% confidence interval of the posterior effect distribution does not straddle zero) and the WAIC scores of each model. Ridgeplots of all variables and their effects in all 8 models can be found in appendix \ref{appendix_supp_figs_ridges}. The model fit scores reported very similar ranking of the models, in table \ref{brms_results_summary} only WAIC is included but the other model fit comparison metrics can be found in Appendix \ref{appendix_model_fit_scores}.
 
 \begin{table}[ht]
 \centering
@@ -380,48 +382,36 @@ The model comparisons showed that the models without control for spatial and/or 
 \multirow{2}{*}{Overnight sailing}	&	Significant effect\linebreak	&	\cellcolor{spec_color_lightgreen!50} EA033:Shoreline	&	Neither	&	\cellcolor{spec_color_lightgreen!50} EA033:Shoreline &	Neither		\\
 	&	WAIC	&	191.558	&	 172.586 	&	178.292	&	173.43		\\
 
-
    \bottomrule
 \end{tabular}
 \caption{Summary of results in regards to variables of interest (EA033 alone and in interaction with Shoreline). Significant effect means that the 95\% confidence interval of the effect does not straddle zero (marked in green). The model fit can be compared using the Watanabe–Akaike Information Criterion (WAIC). Lower WAIC-values indicate a better model fit.} 
 \label{brms_results_summary}
 \end{table}
 
+The predictions of the best fitting models, given WAIC are found in Fig. \ref{prediction_plot}. The posterior predictions (10,000 draws) are shown using conventional box plots\footnote{The green box plots represent the posterior predictions from the model (10,000 draws). The plot follows the conventional design for box plot, with the middle of the box representing the median, the two ends of the box (a.k.a ``hinges'') the first and third quartiles (the 25th and 75th percentiles). The whiskers extend from the end of the box 1.5 $\ast$  of the distance between first and third quartiles. Data beyond the end of the whiskers, so-called "outlying" points, are not visualised in this plot as they were found to give a biased impression of the range. The R-function  ggplot2::geom\_boxplot() was used for these visualisations, scripts are included in additional material.}). The observed number of languages is shown with a purple triangle and the mean is indicated with a yellow circle\footnote{The mean and the median are very similar}. Prediction plots for all 8 models are found in Appendix \ref{appendix_supp_figs_pred_boxplots}.
 
-
-We will first go through the outcomes for the shared language island groups (i.e. groups of islands that share at least one language), and secondly the overnight distance groups. In common for both is that political complexity is a relevant predicting factor in some of the models, with a negative effect (the more political vertical levels, the lower the number of languages). This lends support to the proposal by \citet{pawley81} and \citet{pawley2007}. However, there are details of the result that suggest that the effect may be due to non-Austronesian contact rather than political complexity \emph{per se}.
-
-
-
-% BARG
-
-Fig.~\ref{medium_model_predict} shows the actual observed language counts (purple triangles) and predictions of this model (green boxplots\footnote{The green box-plots represent the posterior predictions from the model (10,000 draws). The plot follows conventional design for box-plot, with the middle of the box representing the median, the two ends of the box (a.k.a ``hinges'') the first and third quartiles (the 25th and 75th percentiles). The whiskers extends from the end of the box 1.5 $\ast$  of the distance between first and third quartiles. Data beyond the end of the whiskers, so called "outlying" points, are not visualised in this plot as they were found to give a biased impression of the range. The R-function  ggplot2::geom\_boxplot() was used for these visualisation, scripts are included in additional material.}). The model does predict that Santo, Kanaky and Malakula have the highest language counts in the dataset. Our observed language counts for Santo, Kanky and Malakula are 24, 29 and 33 respectively. The model is very close for Santo and Kanaky for its average prediction value but underestimates Malakula by 17 languages. The absolute average difference between the mean predicted values and the observed is 1.3.
+Fig.~\ref{medium_model_predict} show the predictions of the model with island groups based on shared languages which included control for both spatial and phylogenetic non-independence. Fig. \ref{SBZR_model_predict} shows the predictions of the model with overnight sailing distance-island groups, with control for phylogenetic non-independence. Overall the predictions are very accurate, only underestimating Malakula somewhat in the first island grouping.
 
 %The results show that the model run with the shared-language island groups have an absolute average of difference between the predicting number of languages and observed of 2,8 the overnight-sailing distances island groups of 4.3 Fig.~\ref{medium_model_predict} and Fig.~\ref{SBZR_model_predict} illustrate the specific predictions the models make compared to the observed language counts. 
 
-\begin{figure}[ht]
+\begin{figure}
 \centering
-\includegraphics[width=0.6\textwidth]{latex/brms_predict_SBZR_control_spatialphylo.png}
-\caption{Posterior predictions from the model with island grouped for shared language (10,000 draws). Number of languages is on the x-axis, observations on the Y. The dark blue triangles represent the observed number of languages, the green boxplot the predictions of the model. The middle of the box represents the median. The mean is represented with a yellow circle.}
+\begin{subfigure}{0.48\textwidth}
+  \centering
+\includegraphics[width=1\textwidth]{latex/brms_predict_medium_control_spatialphylo.png}
+\caption{Predictions of model over island groups based on shared language, with control for spatial and phylogenetic non-independence}
 \label{medium_model_predict}
+\end{subfigure}%
+\hfill
+\begin{subfigure}{0.48\textwidth}
+  \centering
+  \includegraphics[width=1\textwidth]{latex/brms_predict_SBZR_control_phylo.png}
+  \caption{Predictions of model over island groups based on overnight sailing distances, with control for phylogenetic non-independence}
+\label{SBZR_model_predict}
+\end{subfigure}
+\caption{Predictions of models}
+\label{prediction_plot}
 \end{figure}
-
-For the shared language island groups, the variables that have a 95\% confidence interval which are not different from zero are: political complexity (EA033), environmental PC1, Shoreline, time depth and shoreline in interaction with time depth. Fig \ref{brms_SBZR_group_full_effect_ridge_panels} in Appendix \ref{appendix_supp_figs} shows the full distributions.
-
-\begin{figure}[ht]
-\includegraphics[width=0.6\textwidth]{latex/brms_SBZR_control_spatialphylo_group_full_effect_ridge_panels_plot.png}
-\caption{Coefficient distribution of BRMS model, using overnight sailing distances island groups with all observations - including control for phylogenetic non-independence. Distributions, where the 95\% confidence interval straddles zero, are marked as more transparent and with dashed outlines.}
-\label{brms_SBZR_group_full_effect_ridge_panels_phylo}
-\end{figure}
-
-
-\begin{figure}[ht]
-\includegraphics[width=0.6\textwidth]{brms_medium_control_spatial_group_full_effect_ridge_panels_plot.png}
-\caption{Coefficient distribution of BRMS model, using shared-language-distances island groups with all observations - including control for spatial non-independence. Distributions, where the 95\% confidence interval straddles zero, are marked as more transparent and with dashed outlines.}
-\label{brms_SBZR_group_full_effect_ridge_panels}
-\end{figure}
-
-
 
 
 
@@ -447,7 +437,7 @@ For the overnight sailing distances, several island groups are much larger than 
 
 The most important variables in this model (i.e. 95\% confidence interval of coefficient distribution does not overlap 0) were: political complexity, environmental PC2, shoreline, time depth and time-depth in interaction with shoreline  (see Fig ). However, if we drop out Vanuatu + Temotu this no longer holds. When Vanuatu + Temotu are left out, the coefficient distribution of political complexity overlaps zero. Instead,  Shoreline in interaction with time depth and environmental PC1 in interaction with Shoreline are relevant predictors. When Vanuatu + Temotu are dropped out, the overall difference between predicted and observed values goes down the most (from 1.6 to 0.7, see Fig. \ref{appendix_brms_SBZR_dropped_out_plot_diff}). When Vanuatu + Temotu are excluded, the model is more accurate. If we ask this model that has been trained \emph{without} the Vanuatu + Temotu data to predict how many languages there are there, it grossly underestimates and proposes 7 languages (observed = 130). If we drop out any other island group (including Kanaky), political complexity remains an important predictor.
 
-For tables of the predictor Estimates, Rhat and ESS of both models, please see appendix \ref{appendix_BRMS_model_tables}.
+%For tables of the predictor Estimates, Rhat and ESS of both models, please see appendix \ref{appendix_BRMS_model_tables}.
 
 %Most of the island groups in this dataset have only one language, and this seems to have caused some issues (despite the Negative Binomial distribution). The model does best at predicting languages in Polynesia (which is dominated by island groups with only one language). Islands groups in Polynesia can have a very long coastline (like the Paumotu archipelago of French Polynesia) or very short one (like Niue). There is not as much difference in shorelines between islands of Vanuatu. The model seems to have struggled with using shoreline to predict languages globally, even leading to the result that Shoreline as a standalone term comes out in the model as negatively predicting the number of languages (though not with a \emph{p} value that passes traditional thresholds of significance). 
 

@@ -736,20 +736,6 @@ Anonymised OSF project for double-blind peer review: \url{https://osf.io/amnh9/?
 
 \newpage
 
-\section{BRMS model tables}
-\label{appendix_BRMS_model_tables}
-%Following the principles of Bayesian Analysis Reporting Guidelines \citep{kruschke2021bayesian}, we are reporting Rhat (convergence of chains) and ESS
-
-\begin{landscape}
-\input{latex/BRMS_effects_medium}
-\end{landscape}
-
-\begin{landscape}
-\input{latex/BRMS_effects_SBZR}
-\end{landscape}
-
-\newpage
-
 \section{Model comparisons}
 \label{appendix_model_fit_scores}
 To evaluate if the hypothesis holds also when taking into account spatial and phylogenetic non-independence of the island groups we ran four models for each of the two island groupings:
@@ -788,88 +774,154 @@ The different metrics are highly correlated. For the shared language island grou
 \section{Supplementary figures}
 \label{appendix_supp_figs}
 
+\FloatBarrier
+\subsection{Ridgeplot of effects}
+\label{appendix_supp_figs_ridges}
+Plots of coefficient distributions of the BRMS models. Distributions, where the 95\% confidence interval straddles zero, are marked as more transparent and with dashed outlines.
 
-
+\begin{figure}[ht]
+\includegraphics[width=0.85\textwidth]{brms_SBZR_control_spatialphylo_group_full_effect_ridge_panels_plot.png}
+\caption{Island grouping: overnight sailing distances, control for spatial and phylogenetic non-independence.}
+\label{brms_SBZR_control_spatialphylo_group_full_effect_ridge_panels_plot}
+\end{figure}
 
 \begin{figure}[ht]
 \includegraphics[width=0.85\textwidth]{brms_SBZR_control_phylo_group_full_effect_ridge_panels_plot.png}
-\caption{Coefficient distribution of BRMS model, using overnight sailing distances island groups with all observations - including control for phylogenetic non-independence. Distributions, where the 95\% confidence interval straddles zero, are marked as more transparent and with dashed outlines.}
+\caption{Island grouping: overnight sailing distances, control for phylogenetic non-independence.}
 \label{brms_SBZR_group_full_effect_ridge_panels_phylo}
 \end{figure}
 
 \begin{figure}[ht]
 \includegraphics[width=0.85\textwidth]{brms_SBZR_control_none_group_full_effect_ridge_panels_plot.png}
-\caption{}
+\caption{Island grouping: overnight sailing distances, \emph{no} control for spatial or phylogenetic non-independence.}
 \label{brms_SBZR_control_none_group_full_effect_ridge_panels_plot}
 \end{figure}
 
 \begin{figure}[ht]
 \includegraphics[width=0.85\textwidth]{brms_SBZR_control_spatial_group_full_effect_ridge_panels_plot.png}
-\caption{}
+\caption{Island grouping: overnight sailing distances, control for spatial non-independence.}
 \label{brms_SBZR_control_spatial_group_full_effect_ridge_panels_plot}
 \end{figure}
 
-\begin{figure}[ht]
-\includegraphics[width=0.85\textwidth]{brms_SBZR_control_spatialphylo_group_full_effect_ridge_panels_plot.png}
-\caption{}
-\label{brms_SBZR_control_spatialphylo_group_full_effect_ridge_panels_plot}
-\end{figure}
+
 
 %%%%%%%%%%%%%%MEDIUM
 
 \begin{figure}[ht]
 \includegraphics[width=0.85\textwidth]{brms_medium_control_phylo_group_full_effect_ridge_panels_plot.png}
-\caption{}
+\caption{Island grouping: shared language, control for phylogenetic non-independence.}
 \label{brms_medium_group_full_effect_ridge_panels_phylo}
 \end{figure}
 
 \begin{figure}[ht]
 \includegraphics[width=0.85\textwidth]{brms_medium_control_none_group_full_effect_ridge_panels_plot.png}
-\caption{}
+\caption{Island grouping: shared language, \emph{no} control for spatial or phylogenetic non-independence.}
 \label{brms_medium_control_none_group_full_effect_ridge_panels_plot}
 \end{figure}
 
 \begin{figure}[ht]
 \includegraphics[width=0.85\textwidth]{brms_medium_control_spatial_group_full_effect_ridge_panels_plot.png}
-\caption{}
+\caption{Island grouping: shared language, control for spatial non-independence. }
 \label{brms_medium_control_spatial_group_full_effect_ridge_panels_plot}
 \end{figure}
 
 \begin{figure}[ht]
 \includegraphics[width=0.85\textwidth]{brms_medium_control_spatialphylo_group_full_effect_ridge_panels_plot.png}
-\caption{}
+\caption{Island grouping: shared language, control for spatial and phylogenetic non-independence.}
 \label{brms_medium_control_spatialphylo_group_full_effect_ridge_panels_plot}
 \end{figure}
 
 
 
+\FloatBarrier
+\subsection{Prediction boxplots}
+\label{appendix_supp_figs_pred_boxplots}
+
+The posterior predictions (10,000 draws) are shown using conventional boxplots. The green box-plots represent the posterior predictions from the model (10,000 draws). The plot follows the conventional design for box-plot, with the middle of the box representing the median, the two ends of the box (a.k.a ``hinges'') the first and third quartiles (the 25th and 75th percentiles). The whiskers extend from the end of the box 1.5 $\ast$  of the distance between the first and third quartiles. Data beyond the end of the whiskers, so called "outlying" points, are not visualised in this plot as they were found to give a biased impression of the range. The R-function  ggplot2::geom\_boxplot() was used for these visualisations, scripts are included in additional material. The observed number of languages is shown with a purple triangle and the mean is indicated with a yellow circle\footnote{The mean and the median are very similar}.
+
+\begin{figure}[ht]
+\includegraphics[width=0.65\textwidth]{brms_predict_SBZR_control_spatialphylo.png}
+\caption{Island grouping: overnight sailing distances, control for spatial and phylogenetic non-independence.}
+\label{brms_predict_SBZR_control_spatialphylo}
+\end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=0.65\textwidth]{brms_predict_SBZR_control_spatial.png}
+\caption{Island grouping: overnight sailing distances, control for spatial non-independence.}
+\label{brms_predict_SBZR_control_spatial}
+\end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=0.65\textwidth]{brms_predict_SBZR_control_phylo.png}
+\caption{Island grouping: overnight sailing distances, control for phylogenetic non-independence.}
+\label{brms_predict_SBZR_control_phylo}
+\end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=0.65\textwidth]{brms_predict_SBZR_control_none.png}
+\caption{Island grouping: overnight sailing distances, \emph{no} control for spatial or phylogenetic non-independence.}
+\label{
+brms_predict_SBZR_control_none}
+\end{figure}
+
+
+\begin{figure}[ht]
+\includegraphics[width=0.65\textwidth]{brms_predict_medium_control_spatialphylo.png}
+\caption{Island grouping: shared language,  control for spatial and phylogenetic non-independence.}
+\label{brms_predict_medium_control_spatialphylo}
+\end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=0.65\textwidth]{brms_predict_medium_control_spatial.png}
+\caption{Island grouping: shared language, control for spatial non-independence. }
+\label{brms_predict_medium_control_spatial}
+\end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=0.65\textwidth]{brms_predict_medium_control_phylo.png}
+\caption{Island grouping: shared language,  control for phylogenetic non-independence.}
+\label{brms_predict_medium_control_phylo.png}
+\end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=0.65\textwidth]{brms_predict_medium_control_none.png
+}
+\caption{Island grouping: shared language,  \emph{no} control for spatial or phylogenetic non-independence.}
+\label{brms_predict_medium_control_none}
+\end{figure}
+
+\FloatBarrier
+\subsection{Barplots of difference between predicted and observed when one island group is dropped}
+\label{appendix_supp_figs_barplots_diff}
+
+These barplots show the mean absolute difference of the predicted and observed number of languages per island group (y-axis). Every column represents a new run of the model with a particular group dropped out from the observations. Which island group is left out is indicated on the x-axis. Due to the time and resources it takes to run all models, we only report here the differences between models with no control for phylogenetic or spatial non-independence and the models with the lowest WAIC-scores.
 
 \begin{figure}[ht]
 \centering
-%\includegraphics[width=0.8\textwidth]{brms_SBZR_control_phylo_dropped_out_plot_diff.png}
-\caption{Mean absolute difference of predicted and observed number of languages per island group (overnight sailing distances groups) including control for phylogenetic non-independence. Every column represents a new run of the model with a particular group dropped out from the observations (x-axis).}
+\includegraphics[width=0.9\textwidth]{brms_SBZR_control_phylo_dropped_out_plot_diff.png}
+\caption{Island grouping: overnight sailing distances, control for phylogenetic non-independence.}
 \label{appendix_SBZR_control_phylo_dropped_out_plot_diff}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-%\includegraphics[width=0.8\textwidth]{brms_SBZR_control_none_dropped_out_plot_diff.png}
-\caption{Mean absolute difference of predicted and observed number of languages per island group (overnight sailing distances groups), no phylogenetic or spatial control. Every column represents a new run of the model with a particular group dropped out from the observations (x-axis).}
-\label{appendix_SBZR_control_none_dropped_out_plot_diff}
+\includegraphics[width=0.9\textwidth]{brms_SBZR_control_none_dropped_out_plot_diff.png}
+\caption{Island grouping: overnight sailing distances, \emph{no}  control for spatial or phylogenetic non-independence.}
+\label{brms_SBZR_control_none_dropped_out_plot_diff}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.8\textwidth]{brms_medium_control_spatialphylo_dropped_out_plot_diff.png}
-\caption{Mean absolute difference of predicted and observed number of languages per island group (shared language island groups) including control for spatial and phylogenetic non-independence. Every column represents a new run of the model with a particular group dropped out from the observations (x-axis).}
-\label{appendix_medium_control_spatialphylo_dropped_out_plot_diff}
+\includegraphics[width=0.9\textwidth]{brms_medium_control_spatialphylo_dropped_out_plot_diff.png}
+\caption{Island grouping: shared language,  control for spatial and phylogenetic non-independence.}
+\label{brms_medium_control_spatialphylo_dropped_out_plot_diff}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-%\includegraphics[width=0.8\textwidth]{brms_medium_control_none_dropped_out_plot_diff.png}
-\caption{Mean absolute difference of predicted and observed number of languages per island group (shared language island groups), no phylogenetic or spatial control. Every column represents a new run of the model with a particular group dropped out from the observations (x-axis).}
-\label{appendix_medium_control_none_dropped_out_plot_diff}
+\includegraphics[width=0.9\textwidth]{brms_medium_control_none_dropped_out_plot_diff.png}
+\caption{Island grouping: shared language, \emph{no}  control for spatial or phylogenetic non-independence.}
+\label{brms_medium_control_none_dropped_out_plot_diff}
 \end{figure}
 
 
@@ -878,8 +930,9 @@ The different metrics are highly correlated. For the shared language island grou
 
 
 
-
-
+\FloatBarrier
+\subsection{SPLOM of all variables per island grouping}
+\label{appendix_supp_figs_SPLOM_all_vars}
 
 
 
@@ -887,14 +940,14 @@ The different metrics are highly correlated. For the shared language island grou
 
 \begin{figure}[ht]
 \centering
-%\includegraphics[width=\textwidth]{latex/SPLOM_SBZR_all_variables}
+\includegraphics[width=\textwidth]{latex/SPLOM_SBZR_all_variables}
 \caption{Scatterplot matrix of all variables available, over overnight-sailing-groups.}
 \label{appendix_SPLOM_SBZR_all_variables}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-%\includegraphics[width=\textwidth]{latex/SPLOM_medium_all_variables}
+\includegraphics[width=\textwidth]{latex/SPLOM_medium_all_variables}
 \caption{Scatterplot matrix of all variables available, over shared-language-groups.}
 \label{appendix_SPLOM_medium_all_variables}
 \end{figure}
