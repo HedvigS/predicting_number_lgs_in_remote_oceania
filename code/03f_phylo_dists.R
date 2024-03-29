@@ -66,8 +66,12 @@ tree_medium <- ape::nj(X = tree_dists_list_medium)
 tree_medium <- phytools::midpoint_root(tree_medium)
 tree_medium <- ape::compute.brlen(tree_medium, method = "grafen")
 
-png("output/plots/island_group_tree_medium.png", width = 20, height = 20, units = "cm", res = 300)
-plot(ladderize(tree_medium), cex = 0.4)
+png("output/plots/island_group_tree_medium.png", width = 20, height = 30, units = "cm", res = 300)
+plot(ladderize(tree_medium), cex = 0.9, edge.color = "#4c1c80", no.margin = T, edge.width = 2.7, label.offset = 0.03)
+x <- dev.off()
+
+png("../latex/island_group_tree_medium.png", width = 20, height = 30, units = "cm", res = 300)
+plot(ladderize(tree_medium), cex = 0.9, edge.color = "#4c1c80", no.margin = T, edge.width = 2.7, label.offset = 0.03)
 x <- dev.off()
 
 ape::vcv.phylo(tree_medium, corr = FALSE) %>% 
@@ -98,8 +102,12 @@ tree_SBZR <- ape::nj(X = tree_dists_list_SBZR)
 tree_SBZR <- phytools::midpoint_root(tree_SBZR)
 tree_SBZR <- ape::compute.brlen(tree_SBZR, method = "grafen")
 
-png("output/plots/island_group_tree_SBZR.png", width = 20, height = 20, units = "cm", res = 300)
-plot(ladderize(tree_SBZR), cex = 0.4)
+png("output/plots/island_group_tree_SBZR.png", width = 20, height = 30, units = "cm", res = 300)
+plot(ladderize(tree_SBZR), cex = 0.9, edge.color= "#22519c", no.margin = T, edge.width = 2.7, label.offset = 0.03)
+x <- dev.off()
+
+png("../latex/island_group_tree_SBZR.png", width = 20, height = 30, units = "cm", res = 300)
+plot(ladderize(tree_SBZR), cex = 0.9, edge.color= "#22519c", no.margin = T, edge.width = 2.7, label.offset = 0.03)
 x <- dev.off()
 
 ape::vcv.phylo(tree_SBZR, corr = FALSE) %>% 
