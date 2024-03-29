@@ -3,7 +3,7 @@ source("fun_def_make_brms_appendix_xtable.R")
 
 
 #BRMS tables
-make_brms_appendix_xtable(fn_in = "output/results/brms_medium_full_effects_table.tsv", 
+make_brms_appendix_xtable(fn_in = "output/results/brms_medium_control_none_full_effects_table.tsv", 
                           fn_out = "../latex/BRMS_effects_medium.tex",
                           cap = "Table of BRMS model outcomes, shared-language island groups (all observations included).",
                           lbl = "BRMS_effects_medium"
