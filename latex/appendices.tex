@@ -429,11 +429,11 @@ D-PLACE has a value recorded for political complexity for 44 ``language-societie
 %\end{figure}
 
 
-It should be noted that this data does not represent the state of these societies for the entire period between first settlement and European arrival. As \citet{meleisea1995} writes, anthropology of the Pacific often depicts an unrealistic ``ethnographic present''. For example, \citet[185]{schoeffel87} writes about the shift in the political world of S\={a}moa under the rule of Salam\={a}sina which gave rise to a greater distinction between two kinds of chiefs: \emph{tul\={a}fale} and \emph{ali'i}. \citet[249]{kirch2017road} also mentions this distinction but notes that it mainly came to prominence in the 1500's. As a way of avoiding this problem, the D-PLACE database \citep{d_place_all} contains information on the focal years of the description. The data for the variable on political complexity in Remote Oceania varies from 1800 (Hawai'i) and 1940 (Vanua Levu). This study assumes that also more recent data may sufficiently accurately reflect the state of past societies, such that it remains useful for testing the central hypothesis.
+It should be noted that this data does not represent the state of these societies for the entire period between first settlement and European arrival. As \citet{meleisea1995} writes, anthropology of the Pacific often depicts an unrealistic ``ethnographic present''. For example, \citet[185]{schoeffel87} writes about the shift in the political world of S\={a}moa under the rule of Salam\={a}sina which gave rise to a greater distinction between two kinds of chiefs: \emph{tul\={a}fale} and \emph{ali'i}. \citet[249]{kirch2017road} also mentions this distinction but notes that it mainly came to prominence in the 1500's. As a way of avoiding this problem, the D-PLACE database \citep{d_place_all} contains information on the focal years of the description. The data for the variable on political complexity in Remote Oceania varies from 1800 (Hawai'i) and 1940 (Vanua Levu). This study assumes that also more recent data may sufficiently accurately reflect the differences also of past societies, such that it remains useful for testing the central hypothesis.
 
 Fig.~\ref{appendix_pol_complex_map} represents the coding of political complexity for the relevant societies. A more detailed table can be found in appendix \ref{appendix_pol_complex}. While it is indeed the case that societies of Melanesian Remote Oceania tend to have lower levels of political complexity, it should be noted that many societies in Polynesia and Micronesia also score a value of 1.
 
-For the calculations of this study, the mode political complexity per island group was used. 
+For the calculations of this study, the mode political complexity per island group was used and it is modelled as a monotonic effect (i.e. it is not assumed that the difference between level 1 and 2 is the same length as the difference between 2 and 3, but they are still on an ordinal scale).
 
 \begin{sidewaysfigure}
 \centering
@@ -455,6 +455,8 @@ For most of the island groups, the labels provided in \citet{rieth_cochrane_2018
 Archaeological dates are based on radiocarbon findings which are calibrated based on conditions at the excavation site and other finds there. There exist different calibration methods\footnote{Radiocarbon calibration is the process by which radiocarbon years are converted into calendar years. Because the ratio of atmospheric $^{14}$C/$^{12}$C, which is a key element in this process, has not been stable historically, different methods exist and these may produce different results.}. In order to make the dates from different sites directly comparable they need to be re-calibrated in the same way. It was not possible to access all the necessary information on each publication and re-calibrate the dates appropriately. Instead of using the raw dates from the different studies, the islands have been sorted into a settlement order with twelve waves based on the dates in the literature and descriptions of what was settled in the same wave. Fig.~\ref{appendix_dates_map} illustrates the settlement wave order per island. Exact dates and references are found in appendix \ref{appendix_dates_table_appendix}.
 
 For comparison across island groups, the oldest settlement order per group was used. Unfortunately, this means that settlement data for so called Polynesian outlier communities in areas that were already inhabited (c.f. Southern Vanuatu), who arrived much more recently, is ignored.
+
+As with EA033, settlement waves are modelled as monotonic effects in the models. Settlement order was reversed from Fig. \ref{appendix_dates_map} such that high numbers represent further back in time, making the interpretation of effects more intuitive. 
 
 \begin{sidewaysfigure}
 \centering
@@ -500,7 +502,13 @@ The variables Net Primary Production (NPP; the amount of biomass or carbon produ
 \FloatBarrier
 
 
+\FloatBarrier
+\subsection{Controls for spatial and phylogenetic non-indepedence} 
+\label{appendix_sp_control}
+
 \newpage
+
+
 
 \section{Caveat regarding time-span}
 \label{appendix_time_span}
@@ -512,10 +520,9 @@ The aforementioned processes, while recent, have resulted in mass immigration/in
 
 The massive effect of these forces in the last 500 years means that for historical scientists, there is a big difference between considering the human landscape before and after this point --- especially in terms of cultural history and diversity. \citet[7340-7341]{curriemace2009} find that the data available for language territories in Australia and the Americas is so affected by colonial history and population replacement to make it impossible to include it in the analysis alongside the other regions. 
 
-There is also a problem with information pertaining to history before these massive forces step onto the stage. Ethnographic accounts are often ``snapshots'' with unclear time-depth 
- \citep[113]{bedford2008northern}. Human culture everywhere is dynamic and changing. \citet{meleisea1995} has also written about how anthropology of the Pacific often depicts an unrealistic ``ethnographic present''. This is one of the reasons why the ethnographic database D-PLACE \citep{d_place_all} includes ``focal year'' for each variable. 
+There is also a problem with information pertaining to history before these massive forces step onto the stage. Ethnographic accounts are often ``snapshots'' with unclear time-depth \citep[113]{bedford2008northern}. Human culture everywhere is dynamic and changing. \citet{meleisea1995} has also written about how anthropology of the Pacific often depicts an unrealistic ``ethnographic present''. This is one of the reasons why the ethnographic database D-PLACE \citep{d_place_all} includes ``focal year'' for each variable. 
 
-Through studies like this, we can model and discuss what the past may have been like and what could be driving certain changes, such as language splitting, but we must always be wary of the shortcomings of our data and methods. While the coding of political complexity and environmental data may not perfectly represent all the time between the settlement of Remote Oceania 3,000 years ago until now, it may be a decent proxy of large patterns and conclusions drawn may still be informative. For a more detailed understanding, deeper engagement with local communities and agent-based modelling is desirable.
+Through studies like this, we can model and discuss what the past may have been like and what could be driving certain changes, such as language splitting, but we must always be wary of the shortcomings of our data and methods. While the coding of political complexity and environmental data may not perfectly represent all the time between the settlement of Remote Oceania 3,000 years ago until now, it may be a good enough proxy of large patterns and conclusions drawn may still be informative. For a more detailed understanding, deeper engagement with local communities and agent-based modelling is desirable.
 \newpage
 
 \section{Regarding population and the number of languages}
@@ -597,11 +604,9 @@ The column ``Time depth settlement group'' contains the grouping of islands into
 \section{Input data tables}
 \singlespacing
 \label{appendix_data tables}
-All measurements, except the response variable, were scaled and centred to make the coefficients easier to interpret and compare. Shorelines were also log-10-transformed (before scaling). 
+All measurements, except the response variable, were scaled and centred to make the coefficients easier to interpret and compare. Shorelines were also log-10-transformed (before scaling) to avoid an outsized effect of outliers (c.f. \citet{rolett2004environmental} and \citet{atkinson2016cultural}).
 
 All code and data will also be available on OSF/GitHub/Zenodo.
-
-Anonymised OSF project for double-blind peer review: \url{https://osf.io/amnh9/?view_only=403d57d715254539a3a99c798b4014d2}.
 
 \begin{landscape}
 \input{appendix_medium_group_table.tex}
@@ -626,6 +631,16 @@ Directed Acyclic Graphs are a helpful tool in causal reasoning (\citet{pearl1995
 \caption{Directed Acyclic Graph of the variables in this study. Blue = variable to be predicted (response). Asterisk-nodes represent interactions.}
 \label{appendix_Predicting_lgs_DAG_full}
 \end{sidewaysfigure}
+
+
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=\textwidth]{Predicting_lgs_DAG_slimmed}
+\caption{Directed Acyclic Graph of the variables in this study (DAG, cf. \cite{mcelreath2020statistical}). Blue = variable to be predicted (response), red = predictors. Asterisk nodes represent variable interactions, a type of deterministic DAG-node. PCA represents Principal Components Analysis. PCA was run on the incoming variables, and the optimal number of components (given a Non-Graphical Cattel's Scree Test) were carried forward. Terra and Aqua are the names of the NASA satellites.}
+\label{appendix_Predicting_lgs_DAG_slimmed}
+\end{figure}
+
 
 \newpage
 
@@ -737,7 +752,7 @@ Anonymised OSF project for double-blind peer review: \url{https://osf.io/amnh9/?
 
 \section{Model comparisons}
 \label{appendix_model_fit_scores}
-To evaluate if the hypothesis holds also when taking into account spatial and phylogenetic non-independence of the island groups I ran four models for each of the two island groupings:
+To evaluate if the hypothesis holds also when taking into account spatial and phylogenetic non-independence of the island groups we ran four models for each of the two island groupings:
 
 \begin{itemize}
 
@@ -755,17 +770,19 @@ Spatial relationships and phylogenetic relationships are related, which is why i
 To compare the models, I have calculated four metrics:
 
 \begin{itemize}
-    \item LOO - specifically PSIS-LOO CV which is an efficient approximate leave-one-out (LOO) cross-validation (CV) for Bayesian models using Pareto smoothed importance sampling (PSIS) \citep{R-loo, loo2017a, loo2017b}. Implemented with the function loo in the R-package loo.
-    \item WAIC - Watanabe–Akaike Cnformation Criterion \citep{R-loo, loo2017a, loo2017b}. Implemented with the function waic in the R-package loo.
-    \item R2 - a Bayesian version of R-squared for regression models \citep{R-brms, brms2017, brms2018, brms2021}. Implemented with the function bayes\_R2 in the R-package brms.
+    \item LOO - specifically PSIS-LOO CV which is an efficient approximate leave-one-out (LOO) cross-validation (CV) for Bayesian models using Pareto smoothed importance sampling (PSIS) . Implemented with the function loo in the R-package loo \citep{R-loo, loo2017a, loo2017b}.
+    \item WAIC - Watanabe–Akaike Cnformation Criterion. Implemented with the function waic in the R-package loo.
+    \item Bayesian $R^2$ - a Bayesian version of R-squared for regression models \citep{R-brms, brms2017, brms2018, brms2021}. Implemented with the function bayes\_R2 in the R-package rstanarm.
     \item Absolute diff - the mean absolute numeric difference between the predicted number of languages per island group of the model and the observed number.
 \end{itemize}
+
+When comparing models, the model with the lower LOO, WAIC or absolute diff fits the data better whereas the model with higher $R^2$ fits the data better. 
 
 \input{model_fit_score_table_medium.tex}
 
 \input{model_fit_score_table_SBZR.tex}
 
-The different metrics are highly correlated. For the shared language island groups, the best-performing model is the one that includes only a control for spatial relationships. For the overnight-sailing distances, the best-performing model is the one that includes phylogenetic control only.
+The different metrics are highly correlated. For the shared language island groups, the best-performing model is the one that includes control for spatial and phylogenetic relationships. For the overnight-sailing distances, the best-performing model is the one that includes phylogenetic control only.
 
 \newpage
 \section{Supplementary figures}
@@ -774,25 +791,58 @@ The different metrics are highly correlated. For the shared language island grou
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+\begin{figure}[ht]
+\includegraphics[width=0.85\textwidth]{brms_SBZR_control_phylo_group_full_effect_ridge_panels_plot.png}
+\caption{Coefficient distribution of BRMS model, using overnight sailing distances island groups with all observations - including control for phylogenetic non-independence. Distributions, where the 95\% confidence interval straddles zero, are marked as more transparent and with dashed outlines.}
+\label{brms_SBZR_group_full_effect_ridge_panels_phylo}
+\end{figure}
 
 \begin{figure}[ht]
-\centering
-
-\includegraphics[width=0.8\textwidth]{brms_SBZR_dropped_out_plot_diff}
-\caption{Mean absolute difference of predicted and observed number of languages per island group (overnight sailing distances group). Every column represents a new run of the model with a particular group dropped out from the observations. When Vanuatu + Temotu is dropped out, the model predicts numbers that are more similar to the observed values than when that island group is included in the model.}
-\label{appendix_brms_SBZR_dropped_out_plot_diff}
+\includegraphics[width=0.85\textwidth]{brms_SBZR_control_none_group_full_effect_ridge_panels_plot.png}
+\caption{}
+\label{brms_SBZR_control_none_group_full_effect_ridge_panels_plot}
 \end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=0.85\textwidth]{brms_SBZR_control_spatial_group_full_effect_ridge_panels_plot.png}
+\caption{}
+\label{brms_SBZR_control_spatial_group_full_effect_ridge_panels_plot}
+\end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=0.85\textwidth]{brms_SBZR_control_spatialphylo_group_full_effect_ridge_panels_plot.png}
+\caption{}
+\label{brms_SBZR_control_spatialphylo_group_full_effect_ridge_panels_plot}
+\end{figure}
+
+%%%%%%%%%%%%%%MEDIUM
+
+\begin{figure}[ht]
+\includegraphics[width=0.85\textwidth]{brms_medium_control_phylo_group_full_effect_ridge_panels_plot.png}
+\caption{}
+\label{brms_medium_group_full_effect_ridge_panels_phylo}
+\end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=0.85\textwidth]{brms_medium_control_none_group_full_effect_ridge_panels_plot.png}
+\caption{}
+\label{brms_medium_control_none_group_full_effect_ridge_panels_plot}
+\end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=0.85\textwidth]{brms_medium_control_spatial_group_full_effect_ridge_panels_plot.png}
+\caption{}
+\label{brms_medium_control_spatial_group_full_effect_ridge_panels_plot}
+\end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=0.85\textwidth]{brms_medium_control_spatialphylo_group_full_effect_ridge_panels_plot.png}
+\caption{}
+\label{brms_medium_control_spatialphylo_group_full_effect_ridge_panels_plot}
+\end{figure}
+
+
+
 
 \begin{figure}[ht]
 \centering
@@ -810,9 +860,9 @@ The different metrics are highly correlated. For the shared language island grou
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.8\textwidth]{brms_medium_control_spatial_dropped_out_plot_diff.png}
-\caption{Mean absolute difference of predicted and observed number of languages per island group (shared language island groups) including control for spatial non-independence. Every column represents a new run of the model with a particular group dropped out from the observations (x-axis).}
-\label{appendix_medium_control_spatial_dropped_out_plot_diff}
+\includegraphics[width=0.8\textwidth]{brms_medium_control_spatialphylo_dropped_out_plot_diff.png}
+\caption{Mean absolute difference of predicted and observed number of languages per island group (shared language island groups) including control for spatial and phylogenetic non-independence. Every column represents a new run of the model with a particular group dropped out from the observations (x-axis).}
+\label{appendix_medium_control_spatialphylo_dropped_out_plot_diff}
 \end{figure}
 
 \begin{figure}[ht]
@@ -859,7 +909,10 @@ The different metrics are highly correlated. For the shared language island grou
 All the analysis for this research project was done in the free and open source programming language R, using a multitude of packages. All code and data for this project are available in the locations listed in appendix \ref{appendix_supp_data_availability}. The scripts have been written so that any user of R can execute them. Please see the bibliography for information on package versions. Below are citations for all used packages. The citations also include which version of the package was used.
 
 \input{latex/citation_keys.txt}.
+\newpage
+Table \ref{appendix_r_package_table} shows all packages used and their versions.
 
+\input{latex/appendix_used_packages_table_versions.tex}
 %\end{appendices}
 
 \section{Competing interests}
