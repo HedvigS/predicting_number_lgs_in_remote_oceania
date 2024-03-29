@@ -83,7 +83,8 @@ df %>%
   theme(panel.background = element_rect(fill = "white"), 
         plot.background = element_rect(fill = "white"), 
         axis.text.x = element_text(size = 7)) +
-  ylim(c(0, 1.5))
+  scale_y_continuous(breaks = c(0, 0.25, 0.5, 0.75, 1, 1.25), limits = c(0, 1.28)) 
+  
   
 
 ggsave(filename = paste0("output/plots/brms_", group, "_control_", control, "_dropped_out_plot_diff.png"), width = 7, height = 7, dpi = 200)
