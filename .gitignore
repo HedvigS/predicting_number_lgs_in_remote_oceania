@@ -5,6 +5,7 @@
 .DS_Store
 *.aux
 *.lof
+*.tex.bak
 *.log
 *.lot
 *.out
