@@ -71,6 +71,10 @@
 \usepackage[english]{babel} % To obtain English text with the blindtext package
 \usepackage{blindtext}
 
+\usepackage{colortbl}
+\definecolor{spec_color_lightgreen}{HTML}{81F093}
+\definecolor{spec_color_lightgrey}{HTML}{e6e6e6}
+
 
 
 %\usepackage{authblk}
@@ -112,6 +116,8 @@
 }
 
 \myexternaldocument{appendices}
+
+
 
 
 \begin{document}
@@ -277,7 +283,7 @@ This study focuses on a particular hypothesis concerning a particular region of 
 \FloatBarrier
 \section{Materials and Method}
 \label{pol_complex_method}
-The approach of this paper is to gather relevant data on island groups and their societies and then fit a statistical model which aims to predict the number of languages given all the variables. From the composition of variables in the resulting model we can infer which have the greatest predicting power when they are co-estimated.
+The approach of this paper is to gather relevant data on island groups and their societies and then fit statistical modeld which aims to predict the number of languages given all the variables. From the composition of variables in the resulting model we can infer which have the greatest predicting power when they are co-estimated.
 
 The unit of analysis is ``island group''. We cannot use modern political boundaries (``French Polynesia'', ``Cook Islands'' etc) because they are often historically and culturally inappropriate. As we want to capture something about the communities at large we are not satisfied with using individual islands. For these reasons, we use two different ways of grouping islands: overnight sailing distances and shared language (see appendix \ref{appendix_sec:island_geo} for details).
 
@@ -285,7 +291,9 @@ The unit of analysis is ``island group''. We cannot use modern political boundar
 
 A simple test of Spearman's Rank Order correlation reveals that the number of languages and political complexity per island group are indeed moderately correlated (rho  = -0.4, \emph{p} value < 0.001 for islands grouped for shared language). However, this is not sufficient. We want to investigate whether this correlation still holds once we explicitly incorporate other variables that we expect might explain language diversity as well, such as time-depth and environmental factors. In addition, we also include controls for phylogenetic and spatial non-independence in order to account for unobserved confounds that may be transferred through contact or inherited and affect the number of languages (cf. \citet{gavin2013toward}).
 
-Variables were included in the model if they meet all three of the following criteria: a) have been suggested as relevant in previous literature, b) there is enough data on the variable in a published source and c) if they relate to the response variable (language richness) in a non-mediated manner (cf. \citet{pearl1995causal}). This results in the following variables:
+Variables were included in the model if they meet all three of the following criteria: a) have been suggested as relevant in previous literature, b) there is enough data on most of the island groups in a published source and c) if they relate to the response variable (language richness) in a non-mediated manner (cf. \citet{pearl1995causal} and \citet{cinelli_et_al_2022}). Figure \ref{appendix_Predicting_lgs_DAG_full} in the appendices shows the full set of variables that were considered and figure \ref{appendix_Predicting_lgs_DAG_slimmed}, also in the appendices, the ones that ended up being implemented. This filtering resulted in the following variables:
+
+\singlespacing
 
 \begin{itemize}
 \item \textbf{response variable}:
@@ -295,7 +303,7 @@ Variables were included in the model if they meet all three of the following cri
 \item \textbf{predicting variables:}
 \begin{itemize}
 
-\item \textbf{EA033} - number of vertical levels of jurisdictional hierarchy per society \footnote{Note that there are other kinds of political complexity besides vertical, for example, horizontal complex exchange networks and this variable only tracks hierarchy. See Appendix \ref{appendix_def_pol_complex} for more.}, based on the Ethnographic Atlas \citep{gray1998ethnographic, d_place_all}, \citet{sheehan2018coevolution} and own modifications. Also known as ``political complexity'' (see appendix \ref{appendix_def_pol_complex} for details on definition and coding).
+\item \textbf{EA033} - number of vertical levels of jurisdictional hierarchy per society\footnote{Note that there are other kinds of political complexity besides vertical, for example, horizontal complex exchange networks and this variable only tracks hierarchy. See Appendix \ref{appendix_def_pol_complex} for more details.}, based on the Ethnographic Atlas \citep{gray1998ethnographic, d_place_all}, \citet{sheehan2018coevolution} and own modifications. Also known as ``political complexity'' (see appendix \ref{appendix_def_pol_complex} for details on definition and coding).
 
 \item \textbf{Settlement time depth} - archaeological dates, grouped into waves \citep{intoh2007reconnaissance, intoh2008ongoing, rieth_cochrane_2018, levin_seikel_miles_2019, pol_outliers_stat_art, Napolitano_et_al_yap}. (See appendix \ref{appendix_def_dates} for details.)
 
@@ -303,9 +311,6 @@ Variables were included in the model if they meet all three of the following cri
 
 \item \textbf{Environmental Principal Components} - based on variables related to how suitable the islands are for human settlement
 
- \item \textbf{Phylogenetic non-independence} - based on the median of patristic distances between languages of different island groups. Phylogeny based on Glottolog v5.0 \citep{Glottolog5}, with branches modified with Grafen's transform.
- 
-\item \textbf{Spatial non-independence} - based on the minimal haversine distance between landmasses of island groups
 
 \begin{itemize}
     \item \textbf{temperature and rainfall} - historical environmental data from \citet{ecoclimate}: mean temperature, temperature seasonality, mean rainfall and rainfall seasonality (see appendix \ref{appendix_environ} for details.)
@@ -313,27 +318,27 @@ Variables were included in the model if they meet all three of the following cri
     \item \textbf{Absolute latitude} - based on the Global Self-consistent, Hierarchical, High-resolution Geography Database (GSHHG) 
 \end{itemize}
 
+
+ \item \textbf{Phylogenetic non-independence} - based on the median of patristic distances between languages of different island groups. Phylogeny based on Glottolog v5.0 \citep{Glottolog5}, with branches modified with Grafen's transform.
+ 
+\item \textbf{Spatial non-independence} - based on the minimal haversine distance between landmasses of island groups
+
 \end{itemize}
 
 \end{itemize}
+
+\doublespacing
 
 The variables Net Primary Production (NPP; the amount of biomass or carbon produced), temperature \& rainfall (mean and seasonality) and absolute latitude are all associated with the suitability of a place for life and they correlate with each other, at least to some degree (cf. Figs \ref{appendix_SPLOM_medium_all_variables} and \ref{appendix_SPLOM_SBZR_all_variables}). In this study, they are all tracking a similar concept: the suitability for human populations to thrive in smaller groups. Because of this, we are running a Principal Components Analysis on all variables related to this concept (NPP, temperature, rainfall and absolute latitude), this allows us to extract a variable that explains most of the information. The aggregation is carried out twice, once for values of islands grouped by overnight-sailing distances and one for groups based on shared language. We ran a Non-Graphical Cattel's Scree Test \citep{cattell1966scree, R-nFactors} to determine the number of optimal components (overnight sailing distance island groups = 2 PCs, shared language island groups = 3 PCs). For more details, see Appendix \ref{appendix_environ}.
 
 In order to create a formula for the statistical model, we consider the suggested causal relationships based on previous research (see section \ref{sec:previous_research}). Besides the effect of the environmental variables on language richness, we also hypothesise that there can be a joint effect with the size of the island. Similarly, the time-depth and size of islands may also interact. 
 
-The relationship between variables is be represented in DAG in Fig. \ref{Predicting_lgs_DAG_slimmed}. For the full DAG, including excluded variables and variables with missing data, see appendix \ref{appendix_DAG_def}. Interactions are denoted with a deterministic node labelled with $\ast$. 
+The relationship between variables is represented in DAG in Fig. \ref{appendix_Predicting_lgs_DAG_slimmed} in the appendix. For the full DAG, including excluded variables and variables with missing data, see appendix \ref{appendix_DAG_def}. Interactions are denoted with a deterministic node labelled with $\ast$. 
 
-\begin{figure}[!ht]
-\centering
-\includegraphics[width=\textwidth]{Predicting_lgs_DAG_slimmed}
-\caption{Directed Acyclic Graph of the variables in this study (DAG, cf. \cite{mcelreath2020statistical}). Blue = variable to be predicted (response), red = predictors. Asterisk nodes represent variable interactions, a type of deterministic DAG-node. PCA represents Principal Components Analysis. PCA was run on the incoming variables, and the optimal number of components (given a Non-Graphical Cattel's Scree Test) were carried forward. Terra and Aqua are the names of the NASA satellites.}
-\label{Predicting_lgs_DAG_slimmed}
-\end{figure}
-
-This results in the model formula below. The formula is formatted in the style and conventions of statistical programming in R. The response variable is to the left of the tilde ($\textasciitilde{}$) and the different predictors are combined with + for additive factors and with $\ast$ for interactions. Environmental PC3 is only included for the models predicting the number of languages of islands defined by shared language. The models are also run with and without control for phylogenetic and spatial non-independence. Predictors that are only in some of the models are marked with parentheses.
+This results in the model formula below. The formula is formatted in the style and conventions of statistical programming in R. The response variable is to the left of the tilde ($\textasciitilde{}$) and the different predictors are combined with + for additive factors and with $\ast$ for interactions. Environmental PC3 is only included for the models predicting the number of languages of islands defined by shared language (based on the outcome of the Non-Graphical Cattel's Scree Test). The models are also run with and without control for phylogenetic and/or spatial non-independence. Predictors that are only in some of the models are marked with parentheses.
 
 \begin{quotation}
-\texttt{Number of languages \textasciitilde{} Political complexity +} \\
+\texttt{Number of languages \textasciitilde{} EA033 +} \\
 \indent \indent\texttt{Settlement order *  Shoreline +} \\
 \indent \indent \texttt{Environmental PC1  *  Shoreline +} \\
 \indent \indent\texttt{Environmental PC2  *  Shoreline +} \\
@@ -342,25 +347,53 @@ This results in the model formula below. The formula is formatted in the style a
 \indent \indent (\texttt{Spatial relations }) \\
 \end{quotation}
 
-Settlement order was reversed from Fig. \ref{appendix_dates_map} such that high numbers represent further back in time, making the interpretation of effects more intuitive. Shoreline was log-10-transformed to reduce the effect of extreme outliers such as the South Island of Aotearoa (cf. \citet{rolett2004environmental} and \citet{atkinson2016cultural}). For political complexity, the mode of each island group was used\footnote{In instances of ties, the value for the island group was randomly selected}. All predicting variables were then normalized in the conventional manner by subtracting the mean and dividing by the standard deviation.
+Settlement order was reversed from Fig. \ref{appendix_dates_map} such that high numbers represent further back in time, making the interpretation of effects more intuitive. Shoreline was log-10-transformed to reduce the effect of extreme outliers such as the South Island of Aotearoa (cf. \citet{rolett2004environmental} and \citet{atkinson2016cultural}). For EA033 (political complexity), the mode of each island group was used\footnote{In instances of ties, the value for the island group was randomly selected.}. All predicting variables were then normalized in the conventional manner by subtracting the mean and dividing by the standard deviation (centering and scaling). EA033 and settlement waves were both modelled as monotonic effects (i.e. it is not assumed that the difference between level 1 and 2 is the same length as the difference between 2 and 3, but they are still on an ordinal scale).
 
-To test the impact of several variables predicting the same response variable we can use a Bayesian Regression Model \citep{gelman2006data, burkner2017brms}. The distribution of languages per island group is over-dispersed. There are many island groups with one language and only a few with higher numbers (see Figs. \ref{appendix_polygon_plot_SBZR} and \ref{appendix_polygon_plot_medium} in Appendix \ref{appendix_sec:island_geo}). For the overnight-sailing island groups, the group that contains Vanuatu and Temotu has 130 languages, whereas most island groups in Polynesia have 1 or 2. This skewed distribution necessitates a Poisson distribution for the response variable in the model, which is able to adjust the relationship between the mean and the variance appropriately\footnote{This issue was also faced by \citet{gavin2012island} in their study of environmental factors in language diversification in the Pacific. They chose another approach, a reciprocal transformation, based on model fitness compared to two other kinds of transformations of the response variable.}. For further details on the model set-up, see appendix \ref{appendix_model_settings}.
+To test the impact of several variables predicting the same response variable we use a Bayesian Regression Model \citep{gelman2006data, burkner2017brms}. The distribution of languages per island group is over-dispersed; there are many island groups with one language and only a few with higher numbers (see Figs. \ref{appendix_polygon_plot_SBZR} and \ref{appendix_polygon_plot_medium} in Appendix \ref{appendix_sec:island_geo}). For the overnight-sailing island groups, the group that contains Vanuatu and Temotu has 130 languages, whereas most island groups in Polynesia have 1 or 2 languages each. This skewed distribution necessitates a Poisson distribution for the response variable in the model, which is able to adjust the relationship between the mean and the variance appropriately (c.f. \citet{winter2021poisson})\footnote{This issue was also faced by \citet{gavin2012island} in their study of environmental factors in language diversification in the Pacific. They chose another approach, a reciprocal transformation, based on model fitness compared to two other kinds of transformations of the response variable. We chose to manipulate the response variable as little as possible to keep the model and its interpretation as intuitive as possible also for readers with less advanced knowledge of statistical modelling.}. For further details on the model set-up, see appendix \ref{appendix_model_settings}.
 
-Due to missing data, we are testing our models over 65 out of 104 shared language groups and 56 out of 67 overnight distance groups. This sample still contains some of our more extreme sites, like Santo, Kanaky (New Caledonia mainland) and Malakula. Variables that did not cover Vanuatu and New Caledonia with enough specific data-points are not included in this study, for example historic population data, non-Austronesian gene flow or jurisdictional hierarchy within local communities. 
+Due to missing data on some island groups, we are testing our models over 65 out of 104 shared language groups and 56 out of 67 overnight distance groups. This sample still contains some of our more extreme sites, like Santo, Kanaky (New Caledonia mainland) and Malakula. Variables that did not cover Vanuatu and New Caledonia with enough specific data points are not included in this study, for example historic population data, non-Austronesian gene flow or jurisdictional hierarchy within local communities (as opposed to beyond local community which is what EA033 covers). 
 
-To test the robustness of the conclusions over all observations, we drop one observation out at a time and calculate the predictor effects and predictions of the number of languages. This allows us to assess which island groups represent the largest challenge to fitting the model. 
+To test the robustness of the conclusions over all observations, we drop one observation out at a time and calculate the predictor effects and predictions of the number of languages. This allows us to assess which island groups represent the largest challenge to the model and may indicate areas where further in-depth study is necessary. 
 
-The results were calculated in R 3.6.0 \citep{R} using the function \texttt{brms::brm()} \citep{burkner2017brms}, tidyverse suite \citep{tidyverse13} and the modEvA-package \citep{barbosa2016package}. For a full list of packages used, see appendix \ref{appendix_r_packages}.
+For each kind of grouping of islands (shared language and overnight sailing) four models were run (no control for spatial or phylogenetic non-Independence, spatial control, phylogenetic control and control for both spatial and phylogenetic non-independence). This results in 8 models in total. For each island grouping, the four models are compared to each other using Leave-One-Out cross-validation (LOO), Watanabe–Akaike Information Criterion (WAIC), Bayesian $R^2$ and mean absolute difference between predicted and observed number of languages (similar to accuracy). LOO and WAIC were computed following  \citet{vehtari2017practical}, as implemented in the R-package loo \citep{R-loo}, Bayesian $R^2$ following \citet{gelman2019r} as implemented in the R-package rstanarm \citep{R-rstanarm}
 
+The results were calculated in R 4.3.3 \citep{R} using the function \texttt{brms::brm()} \citep{burkner2017brms} and the tidyverse suite of R-packages \citep{tidyverse13}. For a full list of packages used and their versions, see appendix \ref{appendix_r_packages}.
 
-
-\citet{cinelli_et_al_2022}
 \FloatBarrier
 \section{Results}
+The results show that EA033 has a significant effect in some of the models, but not all. This lends support to the proposal by \citet{pawley81, pawley2007}. However, there are details of the result that suggest that the effect may be due to non-Austronesian contact rather than political complexity \emph{per se}.
+
+The model comparisons showed that the models without control for spatial and/or phylogenetic non-independence fit the data less well. The model fit scores were overall similar for the other models (see appendix 
+\ref{appendix_model_fit_scores}). Table \ref{brms_results_summary} shows whether or not EA033 and/or EA033 in interaction with shoreline (EA033:Shoreline) had a significant effect in each model (i.e. 95\% confidence interval of the posterior effect distribution does not straddle zero) and the WAIC scores of each model. The model fit scores reported very similar ranking of the models, in the table \ref{brms_results_summary} only WAIC is included but the others can be found in Appendix \ref{appendix_model_fit_scores}.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{p{2.2cm}p{2.6cm}|p{2.2cm}p{2.2cm}p{2.2cm}p{2cm}}
+  \toprule
+&&  \multicolumn{4}{c}{\textbf{Control for spatial and/or phylogenetic non-independence}}\linebreak\\
+ & \textbf{	Variable	} & \textbf{	none	} & \textbf{	phylo	} & \textbf{	spatial	} & \textbf{	spatialphylo	} 	\\
+\midrule
+\multirow{2}{*}{Shared language}
+ 	&	Significant effect	&	\cellcolor{spec_color_lightgreen!50} EA033  \& EA033:Shoreline	&	\cellcolor{spec_color_lightgreen!50} EA033:Shoreline	&	\cellcolor{spec_color_lightgreen!50} EA033 &	Neither		\\
+		&	WAIC	&	231.952	&	208.562	&	209.082	&	 207.749		\\
+  \midrule
+\multirow{2}{*}{Overnight sailing}	&	Significant effect\linebreak	&	\cellcolor{spec_color_lightgreen!50} EA033:Shoreline	&	Neither	&	\cellcolor{spec_color_lightgreen!50} EA033:Shoreline &	Neither		\\
+	&	WAIC	&	191.558	&	 172.586 	&	178.292	&	173.43		\\
+
+
+   \bottomrule
+\end{tabular}
+\caption{Summary of results in regards to variables of interest (EA033 alone and in interaction with Shoreline). Significant effect means that the 95\% confidence interval of the effect does not straddle zero (marked in green). The model fit can be compared using the Watanabe–Akaike Information Criterion (WAIC). Lower WAIC-values indicate a better model fit.} 
+\label{brms_results_summary}
+\end{table}
+
+
+
+We will first go through the outcomes for the shared language island groups (i.e. groups of islands that share at least one language), and secondly the overnight distance groups. In common for both is that political complexity is a relevant predicting factor in some of the models, with a negative effect (the more political vertical levels, the lower the number of languages). This lends support to the proposal by \citet{pawley81} and \citet{pawley2007}. However, there are details of the result that suggest that the effect may be due to non-Austronesian contact rather than political complexity \emph{per se}.
+
 
 
 % BARG
-We will first go through the outcomes for the shared language island groups (i.e. groups of islands that share at least one language), and secondly the overnight distance groups. In common for both is that political complexity is a relevant predicting factor, with a negative effect (the more political vertical levels, the lower the number of languages). This lends support to the proposal by \citet{pawley81} and \citet{pawley2007}. However, there are details of the result that suggest that the effect may be due to non-Austronesian contact rather than political complexity \emph{per se}.
 
 Fig.~\ref{medium_model_predict} shows the actual observed language counts (purple triangles) and predictions of this model (green boxplots\footnote{The green box-plots represent the posterior predictions from the model (10,000 draws). The plot follows conventional design for box-plot, with the middle of the box representing the median, the two ends of the box (a.k.a ``hinges'') the first and third quartiles (the 25th and 75th percentiles). The whiskers extends from the end of the box 1.5 $\ast$  of the distance between first and third quartiles. Data beyond the end of the whiskers, so called "outlying" points, are not visualised in this plot as they were found to give a biased impression of the range. The R-function  ggplot2::geom\_boxplot() was used for these visualisation, scripts are included in additional material.}). The model does predict that Santo, Kanaky and Malakula have the highest language counts in the dataset. Our observed language counts for Santo, Kanky and Malakula are 24, 29 and 33 respectively. The model is very close for Santo and Kanaky for its average prediction value but underestimates Malakula by 17 languages. The absolute average difference between the mean predicted values and the observed is 1.3.
 
@@ -368,7 +401,7 @@ Fig.~\ref{medium_model_predict} shows the actual observed language counts (purpl
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.6\textwidth]{brms_predict_medium}
+\includegraphics[width=0.6\textwidth]{latex/brms_predict_SBZR_control_spatialphylo.png}
 \caption{Posterior predictions from the model with island grouped for shared language (10,000 draws). Number of languages is on the x-axis, observations on the Y. The dark blue triangles represent the observed number of languages, the green boxplot the predictions of the model. The middle of the box represents the median. The mean is represented with a yellow circle.}
 \label{medium_model_predict}
 \end{figure}
@@ -376,7 +409,7 @@ Fig.~\ref{medium_model_predict} shows the actual observed language counts (purpl
 For the shared language island groups, the variables that have a 95\% confidence interval which are not different from zero are: political complexity (EA033), environmental PC1, Shoreline, time depth and shoreline in interaction with time depth. Fig \ref{brms_SBZR_group_full_effect_ridge_panels} in Appendix \ref{appendix_supp_figs} shows the full distributions.
 
 \begin{figure}[ht]
-\includegraphics[width=0.6\textwidth]{brms_SBZR_control_phylo_group_full_effect_ridge_panels_plot.png}
+\includegraphics[width=0.6\textwidth]{latex/brms_SBZR_control_spatialphylo_group_full_effect_ridge_panels_plot.png}
 \caption{Coefficient distribution of BRMS model, using overnight sailing distances island groups with all observations - including control for phylogenetic non-independence. Distributions, where the 95\% confidence interval straddles zero, are marked as more transparent and with dashed outlines.}
 \label{brms_SBZR_group_full_effect_ridge_panels_phylo}
 \end{figure}
@@ -391,6 +424,9 @@ For the shared language island groups, the variables that have a 95\% confidence
 
 
 
+
+
+
 % #Frederic says: could also compute pareto-k https://mc-stan.org/loo/reference/pareto-k-diagnostic.html
 
 Most of the island groups can be removed with little effect on the overall accuracy of predictions (see Fig.  in \ref{appendix_supp_figs}), however, when Malakula (central Vanuatu), is left out, the difference average difference between predicted and observed becomes lower (1.3 $\rightarrow$ 0.9). Malakula is the island group with the highest number of languages (see Fig \ref{appendix_polygon_plot_medium} in appendix \ref{appendix_sec:island_geo}). Political complexity remains an important predictor regardless of which island group is dropped.
@@ -401,7 +437,7 @@ For the overnight sailing distances, several island groups are much larger than 
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.6\textwidth]{brms_predict_SBZR}
+\includegraphics[width=0.6\textwidth]{latex/brms_predict_SBZR_control_spatial.png}
 \caption{Posterior prediction from the model with island grouped for overnight sailing distances (draws = 10,000). The dark blue triangles represent the observed number of languages, the green boxplot the predictions of the model. The middle of the box represents the median. The mean is represented with a yellow circle.}
 \label{SBZR_model_predict}
 \end{figure}
