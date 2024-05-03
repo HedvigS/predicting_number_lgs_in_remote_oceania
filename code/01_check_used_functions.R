@@ -101,7 +101,7 @@ packages_in_most_scripts[1:5,]
 output_fn <- "../latex/used_pkgs.bib"
 
 #for unclear reasons, NCmisc::list.functions.in.file is not able to pick up on the following packages being in use so they are manually added.
-used_but_not_detected_by_NCmisc <- c("brms", "fs", "patchwork", "cmdstanr", "MCMCglmm", "maps", 
+used_but_not_detected_by_NCmisc <- c("brms", "fs", "patchwork", "cmdstanr", "MCMCglmm", "maps", "rstanarm",
                                      "StanHeaders", "mvtnorm", "Rcpp", "coda", "maps" ,"ade4",  "devtools",  "rlang", "nFactors")
 
 
@@ -132,7 +132,21 @@ fPaste(vec)   %>%
   writeLines(con = "../latex/citation_keys.txt")
 
 
+fn_out = "../latex/appendix_used_packages_table_versions.tex"
+cap <- "Table of R-packages used in this study."
+lbl <- "appendix_r_package_table"
+align <- c("r","p{2.5cm}","p{2.5cm}") 
 
 
-tbl <- installed.packages()[names(sessionInfo()$otherPkgs), "Version"] %>% 
-  as.data.frame() 
+installed.packages()[pkgs_to_cite, "Version"] %>% 
+  as.data.frame() %>% 
+  rownames_to_column("Package") %>% 
+  rename("Version" = "." ) %>% 
+  xtable(caption = cap, label = lbl,
+         align = align) %>% 
+  xtable::print.xtable(file = fn_out, 
+                       sanitize.colnames.function = function(x){x},
+                       sanitize.text.function = function(x){x},
+                       include.rownames = FALSE, math.style.negative = F,tabular.environment = "longtable",
+                       booktabs = TRUE, floating = F) 
+

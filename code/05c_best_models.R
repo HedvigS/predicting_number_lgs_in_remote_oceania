@@ -47,6 +47,7 @@ phylo_vcv <- readRDS("output/processed_data/tree_medium_vcv.rds")
 spatial_vcv <- readRDS("output/processed_data/spatial_vcv_medium.rds")
 data2 = list(phylo_vcv = phylo_vcv, spatial_vcv = spatial_vcv)
 
+#spatialphylo
 formula <- lg_count  ~    (1 | gr(phylo_id, cov = phylo_vcv)) +
   (1 | gr(spatial_id, cov = spatial_vcv)) +
   environ_PC1*Shoreline +

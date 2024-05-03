@@ -5,6 +5,7 @@
 .DS_Store
 *.aux
 *.lof
+*.tex.bak
 *.log
 *.lot
 *.out
@@ -18,3 +19,4 @@ code/output/plots/*
 code/output/results*
 latex/main.tex.bak
 **groundhog_librari**
+*.zip

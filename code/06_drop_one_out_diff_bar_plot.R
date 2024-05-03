@@ -32,20 +32,20 @@ diff_means_SBZR_none %>%
   write_tsv("output/results/SBZR_none_drop_one_out_diff_means.tsv")
 
 
-#medium spatial
-fns <- list.files(path = "output/results/drop_one_out/medium_spatial/", pattern = "diff_means", recursive = T, full.names = T)
+#medium spatialphylo
+fns <- list.files(path = "output/results/drop_one_out/medium_spatialphylo/", pattern = "diff_means", recursive = T, full.names = T)
 
-diff_means_medium_spatial <- combine_tsvs(fns = fns) %>% 
-  mutate(island_group_dropped = str_extract(filename, "spatial/.*/diff")) %>% 
-  mutate(island_group_dropped = str_replace_all(island_group_dropped, "spatial", "")) %>% 
+diff_means_medium_spatialphylo <- combine_tsvs(fns = fns) %>% 
+  mutate(island_group_dropped = str_extract(filename, "spatialphylo/.*/diff")) %>% 
+  mutate(island_group_dropped = str_replace_all(island_group_dropped, "spatialphylo", "")) %>% 
   mutate(island_group_dropped = str_replace_all(island_group_dropped, "diff", "")) %>% 
   mutate(island_group_dropped = str_replace_all(island_group_dropped, "/", "")) %>% 
   mutate(island_group_dropped = str_replace_all(island_group_dropped, "_", " ")) %>% 
     mutate(group = "medium") %>% 
-  mutate(control = "spatial")
+  mutate(control = "spatialphylo")
 
-diff_means_medium_spatial %>% 
-  write_tsv("output/results/medium_spatial_drop_one_out_diff_means.tsv")
+diff_means_medium_spatialphylo %>% 
+  write_tsv("output/results/medium_spatialphylo_drop_one_out_diff_means.tsv")
 
 #medium none
 fns <- list.files(path = "output/results/drop_one_out/medium_none//", pattern = "diff_means", recursive = T, full.names = T)
@@ -83,7 +83,8 @@ df %>%
   theme(panel.background = element_rect(fill = "white"), 
         plot.background = element_rect(fill = "white"), 
         axis.text.x = element_text(size = 7)) +
-  ylim(c(0, 1.5))
+  scale_y_continuous(breaks = c(0, 0.25, 0.5, 0.75, 1, 1.25), limits = c(0, 1.28)) 
+  
   
 
 ggsave(filename = paste0("output/plots/brms_", group, "_control_", control, "_dropped_out_plot_diff.png"), width = 7, height = 7, dpi = 200)
@@ -92,6 +93,6 @@ ggsave(filename = paste0("../latex/brms_", group, "_control_", control, "_droppe
 }
 
 plot_diff_cols(df = diff_means_medium_none)
-plot_diff_cols(df = diff_means_medium_spatial)
+plot_diff_cols(df = diff_means_medium_spatialphylo)
 plot_diff_cols(df = diff_means_SBZR_none)
 plot_diff_cols(df = diff_means_SBZR_phylo)
