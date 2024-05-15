@@ -78,7 +78,7 @@ if(!dir.exists(groundhog_dir)){
 
 groundhog::set.groundhog.folder(groundhog_dir)
 
-groundhog.library(pkgs, groundhog_date)
+groundhog.library(pkgs, groundhog_date, tolerate.R.version='4.4.0')
 }else{
   source("fun_def_h_load.R")
   h_load(pkgs)  
