@@ -13,6 +13,7 @@
 *.pdf
 *.toc
 *.Rproj
+*.rds
 code/data/glottolog-cldf/**
 code/data/dplace-cldf/**
 code/output/plots/*
