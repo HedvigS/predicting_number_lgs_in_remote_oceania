@@ -4,7 +4,7 @@
 set.seed(1988)
 
 #if you don't want to use the groundhog package manner of loading and installing packages, set groundhog to anything but "yes"
-groundhog <- "no"
+groundhog <- "yes"
 
 #packages
 pkgs = c(
@@ -78,7 +78,11 @@ if(!dir.exists(groundhog_dir)){
 
 groundhog::set.groundhog.folder(groundhog_dir)
 
-groundhog.library(pkgs, groundhog_date, tolerate.R.version='4.4.0')
+groundhog.library(pkgs, groundhog_date)
+#groundhog.library(pkgs, groundhog_date, tolerate.R.version='3.6.3')
+
+
+
 }else{
   source("fun_def_h_load.R")
   h_load(pkgs)  
