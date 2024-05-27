@@ -92,14 +92,7 @@ spatial_vcv_SBZR = varcov.spatial(
 colnames(spatial_vcv_SBZR) <- colnames(dist_SBZR)
 rownames(spatial_vcv_SBZR) <- rownames(dist_SBZR)
 
-spatial_vcv_SBZR_long <- spatial_vcv_SBZR %>% 
-  reshape2::melt() 
-
-spatial_vcv_SBZR_long$value <- scale(spatial_vcv_SBZR_long$value)[,1]
-
-spatial_vcv_SBZR_long %>%
-  reshape2::dcast(Var1 ~ Var2, value.var = "value") %>%
-  column_to_rownames("Var1") %>% 
+spatial_vcv_SBZR %>% 
   saveRDS("output/processed_data/spatial_vcv_SBZR.rds")
 
 #medium
@@ -112,12 +105,5 @@ spatial_vcv_medium = varcov.spatial(
 colnames(spatial_vcv_medium) <- colnames(dist_medium)
 rownames(spatial_vcv_medium) <- rownames(dist_medium)
 
-spatial_vcv_medium_long <- spatial_vcv_medium %>% 
-  reshape2::melt() 
-
-spatial_vcv_medium_long$value <- scale(spatial_vcv_medium_long$value)[,1]
-
-spatial_vcv_medium_long %>%
-  reshape2::dcast(Var1 ~ Var2, value.var = "value") %>%
-  column_to_rownames("Var1") %>% 
+spatial_vcv_medium %>% 
   saveRDS("output/processed_data/spatial_vcv_medium.rds")
