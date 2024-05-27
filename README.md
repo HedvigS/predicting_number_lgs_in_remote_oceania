@@ -6,4 +6,7 @@ This is a repository for analysis associated with as study of predicting the num
 
 4.3.1 (2023-06-16) -- "Beagle Scouts"
 
-Can be found here: <https://cran.r-project.org/bin/macosx/big-sur-arm64/base/>
+Can be found here for macos:
+
+* 64-bit processing:<https://cran.r-project.org/bin/macosx/big-sur-arm64/base/>
+* intel-based: [https://cran.r-project.org/bin/macosx/big-sur-x86_64/base/](https://cran.r-project.org/bin/macosx/big-sur-x86_64/base/)
