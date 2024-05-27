@@ -66,7 +66,7 @@ if(groundhog == "yes"){
 groundhog_date = "2023-08-02"
 
 if(!("groundhog"%in% rownames(installed.packages()))){
-    install.packages("groundhog")
+    remotes::install_version("groundhog", version = "3.1.0")
 }
 library(groundhog)
 
@@ -79,9 +79,6 @@ if(!dir.exists(groundhog_dir)){
 groundhog::set.groundhog.folder(groundhog_dir)
 
 groundhog.library(pkgs, groundhog_date)
-#groundhog.library(pkgs, groundhog_date, tolerate.R.version='3.6.3')
-
-
 
 }else{
   source("fun_def_h_load.R")
