@@ -3,8 +3,11 @@
 
 source("01_requirements.R")
 
+options(CMDSTANR_NO_VER_CHECK=TRUE)
+
 pkgs = c(
   "coda", 
+  "rstan",
   "brms", 
   "mvtnorm",
   "devtools",
@@ -18,7 +21,7 @@ groundhog <- "yes"
 
 if(groundhog == "yes"){
   
-groundhog.library(pkgs, groundhog_date)
+groundhog::groundhog.library(pkgs, groundhog_date)
 }else{
   source("fun_def_h_load.R")
   h_load(pkgs)  
