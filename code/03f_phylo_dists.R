@@ -75,8 +75,13 @@ png("../latex/island_group_tree_medium.png", width = 20, height = 30, units = "c
 plot(ladderize(tree_medium), cex = 0.9, edge.color = "#4c1c80", no.margin = T, edge.width = 2.7, label.offset = 0.03)
 x <- dev.off()
 
-ape::vcv.phylo(tree_medium, corr = FALSE) %>% 
-  saveRDS("output/processed_data/tree_medium_vcv.rds")
+tree_medium_vcv_long <- ape::vcv.phylo(tree_medium, corr = FALSE) %>%  
+  reshape2::melt()
+
+tree_medium_vcv_long
+
+  
+    saveRDS("output/processed_data/tree_medium_vcv.rds")
 
 tree_medium %>% 
   ape::write.tree(file = "output/processed_data/tree_medium.tree")
