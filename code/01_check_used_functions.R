@@ -138,10 +138,15 @@ lbl <- "appendix_r_package_table"
 align <- c("r","p{2.5cm}","p{2.5cm}") 
 
 
-installed.packages()[pkgs_to_cite, "Version"] %>% 
+pkgs_to_cite_df <- installed.packages()[pkgs_to_cite, "Version"] %>% 
   as.data.frame() %>% 
   rownames_to_column("Package") %>% 
-  rename("Version" = "." ) %>% 
+  rename("Version" = "." )
+  
+  pkgs_to_cite_df %>% 
+    write_tsv("output/pkgs_versions_table.tsv")
+  
+  pkgs_to_cite_df %>% 
   xtable(caption = cap, label = lbl,
          align = align) %>% 
   xtable::print.xtable(file = fn_out, 
