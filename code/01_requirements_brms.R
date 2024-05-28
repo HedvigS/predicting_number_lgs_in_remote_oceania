@@ -17,7 +17,7 @@ pkgs = c(
 )
 
 #if you don't want to use the groundhog package manner of loading and installing packages, set groundhog to anything but "yes"
-groundhog <- "yes"
+groundhog <- "no"
 
 if(groundhog == "yes"){
   

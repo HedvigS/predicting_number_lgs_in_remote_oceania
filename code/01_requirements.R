@@ -4,7 +4,7 @@
 set.seed(1988)
 
 #if you don't want to use the groundhog package manner of loading and installing packages, set groundhog to anything but "yes"
-groundhog <- "yes"
+groundhog <- "no"
 
 #packages
 pkgs = c(
@@ -53,6 +53,7 @@ pkgs = c(
   "MCMCglmm",
   "nFactors",
   "sp", 
+"Matrix",
   "raster",
 "ade4"
 ) 
@@ -63,7 +64,7 @@ pkgs <- unique(pkgs)
 
 if(groundhog == "yes"){
 
-groundhog_date = "2023-08-02"
+groundhog_date = "2023-08-03"
 
 if(!("groundhog"%in% rownames(installed.packages()))){
     remotes::install_version("groundhog", version = "3.1.0")
