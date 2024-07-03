@@ -23,6 +23,7 @@ formula <- lg_count  ~    (1 | gr(phylo_id, cov = phylo_vcv)) +
   environ_PC1*Shoreline +
   environ_PC2*Shoreline + 
   Shoreline*mo(EA033) + 
+  as.factor(Melanesia_or_not) + 
   Shoreline*mo(Settlement_date_grouping_finer)
 
 fun_brms_predicting(data = data, data2 = data2, formula = formula, group = group, control = "spatialphylo", drop_one_out = FALSE )
@@ -33,6 +34,7 @@ formula <- lg_count  ~    (1 | gr(phylo_id, cov = phylo_vcv)) +
   environ_PC1*Shoreline +
   environ_PC2*Shoreline +
   Shoreline*mo(EA033) + 
+  as.factor(Melanesia_or_not) + 
   Shoreline*mo(Settlement_date_grouping_finer)
 
 fun_brms_predicting(data = data, data2 = data2, formula = formula, group = group, control = "phylo", drop_one_out = FALSE )
@@ -41,6 +43,7 @@ fun_brms_predicting(data = data, data2 = data2, formula = formula, group = group
 formula <- lg_count  ~    (1 | gr(spatial_id, cov = spatial_vcv)) +
   environ_PC1*Shoreline +
   environ_PC2*Shoreline +
+  as.factor(Melanesia_or_not) + 
   Shoreline*mo(EA033) + 
   Shoreline*mo(Settlement_date_grouping_finer)
 
@@ -51,6 +54,7 @@ fun_brms_predicting(data = data, data2 = data2, formula = formula, group = group
 formula <- lg_count  ~    environ_PC1*Shoreline +
   environ_PC2*Shoreline +
   Shoreline*mo(EA033) + 
+  as.factor(Melanesia_or_not) + 
   Shoreline*mo(Settlement_date_grouping_finer)
 
 fun_brms_predicting(data = data, data2 = data2, formula = formula, group = group, control = "none", drop_one_out = FALSE )
@@ -62,6 +66,7 @@ data <- read_tsv("output/processed_data/RO_aggregate_medium_group_scaled.tsv", s
   mutate(spatial_id = group) %>% 
   mutate(phylo_id = group)
 
+
 group = "medium"
 
 phylo_vcv <- readRDS("output/processed_data/tree_medium_vcv.rds")
@@ -72,6 +77,7 @@ data2 = list(phylo_vcv = phylo_vcv, spatial_vcv = spatial_vcv)
 formula <- lg_count  ~    (1 | gr(phylo_id, cov = phylo_vcv)) +
   (1 | gr(spatial_id, cov = spatial_vcv)) +
   environ_PC1*Shoreline +
+  as.factor(Melanesia_or_not) + 
   environ_PC2*Shoreline +
   environ_PC3*Shoreline +
   Shoreline*mo(EA033) + 
@@ -85,6 +91,7 @@ formula <- lg_count  ~    (1 | gr(phylo_id, cov = phylo_vcv)) +
   environ_PC1*Shoreline +
   environ_PC2*Shoreline +
   environ_PC3*Shoreline +
+  as.factor(Melanesia_or_not) + 
   Shoreline*mo(EA033) + 
   Shoreline*mo(Settlement_date_grouping_finer)
 
@@ -95,6 +102,7 @@ formula <- lg_count  ~    (1 | gr(spatial_id, cov = spatial_vcv)) +
   environ_PC1*Shoreline +
   environ_PC2*Shoreline +
   environ_PC3*Shoreline +
+  as.factor(Melanesia_or_not) + 
   Shoreline*mo(EA033) + 
   Shoreline*mo(Settlement_date_grouping_finer)
 
@@ -105,6 +113,7 @@ formula <- lg_count  ~    environ_PC1*Shoreline +
   environ_PC2*Shoreline +
   environ_PC3*Shoreline +
   Shoreline*mo(EA033) + 
+  as.factor(Melanesia_or_not) + 
   Shoreline*mo(Settlement_date_grouping_finer)
 
 fun_brms_predicting(data = data, data2 = data2, formula = formula, group = group, control = "none", drop_one_out = FALSE )
