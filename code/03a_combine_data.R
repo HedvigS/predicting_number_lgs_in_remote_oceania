@@ -125,6 +125,14 @@ pol_complex <- read_tsv("data/Remote_oceania_pol_complex.tsv", na = "", show_col
   distinct(Smallest_Island_group, pol_complex_code) %>% 
   filter(!is.na(pol_complex_code))
 
+##Melanesian or not
+NANO_sheet <- read_tsv("output/processed_data/NANO_Melanesia.tsv", show_col_types = F) %>% 
+  filter(!is.na(Smallest_Island_group)) %>% 
+  mutate(Melanesia_or_not_new = ifelse(Melanesia_or_not == "Melanesia"|
+                                  Melanesia_or_not == "Melanesia (polynesian outlier mixed in)", 1, 0)) %>% 
+  distinct(Melanesia_or_not_new, Smallest_Island_group) 
+  
+
 #NPP see 02_get_modis.R
 modis_NPP <- read_tsv("output/processed_data/modis_with_groups.tsv", show_col_types = F, col_types = "c") %>% 
   mutate(MOD17A3HGF_061_Npp_500m = as.numeric(MOD17A3HGF_061_Npp_500m)) %>% 
@@ -159,6 +167,7 @@ Island_group_all_sep <- polygon_geo_grouping_hierarchy %>%
   full_join(modis_NPP, by = "Smallest_Island_group", relationship = "many-to-many") %>% 
   full_join(pol_complex, by = "Smallest_Island_group", relationship = "many-to-many")  %>% 
   full_join(ecoClimate_data, by = "Smallest_Island_group") %>% 
+  left_join(NANO_sheet, by = "Smallest_Island_group", relationship = "many-to-many") %>% 
   distinct()   
 
 write_tsv(Island_group_all_sep, "output/processed_data/RO_aggregate_all_obs_sep.tsv")
@@ -176,6 +185,7 @@ Island_group_summarised_smallest <- Island_group_all_sep %>%
             mean_long = mean(mean_long),
             settlement_date_grouping_finer = max(settlement_date_grouping_finer), 
             oldest_date = max(oldest_date),
+            Melanesia_or_not = get_mode(Melanesia_or_not_new), 
             color = dplyr::first(smallest_island_color), 
             lg_count = dplyr::first(lg_count_smallest),
             NPP_terra_mean = mean(MOD17A3HGF_061_Npp_500m_terra, na.rm = T),
@@ -203,6 +213,7 @@ Island_group_summarised_medium <- Island_group_all_sep %>%
         mean_long = mean(mean_long),
         settlement_date_grouping_finer = max(settlement_date_grouping_finer), 
         oldest_date = max(oldest_date),
+        Melanesia_or_not = get_mode(Melanesia_or_not_new), 
         color = dplyr::first(medium_group_color), 
         lg_count = dplyr::first(lg_count_medium),
         NPP_terra_mean = mean(MOD17A3HGF_061_Npp_500m_terra, na.rm = T),
@@ -232,6 +243,7 @@ Island_group_summarised_Marck_group <- Island_group_all_sep %>%
     settlement_date_grouping_finer = max(settlement_date_grouping_finer), 
     oldest_date = max(oldest_date),
     color = dplyr::first(Marck_group_color), 
+    Melanesia_or_not = get_mode(Melanesia_or_not_new), 
     lg_count = dplyr::first(lg_count_Marck),
     NPP_terra_mean = mean(MOD17A3HGF_061_Npp_500m_terra, na.rm = T),
     NPP_aqua_mean = mean(MYD17A3HGF_061_Npp_500m_water, na.rm = T),
@@ -248,7 +260,7 @@ write_tsv(Island_group_summarised_Marck_group, "output/processed_data/RO_aggrega
 
 #SBZR group
 Island_group_summarised_SBZR_group <- Island_group_all_sep %>% 
-  filter(!is.na(settlement_date_grouping_finer)) %>% 
+  filter(!is.na(settlement_date_grouping_finer)) %>%
   group_by(SBZR_group) %>% 
   dplyr::summarise(
     mode_pol_complex = get_mode(pol_complex_code), 
@@ -256,6 +268,7 @@ Island_group_summarised_SBZR_group <- Island_group_all_sep %>%
     lg_count_smallest = mean(lg_count_smallest, na.rm = T),
     sum_shoreline = sum(sum_shoreline, na.rm = T),
     mean_lat = mean(mean_lat),
+    Melanesia_or_not = get_mode(Melanesia_or_not_new), 
     mean_long = mean(mean_long),
     settlement_date_grouping_finer = max(settlement_date_grouping_finer), 
     oldest_date = max(oldest_date),
@@ -288,6 +301,7 @@ Island_group_summarised_COUNTRY <- Island_group_all_sep %>%
     sum_shoreline = sum(sum_shoreline, na.rm = T),
     mean_lat = mean(mean_lat),
     mean_long = mean(mean_long),
+    Melanesia_or_not = get_mode(Melanesia_or_not_new), 
     settlement_date_grouping_finer = max(settlement_date_grouping_finer), 
     oldest_date = max(oldest_date),
     lg_count = dplyr::first(lg_count_COUNTRY),
