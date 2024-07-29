@@ -10,6 +10,10 @@ groundhog <- "no"
 pkgs = c(
 #  "tidyverse",
   "dplyr",
+  "terra",
+  "maps",
+  "coda",
+  "igraph",
   "stringr",
   "purrr",
   "readr",
@@ -83,7 +87,7 @@ groundhog.library(pkgs, groundhog_date)
 
 }else{
   source("fun_def_h_load.R")
-  h_load(pkgs)  
+  h_load(pkgs, ignore.deps = F)  
 }
 
 #funs
