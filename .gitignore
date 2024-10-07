@@ -21,3 +21,4 @@ code/output/results/drop*
 latex/main.tex.bak
 **groundhog_librari**
 *.zip
+/code/output_old
