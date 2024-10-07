@@ -1,98 +1,53 @@
-# Please run this script first to make sure you have all the necessary packages 
-# installed for running the rest of the scripts in this R project
+# Please run this script first to make sure you have all the necessary packages, directories and functions.
 
 set.seed(1988)
 
-#if you don't want to use the groundhog package manner of loading and installing packages, set groundhog to anything but "yes"
-groundhog <- "no"
-#if groundhog is set to "yes", then the code will expect R version 4.3.1. If you use another version of R, please set the argument tolerate.R.version of groundhog.ibrary to the version youa re using, (e.g. tolerate.R.version='4.4.1').
+#### PACKAGE INSTALLATION ####
+R_version_numbers <- paste0(R.version$major, ".", R.version$minor)
 
-#packages
-pkgs = c(
-#  "tidyverse",
-  "dplyr",
-  "terra",
-  "maps",
-  "coda",
-  "igraph",
-  "stringr",
-  "purrr",
-  "readr",
-  "reader",
+if(R_version_numbers != "4.4.1"){
+  message("These scripts were written using R version 4.4.1, but you are using ", R_version_numbers, ". This needn't be a problem, but it's worth noting in case the results differ.\n")
+    }
+
+#instead of using the R-packages for package mangement groundhog or pacman, I have recorded precisely which version is used for each package in a tsv-file and will be looping over each of them with a for-loop applying a function which installs the specific version. If there is another version present, the requested version will be installed. 
+
+pkgs <- read.delim("data/packages.tsv", sep = "\t")
+
+installed_pkgs <- installed.packages()
+
+#the following functions may be masked by installing packages, i.e. it's necessary to specify the package when calling the function (package::function) to make sure you get the right function.
+mask.ok_vec <- c("det", "expand", "pack", "unpack", "backsolve", "forwardsolve", "grid.draw", "grid.draw.absoluteGrob", "grobHeight.absoluteGrob", "robWidth.absoluteGrob", "robX.absoluteGrob",   "obY.absoluteGrob")
+
+#the package remotes is necessary in order to use the function install_version
+if(! "remotes" %in% rownames(installed_pkgs)){
+install.packages("remotes", )
+  }
+
+for(i in 1:nrow(pkgs)){
+
+#  i <- 14
+  pkg <- pkgs[i,1]
+  version <- pkgs[i,2]
+
+  cat(paste0("Installing/loading packages. I'm on ", pkg,  " which is ", i , " of ", nrow(pkgs), ".\n"))
   
-  "tidyr",
-  "tibble",
-  "forcats",
-  "magrittr",
-  "reshape2",
-  "jsonlite",
-#  "modEvA",
-  "MuMIn",
-  "rsq",
-  "viridis",
-  "rlang",
-  "devtools",
-  "MASS", 
-  "colorspace",
-#  "wesanderson",
-  "ggalt",
-  "randomcoloR",
-#  "RColorBrewer",
-  "ggplot2",
-  "readxl",
-  "ggrepel",
-  "psych",
-  "ggthemes",
-#  "readxl",
-#  "broom", 
-  "ggpubr",
-  "lemon",
-  "data.table",
-  "naniar", 
-"bib2df",
-  "fields",
-  "scales",
-  "devtools",
-  "xtable",
-  "ape", 
-  "loo",
-  "adephylo", 
-  "phytools",
-  "MCMCglmm",
-  "nFactors",
-  "sp", 
-"Matrix",
-  "raster",
-"ade4"
-) 
+  if(!pkg %in% rownames(installed_pkgs)){
+    cat(paste0("Package not installed, installing now."))
+    
+    remotes::install_version(pkg, version = version, dependencies = "Depends", repos = "http://cran.us.r-project.org", upgrade = "never", quiet = T, force = F)
+  }
 
-pkgs <- unique(pkgs)
+  if(pkg %in% rownames(installed_pkgs) ){
+        if(  installed_pkgs[pkg, "Version"] != version){
+    cat(paste0("Package installed, but not the right version. Installing requested version now."))
 
-#groundhogr set-up
+    remotes::install_version(pkg, version = version, dependencies = "Depends", repos = "http://cran.us.r-project.org", upgrade = "never", quiet = T, force = F)
+    
+    }}
+    
+  library(pkg, character.only = T, warn.conflicts = F, quietly = T, verbose = F, attach.required = T, mask.ok = mask.ok_vec)
+  }
 
-if(groundhog == "yes"){
-
-groundhog_date = "2023-08-03"
-
-if(!("groundhog"%in% rownames(installed.packages()))){
-    remotes::install_version("groundhog", version = "3.1.0")
-}
-library(groundhog)
-
-groundhog_dir <- paste0("groundhog_libraries_", groundhog_date)
-
-if(!dir.exists(groundhog_dir)){
-  dir.create(groundhog_dir)
-}
-
-groundhog::set.groundhog.folder(groundhog_dir)
-
-groundhog.library(pkgs, groundhog_date)
-
-}else{
-  source("fun_def_h_load.R")
-  h_load(pkgs, ignore.deps = F)  
-}
 
 #funs
 unlist_entire_df <- function(data) {
@@ -127,9 +82,6 @@ if(!dir.exists(dir)){dir.create(dir)}
 
 v <- c(7, 1, 1, 7, 7, 1, 5)
 
-
- 
-
 distinctive_plot_colors <- c("#FFB6C1",
             "#fcf0b3",
             "#a6f7c9", 
@@ -144,8 +96,6 @@ distinctive_plot_colors <- c("#FFB6C1",
             "#957DAD"
 
 )
-
-
 
 gray_dup_to_remove <- c("Sisingga", 
                         "Carolinian",
