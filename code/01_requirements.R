@@ -5,6 +5,7 @@ set.seed(1988)
 
 #if you don't want to use the groundhog package manner of loading and installing packages, set groundhog to anything but "yes"
 groundhog <- "no"
+#if groundhog is set to "yes", then the code will expect R version 4.3.1. If you use another version of R, please set the argument tolerate.R.version of groundhog.ibrary to the version youa re using, (e.g. tolerate.R.version='4.4.1').
 
 #packages
 pkgs = c(
@@ -17,6 +18,8 @@ pkgs = c(
   "stringr",
   "purrr",
   "readr",
+  "reader",
+  
   "tidyr",
   "tibble",
   "forcats",
@@ -46,6 +49,7 @@ pkgs = c(
   "lemon",
   "data.table",
   "naniar", 
+"bib2df",
   "fields",
   "scales",
   "devtools",
