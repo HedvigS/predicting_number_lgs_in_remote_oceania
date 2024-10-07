@@ -163,10 +163,9 @@ theme( panel.background = element_rect(fill = "white"))
 ggsave(plot = 
          medium_map, filename = "output/plots/maps/polygon_medium_group_map.png", width = 15, height = 10)
 
-medium_groups_for_encircle_plotting_df_only_vanuatu <-
-  medium_groups_for_encircle_plotting_df %>% 
-  filter(between(Longitude, 164, 175)) %>% 
-  filter(between(Latitude, -24, -9)) 
+medium_groups_for_encircle_plotting_df_only_vanuatu <-  medium_groups_for_encircle_plotting_df %>% 
+  dplyr::filter(dplyr::between(Longitude, 164, 175)) %>% 
+  dplyr::filter(dplyr::between(Latitude, -24, -9)) 
 
   
 
