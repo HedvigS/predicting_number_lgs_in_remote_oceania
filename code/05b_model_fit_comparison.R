@@ -3,7 +3,7 @@ source("fun_def_SPLOM.R")
 
 df_fit_loo <- SH.misc::stack_tsvs(dir = "output/results/", 
                                   pattern = ".*fit_loo.*",
-                                  recursive = T, verbose = F) %>% 
+                                  recursive = F, verbose = F) %>% 
   mutate(group = ifelse(str_detect(filename, "medium"), "medium", "SBZR")) %>% 
   mutate(control = str_extract(filename, "control_[:alpha:]*")) %>% 
   mutate(control = str_replace(string = control, pattern = "control_",replacement = "")) %>% 
@@ -12,7 +12,7 @@ df_fit_loo <- SH.misc::stack_tsvs(dir = "output/results/",
 
 df_fit_waic <- SH.misc::stack_tsvs(dir = "output/results/", 
                                    pattern = ".*fit_waic.*",
-                                   recursive = T, verbose = F) %>% 
+                                   recursive = F, verbose = F) %>% 
   mutate(group = ifelse(str_detect(filename, "medium"), "medium", "SBZR")) %>% 
   mutate(group = ifelse(str_detect(filename, "medium"), "medium", "SBZR")) %>% 
   mutate(control = str_extract(filename, "control_[:alpha:]*")) %>% 
@@ -22,7 +22,7 @@ df_fit_waic <- SH.misc::stack_tsvs(dir = "output/results/",
 
 df_fit_R2 <- SH.misc::stack_tsvs(dir = "output/results/", 
                                  pattern = ".*fit_R2.*",
-                                 recursive = T, verbose = F) %>% 
+                                 recursive = F, verbose = F) %>% 
   mutate(group = ifelse(str_detect(filename, "medium"), "medium", "SBZR")) %>% 
   mutate(group = ifelse(str_detect(filename, "medium"), "medium", "SBZR")) %>% 
   mutate(control = str_extract(filename, "control_[:alpha:]*")) %>% 
@@ -31,7 +31,7 @@ df_fit_R2 <- SH.misc::stack_tsvs(dir = "output/results/",
 
 df_fit_diff_means <- SH.misc::stack_tsvs(dir = "output/results/", 
                                          pattern = ".*diff_means.*",
-                                         recursive = T, verbose = F) %>% 
+                                         recursive = F, verbose = F) %>% 
   mutate(group = ifelse(str_detect(filename, "medium"), "medium", "SBZR")) %>% 
   mutate(group = ifelse(str_detect(filename, "medium"), "medium", "SBZR")) %>% 
   mutate(control = str_extract(filename, "control_[:alpha:]*")) %>% 
