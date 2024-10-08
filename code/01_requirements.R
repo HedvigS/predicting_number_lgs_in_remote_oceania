@@ -29,9 +29,9 @@ for(i in 1:nrow(pkgs)){
   pkg <- pkgs[i,1]
   version <- pkgs[i,2]
 
-  cat(paste0("Installing/loading packages. I'm on ", pkg,  " which is ", i , " of ", nrow(pkgs), ".\n"))
   
   if(!pkg %in% rownames(installed_pkgs)){
+    cat(paste0("Installing/loading packages. I'm on ", pkg,  " which is ", i , " of ", nrow(pkgs), ".\n"))
     cat(paste0("Package not installed, installing now.\n"))
     
     remotes::install_version(pkg, version = version, dependencies = "Depends", repos = "http://cran.us.r-project.org", upgrade = "never", quiet = T, force = F)
@@ -39,6 +39,8 @@ for(i in 1:nrow(pkgs)){
 
   if(pkg %in% rownames(installed_pkgs) ){
         if(  installed_pkgs[pkg, "Version"] != version){
+    
+          cat(paste0("Installing/loading packages. I'm on ", pkg,  " which is ", i , " of ", nrow(pkgs), ".\n"))
     cat(paste0("Package installed, but not the right version. Installing requested version now.\n"))
 
     remotes::install_version(pkg, version = version, dependencies = "Depends", repos = "http://cran.us.r-project.org", upgrade = "never", quiet = T, force = F)
