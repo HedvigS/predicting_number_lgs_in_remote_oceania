@@ -23,3 +23,4 @@ latex/main.tex.bak
 *.zip
 /code/output_old
 todo.txt
+/code/output_old_new
