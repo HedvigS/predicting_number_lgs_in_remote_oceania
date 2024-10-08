@@ -106,12 +106,12 @@ Reao	Reao	Tuamotu	9	1100, 770	1100	Chazine (1985) and Hatanaka et al (1978)	\cit
 Tuvalu	Tuvalu	Tuvalu	9	1070, 770	1070	Dickinson et al (1990)	\citet{rieth_cochrane_2018}			Western Poly	Polynesia		5	4	24
 Vanuatu (greater)	Emae	Emae	9	1000	1000	\citet{kirch2012basline} and \citet{carson2012recent}		Yes		Southern Poly Outlier	Melanesia		5	4	30
 Kapingamarangi	Kapingamarangi	Kapingamarangi	9	1000, 700	1000	\citet{carson2012recent}				Northern Poly Outlier	Micronesia		5	4	30
-Vanuatu (greater)	Futuna and Aniwa	West Futuna	9	1000, 900	1000	\citet{carson2012recent}			yes	Northern Poly Outlier	Melanesia		5	4	31
+Vanuatu (greater)	Futuna + Aniwa	West Futuna	9	1000, 900	1000	\citet{carson2012recent}			yes	Northern Poly Outlier	Melanesia		5	4	31
 Raro Matai	Raro Matai	Society Islands	9	960, 800	960	Anderson and Sinoto (2002), Kahn (2012), Wilmshurst et al (2011) and Parkes (1997) 	\citet{rieth_cochrane_2018}			Eastern Polynesia	Polynesia		5	4	31
 Nia Matai	Nia Matai	Society Islands	9	960, 800	960	Anderson and Sinoto (2002), Kahn (2012), Wilmshurst et al (2011) and Parkes (1997) 	\citet{rieth_cochrane_2018}						6	4	29
 Mangaia	Mangaia	Southern Cook Islands	9	960, 780	960	Walter and Reilly 2010	\citet{walworth2015}			Eastern Polynesia	Polynesia		6	5	24
-Marquesas	Te Fenua ’Enata	Marquesas	9	950, 750	950	Allen (2004) and Allen and McAllister (2010, 2013)	\citet{rieth_cochrane_2018}			Eastern Polynesia	Polynesia		6	5	32
-Marquesas	Te Henua ‘Enana	Marquesas	9	950, 750	950	Allen (2004) and Allen and McAllister (2010, 2013)	\citet{rieth_cochrane_2018}						6	5	32
+Marquesas	Te Fenua ’Enata (South Marquesas)	Marquesas	9	950, 750	950	Allen (2004) and Allen and McAllister (2010, 2013)	\citet{rieth_cochrane_2018}			Eastern Polynesia	Polynesia		6	5	32
+Marquesas	Te Henua ‘Enana (North Marquesas)	Marquesas	9	950, 750	950	Allen (2004) and Allen and McAllister (2010, 2013)	\citet{rieth_cochrane_2018}						6	5	32
 Hawai'i	Hawaii	Hawaii	9	950, 850	950	Athens et al (2014)	\citet{rieth_cochrane_2018}			Eastern Polynesia	Polynesia		6	5	34
 Mangareva	Mangareva	Mangareva	9	920, 660	920	Anderson et al (2003), Green and Weisler (2002) and Kirch et al (2010)	\citet{rieth_cochrane_2018}		yes				5	4	23
 Rarotonga	Rarotonga	Southern Cook Islands	9	900, 680	900	Allen and Morrison (2013), Allen and Wallace (2007), Kirch et al (1995) and Parkes (1997)	\citet{rieth_cochrane_2018}			Eastern Polynesia	Polynesia		5	4	24
@@ -140,3 +140,5 @@ Takuu	Takuu	Takuu	11	500	500	\citet{kirch2012basline} and \citet{carson2012recen
 Kanaky	Ouvea (West Uvean)	None	11	500	500	\citet{kirch2012basline} and \citet{carson2012recent}		Yes	yes	Northern Poly Outlier	Melanesia		6	5	
 Rekohou	Rēkohou	Aotearoa	11	450, 400	450	McFadgen (1994)	\citet{rieth_cochrane_2018}		yes				6	5	
 Laguas_yan_gani	Northern Marianas	Mariana Islands (Carolinian settlement)	12	185	185	Fritz (1911), Spoehr (1954), Bowers (1953) and Quackenbush (1968)	\citet{ellis2012saipan}						6	5	
+	Niu	Tuvalu	9	1070, 770	1070	Dickinson et al (1990)	\citet{rieth_cochrane_2018}	Yes, Tuvalu specifically mentioned		Western Poly	Polynesia		5	4	24
+	Tinian	Mariana Islands	1	3500, 2950	3500	Carson (2014) and Athens et al (2004)	\citet{rieth_cochrane_2018}			Old Micronesia	Micronesia		4	3	17
