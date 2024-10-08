@@ -5,7 +5,6 @@
 .DS_Store
 *.aux
 *.lof
-*.tex.bak
 *.log
 *.lot
 *.out
@@ -13,14 +12,11 @@
 *.pdf
 *.toc
 *.Rproj
-*.rds
 code/data/glottolog-cldf/**
 code/data/dplace-cldf/**
 code/output/plots/*
-code/output/results/drop*
+code/output/results*
 latex/main.tex.bak
 **groundhog_librari**
-*.zip
 /code/output_old
-todo.txt
 /code/output_old_new

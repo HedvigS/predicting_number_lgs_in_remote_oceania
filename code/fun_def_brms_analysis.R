@@ -177,7 +177,7 @@ colnames(chain_joined) <- str_replace_all(colnames(chain_joined), "bsp_", "")
 
 #making a straddle df
 ms_df_long <- ms_full$fixed %>% 
-  rownames_to_column("term") %>% 
+  rownames_to_column("term") %>%
   mutate(straddle_zero_95 = ifelse(`l-95% CI` < 0 & `u-95% CI` < 0|
                                      `l-95% CI`  > 0 & `u-95% CI`  > 0  , "no", "yes")) %>% 
   reshape2::melt(id.vars = "term") 
@@ -185,6 +185,7 @@ ms_df_long <- ms_full$fixed %>%
 ms_df_long_straddle <- ms_df_long %>% 
   filter(variable == "straddle_zero_95") %>% 
   dplyr::select(variable = term, straddle_zero_95 = value)
+
 
 p <-  chain_joined %>% 
     reshape2::melt(id.vars = "chain") %>%  
@@ -196,25 +197,38 @@ p <-  chain_joined %>%
   filter(!str_detect(variable, "simo_mo")) %>%
     filter(variable != "Intercept") %>% 
     mutate(variable = str_replace_all(variable,"Settlement_date_grouping_finer", "Time depth")) %>% 
-    mutate(variable = str_replace_all(variable,"bsp_mo", "")) %>% 
+  mutate(variable = str_replace_all(variable,":", ":\n")) %>% 
+  mutate(variable = str_replace_all(variable,"bsp_mo", "")) %>% 
     mutate(variable = str_replace_all(variable,"moEA", "EA")) %>% 
     mutate(variable = str_replace_all(variable,"moTime", "Time")) %>% 
                 ggplot(aes(x = value, fill = variable, 
                color = variable,
                y = after_stat(density))) + 
     scale_color_manual(values = distinctive_plot_colors) +
-    scale_fill_manual(values = distinctive_plot_colors) +
+    scale_fill_manual(values = distinctive_plot_colors) 
+
+## if all distributions straddle zero, then terms should be alpha = 0.1
+if(all(ms_df_long_straddle$straddle_zero_95 == "yes")){
+  p <- p +
+    geom_density(alpha = 0.1, linetype = "dashed",
+                 color = "darkgray",
+                 linewidth = 0.8, adjust = 0.7) 
+}else{
+p <- p +
     geom_density(mapping = aes(alpha = as.factor(straddle_zero_95), 
                                linetype = as.factor(straddle_zero_95)),
                    color = "darkgray",
-                   linewidth = 0.8, adjust = 0.7
-    ) +
-  suppressWarnings(  scale_alpha_discrete(range = c(1, 0.1)) )+
-    lemon::facet_rep_wrap(~variable, 
+                   linewidth = 0.8, adjust = 0.7)  +
+  suppressWarnings(  scale_alpha_discrete(range = c(1, 0.1)) ) 
+
+}
+
+p <- p + 
+  geom_vline(aes(xintercept = 0), linetype="dashed", color = "darkgray", alpha = 0.7) + 
+  lemon::facet_rep_wrap(~variable, 
                           #ncol = 3, 
                           #             scales = "free",
                           repeat.tick.labels = c('bottom')) +
-    geom_vline(aes(xintercept = 0), linetype="dashed", color = "darkgray", alpha = 0.7) +
     theme_classic() +
     theme(legend.position = "none", 
           axis.ticks.y = element_blank(),
