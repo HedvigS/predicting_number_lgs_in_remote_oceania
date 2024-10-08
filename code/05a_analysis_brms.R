@@ -1,5 +1,5 @@
 source("01_requirements.R")
-source("01_requirements_brms.R")
+source("01_requirements.R")
 source("fun_def_brms_analysis.R")
 
 #inspired by
