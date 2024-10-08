@@ -31,7 +31,6 @@ source("04_map_polygon_groups.R")
 
 source("04_variable_SPLOM.R")
 
-
 #ANALYZE
 
 source("05a_analysis_brms.R")
