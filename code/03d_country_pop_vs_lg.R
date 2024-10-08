@@ -43,7 +43,7 @@ combined %>%
                    label.y.npc="top", label.x.npc = "left", alpha = 0.8, size = 8) +
   geom_smooth(method='lm', formula = 'y ~ x') +
   theme(text = element_text(size = 20),
-        legend.position = "None") +
+        legend.position= "None") +
   scale_color_manual(values=c("darkolivegreen2","blue4"))
 
 ggsave("output/plots/number_of_languages_vs_pop_1950.png", width = 7, height = 7)
