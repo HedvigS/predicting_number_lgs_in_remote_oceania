@@ -28,8 +28,7 @@ data <- read_tsv("output/processed_data/RO_aggregate_SBZR_group.tsv", show_col_t
                 Settlement_date_grouping_finer, #9
                 ratio_coastline_to_area,#10
                 NPP_terra_mean,#11
-                NPP_aqua_mean ,#12 
-                Melanesia_or_not #13
+                NPP_aqua_mean #12 
       ) 
 
 #log10 size variables to take out the oversized effect of large island groups, like south island aotearoa etc
@@ -84,8 +83,7 @@ data <- read_tsv("output/processed_data/RO_aggregate_medium_island.tsv", show_co
                 Settlement_date_grouping_finer, #9
                 ratio_coastline_to_area,#10
                 NPP_terra_mean,#12
-                NPP_aqua_mean,#12
-                Melanesia_or_not #13
+                NPP_aqua_mean#12
 )
 
 #log10 size variables to take out the oversized effect of large island groups, like south island aotearoa etc
@@ -138,8 +136,7 @@ data <- read_tsv("output/processed_data/RO_aggregate_COUNTRY_group.tsv", show_co
                 Settlement_date_grouping_finer, #9
                 ratio_coastline_to_area,#10
                 NPP_terra_mean,#12
-                NPP_aqua_mean, #12
-                Melanesia_or_not #13
+                NPP_aqua_mean #12
   )
 
 #log10 size variables to take out the oversized effect of large island groups, like south island aotearoa etc
