@@ -6,14 +6,17 @@ Polygons <- read_csv("data/RO_polygons_grouped_with_languages.csv", show_col_typ
   summarise(Longitude = mean(Longitude), 
             Latitude = mean(Latitude)) 
 
-NANO_contact <- read_csv("data/Smallest_Island_group_NANO_contact_manual_edit.tsv") %>% 
+NANO_contact <- read_csv("data/Smallest_Island_group_NANO_contact_manual_edit.tsv", show_col_types = F) %>% 
   dplyr::select(-country_ids) %>% 
+  mutate(NANO_contact = as.character(NANO_contact)) %>% 
+  mutate(NANO_contact = ifelse(NANO_contact == "0", "None", NANO_contact)) %>% 
+  mutate(NANO_contact = ifelse(NANO_contact == "0.5", "Medium", NANO_contact)) %>% 
+  mutate(NANO_contact = ifelse(NANO_contact == "1", "High", NANO_contact)) %>% 
   mutate(Smallest_Island_group = str_split(Smallest_Island_group, pattern = ", ")) %>% 
   unnest(Smallest_Island_group) %>% 
   distinct()
 
 joined <- left_join(NANO_contact, Polygons, by = join_by(Smallest_Island_group))
-
 
 #worldmaps
 #rendering a worldmap that is pacific centered
@@ -49,6 +52,8 @@ basemap <- ggplot(joined) +
 
 
 basemap + 
-  geom_point(mapping = aes(x = Longitude, y = Latitude, col = as.factor(NANO_contact)))
+  geom_jitter(mapping = aes(x = Longitude, y = Latitude, fill = NANO_contact), shape = 21, stroke = 0.7, alpha = 0.9,color = "black") +
+  scale_fill_manual(values = c( "#66d48a","#9636bf", "#6598eb"), na.value = "white")
 
-ggsave("output/plots/NANO_contact_map.png")
+ggsave("output/plots/maps/NANO_contact_map.png", width = 9, height = 8)
+ggsave("../latex/NANO_contact_map.png", width = 9, height = 8)
