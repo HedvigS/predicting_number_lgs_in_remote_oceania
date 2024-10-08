@@ -10,11 +10,10 @@ if(dir.exists(paths = "output/processed_data/glottolog_language_table_wide_df.ts
   exdir <- "data/glottolog-cldf"
 
 if(!dir.exists(exdir)){  
-source("fun_def_get_zenodo.R")
 
 glottolog_fn <- c("https://zenodo.org/records/10804582/files/glottolog/glottolog-cldf-v5.0.zip")
 
-get_zenodo_dir(url = glottolog_fn, exdir = exdir, remove_git_commit_dir = T)
+SH.misc::get_zenodo_dir(url = glottolog_fn, exdir = exdir, drop_dir_level = T)
 }
 
 #finding the filenames for the two tables we are intersted in, the language and value tables. The specific filenames can vary, so instead of identifying them via the filename we should check which of the tables conform to particular CLDF-standards and then take the filenames for the tables that conform to those standards fromt the meta-datajson.
