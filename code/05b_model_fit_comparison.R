@@ -1,21 +1,18 @@
 source("01_requirements.R")
-source("fun_def_combine_tsvs.R")
 source("fun_def_SPLOM.R")
 
-fns <- list.files("output/results/", pattern = ".*fit_loo.*", full.names = T)
-fns <- fns[!str_detect(fns, "drop")]
-
-df_fit_loo <- combine_tsvs(fns = fns) %>% 
+df_fit_loo <- SH.misc::stack_tsvs(dir = "output/results/", 
+                                  pattern = ".*fit_loo.*",
+                                  recursive = T, verbose = F) %>% 
   mutate(group = ifelse(str_detect(filename, "medium"), "medium", "SBZR")) %>% 
   mutate(control = str_extract(filename, "control_[:alpha:]*")) %>% 
   mutate(control = str_replace(string = control, pattern = "control_",replacement = "")) %>% 
   filter(fit_score == "looic") %>% 
   dplyr::select(control, group, LOO = Estimate)
 
-fns <- list.files("output/results/", pattern = ".*fit_waic.*", full.names = T)
-fns <- fns[!str_detect(fns, "drop")]
-
-df_fit_waic <- combine_tsvs(fns = fns)  %>% 
+df_fit_waic <- SH.misc::stack_tsvs(dir = "output/results/", 
+                                   pattern = ".*fit_waic.*",
+                                   recursive = T, verbose = F) %>% 
   mutate(group = ifelse(str_detect(filename, "medium"), "medium", "SBZR")) %>% 
   mutate(group = ifelse(str_detect(filename, "medium"), "medium", "SBZR")) %>% 
   mutate(control = str_extract(filename, "control_[:alpha:]*")) %>% 
@@ -23,20 +20,18 @@ df_fit_waic <- combine_tsvs(fns = fns)  %>%
   filter(fit_score == "waic") %>% 
   dplyr::select(control, group, WAIC = Estimate)
 
-fns <- list.files("output/results/", pattern = ".*fit_R2.*", full.names = T)
-fns <- fns[!str_detect(fns, "drop")]
-
-df_fit_R2 <- combine_tsvs(fns = fns)  %>% 
+df_fit_R2 <- SH.misc::stack_tsvs(dir = "output/results/", 
+                                 pattern = ".*fit_R2.*",
+                                 recursive = T, verbose = F) %>% 
   mutate(group = ifelse(str_detect(filename, "medium"), "medium", "SBZR")) %>% 
   mutate(group = ifelse(str_detect(filename, "medium"), "medium", "SBZR")) %>% 
   mutate(control = str_extract(filename, "control_[:alpha:]*")) %>% 
   mutate(control = str_replace(string = control, pattern = "control_",replacement = "")) %>% 
   dplyr::select(control, group, "$R^2$" = Estimate)
 
-fns <- list.files("output/results/", pattern = ".*diff_means.*", full.names = T)
-fns <- fns[!str_detect(fns, "drop")]
-
-df_fit_diff_means <- combine_tsvs(fns = fns)  %>% 
+df_fit_diff_means <- SH.misc::stack_tsvs(dir = "output/results/", 
+                                         pattern = ".*diff_means.*",
+                                         recursive = T, verbose = F) %>% 
   mutate(group = ifelse(str_detect(filename, "medium"), "medium", "SBZR")) %>% 
   mutate(group = ifelse(str_detect(filename, "medium"), "medium", "SBZR")) %>% 
   mutate(control = str_extract(filename, "control_[:alpha:]*")) %>% 
