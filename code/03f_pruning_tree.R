@@ -15,7 +15,7 @@ df_line <- glottolog_df %>%
 
 tree_full <- ape::read.tree(text = df_line$subclassification)
 
-tree_pruned <- keep_as_tip(tree_full, tips_and_nodes_to_keep = mala1545_lgs$Language_level_ID)
+tree_pruned <- SH.misc::keep_as_tip(tree_full, tips_and_nodes_to_keep = mala1545_lgs$Language_level_ID)
 
 tree_pruned <- ape::compute.brlen(tree_pruned, method = "grafen")
 
