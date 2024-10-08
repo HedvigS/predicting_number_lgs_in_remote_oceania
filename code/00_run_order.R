@@ -2,9 +2,6 @@ source("01_check_used_functions.R")
 
 source("01_requirements.R")
 
-source("01_requirements_brms.R")
-
-
 #GET
 source("02_subregions_glottocodes_unnesting.R")
 
