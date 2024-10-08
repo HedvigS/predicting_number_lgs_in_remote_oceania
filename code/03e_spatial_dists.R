@@ -1,5 +1,4 @@
 source("01_requirements.R")
-source("fun_def_varcov_spatial.R")  
 
 data_SBZR <- read_tsv("output/processed_data/RO_aggregate_SBZR_group_scaled.tsv", show_col_types = F) %>%  
   dplyr::select(SBZR_group)
@@ -83,7 +82,7 @@ dists_vector_SBZR <- as.vector(dist_SBZR) %>% na.omit()
 dists_vector_medium <- as.vector(dist_medium) %>% na.omit()
 
 #SBZR
-spatial_vcv_SBZR = varcov.spatial(
+spatial_vcv_SBZR = rgrambank::varcov.spatial.3D(
   dists.lowertri = dists_vector_SBZR,         
   cov.pars = c(1, 1.15),
   kappa = 2
@@ -96,7 +95,7 @@ spatial_vcv_SBZR %>%
   saveRDS("output/processed_data/spatial_vcv_SBZR.rds")
 
 #medium
-spatial_vcv_medium = varcov.spatial(
+spatial_vcv_medium = rgrambank::varcov.spatial.3D(
   dists.lowertri = dists_vector_medium,         
   cov.pars = c(1, 1.15),
   kappa = 2
