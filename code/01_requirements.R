@@ -1,4 +1,4 @@
-# Please run this script first to make sure you have all the necessary packages, directories and functions.
+# Run this script first to make sure you have all the necessary packages, directories and functions.
 
 set.seed(1988)
 
@@ -32,24 +32,42 @@ for(i in 1:nrow(pkgs)){
   cat(paste0("Installing/loading packages. I'm on ", pkg,  " which is ", i , " of ", nrow(pkgs), ".\n"))
   
   if(!pkg %in% rownames(installed_pkgs)){
-    cat(paste0("Package not installed, installing now."))
+    cat(paste0("Package not installed, installing now.\n"))
     
     remotes::install_version(pkg, version = version, dependencies = "Depends", repos = "http://cran.us.r-project.org", upgrade = "never", quiet = T, force = F)
   }
 
   if(pkg %in% rownames(installed_pkgs) ){
         if(  installed_pkgs[pkg, "Version"] != version){
-    cat(paste0("Package installed, but not the right version. Installing requested version now."))
+    cat(paste0("Package installed, but not the right version. Installing requested version now.\n"))
 
     remotes::install_version(pkg, version = version, dependencies = "Depends", repos = "http://cran.us.r-project.org", upgrade = "never", quiet = T, force = F)
     
     }}
     
   library(pkg, character.only = T, warn.conflicts = F, quietly = T, verbose = F, attach.required = T, mask.ok = mask.ok_vec)
+}
+
+#### R packages not on cran 
+
+# cmdstanr
+if(!("cmdstanr" %in% rownames(installed_pkgs))){
+  remotes::install_version(package = "cmdstanr", repos = "https://mc-stan.org/r-packages/", version = "0.8.0")
+  cmdstanr::install_cmdstan()
+}
+library(cmdstanr)
+
+if(!("rgrambank" %in% rownames(installed_pkgs))){
+remotes::install_github("HedvigS/rgrambank", ref = "94b3cb2caae4744e0f574b3dd8b5d3c8af40d1d2")
   }
+library(rgrambank)
 
+if(!("SH.misc" %in% rownames(installed_pkgs))){
+  remotes::install_github("HedvigS/SH.misc", ref = "fbadb86a474d955672101faad5165c87b2f2ef6d")
+  }
+library(SH.misc)
 
-#funs
+#small functions
 unlist_entire_df <- function(data) {
   temp1 <- sapply(data, is.list)
   temp2 <- do.call(
@@ -61,7 +79,7 @@ unlist_entire_df <- function(data) {
 #quieting down tidyverse
 options(tidyverse.quiet = TRUE)
 
-#set-up some output dirs
+#set-up output dirs if they don't exist already
 dir <- "output"
 if(!dir.exists(dir)){dir.create(dir)}
 
