@@ -65,7 +65,7 @@ remotes::install_github("HedvigS/rgrambank", ref = "94b3cb2caae4744e0f574b3dd8b5
 library(rgrambank)
 
 if(!("SH.misc" %in% rownames(installed_pkgs))){
-  remotes::install_github("HedvigS/SH.misc", ref = "fbadb86a474d955672101faad5165c87b2f2ef6d")
+  remotes::install_github("HedvigS/SH.misc", ref = "95f32d1f04aca7e321fb4c937be90930cedcff64")
   }
 library(SH.misc)
 
