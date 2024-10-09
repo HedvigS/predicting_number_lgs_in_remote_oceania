@@ -1066,9 +1066,12 @@ There is a negative correlation of -0.56 between the population (log10) per coun
 
 \subsection{Table of political complexity per island group }
 \singlespacing
-All code and data will also be available on OSF/GitHub/Zenodo.
+All code and data is also available on GitHub and Zenodo with versioning.
 
-Anonymised OSF project for double-blind peer review: \url{https://osf.io/amnh9/?view_only=403d57d715254539a3a99c798b4014d2}.
+\begin{itemize}
+    \item GitHub - \url{https://github.com/HedvigS/predicting_number_lgs_in_remote_oceania}
+    \item Zenodo - 
+\end{itemize}
 
  \begin{landscape}
      
@@ -1154,6 +1157,7 @@ The list below specifies further settings of the model functions.
     \item  chains = 4
     \item  cores = 4
     \item  seed = 10
+    \item  control = list(adapt\_delta = 0.9)
     \item family = poisson
     \item backend = cmdstanr
     \end{itemize}
@@ -1164,9 +1168,14 @@ The list below specifies further settings of the model functions.
     \end{itemize}
 \end{itemize}
 
-All code and data will also be available on OSF/GitHub/Zenodo.
+All code is available on GitHub and Zenodo with versioning.
 
-Anonymised OSF project for double-blind peer review: \url{https://osf.io/amnh9/?view_only=403d57d715254539a3a99c798b4014d2}.
+\begin{itemize}
+    \item GitHub - \url{https://github.com/HedvigS/predicting_number_lgs_in_remote_oceania}
+    \item Zenodo - 
+\end{itemize}
+
+%Anonymised OSF project for double-blind peer review: \url{https://osf.io/amnh9/?view_only=403d57d715254539a3a99c798b4014d2}.
 
 % BARG
 % https://www.nature.com/articles/s41562-021-01177-7/tables/1
@@ -1240,8 +1249,8 @@ Anonymised OSF project for double-blind peer review: \url{https://osf.io/amnh9/?
 
 \input{latex/BRMS_effects_medium_control_spatialphylo.tex}
 
-
-
+\FloatBarrier
+\newpage
 \subsection{Model comparisons}
 \label{appendix_model_fit_scores}
 To evaluate if the hypothesis holds also when taking into account spatial and phylogenetic non-independence of the island groups we ran four models for each of the two island groupings:
