@@ -1,19 +1,33 @@
 source("01_requirements.R")
 source("fun_def_make_brms_appendix_xtable.R")
 
-
 #BRMS tables
 make_brms_appendix_xtable(fn_in = "output/results/brms_medium_control_none_full_effects_table.tsv", 
-                          fn_out = "../latex/BRMS_effects_medium.tex",
-                          cap = "Table of BRMS model outcomes, shared-language island groups (all observations included).",
-                          lbl = "BRMS_effects_medium"
+                          fn_out = "../latex/BRMS_effects_medium_control_none.tex",
+                          cap = "Table of BRMS model outcomes, shared-language island groups (all observations included) and no control for spatial or phylogenetic non-independence.",
+                          lbl = "BRMS_effects_medium_control_none"
  )
 
-make_brms_appendix_xtable(fn_in = "output/results/brms_SBZR_full_effects_table.tsv", 
-                          fn_out = "../latex/BRMS_effects_SBZR.tex",
-                          cap = "Table of BRMS model outcomes, overnight-distance island groups (all observations included).",
-                          lbl = "BRMS_effects_SBZR"
+make_brms_appendix_xtable(fn_in = "output/results/brms_medium_control_spatialphylo_full_effects_table.tsv", 
+                          fn_out = "../latex/BRMS_effects_medium_control_spatialphylo.tex",
+                          cap = "Table of BRMS model outcomes, shared-language island groups (all observations included) and control for spatial and phylogenetic non-independence.",
+                          lbl = "BRMS_effects_medium_control_sp"
 )
+
+
+make_brms_appendix_xtable(fn_in = "output/results/brms_SBZR_control_none_full_effects_table.tsv", 
+                          fn_out = "../latex/BRMS_effects_SBZR_control_none.tex",
+                          cap = "Table of BRMS model outcomes, overnight sailing island groups (all observations included) and no control for spatial or phylogenetic non-independence.",
+                          lbl = "BRMS_effects_SBZR_control_none"
+)
+
+
+make_brms_appendix_xtable(fn_in = "output/results/brms_SBZR_control_phylo_full_effects_table.tsv", 
+                          fn_out = "../latex/BRMS_effects_SBZR_control_phylo.tex",
+                          cap = "Table of BRMS model outcomes, overnight sailing island groups (all observations included) and control for phylogenetic non-independence only.",
+                          lbl = "BRMS_effects_SBZR_control_none"
+)
+
 
 #pol complex table
 # island groups
