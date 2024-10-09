@@ -24,6 +24,8 @@ source("03e_spatial_dists.R")
 
 source("03f_phylo_dists.R")
 
+source("03g_NANO_contact_map.R")
+
 #PLOT
 source("04_data_maps.R")
 
