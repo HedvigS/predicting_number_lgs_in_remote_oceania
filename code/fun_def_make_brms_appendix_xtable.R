@@ -30,17 +30,17 @@ df <- read_tsv(fn_in, show_col_types = F) %>%
   mutate(Bulk_ESS = as.numeric(Bulk_ESS)) %>% 
   mutate(Tail_ESS = as.numeric(Tail_ESS)) %>% 
   mutate_if(.predicate = is.numeric, .funs = function(x){round(x, 3)}) %>% 
-  dplyr::select(term, Estimate, `Est.Error`, `l-95% CI`, `u-95% CI`, Bulk_ESS, Tail_ESS)
+  dplyr::select(term, Estimate, `Est.Error`, `l-95% CI`, `u-95% CI`, Bulk_ESS, Tail_ESS, Rhat)
 
 colnames(df) <- str_replace_all(colnames(df), "\\_", " ")
 colnames(df) <- str_replace_all(colnames(df), "\\%", "\\\\%")
 colnames(df) <- str_replace_all(colnames(df), "\\:", "\\: ")
 
-align <- c("r","p{4cm}","p{1.65cm}","p{1.65cm}", "p{1.65cm}", "p{1.65cm}", "p{1.65cm}", "p{1.65cm}") 
+align <- c("r","p{3cm}","p{1.35cm}","p{1.35cm}", "p{1.35cm}", "p{1.35cm}", "p{1.35cm}", "p{1.35cm}", "p{1.35cm}") 
 
 df %>% 
   xtable(caption = cap, label = lbl,
-         digits = 3, 
+         digits = 2, 
          align = align) %>% 
   xtable::print.xtable(file = fn_out, sanitize.colnames.function = function(x){x},
                        include.rownames = FALSE, math.style.negative = F,
