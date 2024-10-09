@@ -3,8 +3,7 @@ source("01_requirements.R")
 #SBZR phylo
 fns <- list.files(path = "output/results/drop_one_out/SBZR_phylo/", pattern = "diff_means", recursive = T, full.names = T)
 
-diff_means_SBZR_phylo <- SH.misc::stack_tsvs(dir = "output/results/drop_one_out/SBZR_phylo/", pattern = "diff_means",
-                                             recursive = T, verbose = F) %>% 
+diff_means_SBZR_phylo <- SH.misc::stack_tsvs(fns = fns, verbose = F) %>% 
   mutate(island_group_dropped = str_extract(filename, "phylo/.*/diff")) %>% 
   mutate(island_group_dropped = str_replace_all(island_group_dropped, "phylo", "")) %>% 
   mutate(island_group_dropped = str_replace_all(island_group_dropped, "diff", "")) %>% 
@@ -17,8 +16,10 @@ diff_means_SBZR_phylo %>%
   write_tsv("output/results/SBZR_phylo_drop_one_out_diff_means.tsv")
 
 #SBZR none
-diff_means_SBZR_none <- SH.misc::stack_tsvs(dir = "output/results/drop_one_out/SBZR_none//", pattern = "diff_means",
-                                            recursive = T, verbose = F) %>% 
+fns <- list.files(path = "output/results/drop_one_out/SBZR_none//", pattern = "diff_means", recursive = T, full.names = T)
+
+diff_means_SBZR_none <- SH.misc::stack_tsvs(fns = fns ,
+                                            verbose = F) %>% 
   mutate(island_group_dropped = str_extract(filename, "none/.*/diff")) %>% 
   mutate(island_group_dropped = str_replace_all(island_group_dropped, "none", "")) %>% 
   mutate(island_group_dropped = str_replace_all(island_group_dropped, "diff", "")) %>% 
@@ -32,9 +33,9 @@ diff_means_SBZR_none %>%
 
 
 #medium spatialphylo
-diff_means_medium_spatialphylo <- SH.misc::stack_tsvs(dir = "output/results/drop_one_out/medium_spatialphylo/", 
-                                                      pattern = "diff_means",
-                                                      recursive = T, verbose = F) %>% 
+fns <- list.files(path = "output/results/drop_one_out/medium_spatialphylo/", pattern = "diff_means", recursive = T, full.names = T)
+
+diff_means_medium_spatialphylo <- SH.misc::stack_tsvs(fns = fns, verbose = F) %>% 
   mutate(island_group_dropped = str_extract(filename, "spatialphylo/.*/diff")) %>% 
   mutate(island_group_dropped = str_replace_all(island_group_dropped, "spatialphylo", "")) %>% 
   mutate(island_group_dropped = str_replace_all(island_group_dropped, "diff", "")) %>% 
@@ -47,9 +48,10 @@ diff_means_medium_spatialphylo %>%
   write_tsv("output/results/medium_spatialphylo_drop_one_out_diff_means.tsv")
 
 #medium none
-diff_means_medium_none <-  SH.misc::stack_tsvs(dir = "output/results/drop_one_out/medium_none//", 
-                                               pattern = "diff_means",
-                                               recursive = T, verbose = F) %>% 
+fns <- list.files(path = "output/results/drop_one_out/medium_none//", pattern = "diff_means", recursive = T, full.names = T)
+
+diff_means_medium_none <-  SH.misc::stack_tsvs(fns = fns, 
+                                               verbose = F) %>% 
   mutate(island_group_dropped = str_extract(filename, "none/.*/diff")) %>% 
   mutate(island_group_dropped = str_replace_all(island_group_dropped, "none", "")) %>% 
   mutate(island_group_dropped = str_replace_all(island_group_dropped, "diff", "")) %>% 
