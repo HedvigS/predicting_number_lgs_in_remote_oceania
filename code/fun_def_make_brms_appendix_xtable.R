@@ -12,6 +12,9 @@ make_brms_appendix_xtable <- function(fn_in,
 #lbl <- "BRMS_effects_medium"
 
 df <- read_tsv(fn_in, show_col_types = F) %>% 
+  mutate(variable = str_replace_all(variable,"moEA", "EA")) %>% 
+  mutate(variable = str_replace_all(variable,"moTime", "Time")) %>% 
+  
   filter(variable == "Estimate"|
            variable == "Est.Error"|
            variable == "l-95% CI"|
@@ -35,7 +38,7 @@ colnames(df) <- str_replace_all(colnames(df), "\\_", " ")
 colnames(df) <- str_replace_all(colnames(df), "\\%", "\\\\%")
 colnames(df) <- str_replace_all(colnames(df), "\\:", "\\: ")
 
-align <- c("r","p{5cm}","p{2cm}","p{2cm}", "p{2cm}", "p{2cm}", "p{2cm}", "p{2cm}") 
+align <- c("r","p{4cm}","p{1.65cm}","p{1.65cm}", "p{1.65cm}", "p{1.65cm}", "p{1.65cm}", "p{1.65cm}") 
 
 df %>% 
   xtable(caption = cap, label = lbl,
