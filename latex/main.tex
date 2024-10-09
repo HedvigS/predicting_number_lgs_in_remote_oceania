@@ -384,12 +384,12 @@ The results were calculated in R 4.3.3 \citep{R} using the function \texttt{brms
 
 \FloatBarrier
 \section{Results}
-The results show that EA033 has a significant effect in some of the models that have control for spatial and phylogenetic non-independence, but not all. This lends some support to the proposal by \citet{pawley81, pawley2007} that the rise of powerful chiefs in Polynesia slows community fragmentation and language diversification.
+The results show that EA033 has a significant effect in some of the models that have control for spatial and phylogenetic non-independence, but not all. This lends some but not conclusive support to the proposal by \citet{pawley81, pawley2007} that the rise of powerful chiefs in Polynesia slows community fragmentation and language diversification.
 
 %However, there are details of the result that suggest that the effect may be due to non-Austronesian contact rather than political complexity \emph{per se}.
 
-The model comparisons showed that the models without control for spatial and/or phylogenetic non-independence fit the data less well. The model fit scores were overall similar for the other models (see Appendix 
-\ref{appendix_model_fit_scores}). Table \ref{brms_results_summary} shows whether or not EA033 and/or EA033 in interaction with shoreline (EA033:Shoreline) had a significant effect in each of the 8 model (i.e. the 95\% confidence interval of the posterior effect distribution does not straddle zero) and the WAIC scores of each model. Ridgeplots of all variables and their effects in all 8 models can be found in Appendix \ref{appendix_supp_figs_ridges}. The model fit scores reported very similar ranking of the models, in Table \ref{brms_results_summary} only WAIC is included but the other model fit comparison metrics can be found in Appendix \ref{appendix_model_fit_scores}.
+The model comparisons showed that the models without control for spatial and/or phylogenetic non-independence fit the data less well. The model fit scores were overall similar for the three other models for both island groupings (see Appendix \ref{appendix_model_fit_scores}). Table \ref{brms_results_summary} shows which variables had significant effect distributions in each model (i.e. the 95\% confidence interval of the posterior effect distribution does not straddle zero) and the WAIC scores of each model. Results where political complexity (EA033 or EA033 in interaction with shoreline (EA033:Shoreline)) are highlighted in green.
+
 
 \begin{table}[ht]
 \centering
@@ -402,14 +402,30 @@ The model comparisons showed that the models without control for spatial and/or 
  	&	Significant effect	&	\cellcolor{spec_color_lightgreen!50} EA033, EA033:Shoreline, Time depth, Time depth:Shoreline	&	\cellcolor{spec_color_lightgreen!50} EA033:Shoreline	&	\cellcolor{spec_color_lightgreen!50} EA033, Time depth &		\\
 		&	WAIC	&	238.63	&	211.2	&	211.33	&	 \textbf{209.94}	\\
   \midrule
-\multirow{2}{*}{Overnight sailing}	&	Significant effect\linebreak	&	\cellcolor{spec_color_lightgreen!50} EA033:Shoreline, Shoreline, Time depth:Shoreline	&	Time depth:Shoreline	&	\cellcolor{spec_color_lightgreen!50} EA033:Shoreline, Time depth:Shoreline &	Time depth:Shoreline		\\
-	&	WAIC	&	192.66	&	\textbf{172.43}	&	178.23&	178.23		\\
+\multirow{2}{*}{Overnight sailing}	&	Significant effect	&	\cellcolor{spec_color_lightgreen!50} EA033:Shoreline, Shoreline, Time depth:Shoreline	&	Time depth:Shoreline	&	\cellcolor{spec_color_lightgreen!50} EA033:Shoreline, Time depth:Shoreline &	Time depth:Shoreline		\\
+	&	WAIC	&	192.66	&	\textbf{172.43}	&	178.23&	173.267		\\
 
    \bottomrule
 \end{tabular}
-\caption{Summary of results in terms of predictors that were significant. Significant here means that the 95\% confidence interval of the effect does not straddle zero. The model fit is compared using the Watanabe–Akaike Information Criterion (WAIC). Lower WAIC-values indicate a better model fit. Colon (:) indicates an interaction. Green cell colour denotes that political complexity (EA033) is significant. } 
+\caption{Summary of results in terms of predictors that were significant. Significant here means that the 95\% confidence interval of the effect does not straddle zero. The model fit is compared using the Watanabe–Akaike Information Criterion (WAIC). Lower WAIC-values indicate a better model fit. Colon (:) indicates an interaction. Green cell colour denotes that political complexity (EA033) has a significant effect. } 
 \label{brms_results_summary}
 \end{table}
+
+
+The model fit scores (LOO, WAIC, $R^2$ \& absolute difference between observed and predicted) reported very similar ranking of the models. In Table \ref{brms_results_summary} only WAIC is reported. The other model fit comparison metrics can be found in Appendix \ref{appendix_model_fit_scores}. Figures \ref{brms_SBZR_group_full_effect_ridge_panels_phylo_main_text}
+\ref{brms_medium_control_spatialphylo_group_full_effect_ridge_panels_plot_main_text} show the effect distributions for the best fitting model for each island grouping: control for spatial and phylogenetic non-independence for islands based on shared language and phylogeny only for islands based on overnight sailing. Ridgeplots of all variables and their effects in all 8 models can be found in Appendix \ref{appendix_supp_figs_ridges}. 
+
+\begin{figure}
+\includegraphics[width=0.7\textwidth]{brms_SBZR_control_phylo_group_full_effect_ridge_panels_plot.png}
+\caption{Ridge-plots of posterior effect distributions. Distributions where the 95\% interval does not straddle zero are marked by dashed lines and transparent colour. Island grouping: overnight sailing distances, control for phylogenetic non-independence only.}
+\label{brms_SBZR_group_full_effect_ridge_panels_phylo_main_text}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.7\textwidth]{brms_medium_control_spatialphylo_group_full_effect_ridge_panels_plot.png}
+\caption{Ridge-plots of posterior effect distributions. Distributions where the 95\% interval does not straddle zero are marked by dashed lines and transparent colour. Island grouping: shared language, control for spatial and phylogenetic non-independence.}
+\label{brms_medium_control_spatialphylo_group_full_effect_ridge_panels_plot_main_text}
+\end{figure}
 
 While it is the case that the models with the lowest score for each of the island groupings does not include political complexity (EA033) as a significant effect, the effect is present in several of the models with control for spatial and/or phylogenetic non-independence and the WAIC scores are comparable.
 
@@ -572,11 +588,9 @@ Further research on language diversification in Remote Oceania should focus on t
 \subsection{Data and code availability}
 \label{appendix_supp_data_availability}
 
-All data in this study is available freely. The data has been gathered from multiple sources and will be published along with the code for the study on GitHub and Zenodo. The code is also made available, from combining data to conducting analysis and preparing plots and tables. Additional results table such as more detailed information on model outputs are published alongside the input data and code.
+All data in this study is available freely. The data has been gathered from multiple sources and is published along with the code for the study on GitHub and Zenodo. The code is also made available, from combining data to conducting analysis and preparing plots and tables. Additional results table such as more detailed information on model outputs are published alongside the input data and code.
 
-Anonymized OSF project for double-blind peer review: \url{https://osf.io/amnh9/?view_only=403d57d715254539a3a99c798b4014d2}.
-
-Information on latitude and shoreline is taken from the Global Self-consistent, Hierarchical, High-resolution Geography Database (GSHHG) \citep{wessel1996global}. Rainfall and temperature information is taken from the ecoClimate database \citep{ecoclimate}. Data on Net Primary Production comes from the  United States of America's National Aeronautics and Space Administration's Moderate Resolution Imaging Spectroradiometer (MODIS, \citet{running2021modis_terra, running2021modis_aqua}). Number of languages per island was originally based on Glottolog (version 3.0), with some modification (see section \ref{appendix_sec:language_class}). Glottolog v5.0 \citet{Glottolog5} was also used for language phylogeny data. 
+Information on latitude and shoreline is taken from the Global Self-consistent, Hierarchical, High-resolution Geography Database (GSHHG) \citep{wessel1996global}. Rainfall and temperature information is taken from the ecoClimate database \citep{ecoclimate}. Data on Net Primary Production comes from the  United States of America's National Aeronautics and Space Administration's Moderate Resolution Imaging Spectroradiometer (MODIS, \citet{running2021modis_terra, running2021modis_aqua}). Number of languages per island was originally based on Glottolog (version 3.0), with some modification (see section \ref{appendix_sec:language_class}). Glottolog v5.0 \citet{Glottolog5} was used for language family tree information. 
 
 GitHub locations:
 \begin{itemize}
@@ -587,7 +601,7 @@ GitHub locations:
 
 Zenodo locations:
 \begin{itemize}
-\item predicting\_number\_lgs\_in\_remote\_oceania  \textcolor{red}{TBA}
+\item predicting\_number\_lgs\_in\_remote\_oceania  \url{https://doi.org/10.5281/zenodo.13909531}
 \item glottolog (v3.0) \url{https://doi.org/10.5281/zenodo.437430}
 \item glottolog (v5.0) \url{https://zenodo.org/records/10804582}
 
@@ -720,7 +734,7 @@ The definitions of language in ISO 639-3 (as described in Ethnologue \citep{ethn
 %It is not within the scope, or indeed even the aim, of the present study to provide a universal and unproblematic classification of languages. 
 The language classification standards for Glottolog and SIL International do differ conceptually, and many of their differences may reflect their different aims (facilitating academic research by making references more accessible and integrated as compared to facilitating description and translation of the Bible into the world's languages). However, the counts for languages in the world that they produce are not that different in the end.
 
-I will be using the classification of Glottolog, with a few adjustments, since it is more transparent and better referenced. It should be noted that using the ISO 639-3 results in the language count for the Vanuatu being 108, as opposed to 105 in Glottolog, which is not a huge difference. 
+I use the classification of Glottolog, with a few adjustments, since it is more transparent and better referenced. It should be noted that using the ISO 639-3 results in the language count for the Vanuatu being 108, as opposed to 105 in Glottolog, which is not a huge difference. 
 
 The aim of this study is to explore language diversification in Remote Oceania prior to the arrival of European people. Because of this, I have made a few adjustments to the Glottolog classifications of languages in the relevant region. Languages that have come into the region directly because of the arrival of Europeans have been excluded (Bislama, English, French etc). Furthermore, I have made three other changes from Glottolog in the classification of indigenous languages of the region based on other accounts of their mutual intelligibility at the relevant point in time\footnote{Tahitianization and dialect/language levelling has occurred, and therefore languages that used to be more different from each other are now more similar.}. Firstly: in Fiji, Glottolog's Eastern Fijian [fiji1243] is split into three languages: Southeast Fijian [sout2864], Northeast Fijian [nort2842] and Kadavu [kada1285] based on personal correspondence with Andrew Pawley and Paul Geraghty. Secondly, M\={a}ori [maor1246] is split into two languages: Morori [mori1267] on R\={e}kohou (Chatham Islands) and M\={a}ori [maor1246] on mainland Aotearoa (New Zealand). This classification is based on \citet{harlow1973regional} and personal advice from Andrew Pawley. Third and finally, as was previously mentioned, the languages of the Austral Islands have been divided from one to four based on advice from Mary Walworth and Alexandre François.
 
@@ -897,7 +911,7 @@ However, this framework is less easy to apply to the Melanesian islands of Remot
 
 Given our language classification earlier, there are 233 language communities in our maximal sample. The ethnographic data is collected per society, and as was mentioned earlier it is possible for different societies to have the same language. Societies with the same language have been merged and our smallest cultural units of analysis are the language-society\footnote{American S\={a}moans and Upolu S\={a}moans were the only societies that needed merging in this fashion.}. Each language is associated with the islands and atolls where it is described as spoken. The full geographical dataset contains 5,525 unique landmass polygons\footnote{The total number of polygons in the geographical dataset is 9,750, but this includes New Guinea and uninhabited islands (Phoenix Islands for example). 5,525 is the number of unique polygons that can be associated with a community of Remote Oceania.} which have been grouped into our smallest geographical unit of analysis: 104 shared language island groups. In the analysis, we will also be aggregating the islands into 67 overnight distance groups.
 
-D-PLACE has a value recorded for political complexity for 44 ``language-societies'' in Remote Oceania. There have also been more recent studies where other authors have added more entries. We will be using additional data-points from a separate publication by \citet{sheehan2018coevolution}, resulting in another 27 data-points. There was an overlap between these two datasets, 26 language-socities having a coding both in the original Ethnographic Atlas dataset in D-PLACE and in Sheehan et al. Of these, 11 societies (i.e. 43\%) were coded exactly the same. Upon closer investigation of the instances where the coding differed, I found that Sheehan et al often had access to \textit{more} data, more \textit{comprehensive} data and more \textit{recent} data. Each of these instances was re-evaluated, and most often the coding from Sheehan et al was kept\footnote{I am grateful to Sheehan for very helpful personal correspondence during this process.}. The data was also further supplemented with information from \citet[201]{bonnemaison1996graded}, resulting in 66 more data-points in Vanuatu. See appendix \ref{appendix_pol_complex} for a table of the coding of this variable.
+D-PLACE has a value recorded for political complexity for 44 ``language-societies'' in Remote Oceania. There have also been more recent studies where other authors have added more entries. We also use additional data-points from a separate publication by \citet{sheehan2018coevolution}, resulting in another 27 data-points. There was an overlap between these two datasets, 26 language-socities having a coding both in the original Ethnographic Atlas dataset in D-PLACE and in Sheehan et al. Of these, 11 societies (i.e. 43\%) were coded exactly the same. Upon closer investigation of the instances where the coding differed, I found that Sheehan et al often had access to \textit{more} data, more \textit{comprehensive} data and more \textit{recent} data. Each of these instances was re-evaluated, and most often the coding from Sheehan et al was kept\footnote{I am grateful to Sheehan for very helpful personal correspondence during this process.}. The data was also further supplemented with information from \citet[201]{bonnemaison1996graded}, resulting in 66 more data-points in Vanuatu. See appendix \ref{appendix_pol_complex} for a table of the coding of this variable.
 
 %For the instances where they had represented the same society with different values, I consulted the relevant ethnographies myself and made my own coding decision. In the most cases, my evaluation of the data sided with the interpretation by Sheehan et al. Given that Sheehan et al have access to more recent and more comprehensive ethnographic material, it shouldn't be surprising that they have made different decisions and that a second look is more likely to agree with their evaluation than the older dataset. 
 
@@ -1070,7 +1084,7 @@ All code and data is also available on GitHub and Zenodo with versioning.
 
 \begin{itemize}
     \item GitHub - \url{https://github.com/HedvigS/predicting_number_lgs_in_remote_oceania}
-    \item Zenodo - 
+    \item Zenodo -\url{https://doi.org/10.5281/zenodo.13909531}
 \end{itemize}
 
  \begin{landscape}
@@ -1085,10 +1099,6 @@ All code and data is also available on GitHub and Zenodo with versioning.
 \subsection{Table of settlement date per island group based on archaeology}
 \singlespacing
 \label{appendix_dates_table_appendix}
-All code and data will also be available on OSF/GitHub/Zenodo.
-
-Anonymised OSF project for double-blind peer review: \url{https://osf.io/amnh9/?view_only=403d57d715254539a3a99c798b4014d2}.
-
 Table \ref{appendix_dates_xtable} shows data on settlement dates from several different archaeological studies. 
 
 The column ``Source'' contains the relevant reference, and ``Source (meta)'' the citation for the source that is citing the reference in ``Source'', where that is useful. In cases where it was reasonable to infer a settlement date based on a nearby island, this is indicated in the column ``Based on inference from neighbouring island?''.
@@ -1111,8 +1121,6 @@ The column ``Time depth settlement group'' contains the grouping of islands into
 \singlespacing
 \label{appendix_data tables}
 All measurements, except the response variable, were scaled and centred to make the coefficients easier to interpret and compare. Shorelines were also log-10-transformed (before scaling) to avoid an outliers such as Aotearoa spuriously driving the effect (c.f. \citet{rolett2004environmental} and \citet{atkinson2016cultural}).
-
-All code and data will also be available on OSF/GitHub/Zenodo.
 
 \begin{landscape}
 \input{appendix_medium_group_table.tex}
@@ -1241,13 +1249,14 @@ All code is available on GitHub and Zenodo with versioning.
 
 \newpage
 \subsection{Model output}
-\input{latex/BRMS_effects_SBZR_control_none.tex}
-
-\input{latex/BRMS_effects_SBZR_control_phylo.tex}
 
 \input{latex/BRMS_effects_medium_control_none.tex}
 
 \input{latex/BRMS_effects_medium_control_spatialphylo.tex}
+
+\input{latex/BRMS_effects_SBZR_control_none.tex}
+
+\input{latex/BRMS_effects_SBZR_control_phylo.tex}
 
 \FloatBarrier
 \newpage
@@ -1296,14 +1305,14 @@ Plots of coefficient distributions of the BRMS models. Distributions, where the 
 
 \begin{figure}[ht]
 \includegraphics[width=0.85\textwidth]{brms_SBZR_control_none_group_full_effect_ridge_panels_plot.png}
-\caption{Island grouping: overnight sailing distances, \emph{no} control for spatial or phylogenetic non-independence.}
+\caption{Ridge-plots of posterior effect distributions. Distributions where the 95\% interval does not straddle zero are marked by dashed lines and transparent colour. Island grouping: overnight sailing distances, \emph{no} control for spatial or phylogenetic non-independence.}
 \label{brms_SBZR_control_none_group_full_effect_ridge_panels_plot}
 \end{figure}
 
 
 \begin{figure}[ht]
 \includegraphics[width=0.85\textwidth]{brms_SBZR_control_phylo_group_full_effect_ridge_panels_plot.png}
-\caption{Island grouping: overnight sailing distances, control for phylogenetic non-independence only.}
+\caption{Ridge-plots of posterior effect distributions. Distributions where the 95\% interval does not straddle zero are marked by dashed lines and transparent colour. Island grouping: overnight sailing distances, control for phylogenetic non-independence only.}
 \label{brms_SBZR_group_full_effect_ridge_panels_phylo}
 \end{figure}
 
@@ -1311,14 +1320,14 @@ Plots of coefficient distributions of the BRMS models. Distributions, where the 
 
 \begin{figure}[ht]
 \includegraphics[width=0.85\textwidth]{brms_SBZR_control_spatial_group_full_effect_ridge_panels_plot.png}
-\caption{Island grouping: overnight sailing distances, control for spatial non-independence only.}
+\caption{Ridge-plots of posterior effect distributions. Distributions where the 95\% interval does not straddle zero are marked by dashed lines and transparent colour. Island grouping: overnight sailing distances, control for spatial non-independence only.}
 \label{brms_SBZR_control_spatial_group_full_effect_ridge_panels_plot}
 \end{figure}
 
 
 \begin{figure}[ht]
 \includegraphics[width=0.85\textwidth]{brms_SBZR_control_spatialphylo_group_full_effect_ridge_panels_plot.png}
-\caption{Island grouping: overnight sailing distances, control for spatial and phylogenetic non-independence.}
+\caption{Ridge-plots of posterior effect distributions. Distributions where the 95\% interval does not straddle zero are marked by dashed lines and transparent colour. Island grouping: overnight sailing distances, control for spatial and phylogenetic non-independence.}
 \label{brms_SBZR_control_spatialphylo_group_full_effect_ridge_panels_plot}
 \end{figure}
 
