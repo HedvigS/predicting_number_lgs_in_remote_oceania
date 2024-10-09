@@ -12,9 +12,6 @@ make_brms_appendix_xtable <- function(fn_in,
 #lbl <- "BRMS_effects_medium"
 
 df <- read_tsv(fn_in, show_col_types = F) %>% 
-  mutate(variable = str_replace_all(variable,"moEA", "EA")) %>% 
-  mutate(variable = str_replace_all(variable,"moTime", "Time")) %>% 
-  
   filter(variable == "Estimate"|
            variable == "Est.Error"|
            variable == "l-95% CI"|
@@ -23,7 +20,8 @@ df <- read_tsv(fn_in, show_col_types = F) %>%
            variable == "Bulk_ESS" |
            variable == "Tail_ESS") %>% 
   reshape2::dcast(term ~ variable, value.var = "value") %>% 
-  mutate(term = str_replace_all(term, "Settlement_date_grouping_finer", "Time depth")) %>% 
+  mutate(term = str_replace_all(term,"moEA", "EA")) %>% 
+  mutate(term = str_replace_all(term, "moSettlement_date_grouping_finer", "Time depth")) %>% 
   mutate(Estimate = as.numeric(Estimate)) %>% 
   mutate(Est.Error = as.numeric(Est.Error)) %>% 
   mutate(`l-95% CI` = as.numeric(`l-95% CI`)) %>% 
