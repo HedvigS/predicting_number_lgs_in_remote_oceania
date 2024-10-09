@@ -16,13 +16,11 @@ df <- read_tsv(fn_in, show_col_types = F) %>%
            variable == "Est.Error"|
            variable == "l-95% CI"|
            variable == "u-95% CI"|
-           variable == "straddle_zero_95"|
            variable == "Rhat"|
            variable == "Bulk_ESS" |
            variable == "Tail_ESS") %>% 
   reshape2::dcast(term ~ variable, value.var = "value") %>% 
   mutate(term = str_replace_all(term, "Settlement_date_grouping_finer", "Time depth")) %>% 
-  rename(`Does 95% interval straddle zero?`= straddle_zero_95) %>% 
   mutate(Estimate = as.numeric(Estimate)) %>% 
   mutate(Est.Error = as.numeric(Est.Error)) %>% 
   mutate(`l-95% CI` = as.numeric(`l-95% CI`)) %>% 
@@ -31,13 +29,13 @@ df <- read_tsv(fn_in, show_col_types = F) %>%
   mutate(Bulk_ESS = as.numeric(Bulk_ESS)) %>% 
   mutate(Tail_ESS = as.numeric(Tail_ESS)) %>% 
   mutate_if(.predicate = is.numeric, .funs = function(x){round(x, 3)}) %>% 
-  dplyr::select(term, Estimate, `Est.Error`, `l-95% CI`, `u-95% CI`, `Does 95% interval straddle zero?`, Bulk_ESS, Tail_ESS)
+  dplyr::select(term, Estimate, `Est.Error`, `l-95% CI`, `u-95% CI`, Bulk_ESS, Tail_ESS)
 
 colnames(df) <- str_replace_all(colnames(df), "\\_", " ")
 colnames(df) <- str_replace_all(colnames(df), "\\%", "\\\\%")
 colnames(df) <- str_replace_all(colnames(df), "\\:", "\\: ")
 
-align <- c("r","p{5cm}","p{2cm}","p{2cm}", "p{2cm}", "p{2cm}", "p{2cm}", "p{2cm}", "p{2cm}") 
+align <- c("r","p{5cm}","p{2cm}","p{2cm}", "p{2cm}", "p{2cm}", "p{2cm}", "p{2cm}") 
 
 df %>% 
   xtable(caption = cap, label = lbl,
