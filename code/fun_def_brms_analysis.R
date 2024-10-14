@@ -63,6 +63,8 @@ stop("The argument control is not one of the recognised strings.")
                           control = list(adapt_delta = 0.9),
                           backend="cmdstanr") 
   
+#   x <- brms::conditional_effects(output_poisson)
+
   waic <- loo::waic(output_poisson)
   loo <- loo::loo(output_poisson)
   bayes_r2 <- bayes_R2(output_poisson, probs = c(0, 0.025, 0.975, 1)) 
@@ -89,6 +91,8 @@ stop("The argument control is not one of the recognised strings.")
     write_tsv(file = paste0("output/results/brms_", group, "_control_", control,"_model_fit_R2.tsv"), na = "")
   
 ms_full <- summary(output_poisson)
+
+ms_full %>% saveRDS(file = paste0("output/results/brms_", group, "_control_", control,"_model_summary_full.rds"))
   
   posterior_predict_df <- brms::posterior_predict(output_poisson, cores = cores, ndraws = ndraws) %>%
     as.data.frame() %>% 
