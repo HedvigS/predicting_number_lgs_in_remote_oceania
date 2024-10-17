@@ -62,7 +62,43 @@ stop("The argument control is not one of the recognised strings.")
                           seed = seed,
                           control = list(adapt_delta = 0.9),
                           backend="cmdstanr") 
+
+if(group == "SBZR"){
+  nd <- expand_grid(EA033= 1:4, Settlement_date_grouping_finer = 2:12, 
+                    environ_PC1 = sample(data$environ_PC1,size = 40), 
+                    environ_PC2 = sample(data$environ_PC2, size = 40),
+                    Shoreline = sample(data$Shoreline, 40))
   
+}
+
+if(group == "medium"){
+  
+    nd <- expand_grid(EA033= 1:4, Settlement_date_grouping_finer = 2:12, 
+                      environ_PC1 = sample(data$environ_PC1,size = 40), 
+                      environ_PC2 = sample(data$environ_PC2, size = 40), 
+                      environ_PC3 = sample(data$environ_PC3, 40),
+                      Shoreline = sample(data$Shoreline, 40))
+  }
+  
+nd <- nd %>% 
+    group_by(EA033, Settlement_date_grouping_finer) %>% 
+    sample_n(30)
+
+  epreds <- posterior_epred(output_poisson, newdata=nd, re_formula=NA, ndraws = ndraws)
+  
+epreds <- epreds %>% 
+  t() %>% 
+  as.data.frame() %>%
+  rownames_to_column("rowname") %>% 
+  reshape2::melt(id.vars = "rowname") %>% 
+  group_by(rowname) %>% 
+  summarise(mean_posterior_predict_nd = mean(value)) 
+
+nd %>% 
+  rownames_to_column("rowname") %>% 
+  left_join(epreds, by = join_by(rowname)) %>% 
+  write_tsv(file = paste0("output/results/brms_", group, "_control_", control,"_epreds.tsv"), na = "")
+
 #   x <- brms::conditional_effects(output_poisson)
 
   waic <- loo::waic(output_poisson)
