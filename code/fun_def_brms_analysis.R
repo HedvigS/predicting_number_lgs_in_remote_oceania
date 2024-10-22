@@ -64,26 +64,22 @@ stop("The argument control is not one of the recognised strings.")
                           backend="cmdstanr") 
 
 if(group == "SBZR"){
-  nd <- expand_grid(EA033= 1:4, Settlement_date_grouping_finer = 2:12, 
-                    environ_PC1 = sample(data$environ_PC1,size = 40), 
-                    environ_PC2 = sample(data$environ_PC2, size = 40),
-                    Shoreline = sample(data$Shoreline, 40))
+  nd <- expand_grid(EA033= 1:4, Settlement_date_grouping_finer = c('2', '3', '4', '5', '7', '8', '9', '10', '11', '12'), 
+                    environ_PC1 = mean(data$environ_PC1), 
+                    environ_PC2 = mean(data$environ_PC2),
+                    Shoreline = mean(data$Shoreline))
   
 }
 
 if(group == "medium"){
   
-    nd <- expand_grid(EA033= 1:4, Settlement_date_grouping_finer = 2:12, 
-                      environ_PC1 = sample(data$environ_PC1,size = 40), 
-                      environ_PC2 = sample(data$environ_PC2, size = 40), 
-                      environ_PC3 = sample(data$environ_PC3, 40),
-                      Shoreline = sample(data$Shoreline, 40))
+    nd <- expand_grid(EA033= 1:4, Settlement_date_grouping_finer =  c('2', '3', '4', '5', '7', '8', '9', '10', '11', '12'), 
+                      environ_PC1 = mean(data$environ_PC1), 
+                      environ_PC2 = mean(data$environ_PC2), 
+                      environ_PC3 = mean(data$environ_PC3),
+                      Shoreline = mean(data$Shoreline))
   }
   
-nd <- nd %>% 
-    group_by(EA033, Settlement_date_grouping_finer) %>% 
-    sample_n(30)
-
   epreds <- posterior_epred(output_poisson, newdata=nd, re_formula=NA, ndraws = ndraws)
   
 epreds <- epreds %>% 
