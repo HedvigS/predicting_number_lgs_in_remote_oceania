@@ -64,7 +64,9 @@ stop("The argument control is not one of the recognised strings.")
                           backend="cmdstanr") 
 
 if(group == "SBZR"){
-  nd <- expand_grid(EA033= 1:4, Settlement_date_grouping_finer = c('2', '3', '4', '5', '7', '8', '9', '10', '11', '12'), 
+  nd <- expand_grid(EA033= 1:4, 
+                    Settlement_date_grouping_finer = 2:12, 
+                    #Settlement_date_grouping_finer = c('2', '3', '4', '5', '7', '8', '9', '10', '11', '12'), 
                     environ_PC1 = mean(data$environ_PC1), 
                     environ_PC2 = mean(data$environ_PC2),
                     Shoreline = mean(data$Shoreline))
@@ -73,7 +75,9 @@ if(group == "SBZR"){
 
 if(group == "medium"){
   
-    nd <- expand_grid(EA033= 1:4, Settlement_date_grouping_finer =  c('2', '3', '4', '5', '7', '8', '9', '10', '11', '12'), 
+    nd <- expand_grid(EA033= 1:4, 
+                      Settlement_date_grouping_finer = 2:12, 
+#                      Settlement_date_grouping_finer =  c('2', '3', '4', '5', '7', '8', '9', '10', '11', '12'), 
                       environ_PC1 = mean(data$environ_PC1), 
                       environ_PC2 = mean(data$environ_PC2), 
                       environ_PC3 = mean(data$environ_PC3),
@@ -351,7 +355,7 @@ if(file.exists(fn)){
                         chains = chains, 
                         cores = cores,
                         seed = seed,
-                        control = list(adapt_delta = 0.9),
+                        control = list(adapt_delta = 0.999),
                         backend="cmdstanr") 
     
     waic <- loo::waic(output_spec)
