@@ -176,6 +176,5 @@ ggsave("../latex/epreds_nd_time.png", width = 9, height = 7)
 
 
 
-
-nd %>% 
-  filter(model == "Overnight-sailing distances\nisland group ~ spatial") %>% View()
+#chain_joined %>% 
+#  write_tsv(file = paste0("output/results/brms_", group, "_control_", control, "_full_chains.tsv"), na = "")
