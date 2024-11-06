@@ -1,6 +1,5 @@
 source("01_requirements.R")
 
-
 df <- SBZR_none_summary <- readRDS("output/results/brms_SBZR_control_none_model_summary_full.rds")$mo %>% 
   rownames_to_column("term") %>% 
   mutate(model = "Overnight-sailing distances\nisland group ~ none")
@@ -130,7 +129,7 @@ nd <- read_tsv("output/results/brms_SBZR_control_spatialphylo_epreds.tsv", show_
 nd %>% 
   filter(model == "Shared language\nisland group ~ phylo"|
            model == "Shared language\nisland group ~ spatial"|
-           model == "Overnight-sailing distances\nisland group ~ spatial") %>% View()
+           model == "Overnight-sailing distances\nisland group ~ spatial") %>% 
   dplyr::rename(`Time depth` =`Settlement_date_grouping_finer`) %>% 
   ggplot() +
   geom_point(aes(x = EA033, y = mean_posterior_predict_nd, color = `Time depth` )) +
