@@ -12,9 +12,6 @@ data <- read_tsv("output/processed_data/RO_aggregate_SBZR_group_scaled.tsv", sho
   mutate(spatial_id = group) %>% 
   mutate(phylo_id = group)
 
-data$EA033 <- factor(data$EA033, ordered = T)
-data$Settlement_date_grouping_finer <- factor(data$Settlement_date_grouping_finer, ordered = T)
-
 phylo_vcv <- readRDS("output/processed_data/tree_SBZR_vcv.rds")
 spatial_vcv <- readRDS("output/processed_data/spatial_vcv_SBZR.rds")
 data2 = list(phylo_vcv = phylo_vcv, spatial_vcv = spatial_vcv)
@@ -64,9 +61,6 @@ data <- read_tsv("output/processed_data/RO_aggregate_medium_group_scaled.tsv", s
   rename(group = Medium_only_merged_for_shared_language) %>% 
   mutate(spatial_id = group) %>% 
   mutate(phylo_id = group)
-
-data$EA033 <- factor(data$EA033, ordered = T)
-data$Settlement_date_grouping_finer <- factor(data$Settlement_date_grouping_finer, ordered = T)
 
 phylo_vcv <- readRDS("output/processed_data/tree_medium_vcv.rds")
 spatial_vcv <- readRDS("output/processed_data/spatial_vcv_medium.rds")
