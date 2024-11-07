@@ -384,12 +384,13 @@ The results were calculated in R 4.3.3 \citep{R} using the function \texttt{brms
 
 \FloatBarrier
 \section{Results}
-The results show that EA033 has a significant effect in some of the models that have control for spatial and phylogenetic non-independence, but not all. This lends some but not conclusive support to the proposal by \citet{pawley81, pawley2007} that the rise of powerful chiefs in Polynesia slows community fragmentation and language diversification.
+The results show that EA033 has a significant effect in some of the models, but not all. This lends some but not conclusive support to the proposal by \citet{pawley81, pawley2007} that the rise of powerful chiefs in Polynesia slows community fragmentation and language diversification but the results require interpretation as to how the variables relate to each other.
+
+Ridge plots of effects distribution in all 8 models can be found in Appendix \ref{appendix_supp_figs_ridges}. However, note that the size of all of the effects in each model cannot be directly compared because the continuous variables (shoreline and environmental variables) were scaled (subtracting the mean and divide by the standard deviation) whereas the monotonic ordinal variables were not (EA033 and time-depth). It is not appropriate to scale the monotonic variables as they are interpreted based on the order of values (EA033 levels 1, 2, 3 \& 4), not on the raw distances between them. This means that it is not possible to directly compare the effect size of the continuous with the monotonic. For this study, we will primarily focus on which variables contribute significantly. 
 
 %However, there are details of the result that suggest that the effect may be due to non-Austronesian contact rather than political complexity \emph{per se}.
 
 The model comparisons showed that the models without control for spatial and/or phylogenetic non-independence fit the data less well. The model fit scores were overall similar for the three other models for both island groupings (see Appendix \ref{appendix_model_fit_scores}). Table \ref{brms_results_summary} shows which variables had significant effect distributions in each model (i.e. the 95\% confidence interval of the posterior effect distribution does not straddle zero) and the WAIC scores of each model. Results where political complexity (EA033 or EA033 in interaction with shoreline (EA033:Shoreline)) are highlighted in green.
-
 
 \begin{table}[ht]
 \centering
@@ -399,7 +400,7 @@ The model comparisons showed that the models without control for spatial and/or 
  & \textbf{	Variable	} & \textbf{	none	} & \textbf{	phylo	} & \textbf{	spatial	} & \textbf{	spatialphylo	} 	\\
 \midrule
 \multirow{2}{*}{Shared language}
- 	&	Significant effect	&	\cellcolor{spec_color_lightgreen!50} EA033, EA033:Shoreline, Time depth, Time depth:Shoreline	&	\cellcolor{spec_color_lightgreen!50} EA033:Shoreline	&	\cellcolor{spec_color_lightgreen!50} EA033, Time depth &		\\
+ 	&	Significant effect	&	\cellcolor{spec_color_lightgreen!50} EA033, EA033:Shoreline, Time depth, Time depth:Shoreline	&	\cellcolor{spec_color_lightgreen!50} EA033:Shoreline, Time depth:Shoreline	&	\cellcolor{spec_color_lightgreen!50} EA033, Time depth &		\\
 		&	WAIC	&	238.63	&	211.2	&	211.33	&	 \textbf{209.94}	\\
   \midrule
 \multirow{2}{*}{Overnight sailing}	&	Significant effect	&	\cellcolor{spec_color_lightgreen!50} EA033:Shoreline, Shoreline, Time depth:Shoreline	&	Time depth:Shoreline	&	\cellcolor{spec_color_lightgreen!50} EA033:Shoreline, Time depth:Shoreline &	Time depth:Shoreline		\\
@@ -411,23 +412,9 @@ The model comparisons showed that the models without control for spatial and/or 
 \label{brms_results_summary}
 \end{table}
 
+The different model fit scores (LOO, WAIC, $R^2$ \& absolute difference between observed and predicted) reported very similar ranking of the models. In Table \ref{brms_results_summary} only WAIC is reported. The other model fit comparison metrics can be found in Appendix \ref{appendix_model_fit_scores}.  
 
-The model fit scores (LOO, WAIC, $R^2$ \& absolute difference between observed and predicted) reported very similar ranking of the models. In Table \ref{brms_results_summary} only WAIC is reported. The other model fit comparison metrics can be found in Appendix \ref{appendix_model_fit_scores}. Figures \ref{brms_SBZR_group_full_effect_ridge_panels_phylo_main_text}
-\ref{brms_medium_control_spatialphylo_group_full_effect_ridge_panels_plot_main_text} show the effect distributions for the best fitting model for each island grouping: control for spatial and phylogenetic non-independence for islands based on shared language and phylogeny only for islands based on overnight sailing. Ridgeplots of all variables and their effects in all 8 models can be found in Appendix \ref{appendix_supp_figs_ridges}. 
-
-\begin{figure}
-\includegraphics[width=0.7\textwidth]{brms_SBZR_control_phylo_group_full_effect_ridge_panels_plot.png}
-\caption{Ridge-plots of posterior effect distributions. Distributions where the 95\% interval does not straddle zero are marked by dashed lines and transparent colour. Island grouping: overnight sailing distances, control for phylogenetic non-independence only.}
-\label{brms_SBZR_group_full_effect_ridge_panels_phylo_main_text}
-\end{figure}
-
-\begin{figure}
-\includegraphics[width=0.7\textwidth]{brms_medium_control_spatialphylo_group_full_effect_ridge_panels_plot.png}
-\caption{Ridge-plots of posterior effect distributions. Distributions where the 95\% interval does not straddle zero are marked by dashed lines and transparent colour. Island grouping: shared language, control for spatial and phylogenetic non-independence.}
-\label{brms_medium_control_spatialphylo_group_full_effect_ridge_panels_plot_main_text}
-\end{figure}
-
-While it is the case that the models with the lowest score for each of the island groupings does not include political complexity (EA033) as a significant effect, the effect is present in several of the models with control for spatial and/or phylogenetic non-independence and the WAIC scores are comparable.
+While it is the case that the models with the very lowest score for each of the island groupings does not include political complexity (EA033) as a significant effect, the effect is present in several of the models with control for spatial and/or phylogenetic non-independence and the WAIC scores are comparable. 
 
 As for the other predictors, the environmental principal components did not have a significant effect in any of the models that included control for spatial and/or phylogenetic non-independence. Time and shoreline were however consistently present. See figures in Appendix \ref{appendix_supp_figs_ridges} for full overview.
 
@@ -1251,12 +1238,14 @@ All code is available on GitHub and Zenodo with versioning.
 \subsection{Model output}
 
 \input{latex/BRMS_effects_medium_control_none.tex}
-
+\input{latex/BRMS_effects_medium_control_phylo.tex}
+\input{latex/BRMS_effects_medium_control_spatial.tex}
 \input{latex/BRMS_effects_medium_control_spatialphylo.tex}
 
 \input{latex/BRMS_effects_SBZR_control_none.tex}
-
 \input{latex/BRMS_effects_SBZR_control_phylo.tex}
+\input{latex/BRMS_effects_SBZR_control_spatial.tex}
+\input{latex/BRMS_effects_SBZR_control_sp.tex}
 
 \FloatBarrier
 \newpage
