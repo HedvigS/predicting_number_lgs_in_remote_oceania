@@ -16,7 +16,7 @@ jsonlite	1.8.8
 rsq	2.6
 viridis	0.6.5
 rlang	1.1.4
-MASS	7.3-60.2
+MASS	7.3-61
 colorspace	2.1-1
 ggalt	0.4.0
 randomcoloR	1.1.0.1
@@ -37,7 +37,7 @@ phytools	2.1-1
 MCMCglmm	2.36
 nFactors	2.4.1.1
 sp	2.1-4
-Matrix	1.7-0
+Matrix	1.7-1
 raster	3.6-26
 ade4	1.7-22
 coda	0.19-4.1
