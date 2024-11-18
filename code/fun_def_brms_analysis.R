@@ -188,12 +188,12 @@ ms_full %>% saveRDS(file = paste0("output/results/brms_", group, "_control_", co
   
   if(group == "medium"){
     p <- p +
-    xlim(c(0, 75))
+      coord_cartesian(xlim = c(0, 75))
   }
   
   if(group == "SBZR"){
     p <- p +
-      xlim(c(0, 205))
+      coord_cartesian(xlim = c(0, 205))
   }
   
   ggsave(plot = p, filename = paste0("output/plots/brms_predict_", group, "_control_", control, ".png"), height = 10, width = 6)  
