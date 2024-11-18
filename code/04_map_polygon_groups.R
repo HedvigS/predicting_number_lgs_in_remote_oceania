@@ -173,7 +173,7 @@ medium_groups_for_encircle_plotting_df_only_vanuatu <-  medium_groups_for_encirc
 #Only vanuatu
 
 vanuatu_inset <- basemap +   
-  geom_rect(aes(xmin = 162.5, xmax = 172, ymin = -24, ymax = -9), fill = "white") +
+  geom_rect(xmin = 162.5, xmax = 172, ymin = -24, ymax = -9, fill = "white") +
   geom_polygon(data=world, aes(x=long, 
                                y=lat,group=group),
                colour="gray87", 
