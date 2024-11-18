@@ -60,7 +60,7 @@ stop("The argument control is not one of the recognised strings.")
                           chains = chains, 
                           cores = cores,
                           seed = seed,
-                          control = list(adapt_delta = 0.9),
+                          control = list(adapt_delta = 0.999),
                           backend="cmdstanr") 
 
 if(group == "SBZR"){
