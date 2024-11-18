@@ -5,8 +5,8 @@ set.seed(1988)
 #### PACKAGE INSTALLATION ####
 R_version_numbers <- paste0(R.version$major, ".", R.version$minor)
 
-if(R_version_numbers != "4.4.1"){
-  message("These scripts were written using R version 4.4.1, but you are using ", R_version_numbers, ". This needn't be a problem, but it's worth noting in case the results differ.\n")
+if(R_version_numbers != "4.4.2"){
+  message("These scripts were written using R version 4.4.2, but you are using ", R_version_numbers, ". This needn't be a problem, but it's worth noting in case the results differ.\n")
     }
 
 #instead of using the R-packages for package mangement groundhog or pacman, I have recorded precisely which version is used for each package in a tsv-file and will be looping over each of them with a for-loop applying a function which installs the specific version. If there is another version present, the requested version will be installed. 
