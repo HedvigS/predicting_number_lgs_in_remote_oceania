@@ -4,9 +4,4 @@ This is a repository for analysis associated with as study of predicting the num
 
 # R version
 
-4.3.1 (2023-06-16) -- "Beagle Scouts"
-
-Can be found here for macos:
-
-* 64-bit processing:<https://cran.r-project.org/bin/macosx/big-sur-arm64/base/>
-* intel-based: [https://cran.r-project.org/bin/macosx/big-sur-x86_64/base/](https://cran.r-project.org/bin/macosx/big-sur-x86_64/base/)
+4.4.2 (2024-10-31) -- "Pile of leaves"
