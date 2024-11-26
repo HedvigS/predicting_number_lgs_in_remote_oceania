@@ -209,7 +209,11 @@ ms_full %>% saveRDS(file = paste0("output/results/brms_", group, "_control_", co
     suppressMessages(full_join(chain_3)) %>%
     suppressMessages(full_join(chain_4))
   
+  #The df contains effects for each indivdual spatial and phylo id for each island group, which makes the file very large so we're not including that in the output
+cols_without_spatial_and_phylo_id  <- colnames(chain_joined)[grep("_id\\[", x=colnames(chain_joined), invert = T)]
+     
   chain_joined %>% 
+    dplyr::select(all_of(cols_without_spatial_and_phylo_id)) %>% 
     write_tsv(file = paste0("output/results/brms_", group, "_control_", control, "_full_chains.tsv"), na = "")
   
 colnames(chain_joined) <- str_replace_all(colnames(chain_joined), "b_", "")  
@@ -443,6 +447,12 @@ write_tsv(file = paste0(dir_spec, "ms_df.tsv"), na = "")
     chain_joined <- suppressMessages(full_join(chain_1, chain_2)) %>% 
       suppressMessages(full_join(chain_3)) %>%
       suppressMessages(full_join(chain_4))
+    
+    #The df contains effects for each indivdual spatial and phylo id for each island group, which makes the file very large so we're not including that in the output
+    cols_without_spatial_and_phylo_id  <- colnames(chain_joined)[grep("_id\\[", x=colnames(chain_joined), invert = T)] 
+    
+    chain_joined <-    chain_joined %>% 
+      dplyr::select(all_of(cols_without_spatial_and_phylo_id)) 
     
     chain_summarised <-      chain_joined %>% 
       dplyr::select(-c("lp__", "lprior")) %>% 
