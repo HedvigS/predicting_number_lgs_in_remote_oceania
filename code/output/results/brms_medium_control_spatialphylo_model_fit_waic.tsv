@@ -1,0 +1,4 @@
+fit_score	Estimate	SE	control	group
+elpd_waic	-104.95038039281035	5.659678674779791	spatialphylo	medium
+p_waic	12.69428669095358	1.9808530693941235	spatialphylo	medium
+waic	209.9007607856207	11.319357349559581	spatialphylo	medium

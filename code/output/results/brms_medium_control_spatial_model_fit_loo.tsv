@@ -1,0 +1,4 @@
+fit_score	Estimate	SE	control	group
+elpd_loo	-111.58490845164008	7.6115845634772095	spatial	medium
+p_loo	19.299404483658947	4.0752933333586805	spatial	medium
+looic	223.16981690328015	15.223169126954419	spatial	medium

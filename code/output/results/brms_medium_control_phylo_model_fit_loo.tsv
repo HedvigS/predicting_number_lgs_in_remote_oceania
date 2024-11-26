@@ -1,0 +1,4 @@
+fit_score	Estimate	SE	control	group
+elpd_loo	-109.97467418613888	7.197857578790752	phylo	medium
+p_loo	17.01538991288502	3.385023989627422	phylo	medium
+looic	219.94934837227777	14.395715157581504	phylo	medium

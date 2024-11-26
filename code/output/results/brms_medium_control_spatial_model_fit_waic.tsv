@@ -1,0 +1,4 @@
+fit_score	Estimate	SE	control	group
+elpd_waic	-105.61792998047805	5.7868993967193685	spatial	medium
+p_waic	13.332426012497006	2.1301499532622907	spatial	medium
+waic	211.2358599609561	11.573798793438737	spatial	medium
