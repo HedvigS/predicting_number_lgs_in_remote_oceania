@@ -11,7 +11,6 @@
 *.gz
 *.pdf
 *.toc
-*.Rproj
 code/data/glottolog-cldf/**
 code/data/dplace-cldf/**
 latex/main.tex.bak
