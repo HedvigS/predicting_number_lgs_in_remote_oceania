@@ -1,0 +1,4 @@
+fit_score	Estimate	SE	control	group
+elpd_loo	-91.1021965851267	6.3508526992162	spatialphylo	SBZR
+p_loo	14.456764783794442	2.901258017055354	spatialphylo	SBZR
+looic	182.2043931702534	12.7017053984324	spatialphylo	SBZR

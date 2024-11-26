@@ -1,0 +1,4 @@
+fit_score	Estimate	SE	control	group
+elpd_waic	-86.66599224546653	5.130719391795639	spatialphylo	SBZR
+p_waic	10.020560444134265	1.7064250617027505	spatialphylo	SBZR
+waic	173.33198449093305	10.261438783591277	spatialphylo	SBZR
