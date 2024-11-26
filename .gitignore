@@ -21,3 +21,4 @@ latex/main.tex.bak
 latex/used_packages_table.tex.bak
 code/data/.~lock.packages.tsv\#
 *.RDS
+/code/output/results/drop_one_out
