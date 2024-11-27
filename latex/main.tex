@@ -1262,7 +1262,7 @@ To evaluate if the hypothesis holds also when taking into account spatial and ph
 \begin{itemize}
 
     \item none - no control for spatial or phylogenetic non-independence
-    \item phylo - control for phylogenetic non-independence by taking the median pairwise distance of languages of the different groups in a language family tree (specifically Glottolog 3 \citet{glottolog3}\footnote{The language family tree from glottolog was modified with Grafen's transform in order to become ultrametric, lest the distances be only number of nodes.})
+    \item phylo - control for phylogenetic non-independence by taking the median pairwise distance of languages of the different groups in a language family tree (specifically Glottolog 3 \citet{glottolog3}\footnote{The language family tree from glottolog was modified with Grafen's transform in order to become ultrametric (same distance from root to all tips). Otherwise the patristic distances would be the same as number of nodes between a pair of tips.})
     \item spatial - minimum haversine distance between island groups
     \item spatialphylo - both spatial and phylo controls
     
