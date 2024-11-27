@@ -108,6 +108,7 @@ plot_time_pol_comples(models = models, fns_full_chains = fns_full_chains, fns_fu
 
 ggsave(file = paste0("output/results/brms_medium_ridge_panels_plot_time_pol_complex.png"), height = 6, width = 7, dpi = 200)
 
+ggsave(file = paste0("../latex/brms_medium_ridge_panels_plot_time_pol_complex.png"), height = 6, width = 7, dpi = 200)
 
 
 fns_full_chains <- c("output/results/brms_SBZR_control_spatialphylo_full_chains.tsv",
@@ -130,3 +131,5 @@ plot_time_pol_comples(models = models, fns_full_chains = fns_full_chains, fns_fu
 
 
 ggsave(file = paste0("output/results/brms_SBZR_ridge_panels_plot_time_pol_complex.png"), height = 6, width = 7, dpi = 200)
+
+ggsave(file = paste0("../latex/brms_SBZR_ridge_panels_plot_time_pol_complex.png"), height = 6, width = 7, dpi = 200)
