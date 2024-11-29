@@ -45,3 +45,4 @@ pkgbuild	1.4.4
 brms	2.21.0
 mvtnorm	1.2-4
 loo	2.7.0
+ggridges	0.5.6

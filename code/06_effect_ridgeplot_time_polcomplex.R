@@ -1,6 +1,4 @@
 source("01_requirements.R")
-library(ggridges)
-
 
 plot_time_pol_comples <- function(fns_full_chains = NULL, 
                                   fns_full_effects = NULL, 
