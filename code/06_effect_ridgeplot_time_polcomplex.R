@@ -76,10 +76,10 @@ p <- df %>%
 
   theme_classic() +
   theme(legend.position = "none", 
+        text = element_text(size = 14),
         axis.ticks.y = element_blank(),
         axis.line.y = element_blank(),
-        axis.title = element_blank(),
-        strip.text = element_text(size = 14)) +
+        axis.title = element_blank()) +
   coord_cartesian(xlim = xlim) +
   ggtitle(title)
  p 
@@ -104,9 +104,9 @@ models <- c("spatialphylo",
 plot_time_pol_comples(models = models, fns_full_chains = fns_full_chains, fns_full_effects = fns_full_effects, 
                       distinctive_plot_colors =  c(  "#87CEEB", "#5f99f5","#68b8cc", "#7DDAD9"), xlim = c(-3, 3))
 
-ggsave(file = paste0("output/results/brms_medium_ridge_panels_plot_time_pol_complex.png"), height = 6, width = 7, dpi = 200)
+ggsave(file = paste0("output/results/brms_medium_ridge_panels_plot_time_pol_complex.png"), height = 5, width = 5, dpi = 200)
 
-ggsave(file = paste0("../latex/brms_medium_ridge_panels_plot_time_pol_complex.png"), height = 6, width = 7, dpi = 200)
+ggsave(file = paste0("../latex/brms_medium_ridge_panels_plot_time_pol_complex.png"), height = 5, width = 5, dpi = 200)
 
 
 fns_full_chains <- c("output/results/brms_SBZR_control_spatialphylo_full_chains.tsv",
@@ -128,6 +128,6 @@ plot_time_pol_comples(models = models, fns_full_chains = fns_full_chains, fns_fu
                       distinctive_plot_colors =  c("#FFDAB9","#FFB6C1" ,   "#C8A2C8", "#ebb0df"), xlim = c(-4, 4))
 
 
-ggsave(file = paste0("output/results/brms_SBZR_ridge_panels_plot_time_pol_complex.png"), height = 6, width = 7, dpi = 200)
+ggsave(file = paste0("output/results/brms_SBZR_ridge_panels_plot_time_pol_complex.png"), height = 5, width = 5, dpi = 200)
 
-ggsave(file = paste0("../latex/brms_SBZR_ridge_panels_plot_time_pol_complex.png"), height = 6, width = 7, dpi = 200)
+ggsave(file = paste0("../latex/brms_SBZR_ridge_panels_plot_time_pol_complex.png"), height = 5, width = 5, dpi = 200)
