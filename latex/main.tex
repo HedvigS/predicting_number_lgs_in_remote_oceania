@@ -416,6 +416,46 @@ The model comparisons showed that the models with control for spatial and/or phy
 
 While it is the case that the models with the very lowest WAIC score for each of the island groupings does not include political complexity (EA033) as a significant effect, the effect is present in several of the models with control for spatial and/or phylogenetic non-independence and the WAIC scores are comparable. 
 
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{figure}
+\centering
+\begin{subfigure}{0.48\textwidth}
+  \centering
+\includegraphics[width=1\textwidth]{brms_medium_ridge_panels_plot_time_pol_complex.png}
+\caption{Island groups based on shared language.}
+\label{medium_ridge_panels_plot_time_pol_complex}
+\end{subfigure}%
+\hfill
+\begin{subfigure}{0.48\textwidth}
+  \centering
+\includegraphics[width=1\textwidth]{brms_SBZR_ridge_panels_plot_time_pol_complex.png}
+\caption{Island groups based on overnight sailing distances.}
+\label{SBZR_ridge_panels_plot_time_pol_complex}
+\end{subfigure}
+\caption{Density ridgeplots of the posterior Bayesian Effect Estimates of EA033 (``political complexity'') and time depth for models with different control for spatial and phylogenetic autocorrelation. Height indicates number of samples in the Markov Chain Monte Carlov chains at that effect estimate. Transparent and dashed ridgeplots indicates that the 95\% confidence interval straddles zero. }
+\label{prediction_plot}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
 In the model with shared language island groups and control for both spatial and phylogenetic non-independence, none of the fixed effects distributions' 95\% CI exclude zero - i.e. they do not have an significant effect. Instead, the variation in the response is primarily explained by the spatial and covariance random effects.
 
 Ridge plots of effects distribution in all 8 models can be found in Appendix \ref{appendix_supp_figs_ridges}. Note that the size of all of the effects in each model cannot be directly compared because the continuous variables (shoreline and environmental variables) were scaled (subtracting the mean and divide by the standard deviation) whereas the monotonic ordinal variables were not (EA033 and time-depth). It is not appropriate to scale the monotonic variables as they are interpreted based on the order of values (e.g. EA033 levels 1, 2, 3 \& 4), not on the distances between them. This means that it is not possible to directly compare the effect distributions of the continuous predictors with the monotonic. For the eight models of this study, there is only one model where a continuous variables has a significant effect (95\% CI does not straddle zero) - overnight sailing distance island groups and no control for spatial and phylogenetic non-independence. This is also the model out of the four for this island grouping with the worst model fit (regardless of model fit score, see appendix \ref{appendix_model_fit_scores}). The continuous predictor in question, shoreline, also participates in significant interactions that can be compared, so we will focus on those effects instead.
