@@ -180,6 +180,7 @@ ms_full %>% saveRDS(file = paste0("output/results/brms_", group, "_control_", co
     ggthemes::theme_fivethirtyeight(base_size = 16) +
     scale_x_continuous(breaks = c(0, 25, 50, 75, 100, 125, 150, 175, 200)) +
     theme(legend.position = "None",
+          axis.text.x =  element_text(angle = 70, hjust = 1),
       panel.background = element_rect(fill = "white"), 
           plot.background = element_rect(fill = "white"), 
       panel.grid.major = element_line(size = 0.5, linetype = 'solid',
@@ -196,8 +197,8 @@ ms_full %>% saveRDS(file = paste0("output/results/brms_", group, "_control_", co
       coord_cartesian(xlim = c(0, 205))
   }
   
-  ggsave(plot = p, filename = paste0("output/plots/brms_predict_", group, "_control_", control, ".png"), height = 10, width = 6)  
-  ggsave(plot = p,filename = paste0("../latex/brms_predict_", group, "_control_", control, ".png"),  height = 12, width = 6) 
+  ggsave(plot = p, filename = paste0("output/plots/brms_predict_", group, "_control_", control, ".png"), height = 10, width = 7)  
+  ggsave(plot = p,filename = paste0("../latex/brms_predict_", group, "_control_", control, ".png"),  height = 12, width = 7) 
   
   ### model output
   chain_1 <- output_poisson$fit@sim$samples[[1]] %>% as.data.frame()  %>% mutate(chain = "1")
