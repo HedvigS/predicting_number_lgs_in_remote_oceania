@@ -1,0 +1,58 @@
+diff_poisson_abs	diff_poisson	island_group_dropped	control	group	filename
+0.479307272727273	0.00233636363636372	Ānewetak	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Ānewetak/diff_means.tsv
+0.500816363636364	0.00335818181818179	Aotearoa	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Aotearoa/diff_means.tsv
+0.473772727272727	0.0038927272727272	Banaba	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Banaba/diff_means.tsv
+0.428721818181818	0.00387090909090916	Chuuk	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Chuuk/diff_means.tsv
+0.472741818181818	0.00906181818181822	East Futuna	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//East_Futuna/diff_means.tsv
+0.480510909090909	0.00254000000000004	Fiji	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Fiji/diff_means.tsv
+0.492574545454545	-1.9272727272727e-4	Hawaii	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Hawaii/diff_means.tsv
+0.482443636363636	0.00241818181818173	Hereheretue	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Hereheretue/diff_means.tsv
+0.483529090909091	-6.7454545454537e-4	Kanaky (main island + Loyalties)	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Kanaky_(main_island_+_Loyalties)/diff_means.tsv
+0.490638181818182	-0.00324181818181825	Kapingamarangi	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Kapingamarangi/diff_means.tsv
+0.468694545454546	0.00354909090909105	Kosrae	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Kosrae/diff_means.tsv
+0.426058181818182	0.00101454545454537	Laguas yan gåni (Guam + Northern Marianas)	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Laguas_yan_gåni_(Guam_+_Northern_Marianas)/diff_means.tsv
+0.475089090909091	5.4727272727276e-4	Luangiua + Nukumanu	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Luangiua_+_Nukumanu/diff_means.tsv
+0.480041818181818	0.0040636363636363	Mangaia	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Mangaia/diff_means.tsv
+0.471936363636364	0.0077545454545455	Mangareva	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Mangareva/diff_means.tsv
+0.470752727272727	-0.00253818181818186	Māngarongaro	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Māngarongaro/diff_means.tsv
+0.456449090909091	0.00229272727272738	Marquesas	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Marquesas/diff_means.tsv
+0.476476363636364	0.00129818181818183	Marutea	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Marutea/diff_means.tsv
+0.471485454545455	0.00119090909090903	Mo-ava-mo-iki (Bellona + Rennelle)	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Mo-ava-mo-iki_(Bellona_+_Rennelle)/diff_means.tsv
+0.483507272727273	0.00123090909090918	Morane	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Morane/diff_means.tsv
+0.472294545454545	3.4181818181818e-4	Napuka	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Napuka/diff_means.tsv
+0.476185454545454	-3.6000000000007e-4	Ngā Pū Toru	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Ngā_Pū_Toru/diff_means.tsv
+0.472734545454545	-0.00397818181818193	Ngatik	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Ngatik/diff_means.tsv
+0.465487272727273	-0.00458545454545457	Niu + Tuvalu	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Niu_+_Tuvalu/diff_means.tsv
+0.468234545454545	0.00223818181818186	Niue	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Niue/diff_means.tsv
+0.478235714285714	0.0043678571428571	None	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//None/diff_means.tsv
+0.480094545454545	0.00290909090909088	Nukuoro	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Nukuoro/diff_means.tsv
+0.481816363636364	0.00838000000000011	Nukutaveke 59	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Nukutaveke_59/diff_means.tsv
+0.4731	-0.0125036363636364	Nukutaveke 61	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Nukutaveke_61/diff_means.tsv
+0.445698181818182	-7.7090909090904e-4	Palau	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Palau/diff_means.tsv
+0.47228	-0.00632363636363645	Pohnpei	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Pohnpei/diff_means.tsv
+0.473989090909091	8.290909090909e-4	Pukapuka	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Pukapuka/diff_means.tsv
+0.482685454545455	0.00695090909090913	Raivavae	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Raivavae/diff_means.tsv
+0.471154545454545	4.2363636363635e-4	Rakahanga-Manihiki	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Rakahanga-Manihiki/diff_means.tsv
+0.484158181818182	0.00478727272727289	Rapa Nui	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Rapa_Nui/diff_means.tsv
+0.474912727272727	0.00240363636363636	Raro Matai + Nia Matai	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Raro_Matai_+_Nia_Matai/diff_means.tsv
+0.471643636363636	-0.00289090909090905	Rarotonga	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Rarotonga/diff_means.tsv
+0.453409090909091	0.00651090909090906	Ratak + Rālik	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Ratak_+_Rālik/diff_means.tsv
+0.475347272727273	0.00349272727272731	Rēkohou	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Rēkohou/diff_means.tsv
+0.47812	0.00412000000000008	Rimatara	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Rimatara/diff_means.tsv
+0.472421818181818	0.00530181818181816	Rotuma	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Rotuma/diff_means.tsv
+0.482807272727273	0.00184727272727265	Rurutu	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Rurutu/diff_means.tsv
+0.47732	0.00205090909090916	Sāmoa	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Sāmoa/diff_means.tsv
+0.475023636363636	0.00159090909090902	Sorol	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Sorol/diff_means.tsv
+0.4814	0.00620000000000006	Tatakoto + Reao	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Tatakoto_+_Reao/diff_means.tsv
+0.486543636363636	0.00755818181818188	Tokelau	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Tokelau/diff_means.tsv
+0.471830909090909	0.00229636363636359	Tonga	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Tonga/diff_means.tsv
+0.474158181818182	-0.00181636363636362	Tuamotu + Puka-puka	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Tuamotu_+_Puka-puka/diff_means.tsv
+0.451649090909091	0.00199090909090925	Tungaru	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Tungaru/diff_means.tsv
+0.476821818181818	0.00423636363636376	Tupuai	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Tupuai/diff_means.tsv
+0.486387272727273	0.00704545454545457	Tureia	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Tureia/diff_means.tsv
+0.485501818181818	0.00514909090909108	Tuvalu 31	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Tuvalu_31/diff_means.tsv
+0.482010909090909	3.9636363636354e-4	Tuvalu 32	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Tuvalu_32/diff_means.tsv
+0.47214	0.00507454545454536	Ulithi + Yap	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Ulithi_+_Yap/diff_means.tsv
+0.480738181818182	0.00275272727272716	Uvea (Wallis)	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Uvea_(Wallis)/diff_means.tsv
+0.452463636363636	0.0011509090909091	Vanuatu + Temotu	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Vanuatu_+_Temotu/diff_means.tsv
+0.468890909090909	0.00100363636363638	Woleai	phylo	SBZR	output/results/drop_one_out/SBZR_phylo//Woleai/diff_means.tsv
