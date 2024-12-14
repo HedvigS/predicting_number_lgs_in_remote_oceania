@@ -1,0 +1,58 @@
+diff_poisson_abs	diff_poisson	island_group_dropped	control	group	filename
+0.970236363636364	0.00112000000000011	Ānewetak	none	SBZR	output/results/drop_one_out/SBZR_none///Ānewetak/diff_means.tsv
+0.918361818181818	0.0025218181818182	Aotearoa	none	SBZR	output/results/drop_one_out/SBZR_none///Aotearoa/diff_means.tsv
+0.959574545454545	0.00591272727272726	Banaba	none	SBZR	output/results/drop_one_out/SBZR_none///Banaba/diff_means.tsv
+0.848272727272727	0.00244	Chuuk	none	SBZR	output/results/drop_one_out/SBZR_none///Chuuk/diff_means.tsv
+0.962972727272727	-0.00523454545454556	East Futuna	none	SBZR	output/results/drop_one_out/SBZR_none///East_Futuna/diff_means.tsv
+0.702	0.00436727272727272	Fiji	none	SBZR	output/results/drop_one_out/SBZR_none///Fiji/diff_means.tsv
+0.939930909090909	-7.5636363636372e-4	Hawaii	none	SBZR	output/results/drop_one_out/SBZR_none///Hawaii/diff_means.tsv
+0.976118181818182	0.00726727272727268	Hereheretue	none	SBZR	output/results/drop_one_out/SBZR_none///Hereheretue/diff_means.tsv
+0.713832727272727	0.00275999999999989	Kanaky (main island + Loyalties)	none	SBZR	output/results/drop_one_out/SBZR_none///Kanaky_(main_island_+_Loyalties)/diff_means.tsv
+0.955794545454546	5.27272727273841e-5	Kapingamarangi	none	SBZR	output/results/drop_one_out/SBZR_none///Kapingamarangi/diff_means.tsv
+0.968683636363636	0.00516727272727273	Kosrae	none	SBZR	output/results/drop_one_out/SBZR_none///Kosrae/diff_means.tsv
+0.699132727272727	0.00583454545454552	Laguas yan gåni (Guam + Northern Marianas)	none	SBZR	output/results/drop_one_out/SBZR_none///Laguas_yan_gåni_(Guam_+_Northern_Marianas)/diff_means.tsv
+0.934303636363637	-0.00371454545454534	Luangiua + Nukumanu	none	SBZR	output/results/drop_one_out/SBZR_none///Luangiua_+_Nukumanu/diff_means.tsv
+0.972905454545455	9.7090909090908e-4	Mangaia	none	SBZR	output/results/drop_one_out/SBZR_none///Mangaia/diff_means.tsv
+0.976327272727273	0.00608000000000007	Mangareva	none	SBZR	output/results/drop_one_out/SBZR_none///Mangareva/diff_means.tsv
+0.951132727272727	0.00192545454545447	Māngarongaro	none	SBZR	output/results/drop_one_out/SBZR_none///Māngarongaro/diff_means.tsv
+0.886305454545455	-0.00157818181818174	Marquesas	none	SBZR	output/results/drop_one_out/SBZR_none///Marquesas/diff_means.tsv
+0.968310909090909	-0.00496181818181818	Marutea	none	SBZR	output/results/drop_one_out/SBZR_none///Marutea/diff_means.tsv
+0.950598181818182	-0.00692545454545465	Mo-ava-mo-iki (Bellona + Rennelle)	none	SBZR	output/results/drop_one_out/SBZR_none///Mo-ava-mo-iki_(Bellona_+_Rennelle)/diff_means.tsv
+0.969607272727273	0.00475272727272733	Morane	none	SBZR	output/results/drop_one_out/SBZR_none///Morane/diff_means.tsv
+0.969510909090909	-3.7272727272722e-4	Napuka	none	SBZR	output/results/drop_one_out/SBZR_none///Napuka/diff_means.tsv
+0.971923636363636	0.00160727272727269	Ngā Pū Toru	none	SBZR	output/results/drop_one_out/SBZR_none///Ngā_Pū_Toru/diff_means.tsv
+0.962298181818182	0.00688363636363641	Ngatik	none	SBZR	output/results/drop_one_out/SBZR_none///Ngatik/diff_means.tsv
+0.971476363636364	0.00423636363636367	Niu + Tuvalu	none	SBZR	output/results/drop_one_out/SBZR_none///Niu_+_Tuvalu/diff_means.tsv
+0.959218181818182	-0.00243272727272731	Niue	none	SBZR	output/results/drop_one_out/SBZR_none///Niue/diff_means.tsv
+0.958892857142857	0.00111428571428567	None	none	SBZR	output/results/drop_one_out/SBZR_none///None/diff_means.tsv
+0.95734	-0.00582727272727287	Nukuoro	none	SBZR	output/results/drop_one_out/SBZR_none///Nukuoro/diff_means.tsv
+0.975458181818182	0.00707636363636375	Nukutaveke 59	none	SBZR	output/results/drop_one_out/SBZR_none///Nukutaveke_59/diff_means.tsv
+0.970183636363636	-8.9272727272721e-4	Nukutaveke 61	none	SBZR	output/results/drop_one_out/SBZR_none///Nukutaveke_61/diff_means.tsv
+0.952190909090909	-0.00130363636363628	Palau	none	SBZR	output/results/drop_one_out/SBZR_none///Palau/diff_means.tsv
+0.90116	0.00279636363636364	Pohnpei	none	SBZR	output/results/drop_one_out/SBZR_none///Pohnpei/diff_means.tsv
+0.965683636363636	0.00567636363636356	Pukapuka	none	SBZR	output/results/drop_one_out/SBZR_none///Pukapuka/diff_means.tsv
+0.97204	-0.00234909090909097	Raivavae	none	SBZR	output/results/drop_one_out/SBZR_none///Raivavae/diff_means.tsv
+0.935943636363636	0.00313272727272728	Rakahanga-Manihiki	none	SBZR	output/results/drop_one_out/SBZR_none///Rakahanga-Manihiki/diff_means.tsv
+0.965643636363636	0.0014909090909092	Rapa Nui	none	SBZR	output/results/drop_one_out/SBZR_none///Rapa_Nui/diff_means.tsv
+0.955923636363636	0.00111272727272736	Raro Matai + Nia Matai	none	SBZR	output/results/drop_one_out/SBZR_none///Raro_Matai_+_Nia_Matai/diff_means.tsv
+0.972109090909091	1.6363636363627e-4	Rarotonga	none	SBZR	output/results/drop_one_out/SBZR_none///Rarotonga/diff_means.tsv
+0.972685454545454	0.00467090909090905	Ratak + Rālik	none	SBZR	output/results/drop_one_out/SBZR_none///Ratak_+_Rālik/diff_means.tsv
+0.976627272727273	0.00193999999999994	Rēkohou	none	SBZR	output/results/drop_one_out/SBZR_none///Rēkohou/diff_means.tsv
+0.975629090909091	0.00422909090909084	Rimatara	none	SBZR	output/results/drop_one_out/SBZR_none///Rimatara/diff_means.tsv
+0.9724	0.00285090909090912	Rotuma	none	SBZR	output/results/drop_one_out/SBZR_none///Rotuma/diff_means.tsv
+0.979805454545454	0.00588181818181813	Rurutu	none	SBZR	output/results/drop_one_out/SBZR_none///Rurutu/diff_means.tsv
+0.969907272727273	-0.00384181818181821	Sāmoa	none	SBZR	output/results/drop_one_out/SBZR_none///Sāmoa/diff_means.tsv
+0.964569090909091	5.1454545454537e-4	Sorol	none	SBZR	output/results/drop_one_out/SBZR_none///Sorol/diff_means.tsv
+0.969763636363636	0.00134909090909101	Tatakoto + Reao	none	SBZR	output/results/drop_one_out/SBZR_none///Tatakoto_+_Reao/diff_means.tsv
+0.963449090909091	0.00590000000000008	Tokelau	none	SBZR	output/results/drop_one_out/SBZR_none///Tokelau/diff_means.tsv
+0.948203636363636	1.0545454545464e-4	Tonga	none	SBZR	output/results/drop_one_out/SBZR_none///Tonga/diff_means.tsv
+0.972156363636364	0.00259636363636373	Tuamotu + Puka-puka	none	SBZR	output/results/drop_one_out/SBZR_none///Tuamotu_+_Puka-puka/diff_means.tsv
+0.969752727272727	0.00195999999999997	Tungaru	none	SBZR	output/results/drop_one_out/SBZR_none///Tungaru/diff_means.tsv
+0.976156363636364	0.00505454545454533	Tupuai	none	SBZR	output/results/drop_one_out/SBZR_none///Tupuai/diff_means.tsv
+0.975583636363636	8.7818181818187e-4	Tureia	none	SBZR	output/results/drop_one_out/SBZR_none///Tureia/diff_means.tsv
+0.968123636363636	4.436363636365e-4	Tuvalu 31	none	SBZR	output/results/drop_one_out/SBZR_none///Tuvalu_31/diff_means.tsv
+0.969216363636364	0.00251090909090923	Tuvalu 32	none	SBZR	output/results/drop_one_out/SBZR_none///Tuvalu_32/diff_means.tsv
+0.948665454545454	0.00343999999999994	Ulithi + Yap	none	SBZR	output/results/drop_one_out/SBZR_none///Ulithi_+_Yap/diff_means.tsv
+0.960492727272727	-4.4545454545454e-4	Uvea (Wallis)	none	SBZR	output/results/drop_one_out/SBZR_none///Uvea_(Wallis)/diff_means.tsv
+0.645001818181818	0.00168545454545457	Vanuatu + Temotu	none	SBZR	output/results/drop_one_out/SBZR_none///Vanuatu_+_Temotu/diff_means.tsv
+0.935938181818182	-0.0092872727272728	Woleai	none	SBZR	output/results/drop_one_out/SBZR_none///Woleai/diff_means.tsv
