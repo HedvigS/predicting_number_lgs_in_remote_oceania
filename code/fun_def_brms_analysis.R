@@ -180,7 +180,7 @@ ms_full %>% saveRDS(file = paste0("output/results/brms_", group, "_control_", co
     ggthemes::theme_fivethirtyeight(base_size = 16) +
     scale_x_continuous(breaks = c(0, 25, 50, 75, 100, 125, 150, 175, 200)) +
     theme(legend.position = "None",
-          axis.text.x =  element_text(angle = 70, hjust = 1),
+          axis.text.x =  element_text(angle = 40, hjust = 1),
       panel.background = element_rect(fill = "white"), 
           plot.background = element_rect(fill = "white"), 
       panel.grid.major = element_line(size = 0.5, linetype = 'solid',
