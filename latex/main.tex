@@ -192,11 +192,11 @@
 %\newpage
 
 
-\section*{Funding information test}
-The research leading to this paper has received funding from the Department of Linguistic and Cultural Evolution at the Max Planck Institute for Evolutionary Anthropology, the School of Culture, History and Language at the Australian National University and from the Australian Research Council through The Wellsprings of Linguistic Diversity Laureate Project (awarded to Nicholas Evans 2014-2018) and the Centre of Excellence for the Dynamics of Language (CoEDL).
+%\section*{Funding information}
+%The research leading to this paper has received funding from the Department of Linguistic and Cultural Evolution at the Max Planck Institute for Evolutionary Anthropology, the School of Culture, History and Language at the Australian National University and from the Australian Research Council through The Wellsprings of Linguistic Diversity Laureate Project (awarded to Nicholas Evans 2014-2018) and the Centre of Excellence for the Dynamics of Language (CoEDL).
 
-\section*{Acknowledgements}
-\input{acknowledgements}
+%\section*{Acknowledgements}
+%\input{acknowledgements}
 
 
 \newpage
@@ -388,7 +388,7 @@ The results show that EA033 has a significant effect on the number of languages 
 
 %However, there are details of the result that suggest that the effect may be due to non-Austronesian contact rather than political complexity \emph{per se}.
 
-The model comparisons showed that the models with control for spatial and/or phylogenetic non-independence fit the data better. Table \ref{brms_results_summary} shows WAIC scores of each model and which variables had significant effect distributions in each model (i.e. the 95\% confidence interval of the posterior effect distribution does not straddle zero). The different model fit scores (WAIC, LOO,  $R^2$ and absolute difference between predictions and observed) rank the different models similarly, for convenience we report only WAIC here. See Appendix \ref{appendix_model_fit_scores} for all model fit scores.
+The model comparisons showed that the models with control for spatial and/or phylogenetic non-independence fit the data better. Table \ref{brms_results_summary} shows WAIC scores of each model and which variables had significant effect distributions in each model (i.e. the 95\% confidence interval of the posterior effect distribution does not straddle zero). The different model fit scores (WAIC, LOO,  $R^2$ and absolute difference between predictions and observed) rank the different models very similarly, for convenience we report only WAIC here. See Appendix \ref{appendix_model_fit_scores} for all model fit scores.
 
 
 
@@ -401,10 +401,10 @@ The model comparisons showed that the models with control for spatial and/or phy
 \midrule
 \multirow{2}{*}{Shared language}
  	&	Significant effect	&	\cellcolor{spec_color_lightgreen!50} EA033, EA033:Shoreline, Time depth, Time depth:Shoreline	&	\cellcolor{spec_color_lightgreen!50} EA033:Shoreline	&	\cellcolor{spec_color_lightgreen!50} EA033, Time depth &		\\
-		&	WAIC	&	238.63	&	211.2	&	211.33	&	 \textbf{209.94}	\\
+		&	WAIC	&	238.4	&	211	&	211.23	&	 \textbf{209.9}	\\
   \midrule
 \multirow{2}{*}{Overnight sailing}	&	Significant effect	&	\cellcolor{spec_color_lightgreen!50} EA033:Shoreline, Shoreline, Time depth:Shoreline	&	Time depth:Shoreline	&	\cellcolor{spec_color_lightgreen!50} EA033:Shoreline, Time depth:Shoreline &	Time depth:Shoreline		\\
-	&	WAIC	&	192.66	&	\textbf{172.43}	&	178.23&	173.267		\\
+	&	WAIC	&	192.69	&	\textbf{172.57}	&	178.23&	173.33		\\
 
    \bottomrule
 \end{tabular}
@@ -441,7 +441,7 @@ It is possible to compare the monotonic effects to each other, including when th
 \label{Ridgeplots_pol_complex_time_depth}
 \end{figure}
 
-As for the other predictors, the environmental principal components did not have a significant effect in any of the models and shoreline had a significant effect in only one model (overnight sailing distance island groups and no control for spatial and phylogenetic non-independence). This was also the model out of the four for this island grouping with the worst model fit. 
+As for the other predictors, the environmental principal components did not have a significant effect in any of the models. Shoreline had a significant effect in only one model (overnight sailing distance island groups and no control for spatial and phylogenetic non-independence). This was also the model out of the four for this island grouping with the worst model fit. 
 
 The predictions of the best fitting models per island grouping (given WAIC) are found in Fig. \ref{prediction_plot}. The posterior predictions (10,000 draws) are shown using conventional box plots\footnote{The green box plots represent the posterior predictions from the model (10,000 draws). The plot follows the conventional design for box plot, with the middle of the box representing the median, the two ends of the box (a.k.a ``hinges'') the first and third quartiles (the 25th and 75th percentiles). The whiskers extend from the end of the box 1.5 times the distance between first and third quartiles. Data beyond the end of the whiskers, so-called ``outlying'' points, are not visualized in this plot as they were found to give a biased impression of the range. The R-function  ggplot2::geom\_boxplot() was used for these visualizations \citep{R-ggplot2}}). The observed number of languages is shown with a purple triangle and the mean of the predictions is indicated with a orange circle\footnote{The mean (orange circle) and the median (middle line of boxplot) of of the predicted values are almost identical).}. Prediction plots for all 8 models are found in Appendix \ref{appendix_supp_figs_pred_boxplots}. Overall the mean and median of the predictions are very similar to the observed values.
 
@@ -502,7 +502,7 @@ Besides the number of languages differing greatly between islands groups of Ocea
 
 Furthermore, it is possible that political complexity, network structure, other variables relevant for language diversification and the number of languages themselves are directly or indirectly impacted by contact with non-Austronesian speaking communities from Near Oceania (cf. \citet{lynch1981melanesian}). There is evidence of ancient gene-flow of this kind in many parts of Remote Oceania \citep{posth_jena_ancient_dna_vanuatu_2018, lipson_harvad_ancient_dna_vanuatu_2018, liu2022ancient}. Unfortunately, there is a lack of data in several key areas, primarily Kanaky (New Caledonia) (see Fig ~\ref{appendix_NANO_contact_map} in Appendix ~\ref{appendix_supp_figs}). This dearth of data made it infeasible to include non-Austronesian contact as a variable directly in this study. It is however possible that time-depth, which is included here, approximates this contact since places that have been settled for longer have a higher likelihood of ancient contact events from non-Austronesian communities given the migration history (cf. Fig ~\ref{appendix_NANO_contact_map} in Appendix ~\ref{appendix_supp_figs} and \ref{appendix_dates_map} in Appendix \ref{appendix_def_dates}). The notable exception here is the Marianas islands which has been settled for a comparable time-depth to Vanuatu but which features no non-Austronesian Near Oceania ancestry \citep{liu2022ancient}. When there is more data on ancient contact events, analyses of language richness should be revisited in order to examine how such a variable relates to time-depth, phylogeny and political complexity.
 
-Finally, as we interpret the results of this study it is necessary to keep in mind that historical Oceania changed over time. There is a tendency for, as \citet{meleisea1995}, puts it: anthropology of the Pacific to depict an unrealistic ``ethnographic present''. The political complexity variable used in this study often describes the state of societal organization at the time of European arrival or just before. However, many island groups have gone through periods of more and less hierarchically structured societies (cf. \citet[178-183]{skirgaard2020multilevel} for summary of S\={a}moan political history). We may be able to assume that the relative differences between island groups over this time are represented well enough in a variable like EA033 such that we can meaningfully use it to explore hypotheses, but we should also acknowledge this caveat and how it limits the conclusions we can make (more details in Appendix \ref{appendix_time_span}). This is yet another reason why agent based modelling can give further insight as it is possible to vary these parameters continuously throughout a simulation.
+Finally, as we interpret the results of this study it is necessary to keep in mind that historical Oceania changed over time. There is a tendency for, as \citet{meleisea1995}, puts it: anthropology of the Pacific to depict an unrealistic ``ethnographic present''. The political complexity variable used in this study often describes the state of societal organization at the time of European arrival or just before. However, many island groups have gone through periods of more and less hierarchically structured societies (cf. \citet[178-183]{skirgaard2020multilevel} for summary of S\={a}moan political history). We may be able to assume that the relative differences between island groups over this time are represented well enough in a variable like EA033 such that we can meaningfully use it to explore hypotheses, but we should also acknowledge this caveat and how it limits the conclusions we can make (more details in Appendix \ref{appendix_time_span}). %This is yet another reason why agent based modelling can give further insight as it is possible to vary these parameters continuously throughout a simulation.
 
 %In order to understand language diversification, we need to understand the steps of the process. Before languages have split into different mutually unintelligible varieties, 
 
@@ -602,14 +602,14 @@ Information on latitude and shoreline is taken from the Global Self-consistent, 
 
 GitHub locations:
 \begin{itemize}
-\item predicting\_number\_lgs\_in\_remote\_oceania  \textcolor{red}{withheld while in review process}
+\item predicting\_number\_lgs\_in\_remote\_oceania (v1.0) \url{https://github.com/HedvigS/predicting_number_lgs_in_remote_oceania/releases/tag/v1.0}
 \item glottolog (v3.0) \url{https://github.com/glottolog/glottolog/tree/v3.0}
 %\item glottolog-cldf (v4.7) \url{https://github.com/glottolog/glottolog/tree/v4.7}
 \end{itemize}
 
 Zenodo locations:
 \begin{itemize}
-\item predicting\_number\_lgs\_in\_remote\_oceania  \url{https://doi.org/10.5281/zenodo.13909531}
+\item predicting\_number\_lgs\_in\_remote\_oceania   (v1.0)\url{https://doi.org/10.5281/zenodo.14479692}
 \item glottolog (v3.0) \url{https://doi.org/10.5281/zenodo.437430}
 \item glottolog (v5.0) \url{https://zenodo.org/records/10804582}
 
@@ -1092,7 +1092,7 @@ All code and data is also available on GitHub and Zenodo with versioning.
 
 \begin{itemize}
     \item GitHub - \url{https://github.com/HedvigS/predicting_number_lgs_in_remote_oceania}
-    \item Zenodo -\url{https://doi.org/10.5281/zenodo.13909531}
+    \item Zenodo -\url{https://doi.org/10.5281/zenodo.13909530}
 \end{itemize}
 
  \begin{landscape}
@@ -1188,7 +1188,7 @@ All code is available on GitHub and Zenodo with versioning.
 
 \begin{itemize}
     \item GitHub - \url{https://github.com/HedvigS/predicting_number_lgs_in_remote_oceania}
-    \item Zenodo - 
+    \item Zenodo - \url{https://doi.org/10.5281/zenodo.13909530}
 \end{itemize}
 
 %Anonymised OSF project for double-blind peer review: \url{https://osf.io/amnh9/?view_only=403d57d715254539a3a99c798b4014d2}.
